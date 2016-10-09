@@ -1,6 +1,7 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
-import {DataService,
+import {
+    DataService,
     Utilities,
     Item,
     Store,
@@ -180,6 +181,11 @@ export class LogicService {
                 accuracy: 0
             };
             store.name = place.name;
+
+            if (place.photos) {
+                store.photo = place.photos[0].getUrl({ maxHeight: 300, maxWidth: 320 });
+            }
+
             store.placeId = place.place_id;
             store.types = place.types;
             store.url = place.url;

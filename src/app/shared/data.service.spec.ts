@@ -1,6 +1,6 @@
 // https://github.com/krimple/angular2-webpack-demo-routing-and-http/blob/master/test/app/services/blog-service.spec.ts
 
-import {DataService, LocalStorage} from "./data.service";
+import { DataService, LocalStorage } from "./data.service";
 
 import {
     inject,
@@ -8,8 +8,8 @@ import {
     TestBed
 } from "@angular/core/testing";
 
-import {IItem, IStore, ICheckout} from "./interfaces";
-import {Checkout, Pickup, AppInfo} from "./models";
+import { IItem, IDtoStore, ICheckout } from "./interfaces";
+import { Checkout, Pickup, AppInfo } from "./models";
 
 let items: IItem[] = [
     {
@@ -42,47 +42,17 @@ let checkouts: ICheckout[] = [
     }
 ];
 
-let stores: IStore[] = [
+let stores: IDtoStore[] = [
     {
-        "formatted_address": "formatted_address",
-        "formatted_phone_number": "formatted_phone_number",
-        "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-        "location": {
-            "altitudeAccuracy": 0,
-            "longitude": 301,
-            "latitude": 300,
-            "speed": 0,
-            "heading": 0,
-            "altitude": 0,
-            "accuracy": 0
-        },
         "name": "FAKE SCHNUCKS",
-        "types": ["grocery_or_supermarket"],
-        "url": "url",
-        "website": "website",
         "vicinity": "vicinity",
         "place_id": "xxxxxxxxxxxxx",
         "id": "S0"
     },
     {
-        "formatted_address": "formatted_address",
-        "formatted_phone_number": "formatted_phone_number",
 
-        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-        "location": {
-            "altitudeAccuracy": 0,
-            "longitude": -90.51309529999997,
-            "latitude": 38.593912,
-            "speed": 0,
-            "heading": 0,
-            "altitude": 0,
-            "accuracy": 0
-        },
         "name": "Zabihah",
         "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-        "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
-        "url": "url",
-        "website": "website",
         "vicinity": "14345 Manchester Road, Ballwin",
         "id": "S1"
     }

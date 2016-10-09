@@ -1,6 +1,6 @@
 // https://github.com/krimple/angular2-webpack-demo-routing-and-http/blob/master/test/app/services/blog-service.spec.ts
 
-import {LogicService} from "./logic.service";
+import { LogicService } from "./logic.service";
 
 import {
     async,
@@ -14,7 +14,7 @@ import {
     DataService,
     LocalStorage,
     IItem,
-    IStore,
+    IDtoStore,
     ICheckout,
     Item,
     Store,
@@ -54,47 +54,47 @@ let checkouts: ICheckout[] = [
     }
 ];
 
-let stores: IStore[] = [
+let stores: IDtoStore[] = [
     {
-        "formatted_address": "formatted_address",
-        "formatted_phone_number": "formatted_phone_number",
-        "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-        "location": {
-            "altitudeAccuracy": 0,
-            "longitude": 301,
-            "latitude": 300,
-            "speed": 0,
-            "heading": 0,
-            "altitude": 0,
-            "accuracy": 0
-        },
+        // "formatted_address": "formatted_address",
+        // "formatted_phone_number": "formatted_phone_number",
+        // "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+        // "location": {
+        //     "altitudeAccuracy": 0,
+        //     "longitude": 301,
+        //     "latitude": 300,
+        //     "speed": 0,
+        //     "heading": 0,
+        //     "altitude": 0,
+        //     "accuracy": 0
+        // },
         "name": "FAKE SCHNUCKS",
-        "types": ["grocery_or_supermarket"],
-        "url": "url",
-        "website": "website",
+        // "types": ["grocery_or_supermarket"],
+        // "url": "url",
+        // "website": "website",
         "vicinity": "vicinity",
         "place_id": "xxxxxxxxxxxxx",
         "id": "S0"
     },
     {
-        "formatted_address": "formatted_address",
-        "formatted_phone_number": "formatted_phone_number",
+        // "formatted_address": "formatted_address",
+        // "formatted_phone_number": "formatted_phone_number",
 
-        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-        "location": {
-            "altitudeAccuracy": 0,
-            "longitude": -90.51309529999997,
-            "latitude": 38.593912,
-            "speed": 0,
-            "heading": 0,
-            "altitude": 0,
-            "accuracy": 0
-        },
-        "name": "Zabihah",
+        // "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+        // "location": {
+        //     "altitudeAccuracy": 0,
+        //     "longitude": -90.51309529999997,
+        //     "latitude": 38.593912,
+        //     "speed": 0,
+        //     "heading": 0,
+        //     "altitude": 0,
+        //     "accuracy": 0
+        // },
+        "name": "Atlantic Mills",
         "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-        "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
-        "url": "url",
-        "website": "website",
+        // "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
+        // "url": "url",
+        // "website": "website",
         "vicinity": "14345 Manchester Road, Ballwin",
         "id": "S1"
     }
@@ -158,7 +158,7 @@ describe("Logic Service", () => {
             expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
             expect(info.checkouts[0].pickups.length).toEqual(2);
 
-            expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Zabihah", "FAKE SCHNUCKS"]);
+            expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Atlantic Mills", "FAKE SCHNUCKS"]);
         });
     })));
 
@@ -220,6 +220,7 @@ describe("Logic Service", () => {
         [LogicService, LocalStorage],
         (sut: LogicService, ls: MockLocalStorage) => {
             const setItem: jasmine.Spy = spyOn(ls, "setItem").and.callThrough();
+            const storePhoto: jasmine.Spy = jasmine.createSpy("getUrl").and.returnValue("photo url");
 
             return sut.load().then((info: AppInfo) => {
 
@@ -249,14 +250,21 @@ describe("Logic Service", () => {
                             international_phone_number: undefined,
                             name: `new name ${n}`,
                             permanently_closed: false,
-                            photos: [],
+                            photos: [
+                                {
+                                    height: 100,
+                                    html_attributions: [],
+                                    width: 100,
+                                    getUrl: storePhoto
+                                }
+                            ],
                             place_id: pid,
                             price_level: undefined,
                             rating: undefined,
                             reviews: [],
                             types: [],
                             url: undefined,
-                            vicinity: undefined,
+                            vicinity: `new vicinity ${n}`,
                             website: undefined
                         };
                     });
@@ -265,20 +273,13 @@ describe("Logic Service", () => {
 
                 expect(actual.length).toBe(2);
 
+                expect(storePhoto).toHaveBeenCalledTimes(2);
+
                 const res: string =
-                    "[{\"id\":\"S0\",\"name\":\"FAKE SCHNUCKS\",\"formatted_addr"
-                    + "ess\":\"formatted_address\",\"formatted_phone_number\":\"f"
-                    + "ormatted_phone_number\",\"icon\":\"http://maps.gstatic.com"
-                    + "/mapfiles/place_api/icons/generic_business-71.png\",\"loca"
-                    + "tion\":{\"altitudeAccuracy\":0,\"longitude\":301,\"latitud"
-                    + "e\":300,\"speed\":0,\"heading\":0,\"altitude\":0,\"accurac"
-                    + "y\":0},\"place_id\":\"xxxxxxxxxxxxx\",\"types\":[\"grocery"
-                    + "_or_supermarket\"],\"url\":\"url\",\"vicinity\":\"vicinity"
-                    + "\",\"website\":\"website\"},{\"id\":\"S1\",\"name\":\"new "
-                    + "name 0\",\"icon\":\"new icon 0\",\"location\":{\"altitudeA"
-                    + "ccuracy\":0,\"longitude\":10,\"latitude\":10,\"speed\":0,\""
-                    + "heading\":0,\"altitude\":0,\"accuracy\":0},\"place_id\":\"C"
-                    + "hIJsUfNv0jU2IcRk9KkjfWbBC0\",\"types\":[]}]";
+                    "[{\"id\":\"S0\",\"name\":\"FAKE SCHNUCKS\",\"place_id\":\"x"
+                    + "xxxxxxxxxxxx\",\"vicinity\":\"vicinity\"},{\"id\":\"S1\",\""
+                    + "name\":\"new name 0\",\"place_id\":\"ChIJsUfNv0jU2IcRk9Kk"
+                    + "jfWbBC0\",\"vicinity\":\"new vicinity 0\"}]";
 
                 expect(setItem).toHaveBeenCalledWith("gbg-stores", res);
 
@@ -300,11 +301,6 @@ describe("Logic Service", () => {
 
         expect(LogicService.predictAisle(item, store)).toBe("2-4");
     });
-
-    // it("should get ailes", () => {
-    //    const s: Store = new Store("A", "B");
-    //     expect(LogicService.getStoreAisles(s).length).toBe(14);
-    // });
 
 });
 

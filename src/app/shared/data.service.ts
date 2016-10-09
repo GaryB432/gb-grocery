@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
-import {IItem, IPickup, IStore, ICheckout} from "./interfaces";
-import {Utilities} from "./utilities";
-import {Item, Checkout, AppInfo} from "./models";
+import { IItem, IPickup, IDtoStore, ICheckout } from "./interfaces";
+import { Utilities } from "./utilities";
+import { Item, Checkout, AppInfo } from "./models";
 
 const ITEMS_KEY: string = "gbg-items";
 const STORES_KEY: string = "gbg-stores";
@@ -98,7 +98,7 @@ export class DataService {
     }
 
     private readStores(): void {
-        let data: IStore[];
+        let data: IDtoStore[];
         try {
             let raw: string = this.storage.getItem(STORES_KEY);
             data = JSON.parse(raw) || [];
@@ -134,19 +134,12 @@ export class DataService {
     }
 
     private writeStores(): void {
-        let data: IStore[] = this.info.stores.map(store => {
+        let data: IDtoStore[] = this.info.stores.map(store => {
             return {
                 id: store.id,
                 name: store.name,
-                formatted_address: store.formattedAddress,
-                formatted_phone_number: store.formattedPhoneNumber,
-                icon: store.icon,
-                location: store.location,
                 place_id: store.placeId,
-                types: store.types,
-                url: store.url,
-                vicinity: store.vicinity,
-                website: store.website
+                vicinity: store.vicinity
             };
         });
         this.storage.setItem(STORES_KEY, JSON.stringify(data));

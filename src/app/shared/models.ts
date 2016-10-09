@@ -15,6 +15,7 @@ export class Store {
     public formattedPhoneNumber: string;
     public icon: string;
     public location: Coordinates;
+    public photo: string;
     public placeId: string;
     public types: string[];
     public url: string;

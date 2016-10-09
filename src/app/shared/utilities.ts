@@ -1,6 +1,6 @@
 import {
     IItem,
-    IStore,
+    IDtoStore,
     ICheckout,
     Item,
     Store,
@@ -28,17 +28,11 @@ export class Utilities {
         newItem.checkouts = [];
         return newItem;
     }
-    public static dtoToStore(dto: IStore): Store {
+    public static dtoToStore(dto: IDtoStore): Store {
         const newStore: Store = new Store(dto.id, dto.name);
-        newStore.formattedAddress = dto.formatted_address;
-        newStore.formattedPhoneNumber = dto.formatted_phone_number;
         newStore.placeId = dto.place_id;
-        newStore.icon = dto.icon;
-        newStore.location = dto.location;
-        newStore.types = dto.types;
-        newStore.url = dto.url;
+        newStore.icon = "http://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png";
         newStore.vicinity = dto.vicinity;
-        newStore.website = dto.website;
         newStore.checkouts = [];
         return newStore;
     }
@@ -47,9 +41,6 @@ export class Utilities {
             context.stores.find(s => s.id === dto.storeId),
             new Date(dto.isoDate)
         );
-
-        // TODO: remove this when items are fully out of storage and switched to pickups
-        if (dto.itemsIds !== void 0) { dto.pickups = dto.itemsIds.map(id => { return { itemId: id, aisle: undefined }; }); };
 
         newCheckout.pickups = dto.pickups
             .map(pu => new Pickup(context.items.find(item => item.id === pu.itemId), pu.aisle));

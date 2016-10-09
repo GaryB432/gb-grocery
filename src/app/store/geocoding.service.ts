@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export abstract class AbstractGeoCoder {
@@ -126,7 +126,14 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                 international_phone_number: `international_phone_number ${n}`,
                 name: `store ${n}`,
                 permanently_closed: false,
-                photos: [],
+                photos: [
+                    {
+                        height: 200,
+                        width: 200,
+                        html_attributions: [],
+                        getUrl: (opts) => "https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0"
+                            + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/"
+                    }],
                 place_id: `GP${n}`,
                 price_level: undefined,
                 rating: undefined,

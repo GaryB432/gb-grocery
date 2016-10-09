@@ -34,29 +34,21 @@ select {
     }
 }
 
-.base-item {
-    display: flex;
-    padding: 5px;
-    margin: 5px 3px;
-}
-
 .store-info {
-    @extend .base-item;
     background-color: $light-heading;
-    .icon {
+    section {
+        display: flex;
+        flex-direction: row;
+        margin: 4px;
+        padding: 10px;
         img {
             width: 71px;
             height: 71px;
         }
+        .vicinity {
+            margin: 4px 10px;
+        }
     }
-    .vicinity {
-        flex: 1 1 auto;
-        margin-left: 1.5rem;
-    }
-}
-
-img {
-    margin: 0 5px;
 }
 
 .check-out {
