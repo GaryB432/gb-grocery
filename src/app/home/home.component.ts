@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Item, LogicService } from "../shared";
+import { Item, LogicService, GestureEvent } from "../shared";
 
 @Component({
     selector: "gbg-home",
@@ -38,8 +38,10 @@ export class HomeComponent implements OnInit {
         this.logic.updateItem(item);
     }
 
-    public doSwipe(direction: string, item: Item): void {
-        console.log(direction, item.name);
+    public doSwipe(e: GestureEvent, item: Item): void {
+        if (e.type !== "tap") {
+            alert(`We don't yet have any idea what you mean by '${e.type}' on '${item.name}'. We will figure something out soon.`);
+        }
     }
 
 }

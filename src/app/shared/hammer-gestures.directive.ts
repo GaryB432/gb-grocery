@@ -6,41 +6,31 @@ import {
     AfterViewInit
 } from "@angular/core";
 
+export type GestureType = "swipeleft" | "swiperight" | "tap";
+
+export type GestureEvent = { type: GestureType };
+
 @Directive({
     selector: "[gbgHammerGestures]"
 })
 export class HammerGesturesDirective implements AfterViewInit {
-    private static hammerInitialized: boolean = false;
 
-    @Output() public onGesture: EventEmitter<string> = new EventEmitter<string>();
+    @Output() public onGesture: EventEmitter<GestureEvent> = new EventEmitter<GestureEvent>();
 
     constructor(private el: ElementRef) {
     }
 
     public ngAfterViewInit(): void {
-        if (!HammerGesturesDirective.hammerInitialized) {
+        const events: GestureType[] = ["swipeleft", "swiperight", "tap"];
 
-            const hammertime: HammerManager = new Hammer(this.el.nativeElement, {
-                recognizers: [
-                    [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }],
-                    [Hammer.Tap]
-                ],
-            });
+        const hammertime: HammerManager = new Hammer(this.el.nativeElement, {
+            recognizers: [
+                [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }],
+                [Hammer.Tap]
+            ],
+        });
 
-            hammertime.on("swipeleft", (ev) => {
-                this.onGesture.emit("swipeleft");
-            });
-            hammertime.on("swiperight", (ev) => {
-                this.onGesture.emit("swiperight");
-            });
-            hammertime.on("tap", (ev) => {
-                this.onGesture.emit("tap");
-            });
-            // http://stackoverflow.com/questions/35728451/using-mobile-events-in-angular2
-            // uses this initialized check but i removed it
-
-            // HammerGesturesDirective.hammerInitialized = true;
-        }
-
+        events.forEach(type => hammertime.on(type, ev => this.onGesture.emit({ type })));
     }
+
 }
