@@ -1,0 +1,17 @@
+@import "../shared/styles/colors";
+@import "../shared/styles/checkbox";
+
+.base-item {
+    display: flex;
+    padding: 5px;
+    margin: 8px auto;
+}
+
+.clear-all {
+    @extend .base-item;
+    button {
+        background-color: red;
+        font-size: 2rem;
+        flex: 1 2 auto;
+    }
+}

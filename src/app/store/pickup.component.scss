@@ -1,0 +1,25 @@
+h1 {
+    font-size: 1.1rem;
+}
+.addl {
+    margin: .2rem 0;
+    display: block;
+    width: 90%;
+    input {
+        font-size: 1.5rem;
+        width: 100%;
+    }
+    section {
+        margin-top: 5px;
+        button{
+            margin: 0 1rem .3rem 0;
+            font-size: 1.4rem;
+            padding: .3rem;
+        }
+    }
+}
+
+.id {
+    font-size: .7rem;
+    color: gray;
+}

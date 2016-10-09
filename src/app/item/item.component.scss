@@ -1,0 +1,81 @@
+@import "../shared/styles/colors";
+
+:host {
+    display: block;
+}
+
+
+.no-checkouts {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 2rem 0;
+    h1, p {
+        margin: 1.2rem;
+        line-height: 1.3rem;
+    }
+    h1 {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+}
+
+.base-item {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+}
+
+h2 {
+    @extend .base-item;
+    font-weight: bold;
+    background-color: $light-heading;
+}
+
+h1 {
+    @extend .base-item;
+    margin-bottom: -5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: {
+        size: 1.1rem;
+        weight: bold;
+    }
+    &.needed{
+        background-color: $needed;
+    }
+}
+
+.checkout {
+    @extend .base-item;
+    box-shadow: 0 2px 10px 0 $silver;
+    display: flex;
+    align-items: center;
+    .icon {
+        img {
+            width: 71px;
+            height: 71px;
+        }
+    }
+    .detail{
+        margin-left: 10px;
+        flex: 1 2 auto;
+        p { 
+            margin: 0.5rem 0;
+            &.store {
+                font-size: 1.2rem;
+            }
+            &.vicinity {
+                font-style: italic; 
+            }
+            &.aisle {
+                font-size: .6rem;
+            }
+            &.date {
+                font-size: .8rem;
+            }
+        }
+    }
+}

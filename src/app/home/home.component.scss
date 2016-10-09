@@ -1,0 +1,27 @@
+@import "../shared/styles/colors";
+
+article.card {
+    .info {
+        a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    &.needed {
+        background-color: $needed;
+    }
+    
+}
+
+.add-item { 
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    div {
+        margin-left: 10px;
+    }
+    input {
+        font-size: 1.3rem;
+    }
+}

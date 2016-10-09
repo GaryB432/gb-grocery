@@ -1,0 +1,19 @@
+<div *ngIf="item">
+    <h1 [ngClass]="{ needed: item.needed, item: true }">{{item.name | uppercase}} <gbg-trashcan-icon (click)="deleteItem(item)"></gbg-trashcan-icon> </h1>
+    <h2>Checkouts</h2>
+    <div *ngIf="checkouts.length === 0" class="no-checkouts">
+        <h1>Nothing yet</h1>
+        <p>You have not yet checked out with this item. As you <a [routerLink]="['/store']">Check Out</a> in the future, the stores used will be listed here.</p>
+    </div>
+    <div *ngFor="let co of checkouts" class="checkout">
+        <div class="icon">
+            <img [src]="co.store.icon" alt="store icon" />
+        </div>
+        <div class="detail">
+            <p class="store">{{co.store.name}}</p>
+            <p class="vicinity">{{co.store.vicinity}}</p>
+            <p class="aisle">{{getItemPickup(co).aisle}}</p>
+            <p class="date">{{co.date | gbgMoment}}</p>
+        </div>
+    </div>
+</div>

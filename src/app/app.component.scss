@@ -1,0 +1,36 @@
+@import "./shared/styles/colors";
+
+header {
+    display: flex;
+    height: 40px;
+    background-color: #00bcd4;
+    padding: 0 10px;
+    align-items: center;
+    h1 {
+        font-size: 2rem;
+        font-family: serif;
+        color: $white;
+    }
+}
+
+nav {
+    height: 33px;
+    display: flex;
+    justify-content: space-around;
+    a {
+        background-color: lighten($grey, 70%);
+        border: 1px solid $grey;
+        text-align: center;
+        line-height: 1.9rem;
+        
+        width: 100%;
+        text-decoration: none;
+        color: $silver;
+        &.active {
+            border-bottom: none;
+            background-color: $white;
+            color: $grey;
+            font-weight: bold;
+        }
+    }
+}

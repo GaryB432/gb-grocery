@@ -1,0 +1,23 @@
+import {Component, OnInit, Input} from "@angular/core";
+
+import {Pickup} from "../shared";
+
+@Component({
+    selector: "gbg-pickup",
+    styleUrls: ["./pickup.component.scss"],
+    templateUrl: "./pickup.component.html"
+})
+export class PickupComponent implements OnInit {
+
+    @Input() public pickup: Pickup;
+
+    @Input() public aisles: string[];
+
+    public ngOnInit(): void {
+        this.aisles = [];
+    }
+
+    public setAisle(selectedAisle: string): void {
+        this.pickup.aisle = selectedAisle;
+    }
+}
