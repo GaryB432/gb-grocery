@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
-import {Item, LogicService} from "../shared";
+import { Item, LogicService } from "../shared";
 
 @Component({
     selector: "gbg-home",
@@ -36,6 +36,10 @@ export class HomeComponent implements OnInit {
     public toggleNeeded(item: Item): void {
         item.needed = !item.needed;
         this.logic.updateItem(item);
+    }
+
+    public doSwipe(direction: string, item: Item): void {
+        console.log(direction, item.name);
     }
 
 }

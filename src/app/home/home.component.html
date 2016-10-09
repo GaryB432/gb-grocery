@@ -5,7 +5,7 @@
             <label [attr.for]="'cb'+item.id"> </label>
         </div>
     </div>
-    <div class="info">
+    <div (onGesture)="doSwipe($event, item)" gbgHammerGestures class="info">
         <a [routerLink]="['/item', item.id]">
             <gbg-home-item class="info" [item]="item"></gbg-home-item>
         </a>

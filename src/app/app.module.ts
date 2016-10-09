@@ -10,12 +10,16 @@ import { HomeItemComponent } from "./home/item.component";
 import { ItemComponent } from "./item/item.component";
 import { PickupComponent } from "./store/pickup.component";
 import { StoreComponent } from "./store/store.component";
-import { MomentPipe } from "./shared/moment.pipe";
 import { PlusIconComponent } from "./icons/plus";
 import { TrashcanIconComponent } from "./icons/trashcan";
 import { routing } from "./app.routing";
-import { DataService, LocalStorage } from "./shared/data.service";
-import { LogicService } from "./shared/logic.service";
+import {
+    DataService,
+    LocalStorage,
+    LogicService,
+    MomentPipe,
+    HammerGesturesDirective
+} from "./shared";
 import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from "./store/geocoding.service";
 
 import { removeNgStyles, createNewHosts } from "@angularclass/hmr";
@@ -44,7 +48,8 @@ abstract class Store {
         StoreComponent,
         MomentPipe,
         TrashcanIconComponent,
-        PlusIconComponent
+        PlusIconComponent,
+        HammerGesturesDirective
     ],
     providers: [
         { provide: AbstractGeoCoder, useClass: isLocal ? LocalGeoCoder : GoogleGeoCoder },
