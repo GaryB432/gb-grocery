@@ -119,7 +119,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                 formatted_phone_number: `formatted_phone_number ${n}`,
                 geometry: {
                     location: new FakeLatLng(spot),
-                    viewport: new google.maps.LatLngBounds()
+                    viewport: undefined
                 },
                 html_attributions: [],
                 icon: "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
