@@ -1,4 +1,7 @@
 import { Injectable } from "@angular/core";
+import { IDtoStore } from "../shared/interfaces";
+
+const flatten: (a: any[][]) => any[] = require("arr-flatten");
 
 @Injectable()
 export abstract class AbstractGeoCoder {
@@ -102,7 +105,8 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         setTimeout(() => done(`Fun Address at ${coords.latitude.toString()},${coords.longitude.toString()}`), 3000);
     }
     public nearbyStoreSearch(coords: Coordinates): Promise<google.maps.places.PlaceResult[]> {
-        const fakePlaces: google.maps.places.PlaceResult[] = [0, 1, 2, 3, 4, 5].map(n => {
+
+        function makePlace(ks: IDtoStore, n: number): google.maps.places.PlaceResult {
             const spot: Coordinates = {
                 accuracy: 0,
                 altitude: 0,
@@ -124,7 +128,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                 html_attributions: [],
                 icon: "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
                 international_phone_number: `international_phone_number ${n}`,
-                name: `store ${n}`,
+                name: `${ks.name} S${n}`,
                 permanently_closed: false,
                 photos: [
                     {
@@ -134,22 +138,52 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                         getUrl: (opts) => "https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0"
                             + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/"
                     }],
-                place_id: `GP${n}`,
+                place_id: ks.place_id,
                 price_level: undefined,
                 rating: undefined,
                 reviews: [],
                 types: ["grocery_or_supermarket", "fake", "store"],
                 url: `url ${n}`,
-                vicinity: `vicinity ${n}`,
+                vicinity: ks.vicinity,
                 website: `website ${n}`
             };
-        });
+        }
+
+        const knownStores: IDtoStore[] = [
+            {
+                "id": "S-KOBIM",
+                "name": "Schnucks",
+                "place_id": "ChIJ43DkSEvU2IcRgU4nzYWcNU0",
+                "vicinity": "15425 Manchester Road, Ballwin"
+            },
+            {
+                "id": "S-f2jIj",
+                "name": "Big Lots",
+                "place_id": "ChIJQ9yAC2zU2IcR4fcxoawalqI",
+                "vicinity": "14850 Manchester Road, Ballwin"
+            },
+            {
+                "id": "S-F5TXz",
+                "name": "Schnucks",
+                "place_id": "ChIJ0-z4P9jT2IcRbt566e0iJIY",
+                "vicinity": "1393 Big Bend Road #1, Ballwin"
+            }
+        ];
+
+        const otherPlaces: google.maps.places.PlaceResult[] = [3, 4, 5].map(ndx => makePlace({
+            "id": `s${ndx}`,
+            "name": `STORE ${ndx}`,
+            "place_id": `GP${ndx}`,
+            "vicinity": `Vicinity ${ndx}`
+        }, ndx));
+
+        const fakePlaces: google.maps.places.PlaceResult[] = knownStores.map(makePlace);
 
         return new Promise<google.maps.places.PlaceResult[]>(
             (resolve, reject) => {
                 window.setTimeout(
                     () => {
-                        resolve(fakePlaces);
+                        resolve(flatten([fakePlaces, otherPlaces]));
                     },
                     2000);
             });

@@ -5,6 +5,12 @@ export interface IDtoStore {
     vicinity: string;
 }
 
+export interface IDtoAppInfo {
+    items: IItem[];
+    stores: IDtoStore[];
+    checkouts: ICheckout[];
+}
+
 export interface IPickup {
     itemId: string;
     aisle: string;
@@ -13,7 +19,7 @@ export interface IPickup {
 export interface ICheckout {
     isoDate: string;
     storeId: string;
-    pickups?: IPickup[];
+    pickups: IPickup[];
 }
 
 export interface IItem {
