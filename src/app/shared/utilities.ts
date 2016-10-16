@@ -16,9 +16,8 @@ function randomString(length: number, chars: string): string {
 }
 
 export class Utilities {
-    public static makeid(): string {
-        return randomString(5, "a#");
-    }
+    public static makeItemId(): string { return `i${randomString(5, "a#")}`; }
+    public static makeStoreId(): string { return `s${randomString(5, "a#")}`; }
     public static dtoToItem(dto: IItem): Item {
         const newItem: Item = new Item();
         newItem.id = dto.id;
