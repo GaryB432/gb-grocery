@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
 import { HomeItemComponent } from "./item.component";
-import { Item, Checkout, Store } from "../shared";
+import { Item, Checkout, Store } from "../shared/models";
 
 describe("Home Item Component", () => {
     beforeEach(() => {

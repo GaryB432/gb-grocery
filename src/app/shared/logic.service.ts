@@ -1,14 +1,8 @@
 import { Injectable } from "@angular/core";
 
-import {
-    DataService,
-    Utilities,
-    Item,
-    Store,
-    Pickup,
-    Checkout,
-    AppInfo
-} from "../shared";
+import { Utilities } from "../shared/utilities";
+import { Item, Store, Pickup, Checkout, AppInfo } from "../shared/models";
+import { DataService } from "../shared/data.service";
 
 const flatten: (a: any[][]) => any[] = require("arr-flatten");
 
@@ -31,7 +25,7 @@ export class LogicService {
 
     private static aisleRegex: RegExp = /^(\d+)(\w*)$/;
 
-    private info: AppInfo;
+    private cache: AppInfo;
 
     private loaded: Promise<AppInfo>;
 
@@ -129,22 +123,17 @@ export class LogicService {
     }
 
     public deleteItem(item: Item, context: AppInfo): Promise<AppInfo> {
-        return this.loaded.then(() =>
-            new Promise<AppInfo>((resolve, reject): void => {
-                const ndx: number = context.items.findIndex(i => i.id === item.id);
-                if (ndx < 0) {
-                    reject(`No item ${item.id} to delete`);
-                }
-                const spliced: Item = context.items.splice(ndx, 1)[0];
 
-                context.checkouts.forEach(co => co.pickups = co.pickups.filter(i => i.item.id !== spliced.id));
-                context.checkouts = context.checkouts.filter(co => co.pickups.length > 0);
+        const ndx: number = context.items.findIndex(i => i.id === item.id);
+        if (ndx < 0) {
+            throw new Error(`No item ${item.id} to delete`);
+        }
+        const spliced: Item = context.items.splice(ndx, 1)[0];
 
-                this.data.saveItems()
-                    .then(() => this.data.saveCheckouts())
-                    .then(a => resolve(a));
-            })
-        );
+        context.checkouts.forEach(co => co.pickups = co.pickups.filter(i => i.item.id !== spliced.id));
+        context.checkouts = context.checkouts.filter(co => co.pickups.length > 0);
+
+        return this.saveAll();
     }
 
     public getItem(id: string): Promise<Item> {
@@ -161,7 +150,7 @@ export class LogicService {
 
     public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
         const stores: Store[] = places.map(place => {
-            let store: Store = this.info.stores.find(s => s.placeId === place.place_id);
+            let store: Store = this.cache.stores.find(s => s.placeId === place.place_id);
 
             if (!store) {
                 store = new Store(undefined, place.name);
@@ -194,18 +183,20 @@ export class LogicService {
 
             return store;
         });
-        this.data.saveStores();
+        this.saveAll();
+
         return stores;
+
     }
 
     public insertCheckout(placeId: string, newStore: Store, pickups: Pickup[]): Promise<Checkout> {
-        let store: Store = this.info.stores.find(s => s.placeId === placeId);
+        let store: Store = this.cache.stores.find(s => s.placeId === placeId);
         if (store === void 0) {
             // the selected store is not already on file
             // this will have an undefined id
             store = newStore;
             store.id = `S-${Utilities.makeid()}`;
-            this.info.stores.push(store);
+            this.cache.stores.push(store);
         }
         const co: Checkout = new Checkout(
             store, new Date()
@@ -215,32 +206,43 @@ export class LogicService {
             i.item.needed = false;
             i.aisle = i.aisle ? i.aisle.toLocaleUpperCase() : undefined;
         });
-        return this.data.addCheckout(co);
+
+        this.cache.checkouts.push(co);
+
+        return this.saveAll().then(() => co);
     }
 
     public insertItem(name: string): Promise<Item> {
         const id: string = `I-${Utilities.makeid()}`;
-        if (this.info.items.find(c => c.id === id)) {
+        if (this.cache.items.find(c => c.id === id)) {
             throw new Error("Random id was duplicated! Make a loop to check.");
         }
-        return this.data.addItem(Utilities.dtoToItem(
+
+        const item: Item = Utilities.dtoToItem(
             {
                 id: id,
                 name: name,
                 needed: true
             }
-        ));
+        );
+
+        this.cache.items.push(item);
+
+        return this.saveAll().then(() => item);
     }
 
     public load(): Promise<AppInfo> {
         this.loaded = this.data.load()
             .then(info => LogicService.project(info))
-            .then(info => this.info = info);
+            .then(info => this.cache = info);
         return this.loaded;
     }
 
     public updateItem(item: Item): Promise<Item> {
-        return this.data.saveItems()
-            .then(info => info.items.find(i => i.id === item.id));
+        return this.saveAll().then(() => item);
+    }
+
+    private saveAll(): Promise<AppInfo> {
+        return this.data.saveAll(this.cache).then(info => this.cache = info);
     }
 }
