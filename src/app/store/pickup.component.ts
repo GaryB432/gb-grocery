@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
-import {Pickup} from "../shared";
+import { Pickup } from "../shared/models";
 
 @Component({
     selector: "gbg-pickup",

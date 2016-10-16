@@ -1,308 +1,364 @@
-// https://github.com/krimple/angular2-webpack-demo-routing-and-http/blob/master/test/app/services/blog-service.spec.ts
+// http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_unit_test_the_searchservice
 
+import { TestBed, inject, tick, fakeAsync } from "@angular/core/testing";
 import { LogicService } from "./logic.service";
+// import { BaseRequestOptions, Http, ConnectionBackend, Response, ResponseOptions } from "@angular/http";
+// import { MockBackend } from "@angular/http/testing";
 
-import {
-    async,
-    inject,
-    TestBed
-} from "@angular/core/testing";
-
-const flatten: (a: any[][]) => any[] = require("arr-flatten");
-
-import {
-    DataService,
-    LocalStorage,
-    IItem,
-    IDtoStore,
-    ICheckout,
-    Item,
-    Store,
-    Checkout,
-    Pickup,
-    AppInfo
-} from "../shared";
-
-let items: IItem[] = [
-    {
-        "id": "I0",
-        "name": "asdf",
-        "needed": false
-    },
-    {
-        "id": "I1",
-        "name": "zebra",
-        "needed": true
-    },
-    {
-        "id": "I2",
-        "name": "another",
-        "needed": false
-    }
-];
-
-let checkouts: ICheckout[] = [
-    {
-        "storeId": "S1",
-        "isoDate": "2016-04-03T04:45:38.582Z",
-        "pickups": [{ "itemId": "I1", "aisle": "K9" }, { "itemId": "I0", "aisle": "D10" }]
-    },
-    {
-        "storeId": "S0",
-        "isoDate": "2016-04-03T05:35:18.334Z",
-        "pickups": [{ "itemId": "I0", "aisle": "S0-D10" }]
-    }
-];
-
-let stores: IDtoStore[] = [
-    {
-        // "formatted_address": "formatted_address",
-        // "formatted_phone_number": "formatted_phone_number",
-        // "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-        // "location": {
-        //     "altitudeAccuracy": 0,
-        //     "longitude": 301,
-        //     "latitude": 300,
-        //     "speed": 0,
-        //     "heading": 0,
-        //     "altitude": 0,
-        //     "accuracy": 0
-        // },
-        "name": "FAKE SCHNUCKS",
-        // "types": ["grocery_or_supermarket"],
-        // "url": "url",
-        // "website": "website",
-        "vicinity": "vicinity",
-        "place_id": "xxxxxxxxxxxxx",
-        "id": "S0"
-    },
-    {
-        // "formatted_address": "formatted_address",
-        // "formatted_phone_number": "formatted_phone_number",
-
-        // "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-        // "location": {
-        //     "altitudeAccuracy": 0,
-        //     "longitude": -90.51309529999997,
-        //     "latitude": 38.593912,
-        //     "speed": 0,
-        //     "heading": 0,
-        //     "altitude": 0,
-        //     "accuracy": 0
-        // },
-        "name": "Atlantic Mills",
-        "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-        // "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
-        // "url": "url",
-        // "website": "website",
-        "vicinity": "14345 Manchester Road, Ballwin",
-        "id": "S1"
-    }
-];
+import { Item, Store, Checkout, Pickup, AppInfo } from "../shared/models";
+import { LocalIoStorage } from "../shared/data.io.service";
+import { DataService } from "../shared/data.service";
 
 class MockLocalStorage {
-    private data: { [key: string]: string; } = {};
-    constructor() {
-        this.data["gbg-items"] = JSON.stringify(items);
-        this.data["gbg-stores"] = JSON.stringify(stores);
-        this.data["gbg-checkouts"] = JSON.stringify(checkouts);
-    }
     public getItem(key: string): any {
-        return this.data[key];
-    }
-    public removeItem(key: string): void {
-        this.data[key] = undefined;
-    }
-    public setItem(key: string, data: string): void {
-        this.data[key] = data;
+        throw new Error("should not be used");
     }
 }
 
-class LatLng {
-    constructor(private coords: Coordinates) {
+class MockDataService {
+    private info: AppInfo = {
+        stores: [],
+        items: [],
+        checkouts: []
+    };
+    public load(): Promise<AppInfo> {
+        const today: Date = new Date(2001, 2, 3, 4, 5, 6, 7);
+        this.info.stores = [0, 1].map(n => {
+            const s: Store = new Store(`S${n}`, `STORE ${n}`);
+            // s.checkouts = [];
+            return s;
+        });
+        this.info.items = [0, 1, 2].map(n => {
+            const item: Item = new Item();
+            item.id = `I-${n}`;
+            item.name = `ITEM ${n}`;
+            return item;
+        });
+        this.info.checkouts = [
+            new Checkout(this.info.stores[1], new Date(today.getTime() - 3 * 3660 * 1000 * 24)),
+            new Checkout(this.info.stores[0], new Date(today.getTime() - 2 * 3660 * 1000 * 24))
+        ];
+
+        this.info.checkouts[0].pickups = [
+            new Pickup(this.info.items[1], "S1-A1")
+        ];
+        this.info.checkouts[1].pickups = [
+            new Pickup(this.info.items[0], "S0-A0"),
+            new Pickup(this.info.items[2], "S0-A2"),
+        ];
+
+        return Promise.resolve(this.info);
     }
-    public lat(): number {
-        return this.coords.latitude;
+
+    public saveAll(info: AppInfo): Promise<AppInfo> {
+        return Promise.resolve(this.info);
     }
-    public lng(): number {
-        return this.coords.longitude;
-    }
-    public equals(other: LatLng): boolean {
-        return this.lng() === other.lng() && this.lat() === other.lat();
-    }
-    public toUrlValue(): string {
-        return `${this.lat()},${this.lng()}`;
+
+    public clearAll() {
+        this.info = {
+            stores: [],
+            items: [],
+            checkouts: []
+        };
     }
 }
 
 describe("Logic Service", () => {
-
     beforeEach(() => {
+
         TestBed.configureTestingModule({
             providers: [
-                { provide: LocalStorage, useClass: MockLocalStorage },
-                DataService,
-                LogicService
+                // {
+                //     provide: Http, useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
+                //         return new Http(backend, defaultOptions);
+                //     }, deps: [MockBackend, BaseRequestOptions]
+                // },
+                { provide: LogicService, useClass: LogicService },
+                { provide: DataService, useClass: MockDataService },
             ]
         });
+
+        //     it("should get items", async(inject([LogicService], (sut: LogicService) => {
+        //         return sut.load().then((info: AppInfo) => {
+        //             expect(info).toBeDefined();
+        //             expect(info.stores.length).toBe(2);
+        //             expect(info.items.length).toBe(3);
+        //             expect(info.checkouts.length).toBe(2);
+
+        //             expect(info.checkouts[0].store).toBe(info.stores[1]);
+        //             expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
+        //             expect(info.checkouts[0].pickups.length).toEqual(2);
+
+        //             expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Atlantic Mills", "FAKE SCHNUCKS"]);
+        //         });
+        //     })));
     });
 
-    it("should get items", async(inject([LogicService], (sut: LogicService) => {
-        return sut.load().then((info: AppInfo) => {
+    it("should load",
+        inject([LogicService, DataService], fakeAsync((sut: LogicService, ds: DataService) => {
+            let info: AppInfo;
+            sut.load().then((response: AppInfo) => {
+                info = response;
+            });
+            tick();
             expect(info).toBeDefined();
             expect(info.stores.length).toBe(2);
             expect(info.items.length).toBe(3);
             expect(info.checkouts.length).toBe(2);
-
             expect(info.checkouts[0].store).toBe(info.stores[1]);
-            expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
-            expect(info.checkouts[0].pickups.length).toEqual(2);
 
-            expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Atlantic Mills", "FAKE SCHNUCKS"]);
-        });
-    })));
+            expect(info.checkouts[0].pickups.length).toBe(1);
+            expect(info.checkouts[0].pickups[0].item).toBe(info.items[1]);
+            expect(info.checkouts[0].pickups[0].aisle).toBe("S1-A1");
 
-    it("should create item", async(inject([LogicService], (sut: LogicService) => {
-        return sut.load().then((info: AppInfo) => {
+            expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1]]);
+
+            // expect(info.checkouts[0].pickups.length).toEqual(3);
+
+            // expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Atlantic Mills", "FAKE SCHNUCKS"]);
+            // let res: Response;
+            // mockBackend.connections.subscribe(c => {
+            //     expect(c.request.url).toBe('app/shared/search/data/people.json');
+            //     let response = new ResponseOptions({ body: '[{"name": "John Elway"}, {"name": "Gary Kubiak"}]' });
+            //     c.mockRespond(new Response(response));
+            // });
+            // sut.getAll().subscribe((response) => {
+            //     res = response;
+            // });
+            // tick();
+            // expect(res[0].name).toBe('John Elway');
+        }))
+    );
+
+    it("should create item",
+        inject([LogicService, DataService], fakeAsync((sut: LogicService, ds: DataService) => {
+            let info: AppInfo;
+            sut.load().then((response: AppInfo) => {
+                info = response;
+                expect(info.items.length).toBe(3);
+            });
+            tick();
             sut.insertItem("tester").then(item => {
                 expect(item.id).not.toBeUndefined();
-                expect(items.find(i => i.id === item.id)).toBeUndefined();
+                expect(info.items.find(i => i.id === item.id)).toBeDefined();
                 expect(item.name).toBe("tester");
                 expect(item.needed).toBe(true);
+                expect(info.items.length).toBe(4);
             });
-        });
-    })));
+        }))
+    );
 
-    it("should get item", async(inject([LogicService], (sut: LogicService) => {
-        return sut.load().then((info: AppInfo) => {
-            return sut.getItem("I1").then(item => {
-                expect(item).toBe(info.items.find(f => f.id === item.id));
-                expect(item.checkouts.length).toBe(1);
-                expect(item.name).toBe("zebra");
-                expect(item.needed).toBe(true);
-            });
-        });
-    })));
-
-    it("should not delete nonexisting item", async(inject([LogicService], (sut: LogicService) => {
-        return sut.load().then((info: AppInfo) => {
-            const loaded: AppInfo = info;
-            const doomed: Item = new Item();
-            doomed.id = "wtf";
-            sut.deleteItem(doomed, loaded).catch(r => {
-                expect(r).toBe("No item wtf to delete");
-            });
-        });
-    })));
-
-    it("should delete item", async(inject([LogicService, DataService], (sut: LogicService, ds: DataService) => {
-        const saveCheckouts: jasmine.Spy = spyOn(ds, "saveCheckouts").and.callThrough();
-        const saveItems: jasmine.Spy = spyOn(ds, "saveItems").and.callThrough();
-        return sut.load().then((info: AppInfo) => {
-            const loaded: AppInfo = info;
-            const doomed: Item = loaded.items[1];
-            sut.deleteItem(doomed, loaded).then(actual => {
-                expect(actual.items.length).toBe(2);
-                expect(actual.items.find(i => i.id === doomed.id)).toBeUndefined();
-
-                const checkoutsIds: string[][] = loaded.checkouts
-                    .map(co => co.pickups
-                        .map(i => i.item.id));
-                const checkedOutItemIds: string[] = flatten(checkoutsIds);
-                expect(checkedOutItemIds.find(i => i === doomed.id)).toBeUndefined();
-                expect(saveItems).toHaveBeenCalledTimes(1);
-                expect(saveCheckouts).toHaveBeenCalledTimes(1);
-            });
-        });
-    })));
-
-    it("should update stores from places", async(inject(
-        [LogicService, LocalStorage],
-        (sut: LogicService, ls: MockLocalStorage) => {
-            const setItem: jasmine.Spy = spyOn(ls, "setItem").and.callThrough();
-            const storePhoto: jasmine.Spy = jasmine.createSpy("getUrl").and.returnValue("photo url");
-
-            return sut.load().then((info: AppInfo) => {
-
-                const hh: Coordinates = {
-                    accuracy: undefined,
-                    altitude: undefined,
-                    altitudeAccuracy: undefined,
-                    heading: undefined,
-                    latitude: 10,
-                    longitude: 10,
-                    speed: undefined
-                };
-
-                const places: google.maps.places.PlaceResult[] = ["ChIJsUfNv0jU2IcRk9KkjfWbBC0", "wtf"]
-                    .map((pid: string, n: number) => {
-                        return {
-                            address_components: [],
-                            aspects: [],
-                            formatted_address: undefined,
-                            formatted_phone_number: undefined,
-                            geometry: {
-                                location: new LatLng(hh),
-                                viewport: undefined
-                            },
-                            html_attributions: [],
-                            icon: `new icon ${n}`,
-                            international_phone_number: undefined,
-                            name: `new name ${n}`,
-                            permanently_closed: false,
-                            photos: [
-                                {
-                                    height: 100,
-                                    html_attributions: [],
-                                    width: 100,
-                                    getUrl: storePhoto
-                                }
-                            ],
-                            place_id: pid,
-                            price_level: undefined,
-                            rating: undefined,
-                            reviews: [],
-                            types: [],
-                            url: undefined,
-                            vicinity: `new vicinity ${n}`,
-                            website: undefined
-                        };
-                    });
-
-                const actual: Store[] = sut.getStoresFromNearbyPlaces(places);
-
-                expect(actual.length).toBe(2);
-
-                expect(storePhoto).toHaveBeenCalledTimes(2);
-
-                const res: string =
-                    "[{\"id\":\"S0\",\"name\":\"FAKE SCHNUCKS\",\"place_id\":\"x"
-                    + "xxxxxxxxxxxx\",\"vicinity\":\"vicinity\"},{\"id\":\"S1\",\""
-                    + "name\":\"new name 0\",\"place_id\":\"ChIJsUfNv0jU2IcRk9Kk"
-                    + "jfWbBC0\",\"vicinity\":\"new vicinity 0\"}]";
-
-                expect(setItem).toHaveBeenCalledWith("gbg-stores", res);
-
-            });
-        })));
-
-    it("should predict aisle properly", () => {
-
-        const store: Store = new Store("S", undefined);
-
-        const item: Item = new Item();
-        item.id = "I0";
-        item.checkouts = [
-            new Checkout(store, new Date(2001, 2, 3, 4, 5, 6)),
-            new Checkout(store, new Date(2001, 2, 4, 4, 5, 6))
-        ];
-        item.checkouts[0].pickups = [new Pickup(item, "2-3")];
-        item.checkouts[1].pickups = [new Pickup(item, "2-4")];
-
-        expect(LogicService.predictAisle(item, store)).toBe("2-4");
-    });
+    it("should clear all",
+        inject([LogicService, DataService], fakeAsync((sut: LogicService, ds: DataService) => {
+            spyOn(ds, "clearAll");
+            sut.clearAll();
+            expect(ds.clearAll).toHaveBeenCalled();
+        }))
+    );
 
 });
+
+// // https://github.com/krimple/angular2-webpack-demo-routing-and-http/blob/master/test/app/services/blog-service.spec.ts
+
+// import { LogicService } from "./logic.service";
+
+// import {
+//     async,
+//     inject,
+//     TestBed
+// } from "@angular/core/testing";
+
+// const flatten: (a: any[][]) => any[] = require("arr-flatten");
+
+// import {
+//     LocalIoStorage,
+//     DataService,
+//     DataIoService,
+//     IItem,
+//     IDtoStore,
+//     ICheckout,
+//     Item,
+//     Store,
+//     Checkout,
+//     Pickup,
+//     AppInfo
+// } from "../shared";
+
+// class LatLng {
+//     constructor(private coords: Coordinates) {
+//     }
+//     public lat(): number {
+//         return this.coords.latitude;
+//     }
+//     public lng(): number {
+//         return this.coords.longitude;
+//     }
+//     public equals(other: LatLng): boolean {
+//         return this.lng() === other.lng() && this.lat() === other.lat();
+//     }
+//     public toUrlValue(): string {
+//         return `${this.lat()},${this.lng()}`;
+//     }
+// }
+
+// describe("Logic Service", () => {
+
+//     beforeEach(() => {
+//         TestBed.configureTestingModule({
+//             providers: [
+//                 { provide: LocalIoStorage, useClass: MockLocalStorage },
+//                 DataService,
+//                 // DataIoService,
+//                 LogicService
+//             ]
+//         });
+//     });
+
+//     it("should get items", async(inject([LogicService], (sut: LogicService) => {
+//         return sut.load().then((info: AppInfo) => {
+//             expect(info).toBeDefined();
+//             expect(info.stores.length).toBe(2);
+//             expect(info.items.length).toBe(3);
+//             expect(info.checkouts.length).toBe(2);
+
+//             expect(info.checkouts[0].store).toBe(info.stores[1]);
+//             expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
+//             expect(info.checkouts[0].pickups.length).toEqual(2);
+
+//             expect(info.items[0].checkouts.map(c => c.store.name)).toEqual(["Atlantic Mills", "FAKE SCHNUCKS"]);
+//         });
+//     })));
+
+//     xit("should get item", async(inject([LogicService], (sut: LogicService) => {
+//         return sut.load().then((info: AppInfo) => {
+//             return sut.getItem("I1").then(item => {
+//                 expect(item).toBe(info.items.find(f => f.id === item.id));
+//                 expect(item.checkouts.length).toBe(1);
+//                 expect(item.name).toBe("zebra");
+//                 expect(item.needed).toBe(true);
+//             });
+//         });
+//     })));
+
+//     xit("should not delete nonexisting item", async(inject([LogicService], (sut: LogicService) => {
+//         return sut.load().then((info: AppInfo) => {
+//             const loaded: AppInfo = info;
+//             const doomed: Item = new Item();
+//             doomed.id = "wtf";
+//             sut.deleteItem(doomed, loaded).catch(r => {
+//                 expect(r).toBe("No item wtf to delete");
+//             });
+//         });
+//     })));
+
+//     xit("should delete item", async(inject([LogicService, DataService], (sut: LogicService, ds: DataService) => {
+//         const saveCheckouts: jasmine.Spy = spyOn(ds, "saveCheckouts").and.callThrough();
+//         const saveItems: jasmine.Spy = spyOn(ds, "saveItems").and.callThrough();
+//         return sut.load().then((info: AppInfo) => {
+//             const loaded: AppInfo = info;
+//             const doomed: Item = loaded.items[1];
+//             sut.deleteItem(doomed, loaded).then(actual => {
+//                 expect(actual.items.length).toBe(2);
+//                 expect(actual.items.find(i => i.id === doomed.id)).toBeUndefined();
+
+//                 const checkoutsIds: string[][] = loaded.checkouts
+//                     .map(co => co.pickups
+//                         .map(i => i.item.id));
+//                 const checkedOutItemIds: string[] = flatten(checkoutsIds);
+//                 expect(checkedOutItemIds.find(i => i === doomed.id)).toBeUndefined();
+//                 expect(saveItems).toHaveBeenCalledTimes(1);
+//                 expect(saveCheckouts).toHaveBeenCalledTimes(1);
+//             });
+//         });
+//     })));
+
+//     xit("should update stores from places", async(inject(
+//         [LogicService, LocalIoStorage],
+//         (sut: LogicService, ls: MockLocalStorage) => {
+//             const setItem: jasmine.Spy = spyOn(ls, "setItem").and.callThrough();
+//             const storePhoto: jasmine.Spy = jasmine.createSpy("getUrl").and.returnValue("photo url");
+
+//             return sut.load().then((info: AppInfo) => {
+
+//                 const hh: Coordinates = {
+//                     accuracy: undefined,
+//                     altitude: undefined,
+//                     altitudeAccuracy: undefined,
+//                     heading: undefined,
+//                     latitude: 10,
+//                     longitude: 10,
+//                     speed: undefined
+//                 };
+
+//                 const places: google.maps.places.PlaceResult[] = ["ChIJsUfNv0jU2IcRk9KkjfWbBC0", "wtf"]
+//                     .map((pid: string, n: number) => {
+//                         return {
+//                             address_components: [],
+//                             aspects: [],
+//                             formatted_address: undefined,
+//                             formatted_phone_number: undefined,
+//                             geometry: {
+//                                 location: new LatLng(hh),
+//                                 viewport: undefined
+//                             },
+//                             html_attributions: [],
+//                             icon: `new icon ${n}`,
+//                             international_phone_number: undefined,
+//                             name: `new name ${n}`,
+//                             permanently_closed: false,
+//                             photos: [
+//                                 {
+//                                     height: 100,
+//                                     html_attributions: [],
+//                                     width: 100,
+//                                     getUrl: storePhoto
+//                                 }
+//                             ],
+//                             place_id: pid,
+//                             price_level: undefined,
+//                             rating: undefined,
+//                             reviews: [],
+//                             types: [],
+//                             url: undefined,
+//                             vicinity: `new vicinity ${n}`,
+//                             website: undefined
+//                         };
+//                     });
+
+//                 const actual: Store[] = sut.getStoresFromNearbyPlaces(places);
+
+//                 expect(actual.length).toBe(2);
+
+//                 expect(storePhoto).toHaveBeenCalledTimes(2);
+
+//                 const res: string =
+//                     "[{\"id\":\"S0\",\"name\":\"FAKE SCHNUCKS\",\"place_id\":\"x"
+//                     + "xxxxxxxxxxxx\",\"vicinity\":\"vicinity\"},{\"id\":\"S1\",\""
+//                     + "name\":\"new name 0\",\"place_id\":\"ChIJsUfNv0jU2IcRk9Kk"
+//                     + "jfWbBC0\",\"vicinity\":\"new vicinity 0\"}]";
+
+//                 expect(setItem).toHaveBeenCalledWith("gbg-stores", res);
+
+//             });
+//         })));
+
+//     it("should predict aisle properly", () => {
+
+//         const store: Store = new Store("S", undefined);
+
+//         const item: Item = new Item();
+//         item.id = "I0";
+//         item.checkouts = [
+//             new Checkout(store, new Date(2001, 2, 3, 4, 5, 6)),
+//             new Checkout(store, new Date(2001, 2, 4, 4, 5, 6))
+//         ];
+//         item.checkouts[0].pickups = [new Pickup(item, "2-3")];
+//         item.checkouts[1].pickups = [new Pickup(item, "2-4")];
+
+//         expect(LogicService.predictAisle(item, store)).toBe("2-4");
+//     });
+
+// });
 
 describe("More Logic Service", () => {
     const info: AppInfo = new AppInfo();

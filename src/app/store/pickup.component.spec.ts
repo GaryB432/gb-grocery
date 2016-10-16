@@ -1,8 +1,8 @@
 import { TestBed, ComponentFixture } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
+import { Item, Checkout, Store, AppInfo } from "../shared/models";
 import { PickupComponent } from "./pickup.component";
-import { Item, Checkout, Store, AppInfo } from "../shared";
 
 describe("Pickup Component", () => {
     let info: AppInfo;
@@ -37,8 +37,8 @@ describe("Pickup Component", () => {
 
         const layouts: StoreLayout[] = [
             [info.stores[0],
-                ["s0-a1", [info.items[0], food]],
-                ["a0-a2", [info.items[3]]]
+            ["s0-a1", [info.items[0], food]],
+            ["a0-a2", [info.items[3]]]
             ],
             [ralphs,
                 ["11a", [info.items[2], info.items[6], info.items[9]]],
@@ -46,7 +46,7 @@ describe("Pickup Component", () => {
                 ["11b", [info.items[3], info.items[5], info.items[7], info.items[8]]]
             ],
             [info.stores[3],
-                ["s3-a1", [info.items[3], info.items[6]]]
+            ["s3-a1", [info.items[3], info.items[6]]]
             ]
         ];
 
@@ -74,12 +74,6 @@ describe("Pickup Component", () => {
             }
             info.checkouts.push(c);
         }
-
-        // shuffle(info.checkouts);
-        // LogicService.project(info);
-
-        // component.store = ralphs;
-        // component.pickup = new Pickup(food, "A1");
 
         fixture.detectChanges();
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Item, LogicService, GestureEvent } from "../shared";
+import { Item } from "../shared/models";
+import { LogicService } from "../shared/logic.service";
+import { GestureEvent } from "../shared/hammer-gestures.directive";
 
 @Component({
     selector: "gbg-home",

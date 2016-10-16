@@ -1,148 +1,63 @@
 import { Injectable } from "@angular/core";
 
-import { IItem, IPickup, IDtoStore, ICheckout } from "./interfaces";
+import { DataIoService } from "../shared/data.io.service";
 import { Utilities } from "./utilities";
-import { Item, Checkout, AppInfo } from "./models";
-
-const ITEMS_KEY: string = "gbg-items";
-const STORES_KEY: string = "gbg-stores";
-const CHECKOUTS_KEY: string = "gbg-checkouts";
-
-export class LocalStorage {
-    public getItem(key: string): any {
-        return localStorage.getItem(key);
-    }
-    public removeItem(key: string): void {
-        localStorage.removeItem(key);
-    }
-    public setItem(key: string, data: string): void {
-        localStorage.setItem(key, data);
-    }
-}
+import { AppInfo } from "./models";
+import { IDtoAppInfo } from "./interfaces";
 
 @Injectable()
 export class DataService {
-    private info: AppInfo = new AppInfo();
 
-    constructor(private storage: LocalStorage) {
-    }
-
-    public addCheckout(c: Checkout): Promise<Checkout> {
-        this.info.checkouts.push(c);
-        this.writeStores();
-        this.writeCheckouts();
-        this.writeItems();
-        return Promise.resolve(c);
-    }
-
-    public addItem(item: Item): Promise<Item> {
-        this.info.items.push(item);
-        this.writeItems();
-        return Promise.resolve(item);
+    constructor(private io: DataIoService) {
     }
 
     public clearAll(): void {
-        this.storage.removeItem(CHECKOUTS_KEY);
-        this.storage.removeItem(STORES_KEY);
-        this.storage.removeItem(ITEMS_KEY);
+        this.io.clearAll();
     }
 
     public load(): Promise<AppInfo> {
-        this.readItems();
-        this.readStores();
-        this.readCheckouts();
-        return Promise.resolve(this.info);
-    }
+        const info: AppInfo = { stores: undefined, items: undefined, checkouts: undefined };
 
-    public saveCheckouts(): Promise<AppInfo> {
-        this.writeCheckouts();
-        return Promise.resolve(this.info);
-    }
-
-    public saveItems(): Promise<AppInfo> {
-        this.writeItems();
-        return Promise.resolve(this.info);
-    }
-
-    public saveStores(): Promise<AppInfo> {
-        this.writeStores();
-        return Promise.resolve(this.info);
-    }
-
-    private readCheckouts(): void {
-        let data: ICheckout[];
-        try {
-            let raw: string = this.storage.getItem(CHECKOUTS_KEY);
-            data = JSON.parse(raw) || [];
-        } catch (ex) {
-            console.log(ex.stack);
-            data = [];
-        }
-        finally {
-            this.info.checkouts = data.map(s => Utilities.dtoToCheckout(s, this.info));
-        }
-    }
-
-    private readItems(): void {
-        let data: IItem[];
-        try {
-            let raw: string = this.storage.getItem(ITEMS_KEY);
-            data = JSON.parse(raw) || [];
-        } catch (ex) {
-            console.log(ex.stack);
-            data = [];
-        }
-        finally {
-            this.info.items = data.map(s => Utilities.dtoToItem(s));
-        }
-    }
-
-    private readStores(): void {
-        let data: IDtoStore[];
-        try {
-            let raw: string = this.storage.getItem(STORES_KEY);
-            data = JSON.parse(raw) || [];
-        } catch (ex) {
-            console.log(ex.stack);
-            data = [];
-        }
-        finally {
-            this.info.stores = data.map(s => Utilities.dtoToStore(s));
-        }
-    }
-
-    private writeCheckouts(): void {
-        let data: ICheckout[] = this.info.checkouts.map(dto => {
-            return {
-                storeId: dto.store.id,
-                isoDate: dto.date.toISOString(),
-                pickups: dto.pickups.map(p => { return <IPickup>{ itemId: p.item.id, aisle: p.aisle }; })
-            };
+        return this.io.load().then(a => {
+            info.stores = a.stores.map(s => Utilities.dtoToStore(s));
+            info.items = a.items.map(i => Utilities.dtoToItem(i));
+            info.checkouts = a.checkouts.map(c => Utilities.dtoToCheckout(c, info));
+            return info;
         });
-        this.storage.setItem(CHECKOUTS_KEY, JSON.stringify(data));
     }
 
-    private writeItems(): void {
-        let data: IItem[] = this.info.items.map(item => {
-            return {
-                id: item.id,
-                name: item.name,
-                needed: item.needed
-            };
-        });
-        this.storage.setItem(ITEMS_KEY, JSON.stringify(data));
-    }
+    public saveAll(info: AppInfo): Promise<AppInfo> {
+        const dto: IDtoAppInfo = {
+            stores: info.stores.map(s => {
+                return {
+                    id: s.id,
+                    name: s.name,
+                    place_id: s.placeId,
+                    vicinity: s.vicinity
+                };
+            }),
+            items: info.items.map(i => {
+                return {
+                    id: i.id,
+                    name: i.name,
+                    needed: i.needed,
+                };
+            }),
+            checkouts: info.checkouts.map(c => {
+                return {
+                    storeId: c.store.id,
+                    isoDate: c.date.toISOString(),
+                    pickups: c.pickups.map(p => {
+                        return {
+                            itemId: p.item.id,
+                            aisle: p.aisle
+                        };
+                    })
+                };
+            })
+        };
 
-    private writeStores(): void {
-        let data: IDtoStore[] = this.info.stores.map(store => {
-            return {
-                id: store.id,
-                name: store.name,
-                place_id: store.placeId,
-                vicinity: store.vicinity
-            };
-        });
-        this.storage.setItem(STORES_KEY, JSON.stringify(data));
+        return this.io.saveAll(dto).then(() => info);
     }
 
 }

@@ -1,13 +1,5 @@
-import {
-    IItem,
-    IDtoStore,
-    ICheckout,
-    Item,
-    Store,
-    Pickup,
-    Checkout,
-    AppInfo
-} from "../shared";
+import { IItem, IDtoStore, ICheckout } from "../shared/interfaces";
+import { Item, Store, Pickup, Checkout, AppInfo } from "../shared/models";
 
 // http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript#10727155
 function randomString(length: number, chars: string): string {

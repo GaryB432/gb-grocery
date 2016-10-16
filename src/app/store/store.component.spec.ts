@@ -1,9 +1,11 @@
-import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { async, TestBed, ComponentFixture } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 
+import { LogicService } from "../shared/logic.service";
 import { StoreComponent } from "./store.component";
-import { Store, Item, Checkout, AppInfo, LogicService, DataService, LocalStorage } from "../shared";
+import { DataService } from "../shared/data.service";
+import { Store, Item, Checkout, AppInfo } from "../shared/models";
 import { AbstractGeoCoder, LocalGeoCoder } from "./geocoding.service";
 
 class MockLogicService {
@@ -18,7 +20,7 @@ class MockLogicService {
 
         this.info.stores = [new Store("1", "ONE"), new Store("2", "TWO")];
         this.info.items = ["A", "B"].map((s) => {
-            const item = new Item();
+            const item: Item = new Item();
             item.id = s;
             item.name = `ITEM ${s}`;
             return item;
@@ -38,14 +40,9 @@ class MockLocalStorage {
 }
 
 class MockDataService {
-    // load(): Promise<AppInfo> {
-    //     return Promise.resolve(mockAppInfo);
-    // }
-    // public load: jasmine.Spy = jasmine.createSpy("load", () => {
-    //     console.log("am i here");
-    //     return Promise.resolve(mockAppInfo);
-    // });
-
+    public load(): Promise<AppInfo> {
+        return Promise.resolve(undefined);
+    }
 }
 class MockRouter {
     public navigate: jasmine.Spy = jasmine.createSpy("navigate");
@@ -64,23 +61,21 @@ xdescribe("Store Component", () => {
                 { provide: LogicService, useClass: LogicService },
                 { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
                 { provide: DataService, useClass: MockDataService },
-                // { provide: LocalStorage, useClass: MockLocalStorage },
                 { provide: Router, useClass: MockRouter }
             ]
         });
     });
 
-    it('should have aisles', async(() => {
+    it("should have aisles", async(() => {
         // Overrides here, if you need them
         TestBed.overrideComponent(StoreComponent, {
             set: {
-                template: '<div>Overridden template something here</div>',
-                // ...
+                template: "<div>Overridden template something here</div>",
             }
         });
 
         TestBed.compileComponents().then(() => {
-            const fixture = TestBed.createComponent(StoreComponent);
+            const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
 
             // Access the dependency injected component instance
             const app: StoreComponent = fixture.componentInstance;
@@ -113,19 +108,18 @@ xdescribe("Store Component", () => {
             expect(app.aisles).toBeDefined();
 
             // Access the element
-            const element = fixture.nativeElement;
+            const element: Element = fixture.nativeElement;
 
             // Detect changes as necessary
             fixture.detectChanges();
 
             fixture.whenStable().then(() => {
-                expect(element.textContent).toContain('something');
+                expect(element.textContent).toContain("something");
             });
 
         });
     }));
 });
-
 
 // import { TestBed, ComponentFixture } from "@angular/core/testing";
 // import { FormsModule } from "@angular/forms";

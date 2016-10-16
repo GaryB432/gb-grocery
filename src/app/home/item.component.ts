@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
-import {Item, Checkout} from "../shared";
+import { Item, Checkout } from "../shared/models";
 
 @Component({
     selector: "gbg-home-item",
