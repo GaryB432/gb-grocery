@@ -195,7 +195,7 @@ export class LogicService {
             // the selected store is not already on file
             // this will have an undefined id
             store = newStore;
-            store.id = Utilities.makeStoreId();
+            store.id = `S-${Utilities.makeid()}`;
             this.cache.stores.push(store);
         }
         const co: Checkout = new Checkout(
@@ -213,7 +213,7 @@ export class LogicService {
     }
 
     public insertItem(name: string): Promise<Item> {
-        const id: string = Utilities.makeItemId();
+        const id: string = `I-${Utilities.makeid()}`;
         if (this.cache.items.find(c => c.id === id)) {
             throw new Error("Random id was duplicated! Make a loop to check.");
         }
