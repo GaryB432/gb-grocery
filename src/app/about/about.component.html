@@ -1,5 +1,10 @@
-<button (click)="clearData()">Erase</button>
-<textarea [(ngModel)]="jsonInfo" rows="20" cols="40"></textarea>
-<button (click)="replaceAppInfoForever()">Replace</button>
-
+<section>
+	<p>This will erase all gb-grocery from your phone. BE CAREFUL.</p>
+	<button (click)="clearData()">Erase</button>
+</section>
+<section>
+	<textarea [(ngModel)]="jsonInfo" rows="20" cols="40"></textarea>
+	<p>This will replace your phone's data from the text above. BE CAREFUL.</p>
+	<button (click)="replaceAppInfoForever()">Replace</button>
+</section>
 <p>io 10-16</p>
