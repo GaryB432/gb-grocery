@@ -185,7 +185,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                     () => {
                         resolve(flatten([fakePlaces, otherPlaces]));
                     },
-                    2000);
+                    200);
             });
     }
 
