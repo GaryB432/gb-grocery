@@ -1,12 +1,7 @@
-// http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_unit_test_the_searchservice
-
 import { TestBed, inject, tick, fakeAsync } from "@angular/core/testing";
-import { LogicService } from "./logic.service";
-// import { BaseRequestOptions, Http, ConnectionBackend, Response, ResponseOptions } from "@angular/http";
-// import { MockBackend } from "@angular/http/testing";
 
+import { LogicService } from "./logic.service";
 import { Item, Store, Checkout, Pickup, AppInfo } from "../shared/models";
-import { LocalIoStorage } from "../shared/data.io.service";
 import { DataService } from "../shared/data.service";
 
 class MockLocalStorage {
@@ -54,7 +49,7 @@ class MockDataService {
         return Promise.resolve(this.info);
     }
 
-    public clearAll() {
+    public clearAll(): void {
         this.info = {
             stores: [],
             items: [],
