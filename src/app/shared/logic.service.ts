@@ -29,92 +29,6 @@ export class LogicService {
 
     private loaded: Promise<AppInfo>;
 
-    public static predictAisle(item: Item, store: Store): string {
-        if (item.checkouts) {
-            const coHere: Checkout = item.checkouts
-                .slice()
-                .sort((a, b) => b.date.getTime() - a.date.getTime())
-                .find(co => co.store.id === store.id);
-            if (coHere) {
-                return coHere.pickups.find(pu => pu.item.id === item.id).aisle;
-            }
-        }
-        return undefined;
-    }
-
-    public static getStoreAisles(store: Store): Aisle[] {
-        return LogicService.sortAisles(
-            distinct(
-                flatten(
-                    store.checkouts
-                        .map(c => c.pickups
-                            .filter(p => !!p.aisle)
-                            .map(p => p.aisle)))));
-    }
-
-    public static sortPickups(pickups: Pickup[]): Pickup[] {
-        return pickups.sort((a, b) => {
-            const itemCompare: number = a.item.name.localeCompare(b.item.name);
-            if (a.aisle) {
-                if (b.aisle) { // both a and b have defined aisles
-                    const aisleCompare: number = LogicService.compareAisles(a.aisle, b.aisle);
-                    return aisleCompare < 0 ? -1 : aisleCompare > 0 ? 1 : itemCompare;
-                } else { // a but no b
-                    return -1;
-                }
-            } else if (b.aisle) { // no a but b
-                return 1;
-            } else { // neither a nor b have defined aisles
-                return itemCompare;
-            }
-        });
-    }
-
-    public static sortAisles(aisles: Aisle[]): Aisle[] {
-        // return aisles.slice(0);
-        return aisles.slice(0).sort(LogicService.compareAisles);
-    }
-
-    public static project(info: AppInfo): AppInfo {
-        info.items.forEach(item => item.checkouts = []);
-        info.stores.forEach(store => store.checkouts = []);
-        info.checkouts.forEach(co => {
-            co.store.checkouts.push(co);
-            co.pickups.forEach(p => p.item.checkouts.push(co));
-        });
-        return info;
-    }
-
-    private static compareAisles(a: Aisle, b: Aisle): number {
-        // return a.localeCompare(b);
-        type AisleParts = { num: number, alpha: string };
-
-        function getParts(aisle: Aisle): AisleParts {
-            let groups: RegExpExecArray = LogicService.aisleRegex.exec(aisle);
-            return groups
-                ? { num: parseInt(groups[1], 10), alpha: groups[2] }
-                : { num: NaN, alpha: aisle };
-        };
-
-        const aparts: AisleParts = getParts(a);
-        const bparts: AisleParts = getParts(b);
-
-        if (isNaN(aparts.num)) {
-            if (isNaN(bparts.num)) { // neither a nor b has a num part
-                return aparts.alpha.localeCompare(bparts.alpha);
-            } else { // b has a num part, a does not
-                return 1;
-            }
-        } else {
-            if (isNaN(bparts.num)) { // a has a num part, b does not
-                return -1;
-            } else { // both a and b have num part
-                const numcomp: number = aparts.num - bparts.num;
-                return numcomp === 0 ? aparts.alpha.localeCompare(bparts.alpha) : numcomp;
-            }
-        }
-    }
-
     constructor(private data: DataService) {
     }
 
@@ -244,5 +158,91 @@ export class LogicService {
 
     private saveAll(): Promise<AppInfo> {
         return this.data.saveAll(this.cache).then(info => this.cache = info);
+    }
+
+    public static predictAisle(item: Item, store: Store): string {
+        if (item.checkouts) {
+            const coHere: Checkout = item.checkouts
+                .slice()
+                .sort((a, b) => b.date.getTime() - a.date.getTime())
+                .find(co => co.store.id === store.id);
+            if (coHere) {
+                return coHere.pickups.find(pu => pu.item.id === item.id).aisle;
+            }
+        }
+        return undefined;
+    }
+
+    public static getStoreAisles(store: Store): Aisle[] {
+        return LogicService.sortAisles(
+            distinct(
+                flatten(
+                    store.checkouts
+                        .map(c => c.pickups
+                            .filter(p => !!p.aisle)
+                            .map(p => p.aisle)))));
+    }
+
+    public static sortPickups(pickups: Pickup[]): Pickup[] {
+        return pickups.sort((a, b) => {
+            const itemCompare: number = a.item.name.localeCompare(b.item.name);
+            if (a.aisle) {
+                if (b.aisle) { // both a and b have defined aisles
+                    const aisleCompare: number = LogicService.compareAisles(a.aisle, b.aisle);
+                    return aisleCompare < 0 ? -1 : aisleCompare > 0 ? 1 : itemCompare;
+                } else { // a but no b
+                    return -1;
+                }
+            } else if (b.aisle) { // no a but b
+                return 1;
+            } else { // neither a nor b have defined aisles
+                return itemCompare;
+            }
+        });
+    }
+
+    public static sortAisles(aisles: Aisle[]): Aisle[] {
+        // return aisles.slice(0);
+        return aisles.slice(0).sort(LogicService.compareAisles);
+    }
+
+    public static project(info: AppInfo): AppInfo {
+        info.items.forEach(item => item.checkouts = []);
+        info.stores.forEach(store => store.checkouts = []);
+        info.checkouts.forEach(co => {
+            co.store.checkouts.push(co);
+            co.pickups.forEach(p => p.item.checkouts.push(co));
+        });
+        return info;
+    }
+
+    private static compareAisles(a: Aisle, b: Aisle): number {
+        // return a.localeCompare(b);
+        type AisleParts = { num: number, alpha: string };
+
+        function getParts(aisle: Aisle): AisleParts {
+            let groups: RegExpExecArray = LogicService.aisleRegex.exec(aisle);
+            return groups
+                ? { num: parseInt(groups[1], 10), alpha: groups[2] }
+                : { num: NaN, alpha: aisle };
+        };
+
+        const aparts: AisleParts = getParts(a);
+        const bparts: AisleParts = getParts(b);
+
+        if (isNaN(aparts.num)) {
+            if (isNaN(bparts.num)) { // neither a nor b has a num part
+                return aparts.alpha.localeCompare(bparts.alpha);
+            } else { // b has a num part, a does not
+                return 1;
+            }
+        } else {
+            if (isNaN(bparts.num)) { // a has a num part, b does not
+                return -1;
+            } else { // both a and b have num part
+                const numcomp: number = aparts.num - bparts.num;
+                return numcomp === 0 ? aparts.alpha.localeCompare(bparts.alpha) : numcomp;
+            }
+        }
     }
 }

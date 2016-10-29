@@ -27,13 +27,6 @@ export class AboutComponent implements OnInit {
         }
     }
 
-    private doReplace(newInfo: IDtoAppInfo): Promise<boolean> {
-        if (confirm("WARNING this is not validated. About to replace your data")) {
-            return this.io.saveAll(newInfo).then(replaced => true);
-        }
-        return Promise.resolve(false);
-    }
-
     public replaceAppInfoForever(): void {
         try {
             const dto: IDtoAppInfo = JSON.parse(this.jsonInfo);
@@ -41,5 +34,12 @@ export class AboutComponent implements OnInit {
         } catch (e) {
             alert(e);
         }
+    }
+
+    private doReplace(newInfo: IDtoAppInfo): Promise<boolean> {
+        if (confirm("WARNING this is not validated. About to replace your data")) {
+            return this.io.saveAll(newInfo).then(replaced => true);
+        }
+        return Promise.resolve(false);
     }
 }

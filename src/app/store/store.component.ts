@@ -30,15 +30,15 @@ export class StoreComponent implements OnInit {
 
     public selectedStorePlaceId: string = null;
 
+    constructor(private logic: LogicService, private geo: AbstractGeoCoder, private router: Router) {
+    }
+
     public checkoutReady(): boolean {
         return this.selectedStorePlaceId != null && this.neededThings.filter(i => i.picked).length > 0;
     }
 
     public get selectedStore(): Store {
         return this.nbStores.find(s => s.placeId === this.selectedStorePlaceId);
-    }
-
-    constructor(private logic: LogicService, private geo: AbstractGeoCoder, private router: Router) {
     }
 
     public ngOnInit(): void {

@@ -16,9 +16,14 @@ function randomString(length: number, chars: string): string {
 }
 
 export class Utilities {
-    public static makeItemId(): string { return Utilities.makeRandomId("i"); }
-    public static makeStoreId(): string { return Utilities.makeRandomId("s"); }
-    private static makeRandomId(prefix: string): string { return prefix + randomString(5, "a#"); }
+    public static makeItemId(): string {
+        return Utilities.makeRandomId("i");
+    }
+
+    public static makeStoreId(): string {
+        return Utilities.makeRandomId("s");
+    }
+
     public static dtoToItem(dto: IItem): Item {
         const newItem: Item = new Item();
         newItem.id = dto.id;
@@ -27,6 +32,7 @@ export class Utilities {
         newItem.checkouts = [];
         return newItem;
     }
+
     public static dtoToStore(dto: IDtoStore): Store {
         const newStore: Store = new Store(dto.id, dto.name);
         newStore.placeId = dto.place_id;
@@ -35,6 +41,7 @@ export class Utilities {
         newStore.checkouts = [];
         return newStore;
     }
+
     public static dtoToCheckout(dto: ICheckout, context: AppInfo): Checkout {
         const newCheckout: Checkout = new Checkout(
             context.stores.find(s => s.id === dto.storeId),
@@ -44,6 +51,10 @@ export class Utilities {
         newCheckout.pickups = dto.pickups
             .map(pu => new Pickup(context.items.find(item => item.id === pu.itemId), pu.aisle));
         return newCheckout;
+    }
+
+    private static makeRandomId(prefix: string): string {
+        return prefix + randomString(5, "a#");
     }
 
 }
