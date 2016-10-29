@@ -73,24 +73,6 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
     }
 }
 
-class FakeLatLng {
-    constructor(private coords: Coordinates) {
-
-    }
-    public lat(): number {
-        return this.coords.latitude;
-    }
-    public lng(): number {
-        return this.coords.longitude;
-    }
-    public equals(): boolean {
-        return true;
-    }
-    public toUrlValue(): string {
-        return undefined;
-    }
-}
-
 @Injectable()
 export class LocalGeoCoder extends AbstractGeoCoder {
     public computeDistanceBetween(from: Coordinates, to: Coordinates): number {
@@ -122,7 +104,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
                 formatted_address: `formatted_address ${n}`,
                 formatted_phone_number: `formatted_phone_number ${n}`,
                 geometry: {
-                    location: new FakeLatLng(spot),
+                    location: new google.maps.LatLng(spot.latitude, spot.longitude),
                     viewport: undefined
                 },
                 html_attributions: [],
