@@ -5,6 +5,11 @@
 		</a>
 	</li>
 </ul>
+<section class="no-items" *ngIf="items.length === 0">
+	<h1>Welcome to GB Grocery.</h1>
+	<p>This webapp will collect your grocery list and help you keep track of your favorite items at your favorite stores.</p>
+	<p>Use the form below to add your first grocery item, try <strong>Milk</strong>.</p>
+</section>
 <section class="add-item">
 	<input type="text" placeholder="New Item" [(ngModel)]="newName" />
 	<div>
