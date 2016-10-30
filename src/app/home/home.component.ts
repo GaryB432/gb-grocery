@@ -1,5 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from "@angular/core";
 
+import { ToastsManager } from "ng2-toastr/ng2-toastr";
+
 import { Item } from "../shared/models";
 import { LogicService } from "../shared/logic.service";
 import { GestureEvent } from "../shared/hammer-gestures.directive";
@@ -26,11 +28,12 @@ export class HomeComponent implements OnInit {
 
     public newName: string = "";
 
-    constructor(private logic: LogicService) {
+    constructor(private logic: LogicService, private toastr: ToastsManager) {
     }
 
     public ngOnInit(): void {
         this.logic.load().then(updatedData => {
+            this.toastr.info("Swipe right on needed items.", null, { toastLife: 5000 });
             this.newName = "";
             return this.items = updatedData.items
                 .slice()
@@ -48,11 +51,6 @@ export class HomeComponent implements OnInit {
                 this.ngOnInit();
             });
         }
-    }
-
-    public toggleNeeded(item: Item): void {
-        item.needed = !item.needed;
-        this.logic.updateItem(item);
     }
 
     public doSwipe(e: GestureEvent, item: Item): void {

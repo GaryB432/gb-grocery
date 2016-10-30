@@ -3,6 +3,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
 import { FormsModule } from "@angular/forms";
 
+import { ToastModule } from "ng2-toastr/ng2-toastr";
+
 import { AboutComponent } from "./about/about.component";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
@@ -31,12 +33,15 @@ abstract class Store {
     public abstract disposeOldHosts(): void;
 }
 
+let toastOptions: any = { positionClass: "toast-top-center" };
+
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
         FormsModule,
-        routing
+        routing,
+        ToastModule.forRoot(toastOptions)
     ],
     declarations: [
         AboutComponent,
