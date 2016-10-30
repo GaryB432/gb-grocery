@@ -4,6 +4,8 @@ require("zone.js/dist/zone");
 
 import "ts-helpers";
 
+import "./web-animations.min.js";
+
 if (process.env.ENV === "build") {
     // Production
 
