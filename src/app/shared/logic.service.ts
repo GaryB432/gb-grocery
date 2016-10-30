@@ -180,7 +180,11 @@ export class LogicService {
                     store.checkouts
                         .map(c => c.pickups
                             .filter(p => !!p.aisle)
-                            .map(p => p.aisle)))));
+                            .map(p => p.aisle)
+                        )
+                )
+            )
+        );
     }
 
     public static sortPickups(pickups: Pickup[]): Pickup[] {
