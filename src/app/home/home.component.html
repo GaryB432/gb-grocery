@@ -1,19 +1,14 @@
-<article *ngFor="let item of items" [ngClass]="{ needed: item.needed, card: true }">
-    <div class="cbh">
-        <div class="slideOne">
-            <input id="cb{{item.id}}" type="checkbox" [(ngModel)]="item.needed" (change)="toggleNeeded(item)" />
-            <label [attr.for]="'cb'+item.id"> </label>
-        </div>
-    </div>
-    <div (onGesture)="doSwipe($event, item)" gbgHammerGestures class="info">
-        <a [routerLink]="['/item', item.id]">
-            <gbg-home-item class="info" [item]="item"></gbg-home-item>
-        </a>
-    </div>
-</article>
+<h1>Swipe right on needed items</h1>
+<ul>
+	<li *ngFor="let item of items" (onGesture)="doSwipe($event, item)" gbgHammerGestures [@itemState]="getState(item)">
+		<a [routerLink]="['/item', item.id]">
+			<gbg-home-item [item]="item"></gbg-home-item>
+		</a>
+	</li>
+</ul>
 <section class="add-item">
-    <input type="text" placeholder="New Item" [(ngModel)]="newName" />
-    <div>
-        <gbg-plus-icon (click)="addItem()"></gbg-plus-icon>
-    </div>
+	<input type="text" placeholder="New Item" [(ngModel)]="newName" />
+	<div>
+		<gbg-plus-icon (click)="addItem()"></gbg-plus-icon>
+	</div>
 </section>

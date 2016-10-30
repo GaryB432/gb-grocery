@@ -1,26 +1,30 @@
-@import "../shared/styles/colors";
-
-article.card {
-    .info {
-        a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-    }
-    &.needed {
-        background-color: $needed;
-    }
-    
+:host{
+    display:block;
 }
 
-.add-item { 
+h1 {
+    font-size: 1.05rem;
+    margin: 5px;
+}
+
+li {
+    display: block;
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 10px 0 silver;
+    min-height: 95px;
+}
+
+a {
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.add-item {
     display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    div {
-        margin-left: 10px;
-    }
+    justify-content: space-around;
+    width: 100%;
     input {
         font-size: 1.3rem;
     }
