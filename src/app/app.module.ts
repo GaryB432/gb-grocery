@@ -26,7 +26,7 @@ import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from "./store/geocodi
 
 import { removeNgStyles, createNewHosts } from "@angularclass/hmr";
 
-let isLocal: boolean = window.location.hostname === "localhost";
+let isLocal: boolean = window.location.hostname === "localhost-is-fun";
 
 type NativeElement = any;
 abstract class Store {

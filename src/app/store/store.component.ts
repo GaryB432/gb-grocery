@@ -82,23 +82,28 @@ export class StoreComponent implements OnInit {
 
             this.stores = updatedData.stores;
 
-            this.geo.nearbyStoreSearch(coords).then(nearbyPlaces => {
+            this.geo.nearbyStoreSearch(coords)
+                .then(nearbyPlaces => {
+                    this.nbStores = this.logic.getStoresFromNearbyPlaces(nearbyPlaces)
+                        .map(store => {
+                            return {
+                                store: store,
+                                distance: this.geo.computeDistanceBetween(coords, store.location)
+                            };
+                        })
+                        .sort((a, b) => a.distance - b.distance)
+                        .map(ds => ds.store);
 
-                this.nbStores = this.logic.getStoresFromNearbyPlaces(nearbyPlaces)
-                    .map(store => {
-                        return {
-                            store: store,
-                            distance: this.geo.computeDistanceBetween(coords, store.location)
-                        };
-                    })
-                    .sort((a, b) => a.distance - b.distance)
-                    .map(ds => ds.store);
-
-                if (this.nbStores.length > 0) {
-                    this.selectedStorePlaceId = this.nbStores[0].placeId;
-                    this.changeStore();
-                }
-            });
+                    if (this.nbStores.length > 0) {
+                        this.selectedStorePlaceId = this.nbStores[0].placeId;
+                        this.changeStore();
+                    }
+                })
+                .catch(() => {
+                    alert("There was a mapping problem or you seem to not be near a grocery store. "
+                        + "The Check Out tab is meant for when you are at the store.");
+                    this.router.navigateByUrl("/");
+                });
         });
     }
 }

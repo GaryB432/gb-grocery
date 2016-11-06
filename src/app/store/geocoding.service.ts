@@ -46,7 +46,7 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
                     = new google.maps.places.PlacesService(new google.maps.Map(document.getElementById("map")));
                 const searchRequest: google.maps.places.PlaceSearchRequest = {
                     location: this.getLatLng(coords),
-                    radius: 3 * 1609.34,
+                    radius: 2 * 1609.34,
                     types: [grocery],
                     bounds: undefined,
                     keyword: undefined,
