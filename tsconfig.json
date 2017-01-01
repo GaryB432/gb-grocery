@@ -11,6 +11,6 @@
   "buildOnSave": false,
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-    "userWebpackText": true
+    "useWebpackText": true
   }
 }
