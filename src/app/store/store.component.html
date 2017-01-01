@@ -1,34 +1,34 @@
 <section [ngSwitch]="!!selectedStore">
-    <section *ngSwitchCase="true">
-        <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
-            <option *ngFor="let store of nbStores" [value]="store.placeId">{{store.name}}</option>
-        </select>
-        <section class="store-info">
-            <section>
-                <img [src]="selectedStore.icon" />
-                <div class="vicinity">{{selectedStore.vicinity}}</div>
-            </section>
-            <img *ngIf="selectedStore.photo" [src]="selectedStore.photo" />
-        </section>
-        <img src="img/powered_by_google_on_white.png" alt="powered by Google" />
+  <section *ngSwitchCase="true">
+    <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
+      <option *ngFor="let store of nbStores" [value]="store.placeId">{{store.name}}</option>
+    </select>
+    <section class="store-info">
+      <section>
+        <img [src]="selectedStore.icon" />
+        <div class="vicinity">{{selectedStore.vicinity}}</div>
+      </section>
+      <img *ngIf="selectedStore.photo" [src]="selectedStore.photo" />
     </section>
-    <div *ngSwitchDefault class="loader"></div>
+    <img src="img/powered_by_google_on_white.png" alt="powered by Google" />
+  </section>
+  <div *ngSwitchDefault class="loader"></div>
 </section>
 <div *ngIf="neededThings.length === 0" class="no-items">
-    <h1>You don't need anything</h1>
-    <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here
-        for you to pick up.</p>
+  <h1>You don't need anything</h1>
+  <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here for
+    you to pick up.</p>
 </div>
 <article *ngFor="let pu of neededThings" [ngClass]="{ picked: pu.picked, card: true }">
-    <div class="cbh">
-        <div class="slideOne">
-            <input id="cb{{pu.item.id}}" type="checkbox" [(ngModel)]="pu.picked" (change)="togglePicked(pu)" />
-            <label [attr.for]="'cb'+pu.item.id"> </label>
-        </div>
+  <div class="cbh">
+    <div class="slideOne">
+      <input id="cb{{pu.item.id}}" type="checkbox" [(ngModel)]="pu.picked" (change)="togglePicked(pu)" />
+      <label [attr.for]="'cb'+pu.item.id"> </label>
     </div>
-    <gbg-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-pickup>
+  </div>
+  <gbg-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-pickup>
 </article>
 <section class="check-out">
-    <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
+  <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
 </section>
 <div id="map"></div>
