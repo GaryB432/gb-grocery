@@ -5,39 +5,39 @@ import { Router } from "@angular/router";
 import { LogicService } from "../shared/logic.service";
 import { StoreComponent } from "./store.component";
 import { DataService } from "../shared/data.service";
-import { Store, Item, Checkout, AppInfo } from "../shared/models";
+import { AppInfo } from "../shared/models";
 import { AbstractGeoCoder, LocalGeoCoder } from "./geocoding.service";
 
-class MockLogicService {
-  private info: AppInfo = {
-    stores: undefined,
-    items: undefined,
-    checkouts: undefined
-  };
+// class MockLogicService {
+//   private info: AppInfo = {
+//     stores: undefined,
+//     items: undefined,
+//     checkouts: undefined
+//   };
 
-  public load(): Promise<AppInfo> {
-    const today: Date = new Date(2034, 5, 6);
+//   public load(): Promise<AppInfo> {
+//     const today: Date = new Date(2034, 5, 6);
 
-    this.info.stores = [new Store("1", "ONE"), new Store("2", "TWO")];
-    this.info.items = ["A", "B"].map((s) => {
-      const item: Item = new Item();
-      item.id = s;
-      item.name = `ITEM ${s}`;
-      return item;
-    });
-    this.info.checkouts = [new Checkout(this.info.stores[0], today)];
-    return new Promise<AppInfo>((resolve, reject) => resolve(this.info));
-  }
-  public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
-    throw new Error("oh noes");
-    // return [];
-  }
-}
+//     this.info.stores = [new Store("1", "ONE"), new Store("2", "TWO")];
+//     this.info.items = ["A", "B"].map((s) => {
+//       const item: Item = new Item();
+//       item.id = s;
+//       item.name = `ITEM ${s}`;
+//       return item;
+//     });
+//     this.info.checkouts = [new Checkout(this.info.stores[0], today)];
+//     return new Promise<AppInfo>((resolve, reject) => resolve(this.info));
+//   }
+//   public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
+//     throw new Error("oh noes");
+//     // return [];
+//   }
+// }
 
-class MockLocalStorage {
-  public setItem: jasmine.Spy = jasmine.createSpy("setItem");
-  public getItem: jasmine.Spy = jasmine.createSpy("getItem");
-}
+// class MockLocalStorage {
+//   public setItem: jasmine.Spy = jasmine.createSpy("setItem");
+//   public getItem: jasmine.Spy = jasmine.createSpy("getItem");
+// }
 
 class MockDataService {
   public load(): Promise<AppInfo> {
