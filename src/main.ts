@@ -1,19 +1,19 @@
-import {enableProdMode, NgModuleRef} from "@angular/core";
-import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
-import {AppModule} from "./app/app.module";
+import { enableProdMode, NgModuleRef } from "@angular/core";
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { AppModule } from "./app/app.module";
 
 // depending on the env mode, enable prod mode or add debugging modules
 if (process.env.ENV === "build") {
-    enableProdMode();
+  enableProdMode();
 }
 
 export function main(): Promise<NgModuleRef<AppModule>> {
-    "use strict";
-    return platformBrowserDynamic().bootstrapModule(AppModule);
+  "use strict";
+  return platformBrowserDynamic().bootstrapModule(AppModule);
 }
 
 if (document.readyState === "complete") {
-    main();
+  main();
 } else {
-    document.addEventListener("DOMContentLoaded", main);
+  document.addEventListener("DOMContentLoaded", main);
 }

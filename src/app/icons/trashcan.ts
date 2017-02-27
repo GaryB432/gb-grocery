@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import { Component } from "@angular/core";
 
 let svg: string = `<svg viewBox="0 0 12 16" xmlns="http://www.w3.org/2000/svg">
   <path d="M10 2H8c0-0.55-0.45-1-1-1H4c-0.55 0-1 0.45-1 1H1c-0.55 0-1 0.45-1 1v1c0 0.55

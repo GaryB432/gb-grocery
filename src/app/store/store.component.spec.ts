@@ -9,116 +9,116 @@ import { Store, Item, Checkout, AppInfo } from "../shared/models";
 import { AbstractGeoCoder, LocalGeoCoder } from "./geocoding.service";
 
 class MockLogicService {
-    private info: AppInfo = {
-        stores: undefined,
-        items: undefined,
-        checkouts: undefined
-    };
+  private info: AppInfo = {
+    stores: undefined,
+    items: undefined,
+    checkouts: undefined
+  };
 
-    public load(): Promise<AppInfo> {
-        const today: Date = new Date(2034, 5, 6);
+  public load(): Promise<AppInfo> {
+    const today: Date = new Date(2034, 5, 6);
 
-        this.info.stores = [new Store("1", "ONE"), new Store("2", "TWO")];
-        this.info.items = ["A", "B"].map((s) => {
-            const item: Item = new Item();
-            item.id = s;
-            item.name = `ITEM ${s}`;
-            return item;
-        });
-        this.info.checkouts = [new Checkout(this.info.stores[0], today)];
-        return new Promise<AppInfo>((resolve, reject) => resolve(this.info));
-    }
-    public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
-        throw new Error("oh noes");
-        // return [];
-    }
+    this.info.stores = [new Store("1", "ONE"), new Store("2", "TWO")];
+    this.info.items = ["A", "B"].map((s) => {
+      const item: Item = new Item();
+      item.id = s;
+      item.name = `ITEM ${s}`;
+      return item;
+    });
+    this.info.checkouts = [new Checkout(this.info.stores[0], today)];
+    return new Promise<AppInfo>((resolve, reject) => resolve(this.info));
+  }
+  public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
+    throw new Error("oh noes");
+    // return [];
+  }
 }
 
 class MockLocalStorage {
-    public setItem: jasmine.Spy = jasmine.createSpy("setItem");
-    public getItem: jasmine.Spy = jasmine.createSpy("getItem");
+  public setItem: jasmine.Spy = jasmine.createSpy("setItem");
+  public getItem: jasmine.Spy = jasmine.createSpy("getItem");
 }
 
 class MockDataService {
-    public load(): Promise<AppInfo> {
-        return Promise.resolve(undefined);
-    }
+  public load(): Promise<AppInfo> {
+    return Promise.resolve(undefined);
+  }
 }
 class MockRouter {
-    public navigate: jasmine.Spy = jasmine.createSpy("navigate");
+  public navigate: jasmine.Spy = jasmine.createSpy("navigate");
 }
 xdescribe("Store Component", () => {
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                StoreComponent
-            ],
-            imports: [
-                FormsModule
-            ],
-            providers: [
-                { provide: LogicService, useClass: LogicService },
-                { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
-                { provide: DataService, useClass: MockDataService },
-                { provide: Router, useClass: MockRouter }
-            ]
-        });
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        StoreComponent
+      ],
+      imports: [
+        FormsModule
+      ],
+      providers: [
+        { provide: LogicService, useClass: LogicService },
+        { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
+        { provide: DataService, useClass: MockDataService },
+        { provide: Router, useClass: MockRouter }
+      ]
+    });
+  });
+
+  it("should have aisles", async(() => {
+    // Overrides here, if you need them
+    TestBed.overrideComponent(StoreComponent, {
+      set: {
+        template: "<div>Overridden template something here</div>",
+      }
     });
 
-    it("should have aisles", async(() => {
-        // Overrides here, if you need them
-        TestBed.overrideComponent(StoreComponent, {
-            set: {
-                template: "<div>Overridden template something here</div>",
-            }
-        });
+    TestBed.compileComponents().then(() => {
+      const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
 
-        TestBed.compileComponents().then(() => {
-            const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
+      // Access the dependency injected component instance
+      const app: StoreComponent = fixture.componentInstance;
 
-            // Access the dependency injected component instance
-            const app: StoreComponent = fixture.componentInstance;
+      // app.ngOnInit();
 
-            // app.ngOnInit();
+      // it("should have aisles", () => {
+      //     const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
+      //     // const component: StoreComponent = fixture.componentInstance;
 
-            // it("should have aisles", () => {
-            //     const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
-            //     // const component: StoreComponent = fixture.componentInstance; 
+      //     // component.pickup = new Pickup(new Item(), "A1");
+      //     // function newStore() {
+      //     //     return new Store("a", undefined)
+      //     // };
+      //     // let s: Store = {
+      //     //     formattedAddress: "a",
+      //     //     formattedPhoneNumber: "B"
+      //     // };
+      //     // component.stores = [new Store("A", undefined)];
+      //     // component.selectedStorePlaceId = "1";
+      //     // component.changeStore();
 
-            //     // component.pickup = new Pickup(new Item(), "A1");
-            //     // function newStore() {
-            //     //     return new Store("a", undefined)
-            //     // };
-            //     // let s: Store = {
-            //     //     formattedAddress: "a",
-            //     //     formattedPhoneNumber: "B"
-            //     // };
-            //     // component.stores = [new Store("A", undefined)];
-            //     // component.selectedStorePlaceId = "1";
-            //     // component.changeStore();
+      //     // fixture.detectChanges();
 
-            //     // fixture.detectChanges();
+      //     // expect(component.aisles.length).toBeGreaterThan(0);
 
-            //     // expect(component.aisles.length).toBeGreaterThan(0);
+      //     expect(fixture.nativeElement.children[0].textContent).toContain("hi");
+      // });
 
-            //     expect(fixture.nativeElement.children[0].textContent).toContain("hi");
-            // });
+      expect(app.aisles).toBeDefined();
 
-            expect(app.aisles).toBeDefined();
+      // Access the element
+      const element: Element = fixture.nativeElement;
 
-            // Access the element
-            const element: Element = fixture.nativeElement;
+      // Detect changes as necessary
+      fixture.detectChanges();
 
-            // Detect changes as necessary
-            fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        expect(element.textContent).toContain("something");
+      });
 
-            fixture.whenStable().then(() => {
-                expect(element.textContent).toContain("something");
-            });
-
-        });
-    }));
+    });
+  }));
 });
 
 // import { TestBed, ComponentFixture } from "@angular/core/testing";
@@ -142,7 +142,7 @@ xdescribe("Store Component", () => {
 
 //     it("should have aisles", () => {
 //         const fixture: ComponentFixture<StoreComponent> = TestBed.createComponent(StoreComponent);
-//         // const component: StoreComponent = fixture.componentInstance; 
+//         // const component: StoreComponent = fixture.componentInstance;
 
 //         // component.pickup = new Pickup(new Item(), "A1");
 //         // function newStore() {
@@ -374,7 +374,7 @@ xdescribe("Store Component", () => {
 
 // //     }));
 
-// //     it('should get existing reference for place_id', inject([StoreComponent, GeoCoder, DataService, LocalStorage], 
+// //     it('should get existing reference for place_id', inject([StoreComponent, GeoCoder, DataService, LocalStorage],
 // //         (sut: StoreComponent, geo: MockGeocoder, ds: MockDataService, ls: MockLocalStorage) => {
 
 // //         let stores = [0, 1, 2, 3, 4].map(n => new Store(`S${n}`, `Store ${n}`));

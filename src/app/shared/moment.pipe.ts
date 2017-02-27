@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from "@angular/core";
+import { Pipe, PipeTransform } from "@angular/core";
 import moment = require("moment");
 
 /*
@@ -11,12 +11,12 @@ import moment = require("moment");
 */
 @Pipe({ name: "gbgMoment", pure: true })
 export class MomentPipe implements PipeTransform {
-    public transform(value: Date): string {
+  public transform(value: Date): string {
 
-        if (value === null) {
-            return null;
-        }
-
-        return moment(value).fromNow();
+    if (value === null) {
+      return null;
     }
+
+    return moment(value).fromNow();
+  }
 }
