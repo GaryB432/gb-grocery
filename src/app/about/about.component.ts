@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { IDtoAppInfo } from "../shared/interfaces";
 import { DataIoService } from "../shared/data.io.service";
+import { IDtoAppInfo } from "../shared/interfaces";
 
 @Component({
   selector: "gbg-about",

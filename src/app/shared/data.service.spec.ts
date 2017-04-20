@@ -1,13 +1,13 @@
 // http://gist.asciidoctor.org/?github-mraible%2Fng2-demo%2F%2FREADME.adoc#_unit_test_the_searchservice
 
-import { TestBed, inject, tick, fakeAsync } from "@angular/core/testing";
+import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 // import { LogicService } from "./logic.service";
 // import { BaseRequestOptions, Http, ConnectionBackend, Response, ResponseOptions } from "@angular/http";
 // import { MockBackend } from "@angular/http/testing";
 
 import { DataIoService } from "../shared/data.io.service";
 import { DataService } from "../shared/data.service";
-import { IDtoAppInfo, IItem, IDtoStore, ICheckout } from "../shared/interfaces";
+import { ICheckout, IDtoAppInfo, IDtoStore, IItem } from "../shared/interfaces";
 import { AppInfo } from "../shared/models";
 
 // class MockDataService {
@@ -22,120 +22,120 @@ import { AppInfo } from "../shared/models";
 // }
 
 const items: IItem[] = [
-    {
-        "id": "I0",
-        "name": "asdf",
-        "needed": false
-    },
-    {
-        "id": "I1",
-        "name": "zebra",
-        "needed": true
-    },
-    {
-        "id": "I2",
-        "name": "another",
-        "needed": false
-    }
+  {
+    "id": "I0",
+    "name": "asdf",
+    "needed": false
+  },
+  {
+    "id": "I1",
+    "name": "zebra",
+    "needed": true
+  },
+  {
+    "id": "I2",
+    "name": "another",
+    "needed": false
+  }
 ];
 
 const checkouts: ICheckout[] = [
-    {
-        "storeId": "S1",
-        "isoDate": "2016-04-03T04:45:38.582Z",
-        "pickups": [{ "itemId": "I1", "aisle": "K9" }, { "itemId": "I0", "aisle": "D10" }]
-    },
-    {
-        "storeId": "S0",
-        "isoDate": "2016-04-03T05:35:18.334Z",
-        "pickups": [{ "itemId": "I0", "aisle": "S0-D10" }]
-    }
+  {
+    "storeId": "S1",
+    "isoDate": "2016-04-03T04:45:38.582Z",
+    "pickups": [{ "itemId": "I1", "aisle": "K9" }, { "itemId": "I0", "aisle": "D10" }]
+  },
+  {
+    "storeId": "S0",
+    "isoDate": "2016-04-03T05:35:18.334Z",
+    "pickups": [{ "itemId": "I0", "aisle": "S0-D10" }]
+  }
 ];
 
 const stores: IDtoStore[] = [
-    {
-        // "formatted_address": "formatted_address",
-        // "formatted_phone_number": "formatted_phone_number",
-        // "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-        // "location": {
-        //     "altitudeAccuracy": 0,
-        //     "longitude": 301,
-        //     "latitude": 300,
-        //     "speed": 0,
-        //     "heading": 0,
-        //     "altitude": 0,
-        //     "accuracy": 0
-        // },
-        "name": "FAKE SCHNUCKS",
-        // "types": ["grocery_or_supermarket"],
-        // "url": "url",
-        // "website": "website",
-        "vicinity": "vicinity",
-        "place_id": "xxxxxxxxxxxxx",
-        "id": "S0"
-    },
-    {
-        // "formatted_address": "formatted_address",
-        // "formatted_phone_number": "formatted_phone_number",
+  {
+    // "formatted_address": "formatted_address",
+    // "formatted_phone_number": "formatted_phone_number",
+    // "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+    // "location": {
+    //     "altitudeAccuracy": 0,
+    //     "longitude": 301,
+    //     "latitude": 300,
+    //     "speed": 0,
+    //     "heading": 0,
+    //     "altitude": 0,
+    //     "accuracy": 0
+    // },
+    "name": "FAKE SCHNUCKS",
+    // "types": ["grocery_or_supermarket"],
+    // "url": "url",
+    // "website": "website",
+    "vicinity": "vicinity",
+    "place_id": "xxxxxxxxxxxxx",
+    "id": "S0"
+  },
+  {
+    // "formatted_address": "formatted_address",
+    // "formatted_phone_number": "formatted_phone_number",
 
-        // "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-        // "location": {
-        //     "altitudeAccuracy": 0,
-        //     "longitude": -90.51309529999997,
-        //     "latitude": 38.593912,
-        //     "speed": 0,
-        //     "heading": 0,
-        //     "altitude": 0,
-        //     "accuracy": 0
-        // },
-        "name": "Atlantic Mills",
-        "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-        // "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
-        // "url": "url",
-        // "website": "website",
-        "vicinity": "14345 Manchester Road, Ballwin",
-        "id": "S1"
-    }
+    // "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+    // "location": {
+    //     "altitudeAccuracy": 0,
+    //     "longitude": -90.51309529999997,
+    //     "latitude": 38.593912,
+    //     "speed": 0,
+    //     "heading": 0,
+    //     "altitude": 0,
+    //     "accuracy": 0
+    // },
+    "name": "Atlantic Mills",
+    "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
+    // "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
+    // "url": "url",
+    // "website": "website",
+    "vicinity": "14345 Manchester Road, Ballwin",
+    "id": "S1"
+  }
 ];
 
 class MockDataIoService {
-    public load(): Promise<IDtoAppInfo> {
-        return Promise.resolve({ stores, items, checkouts });
-    }
+  public load(): Promise<IDtoAppInfo> {
+    return Promise.resolve({ stores, items, checkouts });
+  }
 }
 
 describe("Data Service", () => {
-    beforeEach(() => {
+  beforeEach(() => {
 
-        TestBed.configureTestingModule({
-            providers: [
-                { provide: DataService, useClass: DataService, deps: [DataIoService] },
-                { provide: DataIoService, useClass: MockDataIoService }
-            ]
-        });
-
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: DataService, useClass: DataService, deps: [DataIoService] },
+        { provide: DataIoService, useClass: MockDataIoService }
+      ]
     });
 
-    it("should load",
-        inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
-            let info: AppInfo;
-            sut.load().then((response: AppInfo) => {
-                info = response;
-            });
-            tick();
-            expect(info).toBeDefined();
-            expect(info.stores.length).toBe(2);
-            expect(info.items.length).toBe(3);
-            expect(info.checkouts.length).toBe(2);
+  });
 
-            expect(info.checkouts[0].store).toBe(info.stores[1]);
-            expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
-            expect(info.checkouts[0].pickups.length).toEqual(2);
+  it("should load",
+    inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
+      let info: AppInfo;
+      sut.load().then((response: AppInfo) => {
+        info = response;
+      });
+      tick();
+      expect(info).toBeDefined();
+      expect(info.stores.length).toBe(2);
+      expect(info.items.length).toBe(3);
+      expect(info.checkouts.length).toBe(2);
 
-            expect(info.items[0].checkouts).toBeDefined();
-            expect(info.items[0].checkouts.length).toBe(0);
-        }))
-    );
+      expect(info.checkouts[0].store).toBe(info.stores[1]);
+      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
+      expect(info.checkouts[0].pickups.length).toEqual(2);
+
+      expect(info.items[0].checkouts).toBeDefined();
+      expect(info.items[0].checkouts.length).toBe(0);
+    }))
+  );
 
 });
 

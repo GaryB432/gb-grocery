@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Store, Pickup, Checkout } from "../shared/models";
-import { AbstractGeoCoder } from "./geocoding.service";
 import { LogicService } from "../shared/logic.service";
+import { Checkout, Pickup, Store } from "../shared/models";
+import { AbstractGeoCoder } from "./geocoding.service";
 
 type Aisle = string;
 

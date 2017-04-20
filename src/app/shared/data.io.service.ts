@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { IItem, IDtoStore, ICheckout, IDtoAppInfo } from "./interfaces";
+import { ICheckout, IDtoAppInfo, IDtoStore, IItem } from "./interfaces";
 
 const ITEMS_KEY: string = "gbg-items";
 const STORES_KEY: string = "gbg-stores";

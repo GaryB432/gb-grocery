@@ -1,19 +1,19 @@
 import {
+  animate,
   Component,
   OnInit,
-  trigger,
   state,
   style,
   transition,
-  animate,
+  trigger,
   ViewContainerRef
 } from "@angular/core";
 
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
-import { Item } from "../shared/models";
-import { LogicService } from "../shared/logic.service";
 import { GestureEvent } from "../shared/hammer-gestures.directive";
+import { LogicService } from "../shared/logic.service";
+import { Item } from "../shared/models";
 
 @Component({
   selector: "gbg-home",

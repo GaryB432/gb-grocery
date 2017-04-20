@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 
-import { Utilities } from "../shared/utilities";
-import { Item, Store, Pickup, Checkout, AppInfo } from "../shared/models";
 import { DataService } from "../shared/data.service";
+import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
+import { Utilities } from "../shared/utilities";
 
 const flatten: (a: any[][]) => any[] = require("arr-flatten");
 

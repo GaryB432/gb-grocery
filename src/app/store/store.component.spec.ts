@@ -1,12 +1,12 @@
-import { async, TestBed, ComponentFixture } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
 
-import { LogicService } from "../shared/logic.service";
-import { StoreComponent } from "./store.component";
 import { DataService } from "../shared/data.service";
+import { LogicService } from "../shared/logic.service";
 import { AppInfo } from "../shared/models";
 import { AbstractGeoCoder, LocalGeoCoder } from "./geocoding.service";
+import { StoreComponent } from "./store.component";
 
 // class MockLogicService {
 //   private info: AppInfo = {

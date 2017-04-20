@@ -1,10 +1,10 @@
 import { ModuleWithProviders } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
-import { StoreComponent } from "./store/store.component";
+import { HomeComponent } from "./home/home.component";
 import { ItemComponent } from "./item/item.component";
+import { StoreComponent } from "./store/store.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },

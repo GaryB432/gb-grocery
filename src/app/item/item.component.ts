@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import { LogicService } from "../shared/logic.service";
-import { Item } from "../shared/models";
-import { Checkout } from "../shared/models";
-import { Pickup } from "../shared/models";
+import { Checkout, Item, Pickup } from "../shared/models";
 
 @Component({
     selector: "gbg-item",

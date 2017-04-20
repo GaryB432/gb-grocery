@@ -1,8 +1,8 @@
-import { TestBed, inject, tick, fakeAsync } from "@angular/core/testing";
+import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 
-import { LogicService } from "./logic.service";
-import { Item, Store, Checkout, Pickup, AppInfo } from "../shared/models";
 import { DataService } from "../shared/data.service";
+import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
+import { LogicService } from "./logic.service";
 
 class MockDataService {
   private info: AppInfo = {

@@ -1,32 +1,28 @@
-import { NgModule, ApplicationRef } from "@angular/core";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { BrowserModule } from "@angular/platform-browser";
-import { HttpModule } from "@angular/http";
+import { ApplicationRef, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-
+import { HttpModule } from "@angular/http";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { createNewHosts, removeNgStyles } from "@angularclass/hmr";
 import { ToastModule, ToastsManager } from "ng2-toastr/ng2-toastr";
 
 import { AboutComponent } from "./about/about.component";
 import { AppComponent } from "./app.component";
+import { routing } from "./app.routing";
 import { HomeComponent } from "./home/home.component";
 import { HomeItemComponent } from "./home/item.component";
-import { ItemComponent } from "./item/item.component";
-import { PickupComponent } from "./store/pickup.component";
-import { StoreComponent } from "./store/store.component";
 import { PlusIconComponent } from "./icons/plus";
 import { TrashcanIconComponent } from "./icons/trashcan";
-import { routing } from "./app.routing";
-
-import { DataService } from "./shared/data.service";
+import { ItemComponent } from "./item/item.component";
 import { DataIoService, LocalIoStorage } from "./shared/data.io.service";
+import { DataService } from "./shared/data.service";
+import { HammerGesturesDirective } from "./shared/hammer-gestures.directive";
 import { LogicService } from "./shared/logic.service";
 import { MomentPipe } from "./shared/moment.pipe";
 import { TopToastsManager } from "./shared/toasts-manager";
-import { HammerGesturesDirective } from "./shared/hammer-gestures.directive";
-
 import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from "./store/geocoding.service";
-
-import { removeNgStyles, createNewHosts } from "@angularclass/hmr";
+import { PickupComponent } from "./store/pickup.component";
+import { StoreComponent } from "./store/store.component";
 
 const isLocal: boolean = window.location.hostname === "localhost-is-fun";
 

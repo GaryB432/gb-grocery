@@ -1,9 +1,9 @@
 import {
+  AfterViewInit,
   Directive,
   ElementRef,
-  Output,
   EventEmitter,
-  AfterViewInit
+  Output
 } from "@angular/core";
 
 export type GestureType = "swipeleft" | "swiperight" | "tap";
