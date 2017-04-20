@@ -113,6 +113,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         icon: "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
         international_phone_number: `international_phone_number ${n}`,
         name: `${ks.name} S${n}`,
+        opening_hours: undefined,
         permanently_closed: false,
         photos: [
           {

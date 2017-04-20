@@ -1,4 +1,13 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+  ViewContainerRef
+} from "@angular/core";
 
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
@@ -28,7 +37,8 @@ export class HomeComponent implements OnInit {
 
   public newName: string = "";
 
-  constructor(private logic: LogicService, private toastr: ToastsManager) {
+  constructor(private logic: LogicService, private toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
   }
 
   public ngOnInit(): void {
