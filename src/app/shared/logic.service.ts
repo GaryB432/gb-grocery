@@ -4,18 +4,13 @@ import { DataService } from "../shared/data.service";
 import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
 import { Utilities } from "../shared/utilities";
 
-const flatten: (a: any[][]) => any[] = require("arr-flatten");
+function flatten(list: any[]): any[] {
+  return list.reduce(
+    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
+}
 
-function distinct(aisles: Aisle[]): Aisle[] {
-  const u: { [id: string]: boolean } = {}, a: Aisle[] = [];
-  for (let i: number = 0, l: number = aisles.length; i < l; ++i) {
-    if (u.hasOwnProperty(aisles[i])) {
-      continue;
-    }
-    a.push(aisles[i] as string);
-    u[aisles[i]] = true;
-  }
-  return a;
+function distinct(arr: any[]): any[] {
+  return Array.from(new Set(arr));
 }
 
 type Aisle = string;

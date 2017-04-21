@@ -84,8 +84,8 @@ describe("Logic Service", () => {
   });
 
   it("should load",
-    inject([LogicService, DataService], fakeAsync((sut: LogicService, ds: DataService) => {
-      console.log(ds, "is not used");
+    inject([LogicService, DataService], fakeAsync((sut: LogicService, _ds: DataService) => {
+      // console.log(ds, "is not used");
       let info: AppInfo;
       sut.load().then((response: AppInfo) => {
         info = response;
@@ -121,8 +121,7 @@ describe("Logic Service", () => {
   );
 
   it("should create item",
-    inject([LogicService, DataService], fakeAsync((sut: LogicService, ds: DataService) => {
-      console.log(ds, "is not used");
+    inject([LogicService, DataService], fakeAsync((sut: LogicService, _ds: DataService) => {
       let info: AppInfo;
       sut.load().then((response: AppInfo) => {
         info = response;
