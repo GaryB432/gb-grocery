@@ -468,4 +468,30 @@ describe("More Logic Service", () => {
       ]);
   });
 
+  it("should predict aisle properly", () => {
+
+    const store: Store = new Store("S", undefined);
+
+    const item: Item = new Item();
+    item.id = "I0";
+    item.checkouts = [
+      new Checkout(store, new Date(2001, 2, 3, 4, 5, 6)),
+      new Checkout(store, new Date(2001, 2, 2, 4, 5, 6))
+    ];
+    item.checkouts[0].pickups = [new Pickup(item, "2-3")];
+    item.checkouts[1].pickups = [new Pickup(item, "2-2")];
+
+    expect(LogicService.predictAisle(item, store)).toBe("2-3");
+  });
+
+  it("should predict undefined aisle properly", () => {
+
+    const store: Store = new Store("S", undefined);
+
+    const item: Item = new Item();
+
+    expect(LogicService.predictAisle(item, store)).toBeUndefined();
+  });
+
+
 });
