@@ -75,13 +75,13 @@ export class LogicService {
       store.formattedPhoneNumber = place.formatted_phone_number;
       store.icon = place.icon;
       store.location = {
-        altitudeAccuracy: 0,
-        longitude: place.geometry.location.lng(),
-        latitude: place.geometry.location.lat(),
-        speed: 0,
-        heading: 0,
-        altitude: 0,
         accuracy: 0,
+        altitude: 0,
+        altitudeAccuracy: 0,
+        heading: 0,
+        latitude: place.geometry.location.lat(),
+        longitude: place.geometry.location.lng(),
+        speed: 0,
       };
       store.name = place.name;
 

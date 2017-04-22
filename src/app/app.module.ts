@@ -1,4 +1,4 @@
-/* tslint:disable:max-classes-per-file */
+/* tslint:disable:max-classes-per-file no-console */
 
 import { ApplicationRef, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
@@ -34,14 +34,7 @@ abstract class Store {
 }
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,
-    FormsModule,
-    routing,
-    ToastModule.forRoot(),
-  ],
+  bootstrap: [AppComponent],
   declarations: [
     AboutComponent,
     AppComponent,
@@ -55,6 +48,14 @@ abstract class Store {
     PlusIconComponent,
     HammerGesturesDirective,
   ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpModule,
+    FormsModule,
+    routing,
+    ToastModule.forRoot(),
+  ],
   providers: [
     { provide: ToastsManager, useClass: TopToastsManager },
     { provide: AbstractGeoCoder, useClass: isLocal ? LocalGeoCoder : GoogleGeoCoder },
@@ -63,7 +64,6 @@ abstract class Store {
     LocalIoStorage,
     LogicService,
   ],
-  bootstrap: [AppComponent],
 })
 
 export class AppModule {

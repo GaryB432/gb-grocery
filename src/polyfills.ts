@@ -1,4 +1,4 @@
-/* tslint:disable:no-var-requires */
+/* tslint:disable:no-var-requires no-string-literal */
 
 import "core-js/client/shim";
 import "reflect-metadata";

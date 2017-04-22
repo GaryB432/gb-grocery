@@ -1,3 +1,5 @@
+/* tslint:disable:object-literal-sort-keys */
+
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 

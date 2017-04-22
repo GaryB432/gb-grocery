@@ -16,9 +16,6 @@ import { LogicService } from "../shared/logic.service";
 import { Item } from "../shared/models";
 
 @Component({
-  selector: "gbg-home",
-  styleUrls: ["./home.component.scss"],
-  templateUrl: "./home.component.html",
   animations: [trigger("itemState", [
     state("needed", style({
       backgroundColor: "#00bcd4",
@@ -30,6 +27,9 @@ import { Item } from "../shared/models";
     })),
     transition("notneeded => needed, needed => notneeded", animate(".4s ease-in-out")),
   ])],
+  selector: "gbg-home",
+  styleUrls: ["./home.component.scss"],
+  templateUrl: "./home.component.html",
 })
 export class HomeComponent implements OnInit {
 

@@ -1,5 +1,4 @@
-/* tslint:disable:no-unsafe-finally */
-/* tslint:disable:max-classes-per-file */
+/* tslint:disable:no-unsafe-finally max-classes-per-file no-console */
 
 import { Injectable } from "@angular/core";
 
@@ -36,9 +35,9 @@ export class DataIoService {
 
   public load(): Promise<IDtoAppInfo> {
     return Promise.resolve({
-      stores: this.readStores(),
-      items: this.readItems(),
       checkouts: this.readCheckouts(),
+      items: this.readItems(),
+      stores: this.readStores(),
     });
   }
 
@@ -57,8 +56,7 @@ export class DataIoService {
     } catch (ex) {
       console.log(ex.stack);
       data = [];
-    }
-    finally {
+    } finally {
       return data;
     }
   }
@@ -71,8 +69,7 @@ export class DataIoService {
     } catch (ex) {
       console.log(ex.stack);
       data = [];
-    }
-    finally {
+    } finally {
       return data;
     }
   }
@@ -85,8 +82,7 @@ export class DataIoService {
     } catch (ex) {
       console.log(ex.stack);
       data = [];
-    }
-    finally {
+    } finally {
       return data;
     }
   }

@@ -47,13 +47,13 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
         const placeService: google.maps.places.PlacesService
           = new google.maps.places.PlacesService(new google.maps.Map(document.getElementById("map")));
         const searchRequest: google.maps.places.PlaceSearchRequest = {
-          location: this.getLatLng(coords),
-          radius: 2 * 1609.34,
-          types: [grocery],
           bounds: undefined,
           keyword: undefined,
+          location: this.getLatLng(coords),
           name: undefined,
+          radius: 2 * 1609.34,
           rankBy: undefined,
+          types: [grocery],
         };
         placeService.nearbySearch(searchRequest, (results: google.maps.places.PlaceResult[],
           status: google.maps.places.PlacesServiceStatus) => {
@@ -119,11 +119,11 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         permanently_closed: false,
         photos: [
           {
-            height: 200,
-            width: 200,
-            html_attributions: [],
             getUrl: (_opts) => "https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0"
               + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/",
+            height: 200,
+            html_attributions: [],
+            width: 200,
           }],
         place_id: ks.place_id,
         price_level: undefined,
@@ -178,13 +178,13 @@ export class LocalGeoCoder extends AbstractGeoCoder {
 
   public getCurrentPosition(successCallback: PositionCallback, _errorCallback?: PositionErrorCallback, _options?: PositionOptions): void {
     const hhCoords: Coordinates = {
-      altitudeAccuracy: 0,
-      longitude: -90.55149092347412,
-      latitude: 38.575547947584255,
-      speed: 0,
-      heading: 0,
-      altitude: 0,
       accuracy: 0,
+      altitude: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      latitude: 38.575547947584255,
+      longitude: -90.55149092347412,
+      speed: 0,
     };
     successCallback({ coords: hhCoords, timestamp: undefined });
 

@@ -23,30 +23,30 @@ const items: IItem[] = [
 
 const checkouts: ICheckout[] = [
   {
-    storeId: "S1",
     isoDate: "2016-04-03T04:45:38.582Z",
     pickups: [{ itemId: "I1", aisle: "K9" }, { itemId: "I0", aisle: "D10" }],
+    storeId: "S1",
   },
   {
-    storeId: "S0",
     isoDate: "2016-04-03T05:35:18.334Z",
     pickups: [{ itemId: "I0", aisle: "D10" }],
+    storeId: "S0",
   },
 ];
 
 const stores: IDtoStore[] = [
   {
-    name: "FAKE SCHNUCKS",
-    vicinity: "vicinity",
-    place_id: "xxxxxxxxxxxxx",
     id: "S0",
+    name: "FAKE SCHNUCKS",
+    place_id: "xxxxxxxxxxxxx",
+    vicinity: "vicinity",
   },
   {
 
+    id: "S1",
     name: "Zabihah",
     place_id: "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
     vicinity: "14345 Manchester Road, Ballwin",
-    id: "S1",
   },
 ];
 

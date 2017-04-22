@@ -16,7 +16,11 @@ export class DataService {
   }
 
   public load(): Promise<AppInfo> {
-    const info: AppInfo = { stores: undefined, items: undefined, checkouts: undefined };
+    const info: AppInfo = {
+      checkouts: undefined,
+      items: undefined,
+      stores: undefined,
+    };
 
     return this.io.load().then((a) => {
       info.stores = a.stores.map((s) => Utilities.dtoToStore(s));
@@ -28,12 +32,16 @@ export class DataService {
 
   public saveAll(info: AppInfo): Promise<AppInfo> {
     const dto: IDtoAppInfo = {
-      stores: info.stores.map((s) => {
+      checkouts: info.checkouts.map((c) => {
         return {
-          id: s.id,
-          name: s.name,
-          place_id: s.placeId,
-          vicinity: s.vicinity,
+          isoDate: c.date.toISOString(),
+          pickups: c.pickups.map((p) => {
+            return {
+              aisle: p.aisle,
+              itemId: p.item.id,
+            };
+          }),
+          storeId: c.store.id,
         };
       }),
       items: info.items.map((i) => {
@@ -43,16 +51,12 @@ export class DataService {
           needed: i.needed,
         };
       }),
-      checkouts: info.checkouts.map((c) => {
+      stores: info.stores.map((s) => {
         return {
-          storeId: c.store.id,
-          isoDate: c.date.toISOString(),
-          pickups: c.pickups.map((p) => {
-            return {
-              itemId: p.item.id,
-              aisle: p.aisle,
-            };
-          }),
+          id: s.id,
+          name: s.name,
+          place_id: s.placeId,
+          vicinity: s.vicinity,
         };
       }),
     };

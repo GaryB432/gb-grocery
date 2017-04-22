@@ -6,9 +6,9 @@ import { LogicService } from "./logic.service";
 
 class MockDataService {
   private info: AppInfo = {
-    stores: [],
-    items: [],
     checkouts: [],
+    items: [],
+    stores: [],
   };
   public load(): Promise<AppInfo> {
     const today: Date = new Date(2001, 2, 3, 4, 5, 6, 7);
@@ -45,9 +45,9 @@ class MockDataService {
 
   public clearAll(): void {
     this.info = {
-      stores: [],
-      items: [],
       checkouts: [],
+      items: [],
+      stores: [],
     };
   }
 }
@@ -359,10 +359,10 @@ describe("More Logic Service", () => {
 
   info.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => {
     const item: Item = {
+      checkouts: [],
       id: `I${n}`,
       name: `ITEM ${n}`,
       needed: false,
-      checkouts: [],
     };
     return item;
   });
@@ -375,23 +375,22 @@ describe("More Logic Service", () => {
     info.checkouts = [
       {
         date: undefined,
-        store: ralphs,
         pickups: [
           { item: info.items[0], aisle: "11c", picked: undefined },
           { item: info.items[2], aisle: "11a", picked: undefined },
         ],
+        store: ralphs,
       },
       {
         date: undefined,
-        store: bobs,
         pickups: [
           { item: info.items[0], aisle: "765n", picked: undefined },
           { item: info.items[2], aisle: "926m", picked: undefined },
         ],
+        store: bobs,
       },
       {
         date: undefined,
-        store: ralphs,
         pickups: [
           { item: info.items[0], aisle: "11b", picked: undefined },
           { item: info.items[1], aisle: "11b", picked: undefined },
@@ -399,24 +398,25 @@ describe("More Logic Service", () => {
           { item: info.items[3], aisle: "11b", picked: undefined },
           { item: info.items[4], aisle: "11a", picked: undefined },
         ],
+        store: ralphs,
       },
       {
         date: undefined,
-        store: bobs,
         pickups: [
           { item: info.items[0], aisle: "65n", picked: undefined },
           { item: info.items[1], aisle: "26m", picked: undefined },
           { item: info.items[2], aisle: "26m", picked: undefined },
         ],
+        store: bobs,
       },
       {
         date: undefined,
-        store: ralphs,
         pickups: [
           { item: info.items[0], aisle: "11c", picked: undefined },
           { item: info.items[0], aisle: "11b", picked: undefined },
           { item: info.items[2], aisle: "11a", picked: undefined },
         ],
+        store: ralphs,
       },
     ];
 
