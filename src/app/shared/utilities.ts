@@ -1,4 +1,4 @@
-import { ICheckout, IDtoStore, IItem } from "../shared/interfaces";
+import * as Dto from "../shared/dto";
 import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
 
 // http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript#10727155
@@ -24,7 +24,7 @@ export class Utilities {
     return Utilities.makeRandomId("s");
   }
 
-  public static dtoToItem(dto: IItem): Item {
+  public static dtoToItem(dto: Dto.Item): Item {
     const newItem: Item = new Item();
     newItem.id = dto.id;
     newItem.name = dto.name;
@@ -34,7 +34,7 @@ export class Utilities {
   }
 
   // TODO make this on the Store class
-  public static dtoToStore(dto: IDtoStore): Store {
+  public static dtoToStore(dto: Dto.Store): Store {
     const newStore: Store = new Store(dto.id, dto.name);
     newStore.placeId = dto.place_id;
     newStore.icon = "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png";
@@ -43,7 +43,7 @@ export class Utilities {
     return newStore;
   }
 
-  public static dtoToCheckout(dto: ICheckout, context: AppInfo): Checkout {
+  public static dtoToCheckout(dto: Dto.Checkout, context: AppInfo): Checkout {
     const newCheckout: Checkout = new Checkout(
       context.stores.find((s) => s.id === dto.storeId),
       new Date(dto.isoDate),

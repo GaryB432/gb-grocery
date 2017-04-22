@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { DataIoService } from "../shared/data.io.service";
-import { IDtoAppInfo } from "../shared/interfaces";
+import * as Dto from "../shared/dto";
 
 @Component({
   selector: "gbg-about",
@@ -29,14 +29,14 @@ export class AboutComponent implements OnInit {
 
   public replaceAppInfoForever(): void {
     try {
-      const dto: IDtoAppInfo = JSON.parse(this.jsonInfo);
+      const dto: Dto.AppInfo = JSON.parse(this.jsonInfo);
       this.doReplace(dto).then((done: boolean) => done && this.router.navigateByUrl("home"));
     } catch (e) {
       alert(e);
     }
   }
 
-  private doReplace(newInfo: IDtoAppInfo): Promise<boolean> {
+  private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
     if (confirm("WARNING this is not validated. About to replace your data")) {
       return this.io.saveAll(newInfo).then((_replaced) => true);
     }

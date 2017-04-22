@@ -4,10 +4,10 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Router } from "@angular/router";
 
 import { DataIoService } from "../shared/data.io.service";
-import { IDtoAppInfo } from "../shared/interfaces";
+import * as Dto from "../shared/dto";
 import { AboutComponent } from "./about.component";
 
-const mockDtoAppInfo: IDtoAppInfo = {
+const mockDtoAppInfo: Dto.AppInfo = {
   checkouts: [
     {
       isoDate: "2016-04-03T04:45:38.582Z",
@@ -58,7 +58,7 @@ class MockRouter {
 }
 
 class MockDataIoService {
-  public load(): Promise<IDtoAppInfo> {
+  public load(): Promise<Dto.AppInfo> {
     return Promise.resolve(mockDtoAppInfo);
   }
 }

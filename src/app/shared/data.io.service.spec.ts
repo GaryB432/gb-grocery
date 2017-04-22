@@ -2,9 +2,9 @@ import { async, inject, TestBed } from "@angular/core/testing";
 
 import { DataIoService } from "./data.io.service";
 import { LocalIoStorage } from "./data.localstorage.service";
-import { ICheckout, IDtoAppInfo, IDtoStore, IItem } from "./interfaces";
+import * as Dto from "./dto";
 
-const items: IItem[] = [
+const items: Dto.Item[] = [
   {
     id: "I0",
     name: "asdf",
@@ -22,7 +22,7 @@ const items: IItem[] = [
   },
 ];
 
-const checkouts: ICheckout[] = [
+const checkouts: Dto.Checkout[] = [
   {
     isoDate: "2016-04-03T04:45:38.582Z",
     pickups: [{ itemId: "I1", aisle: "K9" }, { itemId: "I0", aisle: "D10" }],
@@ -35,7 +35,7 @@ const checkouts: ICheckout[] = [
   },
 ];
 
-const stores: IDtoStore[] = [
+const stores: Dto.Store[] = [
   {
     id: "S0",
     name: "FAKE SCHNUCKS",
@@ -82,7 +82,7 @@ describe("Data IO Service", () => {
     const getItem: jasmine.Spy = spyOn(ls, "getItem").and.callThrough();
     const setItem: jasmine.Spy = spyOn(ls, "setItem").and.callThrough();
 
-    return sut.load().then((info: IDtoAppInfo) => {
+    return sut.load().then((info: Dto.AppInfo) => {
       expect(info).toBeDefined();
       expect(getItem.calls.allArgs()).toEqual([
         ["gbg-checkouts"], ["gbg-items"], ["gbg-stores"],
@@ -100,7 +100,7 @@ describe("Data IO Service", () => {
     const setItem: jasmine.Spy = spyOn(ls, "setItem").and.callThrough();
     /* tslint:disable:max-line-length quotemark */
 
-    return sut.saveAll({ stores, items, checkouts }).then((info: IDtoAppInfo) => {
+    return sut.saveAll({ stores, items, checkouts }).then((info: Dto.AppInfo) => {
       expect(info).toBeDefined();
       expect(setItem.calls.allArgs()).toEqual([
         ['gbg-stores', '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]'],

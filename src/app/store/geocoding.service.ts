@@ -1,8 +1,9 @@
 /* tslint:disable:max-classes-per-file no-var-requires */
 
 import { Injectable } from "@angular/core";
-import { IDtoStore } from "../shared/interfaces";
+import * as Dto from "../shared/dto";
 
+// TODO use custom flatten
 const flatten: (a: any[][]) => any[] = require("arr-flatten");
 
 @Injectable()
@@ -92,7 +93,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
   }
   public nearbyStoreSearch(coords: Coordinates): Promise<google.maps.places.PlaceResult[]> {
 
-    function makePlace(ks: IDtoStore, n: number): google.maps.places.PlaceResult {
+    function makePlace(ks: Dto.Store, n: number): google.maps.places.PlaceResult {
       const spot: Coordinates = {
         accuracy: 0,
         altitude: 0,
@@ -136,7 +137,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
       };
     }
 
-    const knownStores: IDtoStore[] = [
+    const knownStores: Dto.Store[] = [
       {
         id: "S-KOBIM",
         name: "Schnucks",

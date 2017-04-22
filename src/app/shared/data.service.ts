@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { DataIoService } from "../shared/data.io.service";
-import { IDtoAppInfo } from "./interfaces";
+import * as Dto from "./dto";
 import { AppInfo } from "./models";
 import { Utilities } from "./utilities";
 
@@ -31,7 +31,7 @@ export class DataService {
   }
 
   public saveAll(info: AppInfo): Promise<AppInfo> {
-    const dto: IDtoAppInfo = {
+    const dto: Dto.AppInfo = {
       checkouts: info.checkouts.map((c) => {
         return {
           isoDate: c.date.toISOString(),

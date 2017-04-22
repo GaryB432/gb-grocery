@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { LocalIoStorage } from "./data.localstorage.service";
-import { ICheckout, IDtoAppInfo, IDtoStore, IItem } from "./interfaces";
+import * as Dto from "./dto";
 
 const ITEMS_KEY: string = "gbg-items";
 const STORES_KEY: string = "gbg-stores";
@@ -19,7 +19,7 @@ export class DataIoService {
     this.storage.removeItem(ITEMS_KEY);
   }
 
-  public load(): Promise<IDtoAppInfo> {
+  public load(): Promise<Dto.AppInfo> {
     return Promise.resolve({
       checkouts: this.readCheckouts(),
       items: this.readItems(),
@@ -27,15 +27,15 @@ export class DataIoService {
     });
   }
 
-  public saveAll(newInfo: IDtoAppInfo): Promise<IDtoAppInfo> {
+  public saveAll(newInfo: Dto.AppInfo): Promise<Dto.AppInfo> {
     this.writeStores(newInfo.stores);
     this.writeItems(newInfo.items);
     this.writeCheckouts(newInfo.checkouts);
     return Promise.resolve(newInfo);
   }
 
-  private readCheckouts(): ICheckout[] {
-    let data: ICheckout[];
+  private readCheckouts(): Dto.Checkout[] {
+    let data: Dto.Checkout[];
     try {
       const raw: string = this.storage.getItem(CHECKOUTS_KEY);
       data = JSON.parse(raw) || [];
@@ -46,8 +46,8 @@ export class DataIoService {
     return data;
   }
 
-  private readItems(): IItem[] {
-    let data: IItem[];
+  private readItems(): Dto.Item[] {
+    let data: Dto.Item[];
     try {
       const raw: string = this.storage.getItem(ITEMS_KEY);
       data = JSON.parse(raw) || [];
@@ -58,8 +58,8 @@ export class DataIoService {
     return data;
   }
 
-  private readStores(): IDtoStore[] {
-    let data: IDtoStore[];
+  private readStores(): Dto.Store[] {
+    let data: Dto.Store[];
     try {
       const raw: string = this.storage.getItem(STORES_KEY);
       data = JSON.parse(raw) || [];
@@ -70,15 +70,15 @@ export class DataIoService {
     return data;
   }
 
-  private writeCheckouts(checkouts: ICheckout[]): void {
+  private writeCheckouts(checkouts: Dto.Checkout[]): void {
     this.storage.setItem(CHECKOUTS_KEY, JSON.stringify(checkouts));
   }
 
-  private writeItems(items: IItem[]): void {
+  private writeItems(items: Dto.Item[]): void {
     this.storage.setItem(ITEMS_KEY, JSON.stringify(items));
   }
 
-  private writeStores(stores: IDtoStore[]): void {
+  private writeStores(stores: Dto.Store[]): void {
     this.storage.setItem(STORES_KEY, JSON.stringify(stores));
   }
 

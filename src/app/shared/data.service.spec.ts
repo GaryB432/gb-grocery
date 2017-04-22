@@ -7,7 +7,7 @@ import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 
 import { DataIoService } from "../shared/data.io.service";
 import { DataService } from "../shared/data.service";
-import { ICheckout, IDtoAppInfo, IDtoStore, IItem } from "../shared/interfaces";
+import * as Dto from "../shared/dto";
 import { AppInfo } from "../shared/models";
 
 // class MockDataService {
@@ -21,7 +21,7 @@ import { AppInfo } from "../shared/models";
 //     }
 // }
 
-const items: IItem[] = [
+const items: Dto.Item[] = [
   {
     id: "I0",
     name: "asdf",
@@ -39,7 +39,7 @@ const items: IItem[] = [
   },
 ];
 
-const checkouts: ICheckout[] = [
+const checkouts: Dto.Checkout[] = [
   {
     isoDate: "2016-04-03T04:45:38.582Z",
     pickups: [
@@ -57,7 +57,7 @@ const checkouts: ICheckout[] = [
   },
 ];
 
-const stores: IDtoStore[] = [
+const stores: Dto.Store[] = [
   {
     // "formatted_address": "formatted_address",
     // "formatted_phone_number": "formatted_phone_number",
@@ -88,7 +88,7 @@ const stores: IDtoStore[] = [
 ];
 
 class MockDataIoService {
-  public load(): Promise<IDtoAppInfo> {
+  public load(): Promise<Dto.AppInfo> {
     return Promise.resolve({ stores, items, checkouts });
   }
 }
