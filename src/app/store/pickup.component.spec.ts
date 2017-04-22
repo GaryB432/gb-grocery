@@ -38,23 +38,23 @@ describe("Pickup Component", () => {
     const layouts: StoreLayout[] = [
       [info.stores[0],
       ["s0-a1", [info.items[0], food]],
-      ["a0-a2", [info.items[3]]]
+      ["a0-a2", [info.items[3]]],
       ],
       [ralphs,
         ["11a", [info.items[2], info.items[6], info.items[9]]],
         ["12a", [info.items[4], food]],
-        ["11b", [info.items[3], info.items[5], info.items[7], info.items[8]]]
+        ["11b", [info.items[3], info.items[5], info.items[7], info.items[8]]],
       ],
       [info.stores[3],
-      ["s3-a1", [info.items[3], info.items[6]]]
-      ]
+      ["s3-a1", [info.items[3], info.items[6]]],
+      ],
     ];
 
     for (let visit: number = 0; visit < 20; visit++) {
       const rndLayout: StoreLayout = layouts[Math.floor(Math.random() * layouts.length)];
       const c: Checkout = new Checkout(
         rndLayout[0],
-        new Date(now.valueOf() - (Math.random() * (365 * (24 * 60 * 60 * 1000))))
+        new Date(now.valueOf() - (Math.random() * (365 * (24 * 60 * 60 * 1000)))),
       );
 
       c.pickups = [];
@@ -68,7 +68,7 @@ describe("Pickup Component", () => {
           c.pickups.push({
             item: i,
             aisle: a,
-            picked: undefined
+            picked: undefined,
           });
         }
       }

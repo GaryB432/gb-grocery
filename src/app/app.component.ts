@@ -10,7 +10,7 @@ import "ng2-toastr/ng2-toastr.css";
 @Component({
   selector: "gbg-app",
   styleUrls: ["./app.component.scss"],
-  templateUrl: "./app.component.html"
+  templateUrl: "./app.component.html",
 })
 export class AppComponent {
   constructor(public toastr: ToastsManager, vRef: ViewContainerRef) {

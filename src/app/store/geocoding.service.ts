@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file no-var-requires */
+
 import { Injectable } from "@angular/core";
 import { IDtoStore } from "../shared/interfaces";
 
@@ -51,12 +53,12 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
           bounds: undefined,
           keyword: undefined,
           name: undefined,
-          rankBy: undefined
+          rankBy: undefined,
         };
         placeService.nearbySearch(searchRequest, (results: google.maps.places.PlaceResult[],
           status: google.maps.places.PlacesServiceStatus) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            resolve(results.filter(f => f.types.indexOf(grocery) > -1));
+            resolve(results.filter((pr) => pr.types.indexOf(grocery) > -1));
           } else {
             reject(status.toString());
           }
@@ -98,7 +100,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         heading: 0,
         latitude: coords.latitude + (n * 2),
         longitude: coords.longitude + (n * 2),
-        speed: 0
+        speed: 0,
       };
       return {
         address_components: [],
@@ -107,7 +109,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         formatted_phone_number: `formatted_phone_number ${n}`,
         geometry: {
           location: new google.maps.LatLng(spot.latitude, spot.longitude),
-          viewport: undefined
+          viewport: undefined,
         },
         html_attributions: [],
         icon: "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
@@ -121,7 +123,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
             width: 200,
             html_attributions: [],
             getUrl: (_opts) => "https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0"
-              + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/"
+              + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/",
           }],
         place_id: ks.place_id,
         price_level: undefined,
@@ -130,36 +132,36 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         types: ["grocery_or_supermarket", "fake", "store"],
         url: `url ${n}`,
         vicinity: ks.vicinity,
-        website: `website ${n}`
+        website: `website ${n}`,
       };
     }
 
     const knownStores: IDtoStore[] = [
       {
-        "id": "S-KOBIM",
-        "name": "Schnucks",
-        "place_id": "ChIJ43DkSEvU2IcRgU4nzYWcNU0",
-        "vicinity": "15425 Manchester Road, Ballwin"
+        id: "S-KOBIM",
+        name: "Schnucks",
+        place_id: "ChIJ43DkSEvU2IcRgU4nzYWcNU0",
+        vicinity: "15425 Manchester Road, Ballwin",
       },
       {
-        "id": "S-f2jIj",
-        "name": "Big Lots",
-        "place_id": "ChIJQ9yAC2zU2IcR4fcxoawalqI",
-        "vicinity": "14850 Manchester Road, Ballwin"
+        id: "S-f2jIj",
+        name: "Big Lots",
+        place_id: "ChIJQ9yAC2zU2IcR4fcxoawalqI",
+        vicinity: "14850 Manchester Road, Ballwin",
       },
       {
-        "id": "S-F5TXz",
-        "name": "Schnucks",
-        "place_id": "ChIJ0-z4P9jT2IcRbt566e0iJIY",
-        "vicinity": "1393 Big Bend Road #1, Ballwin"
-      }
+        id: "S-F5TXz",
+        name: "Schnucks",
+        place_id: "ChIJ0-z4P9jT2IcRbt566e0iJIY",
+        vicinity: "1393 Big Bend Road #1, Ballwin",
+      },
     ];
 
-    const otherPlaces: google.maps.places.PlaceResult[] = [3, 4, 5].map(ndx => makePlace({
-      "id": `s${ndx}`,
-      "name": `STORE ${ndx}`,
-      "place_id": `GP${ndx}`,
-      "vicinity": `Vicinity ${ndx}`
+    const otherPlaces: google.maps.places.PlaceResult[] = [3, 4, 5].map((ndx) => makePlace({
+      id: `s${ndx}`,
+      name: `STORE ${ndx}`,
+      place_id: `GP${ndx}`,
+      vicinity: `Vicinity ${ndx}`,
     }, ndx));
 
     const fakePlaces: google.maps.places.PlaceResult[] = knownStores.map(makePlace);
@@ -182,7 +184,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
       speed: 0,
       heading: 0,
       altitude: 0,
-      accuracy: 0
+      accuracy: 0,
     };
     successCallback({ coords: hhCoords, timestamp: undefined });
 

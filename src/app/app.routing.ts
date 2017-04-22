@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "store", component: StoreComponent },
   { path: "about", component: AboutComponent },
-  { path: "item/:id", component: ItemComponent }
+  { path: "item/:id", component: ItemComponent },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, { useHash: true });

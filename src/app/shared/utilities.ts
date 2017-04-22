@@ -33,6 +33,7 @@ export class Utilities {
     return newItem;
   }
 
+  // TODO make this on the Store class
   public static dtoToStore(dto: IDtoStore): Store {
     const newStore: Store = new Store(dto.id, dto.name);
     newStore.placeId = dto.place_id;
@@ -44,12 +45,12 @@ export class Utilities {
 
   public static dtoToCheckout(dto: ICheckout, context: AppInfo): Checkout {
     const newCheckout: Checkout = new Checkout(
-      context.stores.find(s => s.id === dto.storeId),
-      new Date(dto.isoDate)
+      context.stores.find((s) => s.id === dto.storeId),
+      new Date(dto.isoDate),
     );
 
     newCheckout.pickups = dto.pickups
-      .map(pu => new Pickup(context.items.find(item => item.id === pu.itemId), pu.aisle));
+      .map((pu) => new Pickup(context.items.find((item) => item.id === pu.itemId), pu.aisle));
     return newCheckout;
   }
 

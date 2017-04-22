@@ -23,33 +23,38 @@ import { AppInfo } from "../shared/models";
 
 const items: IItem[] = [
   {
-    "id": "I0",
-    "name": "asdf",
-    "needed": false
+    id: "I0",
+    name: "asdf",
+    needed: false,
   },
   {
-    "id": "I1",
-    "name": "zebra",
-    "needed": true
+    id: "I1",
+    name: "zebra",
+    needed: true,
   },
   {
-    "id": "I2",
-    "name": "another",
-    "needed": false
-  }
+    id: "I2",
+    name: "another",
+    needed: false,
+  },
 ];
 
 const checkouts: ICheckout[] = [
   {
-    "storeId": "S1",
-    "isoDate": "2016-04-03T04:45:38.582Z",
-    "pickups": [{ "itemId": "I1", "aisle": "K9" }, { "itemId": "I0", "aisle": "D10" }]
+    storeId: "S1",
+    isoDate: "2016-04-03T04:45:38.582Z",
+    pickups: [
+      { itemId: "I1", aisle: "K9" },
+      { itemId: "I0", aisle: "D10" },
+    ],
   },
   {
-    "storeId": "S0",
-    "isoDate": "2016-04-03T05:35:18.334Z",
-    "pickups": [{ "itemId": "I0", "aisle": "S0-D10" }]
-  }
+    storeId: "S0",
+    isoDate: "2016-04-03T05:35:18.334Z",
+    pickups: [
+      { itemId: "I0", aisle: "S0-D10" },
+    ],
+  },
 ];
 
 const stores: IDtoStore[] = [
@@ -66,36 +71,20 @@ const stores: IDtoStore[] = [
     //     "altitude": 0,
     //     "accuracy": 0
     // },
-    "name": "FAKE SCHNUCKS",
+    name: "FAKE SCHNUCKS",
     // "types": ["grocery_or_supermarket"],
     // "url": "url",
     // "website": "website",
-    "vicinity": "vicinity",
-    "place_id": "xxxxxxxxxxxxx",
-    "id": "S0"
+    vicinity: "vicinity",
+    place_id: "xxxxxxxxxxxxx",
+    id: "S0",
   },
   {
-    // "formatted_address": "formatted_address",
-    // "formatted_phone_number": "formatted_phone_number",
-
-    // "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
-    // "location": {
-    //     "altitudeAccuracy": 0,
-    //     "longitude": -90.51309529999997,
-    //     "latitude": 38.593912,
-    //     "speed": 0,
-    //     "heading": 0,
-    //     "altitude": 0,
-    //     "accuracy": 0
-    // },
-    "name": "Atlantic Mills",
-    "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-    // "types": ["grocery_or_supermarket", "food", "store", "point_of_interest", "establishment"],
-    // "url": "url",
-    // "website": "website",
-    "vicinity": "14345 Manchester Road, Ballwin",
-    "id": "S1"
-  }
+    name: "Atlantic Mills",
+    place_id: "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
+    vicinity: "14345 Manchester Road, Ballwin",
+    id: "S1",
+  },
 ];
 
 class MockDataIoService {
@@ -110,8 +99,8 @@ describe("Data Service", () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: DataService, useClass: DataService, deps: [DataIoService] },
-        { provide: DataIoService, useClass: MockDataIoService }
-      ]
+        { provide: DataIoService, useClass: MockDataIoService },
+      ],
     });
 
   });
@@ -129,12 +118,12 @@ describe("Data Service", () => {
       expect(info.checkouts.length).toBe(2);
 
       expect(info.checkouts[0].store).toBe(info.stores[1]);
-      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1], info.items[0]]);
+      expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([info.items[1], info.items[0]]);
       expect(info.checkouts[0].pickups.length).toEqual(2);
 
       expect(info.items[0].checkouts).toBeDefined();
       expect(info.items[0].checkouts.length).toBe(0);
-    }))
+    })),
   );
 
 });

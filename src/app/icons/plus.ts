@@ -7,6 +7,6 @@ const svg: string = `<svg viewBox="0 0 12 16" xmlns="http://www.w3.org/2000/svg"
 @Component({
   selector: "gbg-plus-icon",
   styles: [require("./icon.scss")],
-  template: svg
+  template: svg,
 })
 export class PlusIconComponent { }

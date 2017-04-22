@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -52,17 +54,17 @@ xdescribe("Store Component", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        StoreComponent
+        StoreComponent,
       ],
       imports: [
-        FormsModule
+        FormsModule,
       ],
       providers: [
         { provide: LogicService, useClass: LogicService },
         { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
         { provide: DataService, useClass: MockDataService },
-        { provide: Router, useClass: MockRouter }
-      ]
+        { provide: Router, useClass: MockRouter },
+      ],
     });
   });
 
@@ -71,7 +73,7 @@ xdescribe("Store Component", () => {
     TestBed.overrideComponent(StoreComponent, {
       set: {
         template: "<div>Overridden template something here</div>",
-      }
+      },
     });
 
     TestBed.compileComponents().then(() => {

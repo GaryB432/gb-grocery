@@ -10,7 +10,7 @@ type Aisle = string;
 @Component({
   selector: "gbg-store",
   styleUrls: ["./store.component.scss"],
-  templateUrl: "./store.component.html"
+  templateUrl: "./store.component.html",
 })
 export class StoreComponent implements OnInit {
   public aisles: Aisle[] = [];
@@ -29,17 +29,18 @@ export class StoreComponent implements OnInit {
   }
 
   public checkoutReady(): boolean {
-    return this.selectedStorePlaceId != null && this.neededThings.filter(i => i.picked).length > 0;
+    return this.selectedStorePlaceId != null
+      && this.neededThings.filter((i) => i.picked).length > 0;
   }
 
   public get selectedStore(): Store {
-    return this.nbStores.find(s => s.placeId === this.selectedStorePlaceId);
+    return this.nbStores.find((s) => s.placeId === this.selectedStorePlaceId);
   }
 
   public ngOnInit(): void {
     this.geo.getCurrentPosition(
-      pc => this.loadWithCurrentCoordinates(pc.coords),
-      pec => alert(pec.message)
+      (pc) => this.loadWithCurrentCoordinates(pc.coords),
+      (pec) => alert(pec.message),
     );
   }
 
@@ -50,7 +51,7 @@ export class StoreComponent implements OnInit {
   public changeStore(): void {
     const newStore: Store = this.selectedStore;
     if (!newStore) { throw new Error("changing to null store"); }
-    this.neededThings.forEach(t => t.aisle = LogicService.predictAisle(t.item, newStore));
+    this.neededThings.forEach((t) => t.aisle = LogicService.predictAisle(t.item, newStore));
     this.neededThings = LogicService.sortPickups(this.neededThings.slice());
     this.aisles = LogicService.getStoreAisles(newStore);
   }
@@ -60,7 +61,7 @@ export class StoreComponent implements OnInit {
       this.selectedStorePlaceId,
       this.selectedStore,
       this.neededThings
-        .filter(i => i.picked))
+        .filter((i) => i.picked))
       .then((co: Checkout) => {
         alert(`Thank you for shopping at ${co.store.name}`);
         this.router.navigateByUrl("/");
@@ -68,26 +69,26 @@ export class StoreComponent implements OnInit {
   }
 
   private loadWithCurrentCoordinates(coords: Coordinates): void {
-    this.logic.load().then(updatedData => {
+    this.logic.load().then((updatedData) => {
       this.neededThings = updatedData.items
         .slice()
-        .filter(i => i.needed)
+        .filter((i) => i.needed)
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map(i => new Pickup(i, undefined));
+        .map((i) => new Pickup(i, undefined));
 
       this.stores = updatedData.stores;
 
       this.geo.nearbyStoreSearch(coords)
-        .then(nearbyPlaces => {
+        .then((nearbyPlaces) => {
           this.nbStores = this.logic.getStoresFromNearbyPlaces(nearbyPlaces)
-            .map(store => {
+            .map((store) => {
               return {
-                store: store,
-                distance: this.geo.computeDistanceBetween(coords, store.location)
+                store,
+                distance: this.geo.computeDistanceBetween(coords, store.location),
               };
             })
             .sort((a, b) => a.distance - b.distance)
-            .map(ds => ds.store);
+            .map((ds) => ds.store);
 
           if (this.nbStores.length > 0) {
             this.selectedStorePlaceId = this.nbStores[0].placeId;

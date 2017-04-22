@@ -5,7 +5,7 @@ import { Checkout, Item } from "../shared/models";
 @Component({
   selector: "gbg-home-item",
   styleUrls: ["./item.component.scss"],
-  templateUrl: "./item.component.html"
+  templateUrl: "./item.component.html",
 })
 export class HomeItemComponent implements OnInit {
 

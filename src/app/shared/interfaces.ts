@@ -1,3 +1,5 @@
+/* tslint:disable:interface-name */
+
 export interface IDtoStore {
     id: string;
     name: string;

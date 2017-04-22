@@ -6,55 +6,55 @@ import { LogicService } from "../shared/logic.service";
 import { Checkout, Item, Pickup } from "../shared/models";
 
 @Component({
-    selector: "gbg-item",
-    styleUrls: ["./item.component.scss"],
-    templateUrl: "./item.component.html"
+  selector: "gbg-item",
+  styleUrls: ["./item.component.scss"],
+  templateUrl: "./item.component.html",
 })
 export class ItemComponent implements OnInit, OnDestroy {
 
-    // http://plnkr.co/edit/Bim8OGO7oddxBaa26WzR?p=preview is gold
+  // http://plnkr.co/edit/Bim8OGO7oddxBaa26WzR?p=preview is gold
 
-    public item: Item;
+  public item: Item;
 
-    public checkouts: Checkout[];
+  public checkouts: Checkout[];
 
-    private sub: Subscription;
+  private sub: Subscription;
 
-    constructor(private logic: LogicService, private route: ActivatedRoute, private router: Router) {
-    }
+  constructor(private logic: LogicService, private route: ActivatedRoute, private router: Router) {
+  }
 
-    public ngOnInit(): void {
-        this.sub = this.route.params.subscribe(params => {
-            const key: string = "id";
-            this.logic.load()
-                .then(() => this.logic.getItem(params[key]))
-                .then(item => {
-                    this.item = item;
-                    this.checkouts = this.item.checkouts
-                        .slice()
-                        .sort((a, b) => b.date.getTime() - a.date.getTime());
-                })
-                .catch(err => {
-                    alert(err);
-                    this.router.navigateByUrl("/");
-                });
+  public ngOnInit(): void {
+    this.sub = this.route.params.subscribe((params) => {
+      const key: string = "id";
+      this.logic.load()
+        .then(() => this.logic.getItem(params[key]))
+        .then((item) => {
+          this.item = item;
+          this.checkouts = this.item.checkouts
+            .slice()
+            .sort((a, b) => b.date.getTime() - a.date.getTime());
+        })
+        .catch((err) => {
+          alert(err);
+          this.router.navigateByUrl("/");
         });
-    }
+    });
+  }
 
-    public ngOnDestroy(): void {
-        this.sub.unsubscribe();
-    }
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
-    public getItemPickup(checkout: Checkout): Pickup {
-        return checkout.pickups.find(c => c.item.id === this.item.id);
-    }
+  public getItemPickup(checkout: Checkout): Pickup {
+    return checkout.pickups.find((c) => c.item.id === this.item.id);
+  }
 
-    public deleteItem(item: Item): void {
-        if (confirm(`The item ${item.name.toUpperCase()} and its associated information will be permanently deleted.`)) {
-            this.logic.load()
-                .then(info => this.logic.deleteItem(item, info))
-                .then(() => this.router.navigateByUrl("/"));
-        }
+  public deleteItem(item: Item): void {
+    if (confirm(`The item ${item.name.toUpperCase()} and its associated information will be permanently deleted.`)) {
+      this.logic.load()
+        .then((info) => this.logic.deleteItem(item, info))
+        .then(() => this.router.navigateByUrl("/"));
     }
+  }
 
 }

@@ -8,16 +8,16 @@ class MockDataService {
   private info: AppInfo = {
     stores: [],
     items: [],
-    checkouts: []
+    checkouts: [],
   };
   public load(): Promise<AppInfo> {
     const today: Date = new Date(2001, 2, 3, 4, 5, 6, 7);
-    this.info.stores = [0, 1].map(n => {
+    this.info.stores = [0, 1].map((n) => {
       const s: Store = new Store(`S${n}`, `STORE ${n}`);
       // s.checkouts = [];
       return s;
     });
-    this.info.items = [0, 1, 2].map(n => {
+    this.info.items = [0, 1, 2].map((n) => {
       const item: Item = new Item();
       item.id = `I-${n}`;
       item.name = `ITEM ${n}`;
@@ -25,11 +25,11 @@ class MockDataService {
     });
     this.info.checkouts = [
       new Checkout(this.info.stores[1], new Date(today.getTime() - 3 * 3660 * 1000 * 24)),
-      new Checkout(this.info.stores[0], new Date(today.getTime() - 2 * 3660 * 1000 * 24))
+      new Checkout(this.info.stores[0], new Date(today.getTime() - 2 * 3660 * 1000 * 24)),
     ];
 
     this.info.checkouts[0].pickups = [
-      new Pickup(this.info.items[1], "S1-A1")
+      new Pickup(this.info.items[1], "S1-A1"),
     ];
     this.info.checkouts[1].pickups = [
       new Pickup(this.info.items[0], "S0-A0"),
@@ -47,7 +47,7 @@ class MockDataService {
     this.info = {
       stores: [],
       items: [],
-      checkouts: []
+      checkouts: [],
     };
   }
 }
@@ -64,7 +64,7 @@ describe("Logic Service", () => {
         // },
         { provide: LogicService, useClass: LogicService },
         { provide: DataService, useClass: MockDataService },
-      ]
+      ],
     });
 
     //     it("should get items", async(inject([LogicService], (sut: LogicService) => {
@@ -101,7 +101,7 @@ describe("Logic Service", () => {
       expect(info.checkouts[0].pickups[0].item).toBe(info.items[1]);
       expect(info.checkouts[0].pickups[0].aisle).toBe("S1-A1");
 
-      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([info.items[1]]);
+      expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([info.items[1]]);
 
       // expect(info.checkouts[0].pickups.length).toEqual(3);
 
@@ -117,7 +117,7 @@ describe("Logic Service", () => {
       // });
       // tick();
       // expect(res[0].name).toBe('John Elway');
-    }))
+    })),
   );
 
   it("should create item",
@@ -128,14 +128,14 @@ describe("Logic Service", () => {
         expect(info.items.length).toBe(3);
       });
       tick();
-      sut.insertItem("tester").then(item => {
+      sut.insertItem("tester").then((item) => {
         expect(item.id).not.toBeUndefined();
-        expect(info.items.find(i => i.id === item.id)).toBeDefined();
+        expect(info.items.find((i) => i.id === item.id)).toBeDefined();
         expect(item.name).toBe("tester");
         expect(item.needed).toBe(true);
         expect(info.items.length).toBe(4);
       });
-    }))
+    })),
   );
 
   it("should clear all",
@@ -143,7 +143,7 @@ describe("Logic Service", () => {
       spyOn(ds, "clearAll");
       sut.clearAll();
       expect(ds.clearAll).toHaveBeenCalled();
-    }))
+    })),
   );
 
 });
@@ -353,16 +353,16 @@ describe("Logic Service", () => {
 describe("More Logic Service", () => {
   const info: AppInfo = new AppInfo();
 
-  info.stores = [0, 1, 2, 3].map(n => {
+  info.stores = [0, 1, 2, 3].map((n) => {
     return new Store(`S${n}`, `STORE ${n}`);
   });
 
-  info.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => {
+  info.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => {
     const item: Item = {
       id: `I${n}`,
       name: `ITEM ${n}`,
       needed: false,
-      checkouts: []
+      checkouts: [],
     };
     return item;
   });
@@ -378,16 +378,16 @@ describe("More Logic Service", () => {
         store: ralphs,
         pickups: [
           { item: info.items[0], aisle: "11c", picked: undefined },
-          { item: info.items[2], aisle: "11a", picked: undefined }
-        ]
+          { item: info.items[2], aisle: "11a", picked: undefined },
+        ],
       },
       {
         date: undefined,
         store: bobs,
         pickups: [
           { item: info.items[0], aisle: "765n", picked: undefined },
-          { item: info.items[2], aisle: "926m", picked: undefined }
-        ]
+          { item: info.items[2], aisle: "926m", picked: undefined },
+        ],
       },
       {
         date: undefined,
@@ -397,8 +397,8 @@ describe("More Logic Service", () => {
           { item: info.items[1], aisle: "11b", picked: undefined },
           { item: info.items[2], aisle: undefined, picked: undefined },
           { item: info.items[3], aisle: "11b", picked: undefined },
-          { item: info.items[4], aisle: "11a", picked: undefined }
-        ]
+          { item: info.items[4], aisle: "11a", picked: undefined },
+        ],
       },
       {
         date: undefined,
@@ -406,8 +406,8 @@ describe("More Logic Service", () => {
         pickups: [
           { item: info.items[0], aisle: "65n", picked: undefined },
           { item: info.items[1], aisle: "26m", picked: undefined },
-          { item: info.items[2], aisle: "26m", picked: undefined }
-        ]
+          { item: info.items[2], aisle: "26m", picked: undefined },
+        ],
       },
       {
         date: undefined,
@@ -415,25 +415,24 @@ describe("More Logic Service", () => {
         pickups: [
           { item: info.items[0], aisle: "11c", picked: undefined },
           { item: info.items[0], aisle: "11b", picked: undefined },
-          { item: info.items[2], aisle: "11a", picked: undefined }
-        ]
-      }
+          { item: info.items[2], aisle: "11a", picked: undefined },
+        ],
+      },
     ];
 
     LogicService.project(info);
 
     expect(LogicService.getStoreAisles(ralphs))
-      .toEqual([
-        "11a", "11b", "11c"
+      .toEqual(["11a", "11b", "11c",
       ]);
 
   });
 
   it("should sort aisles", () => {
     expect(LogicService.sortAisles([
-      "B", "10B", "2A", "A7", "10A", "A", "10", "A8", "2", "1", "2B", "1A"
+      "B", "10B", "2A", "A7", "10A", "A", "10", "A8", "2", "1", "2B", "1A",
     ])).toEqual([
-      "1", "1A", "2", "2A", "2B", "10", "10A", "10B", "A", "A7", "A8", "B"
+      "1", "1A", "2", "2A", "2B", "10", "10A", "10B", "A", "A7", "A8", "B",
     ]);
   });
 
@@ -443,7 +442,10 @@ describe("More Logic Service", () => {
 
   it("should sort pickups", () => {
 
-    type PickupStarter = { name: string, aisle: string };
+    interface PickupStarter {
+      name: string;
+      aisle: string;
+    }
 
     const setup: PickupStarter[] = [
       { name: "A", aisle: "B" },
@@ -452,19 +454,19 @@ describe("More Logic Service", () => {
       { name: "B", aisle: "C" },
       { name: "E", aisle: undefined },
       { name: "F", aisle: "A" },
-      { name: "D", aisle: undefined }
+      { name: "D", aisle: undefined },
     ];
 
-    const pickups: Pickup[] = setup.map(p => {
+    const pickups: Pickup[] = setup.map((p) => {
       const item: Item = new Item();
       item.id = `ID${p.name}`;
       item.name = p.name;
       return new Pickup(item, p.aisle);
     });
 
-    expect(LogicService.sortPickups(pickups).map(p => p.item.name))
+    expect(LogicService.sortPickups(pickups).map((p) => p.item.name))
       .toEqual([
-        "F", "G", "A", "B", "C", "D", "E"
+        "F", "G", "A", "B", "C", "D", "E",
       ]);
   });
 
@@ -476,7 +478,7 @@ describe("More Logic Service", () => {
     item.id = "I0";
     item.checkouts = [
       new Checkout(store, new Date(2001, 2, 3, 4, 5, 6)),
-      new Checkout(store, new Date(2001, 2, 2, 4, 5, 6))
+      new Checkout(store, new Date(2001, 2, 2, 4, 5, 6)),
     ];
     item.checkouts[0].pickups = [new Pickup(item, "2-3")];
     item.checkouts[1].pickups = [new Pickup(item, "2-2")];
@@ -492,6 +494,5 @@ describe("More Logic Service", () => {
 
     expect(LogicService.predictAisle(item, store)).toBeUndefined();
   });
-
 
 });

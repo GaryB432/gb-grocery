@@ -6,7 +6,7 @@ import { ToastOptions, ToastsManager } from "ng2-toastr/ng2-toastr";
 export class TopToastsManager extends ToastsManager {
   constructor(componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, options: ToastOptions) {
     super(componentFactoryResolver, appRef, Object.assign(options, {
-      positionClass: "toast-top-center"
+      positionClass: "toast-top-center",
     }));
   }
 }

@@ -1,9 +1,11 @@
+/* tslint:disable:interface-over-type-literal */
+
 import {
   AfterViewInit,
   Directive,
   ElementRef,
   EventEmitter,
-  Output
+  Output,
 } from "@angular/core";
 
 export type GestureType = "swipeleft" | "swiperight" | "tap";
@@ -11,7 +13,7 @@ export type GestureType = "swipeleft" | "swiperight" | "tap";
 export type GestureEvent = { type: GestureType };
 
 @Directive({
-  selector: "[gbgHammerGestures]"
+  selector: "[gbgHammerGestures]",
 })
 export class HammerGesturesDirective implements AfterViewInit {
 
@@ -26,11 +28,11 @@ export class HammerGesturesDirective implements AfterViewInit {
     const hammertime: HammerManager = new Hammer(this.el.nativeElement, {
       recognizers: [
         [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }],
-        [Hammer.Tap]
+        [Hammer.Tap],
       ],
     });
 
-    events.forEach(type => hammertime.on(type, _ev => this.onGesture.emit({ type })));
+    events.forEach((type) => hammertime.on(type, (_ev) => this.onGesture.emit({ type })));
   }
 
 }

@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 import { ApplicationRef, NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
@@ -38,7 +40,7 @@ abstract class Store {
     HttpModule,
     FormsModule,
     routing,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
   ],
   declarations: [
     AboutComponent,
@@ -51,7 +53,7 @@ abstract class Store {
     MomentPipe,
     TrashcanIconComponent,
     PlusIconComponent,
-    HammerGesturesDirective
+    HammerGesturesDirective,
   ],
   providers: [
     { provide: ToastsManager, useClass: TopToastsManager },
@@ -59,9 +61,9 @@ abstract class Store {
     DataService,
     DataIoService,
     LocalIoStorage,
-    LogicService
+    LogicService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 
 export class AppModule {
@@ -70,7 +72,7 @@ export class AppModule {
     console.log("HMR store", store);
   }
   public hmrOnDestroy(store: Store): void {
-    const cmpLocation: NativeElement[] = this.appRef.components.map(cmp => cmp.location.nativeElement);
+    const cmpLocation: NativeElement[] = this.appRef.components.map((cmp) => cmp.location.nativeElement);
     // recreate elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // remove styles

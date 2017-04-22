@@ -18,43 +18,43 @@ export class DataService {
   public load(): Promise<AppInfo> {
     const info: AppInfo = { stores: undefined, items: undefined, checkouts: undefined };
 
-    return this.io.load().then(a => {
-      info.stores = a.stores.map(s => Utilities.dtoToStore(s));
-      info.items = a.items.map(i => Utilities.dtoToItem(i));
-      info.checkouts = a.checkouts.map(c => Utilities.dtoToCheckout(c, info));
+    return this.io.load().then((a) => {
+      info.stores = a.stores.map((s) => Utilities.dtoToStore(s));
+      info.items = a.items.map((i) => Utilities.dtoToItem(i));
+      info.checkouts = a.checkouts.map((c) => Utilities.dtoToCheckout(c, info));
       return info;
     });
   }
 
   public saveAll(info: AppInfo): Promise<AppInfo> {
     const dto: IDtoAppInfo = {
-      stores: info.stores.map(s => {
+      stores: info.stores.map((s) => {
         return {
           id: s.id,
           name: s.name,
           place_id: s.placeId,
-          vicinity: s.vicinity
+          vicinity: s.vicinity,
         };
       }),
-      items: info.items.map(i => {
+      items: info.items.map((i) => {
         return {
           id: i.id,
           name: i.name,
           needed: i.needed,
         };
       }),
-      checkouts: info.checkouts.map(c => {
+      checkouts: info.checkouts.map((c) => {
         return {
           storeId: c.store.id,
           isoDate: c.date.toISOString(),
-          pickups: c.pickups.map(p => {
+          pickups: c.pickups.map((p) => {
             return {
               itemId: p.item.id,
-              aisle: p.aisle
+              aisle: p.aisle,
             };
-          })
+          }),
         };
-      })
+      }),
     };
 
     return this.io.saveAll(dto).then(() => info);

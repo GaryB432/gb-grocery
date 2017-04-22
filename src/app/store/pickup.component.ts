@@ -5,7 +5,7 @@ import { Pickup } from "../shared/models";
 @Component({
   selector: "gbg-pickup",
   styleUrls: ["./pickup.component.scss"],
-  templateUrl: "./pickup.component.html"
+  templateUrl: "./pickup.component.html",
 })
 export class PickupComponent implements OnInit {
 

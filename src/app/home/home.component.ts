@@ -6,7 +6,7 @@ import {
   style,
   transition,
   trigger,
-  ViewContainerRef
+  ViewContainerRef,
 } from "@angular/core";
 
 import { ToastsManager } from "ng2-toastr/ng2-toastr";
@@ -22,14 +22,14 @@ import { Item } from "../shared/models";
   animations: [trigger("itemState", [
     state("needed", style({
       backgroundColor: "#00bcd4",
-      transform: "scale(1)"
+      transform: "scale(1)",
     })),
     state("notneeded", style({
       backgroundColor: "transparent",
-      transform: "scale(.9)"
+      transform: "scale(.9)",
     })),
-    transition("notneeded => needed, needed => notneeded", animate(".4s ease-in-out"))
-  ])]
+    transition("notneeded => needed, needed => notneeded", animate(".4s ease-in-out")),
+  ])],
 })
 export class HomeComponent implements OnInit {
 
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.logic.load().then(updatedData => {
+    this.logic.load().then((updatedData) => {
       this.toastr.info("Swipe right on needed items.", null, { toastLife: 5000 });
       this.newName = "";
       return this.items = updatedData.items
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
 
   public addItem(): void {
     if (!!this.newName) {
-      this.logic.insertItem(this.newName).then(_i => {
+      this.logic.insertItem(this.newName).then((_i) => {
         this.ngOnInit();
       });
     }
@@ -70,6 +70,8 @@ export class HomeComponent implements OnInit {
         break;
       case "swiperight":
         item.needed = true;
+        break;
+      default:
         break;
     }
     this.logic.updateItem(item);

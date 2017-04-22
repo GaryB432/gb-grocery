@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 export class Item {
     public id: string;
     public name: string;

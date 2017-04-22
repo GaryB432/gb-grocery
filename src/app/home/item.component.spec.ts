@@ -15,13 +15,13 @@ describe("Home Item Component", () => {
     const component: HomeItemComponent = fixture.componentInstance;
     component.item = new Item();
 
-    const stores: Store[] = [0, 1, 2, 3, 4].map(n => new Store(`S${n}`, `Store ${n}`));
+    const stores: Store[] = [0, 1, 2, 3, 4].map((n) => new Store(`S${n}`, `Store ${n}`));
 
     component.item.checkouts = [
       new Checkout(stores[1], new Date("2016-04-16T07:55:26.754Z")),
       new Checkout(stores[2], new Date("2016-03-16T07:55:26.754Z")),
       new Checkout(stores[0], new Date("2016-07-16T07:55:26.754Z")),
-      new Checkout(stores[3], new Date("2016-06-16T07:55:26.754Z"))
+      new Checkout(stores[3], new Date("2016-06-16T07:55:26.754Z")),
     ];
 
     fixture.detectChanges();

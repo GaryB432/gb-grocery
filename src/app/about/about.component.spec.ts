@@ -1,3 +1,5 @@
+/* tslint:disable:max-classes-per-file */
+
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { Router } from "@angular/router";
 
@@ -8,47 +10,47 @@ import { AboutComponent } from "./about.component";
 const mockDtoAppInfo: IDtoAppInfo = {
   stores: [
     {
-      "name": "FAKE SCHNUCKS",
-      "vicinity": "vicinity",
-      "place_id": "xxxxxxxxxxxxx",
-      "id": "S0"
+      name: "FAKE SCHNUCKS",
+      vicinity: "vicinity",
+      place_id: "xxxxxxxxxxxxx",
+      id: "S0",
     },
     {
-      "name": "Atlantic Mills",
-      "place_id": "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-      "vicinity": "14345 Manchester Road, Ballwin",
-      "id": "S1"
-    }
+      name: "Atlantic Mills",
+      place_id: "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
+      vicinity: "14345 Manchester Road, Ballwin",
+      id: "S1",
+    },
   ],
   items: [
     {
-      "id": "I0",
-      "name": "asdf",
-      "needed": false
+      id: "I0",
+      name: "asdf",
+      needed: false,
     },
     {
-      "id": "I1",
-      "name": "zebra",
-      "needed": true
+      id: "I1",
+      name: "zebra",
+      needed: true,
     },
     {
-      "id": "I2",
-      "name": "another",
-      "needed": false
-    }
+      id: "I2",
+      name: "another",
+      needed: false,
+    },
   ],
   checkouts: [
     {
-      "storeId": "S1",
-      "isoDate": "2016-04-03T04:45:38.582Z",
-      "pickups": [{ "itemId": "I1", "aisle": "K9" }, { "itemId": "I0", "aisle": "D10" }]
+      storeId: "S1",
+      isoDate: "2016-04-03T04:45:38.582Z",
+      pickups: [{ itemId: "I1", aisle: "K9" }, { itemId: "I0", aisle: "D10" }],
     },
     {
-      "storeId": "S0",
-      "isoDate": "2016-04-03T05:35:18.334Z",
-      "pickups": [{ "itemId": "I0", "aisle": "S0-D10" }]
-    }
-  ]
+      storeId: "S0",
+      isoDate: "2016-04-03T05:35:18.334Z",
+      pickups: [{ itemId: "I0", aisle: "S0-D10" }],
+    },
+  ],
 };
 
 class MockRouter {
@@ -70,7 +72,7 @@ describe("About Component", () => {
     TestBed.overrideComponent(AboutComponent, {
       set: {
         template: "<div>Overridden template here</div>",
-      }
+      },
     });
 
     TestBed.configureTestingModule({
@@ -82,7 +84,7 @@ describe("About Component", () => {
         set: {
           providers: [
             { provide: DataIoService, useClass: MockDataIoService },
-            { provide: Router, useClass: MockRouter }
+            { provide: Router, useClass: MockRouter },
           ],
         },
       })

@@ -7,7 +7,7 @@ import { IDtoAppInfo } from "../shared/interfaces";
 @Component({
   selector: "gbg-about",
   templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.scss"]
+  styleUrls: ["./about.component.scss"],
 })
 export class AboutComponent implements OnInit {
   public jsonInfo: string;
@@ -15,7 +15,7 @@ export class AboutComponent implements OnInit {
   constructor(private router: Router, private io: DataIoService) { }
 
   public ngOnInit(): void {
-    this.io.load().then(info => {
+    this.io.load().then((info) => {
       this.jsonInfo = JSON.stringify(info, null, 2);
     });
   }
@@ -38,7 +38,7 @@ export class AboutComponent implements OnInit {
 
   private doReplace(newInfo: IDtoAppInfo): Promise<boolean> {
     if (confirm("WARNING this is not validated. About to replace your data")) {
-      return this.io.saveAll(newInfo).then(_replaced => true);
+      return this.io.saveAll(newInfo).then((_replaced) => true);
     }
     return Promise.resolve(false);
   }
