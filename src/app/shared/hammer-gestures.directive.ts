@@ -1,5 +1,3 @@
-/* tslint:disable:interface-over-type-literal */
-
 import {
   AfterViewInit,
   Directive,
@@ -10,7 +8,9 @@ import {
 
 export type GestureType = "swipeleft" | "swiperight" | "tap";
 
-export type GestureEvent = { type: GestureType };
+export interface GestureEvent {
+  type: GestureType;
+}
 
 @Directive({
   selector: "[gbgHammerGestures]",
