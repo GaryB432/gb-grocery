@@ -13,7 +13,7 @@ import { ToastsManager } from "ng2-toastr/ng2-toastr";
 
 import { GestureEvent } from "../shared/hammer-gestures.directive";
 import { LogicService } from "../shared/logic.service";
-import { Item } from "../shared/models";
+import { Item } from "../shared/models/item";
 
 @Component({
   animations: [trigger("itemState", [

@@ -1,8 +1,13 @@
 import { Injectable } from "@angular/core";
 
 import { DataService } from "../shared/data.service";
-import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
-import { Utilities } from "../shared/utilities";
+import { AppInfo } from "./models/appinfo";
+import { Checkout } from "./models/checkout";
+import { Item } from "./models/item";
+import { Pickup } from "./models/pickup";
+import { Store } from "./models/store";
+
+import { Utilities } from "./utilities";
 
 function flatten(list: any[]): any[] {
   return list.reduce(

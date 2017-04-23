@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 
 import { LogicService } from "../shared/logic.service";
-import { Checkout, Item, Pickup } from "../shared/models";
+import { Checkout } from "../shared/models/checkout";
+import { Item } from "../shared/models/item";
+import { Pickup } from "../shared/models/pickup";
 
 @Component({
   selector: "gbg-item",

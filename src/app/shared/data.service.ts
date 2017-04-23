@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { DataIoService } from "../shared/data.io.service";
 import * as Dto from "./dto";
-import { AppInfo } from "./models";
+import { AppInfo } from "./models/appinfo";
 import { Utilities } from "./utilities";
 
 @Injectable()

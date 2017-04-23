@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
-import { Checkout, Item, Store } from "../shared/models";
+import { Checkout } from "../shared/models/checkout";
+import { Item } from "../shared/models/item";
+import { Store } from "../shared/models/store";
 import { HomeItemComponent } from "./item.component";
 
 describe("Home Item Component", () => {

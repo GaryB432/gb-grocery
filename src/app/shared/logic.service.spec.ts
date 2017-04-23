@@ -1,7 +1,12 @@
 import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 
-import { DataService } from "../shared/data.service";
-import { AppInfo, Checkout, Item, Pickup, Store } from "../shared/models";
+import { DataService } from "./data.service";
+import { AppInfo } from "./models/appinfo";
+import { Checkout } from "./models/checkout";
+import { Item } from "./models/item";
+import { Pickup } from "./models/pickup";
+import { Store } from "./models/store";
+
 import { LogicService } from "./logic.service";
 
 class MockDataService {

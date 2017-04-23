@@ -3,7 +3,11 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule } from "@angular/forms";
 
-import { AppInfo, Checkout, Item, Store } from "../shared/models";
+import { AppInfo } from "../shared/models/appinfo";
+import { Checkout } from "../shared/models/checkout";
+import { Item } from "../shared/models/item";
+import { Store } from "../shared/models/store";
+
 import { PickupComponent } from "./pickup.component";
 
 describe("Pickup Component", () => {

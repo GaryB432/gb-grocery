@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 
 import { DataService } from "../shared/data.service";
 import { LogicService } from "../shared/logic.service";
-import { AppInfo } from "../shared/models";
+import { AppInfo } from "../shared/models/appinfo";
 import { AbstractGeoCoder, LocalGeoCoder } from "./geocoding.service";
 import { StoreComponent } from "./store.component";
 
