@@ -4,9 +4,6 @@ import "core-js/client/shim";
 import "reflect-metadata";
 require("zone.js/dist/zone");
 
-// TODO remove
-import "ts-helpers";
-
 import "./web-animations.min.js";
 
 if (process.env.ENV === "build") {
