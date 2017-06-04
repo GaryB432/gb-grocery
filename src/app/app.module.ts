@@ -6,7 +6,7 @@ import { HttpModule } from "@angular/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { createNewHosts, removeNgStyles } from "@angularclass/hmr";
-import { ToastModule, ToastsManager } from "ng2-toastr/ng2-toastr";
+import { ToastModule, ToastOptions } from "ng2-toastr";
 
 import { AboutComponent } from "./about/about.component";
 import { AppComponent } from "./app.component";
@@ -22,7 +22,7 @@ import { DataService } from "./shared/data.service";
 import { HammerGesturesDirective } from "./shared/hammer-gestures.directive";
 import { LogicService } from "./shared/logic.service";
 import { MomentPipe } from "./shared/moment.pipe";
-import { TopToastsManager } from "./shared/toasts-manager";
+import { CustomToastOptions } from "./shared/toast-options";
 import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from "./store/geocoding.service";
 import { PickupComponent } from "./store/pickup.component";
 import { StoreComponent } from "./store/store.component";
@@ -58,7 +58,7 @@ abstract class Store {
     ToastModule.forRoot(),
   ],
   providers: [
-    { provide: ToastsManager, useClass: TopToastsManager },
+    { provide: ToastOptions, useClass: CustomToastOptions },
     { provide: AbstractGeoCoder, useClass: isLocal ? LocalGeoCoder : GoogleGeoCoder },
     DataService,
     DataIoService,

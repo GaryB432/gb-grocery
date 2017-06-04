@@ -9,7 +9,7 @@ import {
   ViewContainerRef,
 } from "@angular/core";
 
-import { ToastsManager } from "ng2-toastr/ng2-toastr";
+import { ToastsManager } from "ng2-toastr";
 
 import { GestureEvent } from "../shared/hammer-gestures.directive";
 import { LogicService } from "../shared/logic.service";

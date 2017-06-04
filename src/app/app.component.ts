@@ -1,5 +1,4 @@
-import { Component, ViewContainerRef } from "@angular/core";
-import { ToastsManager } from "ng2-toastr";
+import { Component } from "@angular/core";
 
 import "../style/reset.scss";
 
@@ -12,8 +11,4 @@ import "ng2-toastr/ng2-toastr.css";
   styleUrls: ["./app.component.scss"],
   templateUrl: "./app.component.html",
 })
-export class AppComponent {
-  constructor(public toastr: ToastsManager, vRef: ViewContainerRef) {
-    this.toastr.setRootViewContainerRef(vRef);
-  }
-}
+export class AppComponent { }
