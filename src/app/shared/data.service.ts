@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { DataIoService } from "../shared/data.io.service";
-import * as Dto from "./dto";
-import { AppInfo } from "./models/appinfo";
-import { Utilities } from "./utilities";
+import { DataIoService } from './data-io.service';
+import * as Dto from './dto';
+import { AppInfo } from '../models/appinfo';
+import { Utilities } from './utilities';
 
 @Injectable()
 export class DataService {
@@ -63,5 +63,4 @@ export class DataService {
 
     return this.io.saveAll(dto).then(() => info);
   }
-
 }

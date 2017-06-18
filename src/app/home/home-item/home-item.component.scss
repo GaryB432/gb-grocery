@@ -1,0 +1,17 @@
+:host {
+    display: block;
+}
+
+h1 {
+    line-height: 1.4em;
+}
+.recent {
+    line-height: 1.3em;
+    .store {
+        font-size: 1.1em;
+    }
+    .date {
+        font-style: italic;
+        font-size: .8em;       
+    }
+}

@@ -1,22 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { DataService } from "../shared/data.service";
-import { AppInfo } from "./models/appinfo";
-import { Checkout } from "./models/checkout";
-import { Item } from "./models/item";
-import { Pickup } from "./models/pickup";
-import { Store } from "./models/store";
+import { DataService } from '../shared/data.service';
+import { AppInfo } from '../models/appinfo';
+import { Checkout } from '../models/checkout';
+import { Item } from '../models/item';
+import { Pickup } from '../models/pickup';
+import { Store } from '../models/store';
 
-import { Utilities } from "./utilities";
-
-function flatten(list: any[]): any[] {
-  return list.reduce(
-    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []);
-}
-
-function distinct(arr: any[]): any[] {
-  return Array.from(new Set(arr));
-}
+import { Utilities } from './utilities';
 
 type Aisle = string;
 
@@ -133,7 +124,7 @@ export class LogicService {
   public insertItem(name: string): Promise<Item> {
     const id: string = Utilities.makeItemId();
     if (this.cache.items.find((c) => c.id === id)) {
-      throw new Error("Random id was duplicated! Make a loop to check.");
+      throw new Error('Random id was duplicated! Make a loop to check.');
     }
 
     const item: Item = Utilities.dtoToItem(
@@ -179,8 +170,8 @@ export class LogicService {
 
   public static getStoreAisles(store: Store): Aisle[] {
     return LogicService.sortAisles(
-      distinct(
-        flatten(
+      Utilities.distinct(
+        Utilities.flatten(
           store.checkouts
             .map((c) => c.pickups
               .filter((p) => !!p.aisle)
@@ -254,4 +245,5 @@ export class LogicService {
       }
     }
   }
+
 }

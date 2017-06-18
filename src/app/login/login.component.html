@@ -1,0 +1,12 @@
+<section>
+  <span class="error" *ngIf="error">{{ error }}</span>
+  <h1>
+    You should be signed in for this feature to work.
+  </h1>
+  <div class="buttons">
+    <img src="assets/img/btn_google_signin_dark_normal_web.png" (click)="loginGoogle()" />
+  </div>
+  <div class="more">
+    More sign-in choices coming soon maybe.
+  </div>
+</section>

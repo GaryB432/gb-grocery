@@ -1,4 +1,4 @@
-@import "./shared/styles/colors";
+@import "colors";
 
 header {
     display: flex;
@@ -6,24 +6,26 @@ header {
     background-color: #00bcd4;
     padding: 0 10px;
     align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
     h1 {
-        font-size: 2rem;
+        font-size: 40px;
         font-family: serif;
         color: $white;
     }
 }
 
 nav {
+    background-color: lighten($grey, 70%);
     height: 33px;
+    font-size: 16px;
     display: flex;
-    justify-content: space-around;
+    align-items: center;
     a {
-        background-color: lighten($grey, 70%);
+        flex: 1 0 auto;
         border: 1px solid $grey;
         text-align: center;
-        line-height: 1.9rem;
-        
-        width: 100%;
+        padding: 5px;
         text-decoration: none;
         color: $silver;
         &.active {

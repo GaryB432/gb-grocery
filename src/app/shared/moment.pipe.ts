@@ -1,6 +1,5 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import moment = require("moment");
-
+import { Pipe, PipeTransform } from '@angular/core';
+import * as moment from 'moment';
 /*
  * calls moment for date formatting
  * Usage:
@@ -9,7 +8,7 @@ import moment = require("moment");
  *   {{ purchaseDate |  moment}}
  *   formats to: moment(purchaseDate).fromNow()
 */
-@Pipe({ name: "gbgMoment", pure: true })
+@Pipe({ name: 'gbgMoment', pure: false })
 export class MomentPipe implements PipeTransform {
   public transform(value: Date): string {
 

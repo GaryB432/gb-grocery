@@ -1,14 +1,8 @@
-import { Component } from "@angular/core";
-
-import "../style/reset.scss";
-
-import "../style/app.scss";
-
-import "ng2-toastr/ng2-toastr.css";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "gbg-app",
-  styleUrls: ["./app.component.scss"],
-  templateUrl: "./app.component.html",
+  selector: 'gbg-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent { }

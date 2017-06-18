@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { LogicService } from "../shared/logic.service";
-import { Checkout } from "../shared/models/checkout";
-import { Pickup } from "../shared/models/pickup";
-import { Store } from "../shared/models/store";
+import { LogicService } from '../shared/logic.service';
+import { Checkout } from '../models/checkout';
+import { Pickup } from '../models/pickup';
+import { Store } from '../models/store';
 
-import { AbstractGeoCoder } from "./geocoding.service";
+import { AbstractGeoCoder } from './geocoding.service';
 
 type Aisle = string;
 
 @Component({
-  selector: "gbg-store",
-  styleUrls: ["./store.component.scss"],
-  templateUrl: "./store.component.html",
+  selector: 'gbg-store',
+  styleUrls: ['./store.component.scss'],
+  templateUrl: './store.component.html',
 })
 export class StoreComponent implements OnInit {
   public aisles: Aisle[] = [];
@@ -24,7 +24,7 @@ export class StoreComponent implements OnInit {
 
   public nbStores: Store[] = [];
 
-  public newName: string = "";
+  public newName = '';
 
   public selectedStorePlaceId: string = null;
 
@@ -53,7 +53,7 @@ export class StoreComponent implements OnInit {
 
   public changeStore(): void {
     const newStore: Store = this.selectedStore;
-    if (!newStore) { throw new Error("changing to null store"); }
+    if (!newStore) { throw new Error('changing to null store'); }
     this.neededThings.forEach((t) => t.aisle = LogicService.predictAisle(t.item, newStore));
     this.neededThings = LogicService.sortPickups(this.neededThings.slice());
     this.aisles = LogicService.getStoreAisles(newStore);
@@ -67,7 +67,7 @@ export class StoreComponent implements OnInit {
         .filter((i) => i.picked))
       .then((co: Checkout) => {
         alert(`Thank you for shopping at ${co.store.name}`);
-        this.router.navigateByUrl("/");
+        this.router.navigateByUrl('/');
       });
   }
 
@@ -86,8 +86,8 @@ export class StoreComponent implements OnInit {
           this.nbStores = this.logic.getStoresFromNearbyPlaces(nearbyPlaces)
             .map((store) => {
               return {
-                store,
                 distance: this.geo.computeDistanceBetween(coords, store.location),
+                store,
               };
             })
             .sort((a, b) => a.distance - b.distance)
@@ -99,9 +99,9 @@ export class StoreComponent implements OnInit {
           }
         })
         .catch(() => {
-          alert("There was a mapping problem or you seem to not be near a grocery store. "
-            + "The Check Out tab is meant for when you are at the store.");
-          this.router.navigateByUrl("/");
+          alert('There was a mapping problem or you seem to not be near a grocery store. '
+            + 'The Check Out tab is meant for when you are at the store.');
+          this.router.navigateByUrl('/');
         });
     });
   }

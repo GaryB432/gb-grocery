@@ -10,7 +10,7 @@
       </section>
       <img *ngIf="selectedStore.photo" [src]="selectedStore.photo" />
     </section>
-    <img src="img/powered_by_google_on_white.png" alt="powered by Google" />
+    <img src="assets/img/powered_by_google_on_white.png" alt="powered by Google" />
   </section>
   <div *ngSwitchDefault class="loader"></div>
 </section>
@@ -26,7 +26,7 @@
       <label [attr.for]="'cb'+pu.item.id"> </label>
     </div>
   </div>
-  <gbg-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-pickup>
+  <gbg-store-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-store-pickup>
 </article>
 <section class="check-out">
   <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>

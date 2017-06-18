@@ -1,73 +1,74 @@
-import { fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
+import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
-import { DataIoService } from "./data.io.service";
-import { DataService } from "./data.service";
-import * as Dto from "./dto";
-import { AppInfo } from "./models/appinfo";
+import { DataIoService } from './data-io.service';
+import { DataService } from './data.service';
+import * as Dto from './dto';
+import { AppInfo } from '../models/appinfo';
+import { Utilities } from '../shared/utilities';
 
 const items: Dto.Item[] = [
   {
-    id: "I0",
-    name: "asdf",
+    id: 'I0',
+    name: 'asdf',
     needed: false,
   },
   {
-    id: "I1",
-    name: "zebra",
+    id: 'I1',
+    name: 'zebra',
     needed: true,
   },
   {
-    id: "I2",
-    name: "another",
+    id: 'I2',
+    name: 'another',
     needed: false,
   },
 ];
 
 const checkouts: Dto.Checkout[] = [
   {
-    isoDate: "2016-04-03T04:45:38.582Z",
+    isoDate: '2016-04-03T04:45:38.582Z',
     pickups: [
-      { itemId: "I1", aisle: "K9" },
-      { itemId: "I0", aisle: "D10" },
+      { itemId: 'I1', aisle: undefined },
+      { itemId: 'I0', aisle: 'D10' },
     ],
-    storeId: "S1",
+    storeId: 'S1',
   },
   {
-    isoDate: "2016-04-03T05:35:18.334Z",
+    isoDate: '2016-04-03T05:35:18.334Z',
     pickups: [
-      { itemId: "I0", aisle: "S0-D10" },
+      { itemId: 'I0', aisle: 'S0-D10' },
     ],
-    storeId: "S0",
+    storeId: 'S0',
   },
 ];
 
 const stores: Dto.Store[] = [
   {
-    // "formatted_address": "formatted_address",
-    // "formatted_phone_number": "formatted_phone_number",
-    // "icon": "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
-    // "location": {
-    //     "altitudeAccuracy": 0,
-    //     "longitude": 301,
-    //     "latitude": 300,
-    //     "speed": 0,
-    //     "heading": 0,
-    //     "altitude": 0,
-    //     "accuracy": 0
+    // 'formatted_address': 'formatted_address',
+    // 'formatted_phone_number': 'formatted_phone_number',
+    // 'icon': 'http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png',
+    // 'location': {
+    //     'altitudeAccuracy': 0,
+    //     'longitude': 301,
+    //     'latitude': 300,
+    //     'speed': 0,
+    //     'heading': 0,
+    //     'altitude': 0,
+    //     'accuracy': 0
     // },
-    // "types": ["grocery_or_supermarket"],
-    // "url": "url",
-    // "website": "website",
-    id: "S0",
-    name: "FAKE SCHNUCKS",
-    place_id: "xxxxxxxxxxxxx",
-    vicinity: "vicinity",
+    // 'types': ['grocery_or_supermarket'],
+    // 'url': 'url',
+    // 'website': 'website',
+    id: 'S0',
+    name: 'FAKE SCHNUCKS',
+    place_id: 'xxxxxxxxxxxxx',
+    vicinity: 'vicinity',
   },
   {
-    id: "S1",
-    name: "Atlantic Mills",
-    place_id: "ChIJsUfNv0jU2IcRk9KkjfWbBC0",
-    vicinity: "14345 Manchester Road, Ballwin",
+    id: 'S1',
+    name: 'Atlantic Mills',
+    place_id: 'ChIJsUfNv0jU2IcRk9KkjfWbBC0',
+    vicinity: '14345 Manchester Road, Ballwin',
   },
 ];
 
@@ -77,7 +78,7 @@ class MockDataIoService {
   }
 }
 
-describe("Data Service", () => {
+describe('Data Service', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
@@ -89,7 +90,7 @@ describe("Data Service", () => {
 
   });
 
-  it("should load",
+  it('should load',
     inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
       let info: AppInfo;
       sut.load().then((response: AppInfo) => {
@@ -100,6 +101,12 @@ describe("Data Service", () => {
       expect(info.stores.length).toBe(2);
       expect(info.items.length).toBe(3);
       expect(info.checkouts.length).toBe(2);
+
+      expect(
+        Utilities.flatten(info.checkouts
+          .map((c) => c.pickups
+            .map((p) => p.aisle))))
+        .toEqual([null, 'D10', 'S0-D10']);
 
       expect(info.checkouts[0].store).toBe(info.stores[1]);
       expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([info.items[1], info.items[0]]);

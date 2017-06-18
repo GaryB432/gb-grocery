@@ -1,19 +1,19 @@
-import * as Dto from "./dto";
-import { AppInfo } from "./models/appinfo";
-import { Checkout } from "./models/checkout";
-import { Item } from "./models/item";
-import { Pickup } from "./models/pickup";
-import { Store } from "./models/store";
+import * as Dto from './dto';
+import { AppInfo } from '../models/appinfo';
+import { Checkout } from '../models/checkout';
+import { Item } from '../models/item';
+import { Pickup } from '../models/pickup';
+import { Store } from '../models/store';
 
 // http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript#10727155
 function randomString(length: number, chars: string): string {
-  let mask: string = "";
+  let mask = '';
   /* tslint:disable:curly */
-  if (chars.indexOf("a") > -1) mask += "abcdefghijklmnopqrstuvwxyz";
-  if (chars.indexOf("A") > -1) mask += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  if (chars.indexOf("#") > -1) mask += "0123456789";
-  if (chars.indexOf("!") > -1) mask += "~`!@#$%^&*()_+-={}[]:';\"<>?,./|\\";
-  let result: string = "";
+  if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+  if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (chars.indexOf('#') > -1) mask += '0123456789';
+  if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:\';"<>?,./|\\';
+  let result = '';
   for (let i: number = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
   /* tslint:enable:curly */
   return result;
@@ -21,11 +21,11 @@ function randomString(length: number, chars: string): string {
 
 export class Utilities {
   public static makeItemId(): string {
-    return Utilities.makeRandomId("i");
+    return Utilities.makeRandomId('i');
   }
 
   public static makeStoreId(): string {
-    return Utilities.makeRandomId("s");
+    return Utilities.makeRandomId('s');
   }
 
   public static dtoToItem(dto: Dto.Item): Item {
@@ -41,7 +41,7 @@ export class Utilities {
   public static dtoToStore(dto: Dto.Store): Store {
     const newStore: Store = new Store(dto.id, dto.name);
     newStore.placeId = dto.place_id;
-    newStore.icon = "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png";
+    newStore.icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png';
     newStore.vicinity = dto.vicinity;
     newStore.checkouts = [];
     return newStore;
@@ -58,8 +58,17 @@ export class Utilities {
     return newCheckout;
   }
 
+  public static flatten(list: any[]): any[] {
+    return list.reduce(
+      (a, b) => a.concat(Array.isArray(b) ? Utilities.flatten(b) : b), []);
+  }
+
+  public static distinct(arr: any[]): any[] {
+    return Array.from(new Set(arr));
+  }
+
   private static makeRandomId(prefix: string): string {
-    return prefix + randomString(5, "a#");
+    return prefix + randomString(5, 'a#');
   }
 
 }

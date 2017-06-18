@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
-import { LogicService } from "../shared/logic.service";
-import { Checkout } from "../shared/models/checkout";
-import { Item } from "../shared/models/item";
-import { Pickup } from "../shared/models/pickup";
+import { LogicService } from '../shared/logic.service';
+import { Checkout } from '../models/checkout';
+import { Item } from '../models/item';
+import { Pickup } from '../models/pickup';
 
 @Component({
-  selector: "gbg-item",
-  styleUrls: ["./item.component.scss"],
-  templateUrl: "./item.component.html",
+  selector: 'gbg-item',
+  styleUrls: ['./item.component.scss'],
+  templateUrl: './item.component.html',
 })
 export class ItemComponent implements OnInit, OnDestroy {
 
@@ -27,7 +27,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
-      const key: string = "id";
+      const key = 'id';
       this.logic.load()
         .then(() => this.logic.getItem(params[key]))
         .then((item) => {
@@ -38,7 +38,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         })
         .catch((err) => {
           alert(err);
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl('/');
         });
     });
   }
@@ -55,7 +55,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     if (confirm(`The item ${item.name.toUpperCase()} and its associated information will be permanently deleted.`)) {
       this.logic.load()
         .then((info) => this.logic.deleteItem(item, info))
-        .then(() => this.router.navigateByUrl("/"));
+        .then(() => this.router.navigateByUrl('/'));
     }
   }
 

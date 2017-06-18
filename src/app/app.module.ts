@@ -1,87 +1,42 @@
-/* tslint:disable:max-classes-per-file no-console */
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { environment } from '../environments/environment';
 
-import { ApplicationRef, NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { createNewHosts, removeNgStyles } from "@angularclass/hmr";
-import { ToastModule, ToastOptions } from "ng2-toastr";
-
-import { AboutComponent } from "./about/about.component";
-import { AppComponent } from "./app.component";
-import { routing } from "./app.routing";
-import { HomeComponent } from "./home/home.component";
-import { HomeItemComponent } from "./home/item.component";
-import { PlusIconComponent } from "./icons/plus";
-import { TrashcanIconComponent } from "./icons/trashcan";
-import { ItemComponent } from "./item/item.component";
-import { DataIoService } from "./shared/data.io.service";
-import { LocalIoStorage } from "./shared/data.localstorage.service";
-import { DataService } from "./shared/data.service";
-import { HammerGesturesDirective } from "./shared/hammer-gestures.directive";
-import { LogicService } from "./shared/logic.service";
-import { MomentPipe } from "./shared/moment.pipe";
-import { CustomToastOptions } from "./shared/toast-options";
-import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from "./store/geocoding.service";
-import { PickupComponent } from "./store/pickup.component";
-import { StoreComponent } from "./store/store.component";
-
-const isLocal: boolean = window.location.hostname === "localhost-is-fun";
-
-type NativeElement = any;
-abstract class Store {
-  public abstract disposeOldHosts(): void;
-}
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AboutModule } from './about/about.module';
+import { HomeModule } from './home/home.module';
+import { SharedModule } from './shared/shared.module';
+import { StoreModule } from './store/store.module';
+import { ItemModule } from './item/item.module';
+import { LoginModule } from './login/login.module';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
-  bootstrap: [AppComponent],
   declarations: [
-    AboutComponent,
-    AppComponent,
-    HomeComponent,
-    HomeItemComponent,
-    ItemComponent,
-    PickupComponent,
-    StoreComponent,
-    MomentPipe,
-    TrashcanIconComponent,
-    PlusIconComponent,
-    HammerGesturesDirective,
+    AppComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
-    FormsModule,
-    routing,
-    ToastModule.forRoot(),
+    AppRoutingModule,
+    AboutModule,
+    HomeModule,
+    SharedModule,
+    StoreModule,
+    ItemModule,
+    LoginModule
   ],
   providers: [
-    { provide: ToastOptions, useClass: CustomToastOptions },
-    { provide: AbstractGeoCoder, useClass: isLocal ? LocalGeoCoder : GoogleGeoCoder },
-    DataService,
-    DataIoService,
-    LocalIoStorage,
-    LogicService,
+    AuthGuard
   ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule {
-  constructor(public appRef: ApplicationRef) { }
-  public hmrOnInit(store: Store): void {
-    console.log("HMR store", store);
-  }
-  public hmrOnDestroy(store: Store): void {
-    const cmpLocation: NativeElement[] = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-    // recreate elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // remove styles
-    removeNgStyles();
-  }
-  public hmrAfterDestroy(store: Store): void {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
-}
+export class AppModule { }

@@ -1,4 +1,4 @@
-@import "../shared/styles/colors";
+@import "colors";
 
 :host {
     display: block;
@@ -12,11 +12,11 @@
     text-align: center;
     margin: 2rem 0;
     h1, p {
-        margin: 1.2rem;
-        line-height: 1.3rem;
+        margin: 1.2em;
+        line-height: 1.3em;
     }
     h1 {
-        font-size: 1.2rem;
+        font-size: 1.2em;
         font-weight: bold;
     }
 }
@@ -40,7 +40,6 @@ h1 {
     justify-content: space-between;
     align-items: center;
     font: {
-        size: 1.1rem;
         weight: bold;
     }
     &.needed{
@@ -63,18 +62,18 @@ h1 {
         margin-left: 10px;
         flex: 1 2 auto;
         p { 
-            margin: 0.5rem 0;
+            margin: 0.5em 0;
             &.store {
-                font-size: 1.2rem;
+                font-size: 1.2em;
             }
             &.vicinity {
                 font-style: italic; 
             }
             &.aisle {
-                font-size: .6rem;
+                font-size: .6em;
             }
             &.date {
-                font-size: .8rem;
+                font-size: .8em;
             }
         }
     }

@@ -1,10 +1,8 @@
 /* tslint:disable:max-classes-per-file no-var-requires */
 
-import { Injectable } from "@angular/core";
-import * as Dto from "../shared/dto";
-
-// TODO use custom flatten
-const flatten: (a: any[][]) => any[] = require("arr-flatten");
+import { Injectable } from '@angular/core';
+import * as Dto from '../shared/dto';
+import { Utilities } from '../shared/utilities';
 
 @Injectable()
 export abstract class AbstractGeoCoder {
@@ -44,9 +42,9 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
   public nearbyStoreSearch(coords: Coordinates): Promise<google.maps.places.PlaceResult[]> {
     return new Promise<google.maps.places.PlaceResult[]>(
       (resolve, reject) => {
-        const grocery: string = "grocery_or_supermarket";
+        const grocery = 'grocery_or_supermarket';
         const placeService: google.maps.places.PlacesService
-          = new google.maps.places.PlacesService(new google.maps.Map(document.getElementById("map")));
+          = new google.maps.places.PlacesService(new google.maps.Map(document.getElementById('map')));
         const searchRequest: google.maps.places.PlaceSearchRequest = {
           bounds: undefined,
           keyword: undefined,
@@ -56,7 +54,8 @@ export class GoogleGeoCoder extends AbstractGeoCoder {
           rankBy: undefined,
           types: [grocery],
         };
-        placeService.nearbySearch(searchRequest, (results: google.maps.places.PlaceResult[],
+        placeService.nearbySearch(searchRequest, (
+          results: google.maps.places.PlaceResult[],
           status: google.maps.places.PlacesServiceStatus) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             resolve(results.filter((pr) => pr.types.indexOf(grocery) > -1));
@@ -113,15 +112,15 @@ export class LocalGeoCoder extends AbstractGeoCoder {
           viewport: undefined,
         },
         html_attributions: [],
-        icon: "https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png",
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         international_phone_number: `international_phone_number ${n}`,
         name: `${ks.name} S${n}`,
         opening_hours: undefined,
         permanently_closed: false,
         photos: [
           {
-            getUrl: (_opts) => "https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0"
-              + "/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/",
+            getUrl: (_opts) => 'https://lh3.googleusercontent.com/-DiA7-qunhnQ/Vtmao0iSekI/AAAAAAAAAB0'
+              + '/Eo1ypD8vvuQWt_Yy9Z3sLgzrBPRhY_wBA/w320-h300-k/',
             height: 200,
             html_attributions: [],
             width: 200,
@@ -130,7 +129,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
         price_level: undefined,
         rating: undefined,
         reviews: [],
-        types: ["grocery_or_supermarket", "fake", "store"],
+        types: ['grocery_or_supermarket', 'fake', 'store'],
         url: `url ${n}`,
         vicinity: ks.vicinity,
         website: `website ${n}`,
@@ -139,22 +138,22 @@ export class LocalGeoCoder extends AbstractGeoCoder {
 
     const knownStores: Dto.Store[] = [
       {
-        id: "S-KOBIM",
-        name: "Schnucks",
-        place_id: "ChIJ43DkSEvU2IcRgU4nzYWcNU0",
-        vicinity: "15425 Manchester Road, Ballwin",
+        id: 'S-KOBIM',
+        name: 'Schnucks',
+        place_id: 'ChIJ43DkSEvU2IcRgU4nzYWcNU0',
+        vicinity: '15425 Manchester Road, Ballwin',
       },
       {
-        id: "S-f2jIj",
-        name: "Big Lots",
-        place_id: "ChIJQ9yAC2zU2IcR4fcxoawalqI",
-        vicinity: "14850 Manchester Road, Ballwin",
+        id: 'S-f2jIj',
+        name: 'Big Lots',
+        place_id: 'ChIJQ9yAC2zU2IcR4fcxoawalqI',
+        vicinity: '14850 Manchester Road, Ballwin',
       },
       {
-        id: "S-F5TXz",
-        name: "Schnucks",
-        place_id: "ChIJ0-z4P9jT2IcRbt566e0iJIY",
-        vicinity: "1393 Big Bend Road #1, Ballwin",
+        id: 'S-F5TXz',
+        name: 'Schnucks',
+        place_id: 'ChIJ0-z4P9jT2IcRbt566e0iJIY',
+        vicinity: '1393 Big Bend Road #1, Ballwin',
       },
     ];
 
@@ -171,7 +170,7 @@ export class LocalGeoCoder extends AbstractGeoCoder {
       (resolve) => {
         window.setTimeout(
           () => {
-            resolve(flatten([fakePlaces, otherPlaces]));
+            resolve(Utilities.flatten([fakePlaces, otherPlaces]));
           },
           200);
       });

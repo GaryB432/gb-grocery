@@ -1,29 +1,28 @@
 import {
-  AfterViewInit,
+  OnInit,
   Directive,
   ElementRef,
   EventEmitter,
   Output,
-} from "@angular/core";
+} from '@angular/core';
 
-export type GestureType = "swipeleft" | "swiperight" | "tap";
+export type GestureType = 'swipeleft' | 'swiperight' | 'tap';
 
 export interface GestureEvent {
   type: GestureType;
 }
 
 @Directive({
-  selector: "[gbgHammerGestures]",
+  selector: '[gbgHammerGestures]',
 })
-export class HammerGesturesDirective implements AfterViewInit {
+export class HammerGesturesDirective implements OnInit {
 
   @Output() public onGesture: EventEmitter<GestureEvent> = new EventEmitter<GestureEvent>();
 
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) { }
 
-  public ngAfterViewInit(): void {
-    const events: GestureType[] = ["swipeleft", "swiperight", "tap"];
+  public ngOnInit(): void {
+    const events: GestureType[] = ['swipeleft', 'swiperight', 'tap'];
 
     const hammertime: HammerManager = new Hammer(this.el.nativeElement, {
       recognizers: [

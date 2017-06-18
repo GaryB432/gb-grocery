@@ -1,6 +1,9 @@
 <div *ngIf="item">
   <h1 [ngClass]="{ needed: item.needed, item: true }">{{item.name | uppercase}}
+    <!--
     <gbg-trashcan-icon (click)="deleteItem(item)"></gbg-trashcan-icon>
+    -->
+    <button (click)="deleteItem(item)">X</button>
   </h1>
   <h2>Checkouts</h2>
   <div *ngIf="checkouts.length === 0" class="no-checkouts">
