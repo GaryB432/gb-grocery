@@ -1,9 +1,8 @@
-@import "colors";
+@import "variables";
 
 :host {
     display: block;
 }
-
 
 .no-checkouts {
     display:flex;
@@ -44,6 +43,9 @@ h1 {
     }
     &.needed{
         background-color: $needed;
+    }
+    button {
+        font-size: 1.5em;
     }
 }
 
