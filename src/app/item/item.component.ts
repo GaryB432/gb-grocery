@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs/Subscription';
 
-import { LogicService } from '../shared/logic.service';
 import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
+import { LogicService } from '../shared/logic.service';
 
 @Component({
   selector: 'gbg-item',
@@ -22,7 +23,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(private logic: LogicService, private route: ActivatedRoute, private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private logic: LogicService, private route: ActivatedRoute, private router: Router) {
   }
 
   public ngOnInit(): void {
