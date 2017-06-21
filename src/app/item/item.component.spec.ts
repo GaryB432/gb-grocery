@@ -12,6 +12,12 @@ import { By } from '@angular/platform-browser';
 import { Location, CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
+import { Observable } from 'rxjs/Observable';
+
+import * as firebase from 'firebase';
+
 class MockLogicService {
   private appInfo: AppInfo = {
     items: [],
@@ -26,6 +32,15 @@ class MockLogicService {
   public getItem(id: string): Promise<Item> {
     return Promise.resolve({ id, checkouts: [] });
   }
+}
+
+class AngularFireAuthMock {
+  // public login() { }
+  // public logout() { }
+  public authState = new Observable<Partial<firebase.User>>((sub) => {
+    sub.next({ displayName: 'FUN TESTER' });
+    sub.complete();
+  });
 }
 
 @Component({
@@ -50,6 +65,7 @@ describe('ItemComponent', () => {
       declarations: [ItemComponent, DummyComponent],
       providers: [
         { provide: LogicService, useClass: MockLogicService },
+        { provide: AngularFireAuth, useClass: AngularFireAuthMock },
         // { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
         // { provide: DataService, useClass: MockDataService },
         // { provide: Router, useClass: MockRouter },
