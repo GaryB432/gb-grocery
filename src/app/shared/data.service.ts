@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { AppInfo } from '../models/appinfo';
 import { DataIoService } from './data-io.service';
 import * as Dto from './dto';
-import { AppInfo } from '../models/appinfo';
 import { Utilities } from './utilities';
 
 @Injectable()

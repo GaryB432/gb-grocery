@@ -1,22 +1,19 @@
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ItemComponent } from './item.component';
-import { LogicService } from '../shared/logic.service';
-import { Item } from '../models/item';
-import { AppInfo } from '../models/appinfo';
-import { Checkout } from '../models/checkout';
-import { Store } from '../models/store';
-
 import { By } from '@angular/platform-browser';
-import { Location, CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
-
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
-import * as firebase from 'firebase';
+import { AppInfo } from '../models/appinfo';
+import { Checkout } from '../models/checkout';
+import { Item } from '../models/item';
+import { Store } from '../models/store';
+import { LogicService } from '../shared/logic.service';
+import { ItemComponent } from './item.component';
 
 class MockLogicService {
   private appInfo: AppInfo = {

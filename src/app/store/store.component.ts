@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LogicService } from '../shared/logic.service';
 import { Checkout } from '../models/checkout';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
-
+import { LogicService } from '../shared/logic.service';
 import { AbstractGeoCoder } from './geocoding.service';
 
 type Aisle = string;

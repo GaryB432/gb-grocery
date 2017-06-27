@@ -1,16 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HammerGesturesDirective } from './hammer-gestures.directive';
-import { MomentPipe } from './moment.pipe';
+import { NgModule } from '@angular/core';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 import { AuthGuard } from '../auth/auth.guard';
-import { DataService } from './data.service';
 import { DataIoService } from './data-io.service';
 import { DataLocalstorageService } from './data-localstorage.service';
-import { CustomToastOptions } from './toast-options';
+import { DataService } from './data.service';
+import { HammerGesturesDirective } from './hammer-gestures.directive';
 import { LogicService } from './logic.service';
-
-import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { MomentPipe } from './moment.pipe';
+import { CustomToastOptions } from './toast-options';
 
 @NgModule({
   imports: [

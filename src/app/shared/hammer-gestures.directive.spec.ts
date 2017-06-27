@@ -1,5 +1,6 @@
-import { HammerGesturesDirective } from './hammer-gestures.directive';
 import { ElementRef } from '@angular/core';
+
+import { HammerGesturesDirective } from './hammer-gestures.directive';
 
 describe('HammerGesturesDirective', () => {
   it('should create an instance', () => {

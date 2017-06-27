@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { DataService } from '../shared/data.service';
 import { AppInfo } from '../models/appinfo';
 import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
-
+import { DataService } from '../shared/data.service';
 import { Utilities } from './utilities';
 
 type Aisle = string;

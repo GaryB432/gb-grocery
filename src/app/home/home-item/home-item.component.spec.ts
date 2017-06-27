@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeItemComponent } from './home-item.component';
-import { SharedModule } from '../../shared/shared.module';
 import { Checkout } from '../../models/checkout';
-import { Store } from '../../models/store';
 import { Item } from '../../models/item';
+import { Store } from '../../models/store';
+import { SharedModule } from '../../shared/shared.module';
+import { HomeItemComponent } from './home-item.component';
 
 describe('HomeItemComponent', () => {
   let component: HomeItemComponent;

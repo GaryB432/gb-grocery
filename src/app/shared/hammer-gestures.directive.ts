@@ -1,8 +1,8 @@
 import {
-  OnInit,
   Directive,
   ElementRef,
   EventEmitter,
+  OnInit,
   Output,
 } from '@angular/core';
 

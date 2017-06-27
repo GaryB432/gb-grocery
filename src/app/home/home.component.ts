@@ -8,15 +8,13 @@ import {
   trigger,
   ViewContainerRef,
 } from '@angular/core';
-
 import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { Item } from '../models/item';
 import { GestureEvent } from '../shared/hammer-gestures.directive';
 import { LogicService } from '../shared/logic.service';
-import { Item } from '../models/item';
-
-import * as firebase from 'firebase/app';
 
 @Component({
   animations: [trigger('itemState', [

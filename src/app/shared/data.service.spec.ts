@@ -1,10 +1,10 @@
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
+import { AppInfo } from '../models/appinfo';
+import { Utilities } from '../shared/utilities';
 import { DataIoService } from './data-io.service';
 import { DataService } from './data.service';
 import * as Dto from './dto';
-import { AppInfo } from '../models/appinfo';
-import { Utilities } from '../shared/utilities';
 
 const items: Dto.Item[] = [
   {

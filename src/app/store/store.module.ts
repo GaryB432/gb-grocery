@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StoreComponent } from './store.component';
-import { StorePickupComponent } from './store-pickup/store-pickup.component';
+import { RouterModule } from '@angular/router';
+
 import { AbstractGeoCoder, GoogleGeoCoder, LocalGeoCoder } from './geocoding.service';
+import { StorePickupComponent } from './store-pickup/store-pickup.component';
+import { StoreComponent } from './store.component';
 
 const isLocal: boolean = window.location.hostname === 'localhost-not';
 
