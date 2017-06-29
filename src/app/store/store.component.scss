@@ -7,6 +7,10 @@ article.card {
             color: inherit;
         }
     }
+    input[type=checkbox]{
+        margin: 10px;
+        transform: scale(2);
+    }
     &.picked {
         background-color: $picked;
     }

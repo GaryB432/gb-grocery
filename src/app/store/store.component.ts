@@ -53,7 +53,10 @@ export class StoreComponent implements OnInit {
   public changeStore(): void {
     const newStore: Store = this.selectedStore;
     if (!newStore) { throw new Error('changing to null store'); }
-    this.neededThings.forEach((t) => t.aisle = LogicService.predictAisle(t.item, newStore));
+    this.neededThings.forEach((t) => {
+      t.picked = false;
+      t.aisle = LogicService.predictAisle(t.item, newStore);
+    });
     this.neededThings = LogicService.sortPickups(this.neededThings.slice());
     this.aisles = LogicService.getStoreAisles(newStore);
   }

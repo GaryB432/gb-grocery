@@ -20,12 +20,7 @@
     you to pick up.</p>
 </div>
 <article *ngFor="let pu of neededThings" [ngClass]="{ picked: pu.picked, card: true }">
-  <div class="cbh">
-    <div class="slideOne">
-      <input id="cb{{pu.item.id}}" type="checkbox" [(ngModel)]="pu.picked" (change)="togglePicked(pu)" />
-      <label [attr.for]="'cb'+pu.item.id"> </label>
-    </div>
-  </div>
+  <input type="checkbox" [checked]="pu.picked" (change)="togglePicked(pu)" />
   <gbg-store-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-store-pickup>
 </article>
 <section class="check-out">
