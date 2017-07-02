@@ -1,17 +1,15 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
+// import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
 import { AppInfo } from '../models/appinfo';
-import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
-import { Store } from '../models/store';
 import { LogicService } from '../shared/logic.service';
 import { ItemComponent } from './item.component';
 

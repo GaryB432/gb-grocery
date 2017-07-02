@@ -15,15 +15,13 @@ import { LogicService } from '../shared/logic.service';
 })
 export class ItemComponent implements OnInit, OnDestroy {
 
-  // http://plnkr.co/edit/Bim8OGO7oddxBaa26WzR?p=preview is gold
-
   public item: Item;
 
   public checkouts: Checkout[];
 
   private sub: Subscription;
 
-  constructor(private afAuth: AngularFireAuth, private logic: LogicService, private route: ActivatedRoute, private router: Router) {
+  constructor(afAuth: AngularFireAuth, private logic: LogicService, private route: ActivatedRoute, private router: Router) {
   }
 
   public ngOnInit(): void {
