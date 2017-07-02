@@ -19,8 +19,11 @@
   <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here for
     you to pick up.</p>
 </div>
-<article *ngFor="let pu of neededThings" [ngClass]="{ picked: pu.picked, card: true }">
-  <input type="checkbox" [checked]="pu.picked" (change)="togglePicked(pu)" />
+<article *ngFor="let pu of neededThings" class="card" [@cbhState]="pu.picked ? 'picked' : 'notpicked'">
+  <div (click)="togglePicked(pu)" class="cbholder">
+    <i class="fa fa-check" [@checkState]="pu.picked ? 'picked' : 'notpicked'"></i>
+  </div>
+
   <gbg-store-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-store-pickup>
 </article>
 <section class="check-out">
