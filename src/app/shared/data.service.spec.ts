@@ -92,9 +92,13 @@ describe('Data Service', () => {
 
   it('should load',
     inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
-      let info: AppInfo;
+      let info: AppInfo = {
+        items: [],
+        checkouts: [],
+        stores: []
+      };
       sut.load().then((response: AppInfo) => {
-        info = response;
+        Object.assign(info, response);
       });
       tick();
       expect(info).toBeDefined();
@@ -115,6 +119,24 @@ describe('Data Service', () => {
       expect(info.items[0].checkouts).toBeDefined();
       expect(info.items[0].checkouts.length).toBe(0);
     })),
+  );
+
+  it('should throw on bad store',
+    inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
+      let info: AppInfo;
+      checkouts[0].storeId = 'WTF';
+      expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined('you have a weird store id');
+      sut.load()
+        .then((response: AppInfo) => {
+          fail('keep out');
+          info = response;
+        })
+        .catch((e: Error) => {
+          expect(e.message).toEqual('no store');
+        });
+      tick();
+    })),
+
   );
 
 });

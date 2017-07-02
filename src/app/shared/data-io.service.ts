@@ -20,7 +20,7 @@ export class DataIoService {
   }
 
   constructor(
-    private afAuth: AngularFireAuth,
+    afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private storage: DataLocalstorageService) {
 

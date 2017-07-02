@@ -16,17 +16,13 @@ export class DataService {
   }
 
   public load(): Promise<AppInfo> {
-    const info: AppInfo = {
-      checkouts: undefined,
-      items: undefined,
-      stores: undefined,
-    };
+    const info: Partial<AppInfo> = {};
 
     return this.io.load().then((a) => {
       info.stores = a.stores.map((s) => Utilities.dtoToStore(s));
       info.items = a.items.map((i) => Utilities.dtoToItem(i));
-      info.checkouts = a.checkouts.map((c) => Utilities.dtoToCheckout(c, info));
-      return info;
+      info.checkouts = a.checkouts.map((c) => Utilities.dtoToCheckout(c, info as AppInfo));
+      return info as AppInfo;
     });
   }
 
@@ -37,7 +33,7 @@ export class DataService {
           isoDate: c.date.toISOString(),
           pickups: c.pickups.map((p) => {
             return {
-              aisle: p.aisle,
+              aisle: p.aisle || 'N/A',
               itemId: p.item.id,
             };
           }),
