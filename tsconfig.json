@@ -10,6 +10,7 @@
     "experimentalDecorators": true,
     // "noImplicitAny": true,
     "noImplicitReturns": true,
+    // "noStrictGenericChecks": false,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "strict": false,
