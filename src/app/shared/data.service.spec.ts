@@ -92,7 +92,7 @@ describe('Data Service', () => {
 
   it('should load',
     inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
-      let info: AppInfo = {
+      const info: AppInfo = {
         items: [],
         checkouts: [],
         stores: []
@@ -125,7 +125,7 @@ describe('Data Service', () => {
     inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
       let info: AppInfo;
       checkouts[0].storeId = 'WTF';
-      expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined('you have a weird store id');
+      expect(stores.find((s) => s.id === checkouts[0].storeId)).toBeUndefined('you have a weird store id');
       sut.load()
         .then((response: AppInfo) => {
           fail('keep out');
