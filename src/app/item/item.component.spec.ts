@@ -27,7 +27,12 @@ class MockLogicService {
     return Promise.resolve(this.appInfo);
   }
   public getItem(id: string): Promise<Item> {
-    return Promise.resolve({ id, checkouts: [] });
+    return Promise.resolve({
+      checkouts: [],
+      id,
+      name: `YOUR ITEM ${id}`,
+      needed: false,
+    });
   }
 }
 
