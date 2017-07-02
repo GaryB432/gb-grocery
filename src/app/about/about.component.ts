@@ -25,8 +25,8 @@ export class AboutComponent implements OnInit {
   public ngOnInit(): void {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       this.isAuthenticated = !!user;
-      this.displayName = user ? user.displayName : 'NOT LOGGED IN';
-      this.photoURL = user ? user.photoURL : 'assets/img/personal.png';
+      this.displayName = user ? user.displayName || 'FALSY NAME' : 'NOT LOGGED IN';
+      this.photoURL = user ? user.photoURL || 'assets/img/personal.png' : 'assets/img/personal.png';
       if (this.isAuthenticated) {
         this.io.load().then((info) => {
           this.jsonInfo = JSON.stringify(info, null, 2);

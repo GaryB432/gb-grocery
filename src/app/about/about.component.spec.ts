@@ -1,43 +1,10 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-// import { AboutComponent } from './about.component';
-
-// describe('AboutComponent', () => {
-//   let component: AboutComponent;
-//   let fixture: ComponentFixture<AboutComponent>;
-
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ AboutComponent ]
-//     })
-//     .compileComponents();
-//   }));
-
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(AboutComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should be created', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
-
-/* tslint:disable:max-classes-per-file */
-
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-
+import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 
-import * as firebase from 'firebase';
-
-// import * as Rx from 'rxjs';
-
-// import { DataIoService } from './data-io.service';
 import { DataIoService } from '../shared/data-io.service';
 import * as Dto from '../shared/dto';
 import { AboutComponent } from './about.component';
@@ -98,13 +65,6 @@ class MockDataIoService {
   }
 }
 
-// export declare class AngularFireAuthGB {
-//   app: FirebaseApp;
-//   auth: firebase.auth.Auth;
-//   authState: Observable<firebase.User>;
-//   constructor(app: FirebaseApp);
-// }
-
 class AngularFireAuthMock {
   // public login() { }
   // public logout() { }
@@ -115,39 +75,44 @@ class AngularFireAuthMock {
 }
 
 describe('About Component', () => {
-
-  let fixture: ComponentFixture<AboutComponent>;
   let component: AboutComponent;
+  let fixture: ComponentFixture<AboutComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        RouterModule
+      ],
+      declarations: [AboutComponent],
+      providers: [
+        { provide: AngularFireAuth, useClass: AngularFireAuthMock },
+        { provide: DataIoService, useClass: MockDataIoService },
+        { provide: Router, useClass: MockRouter },
+      ]
+    })
+      .compileComponents();
+  }));
 
   beforeEach(() => {
-    TestBed.overrideComponent(AboutComponent, {
-      set: {
-        template: '<div>Overridden template here</div>',
-      },
-    });
-
-    TestBed.configureTestingModule({
-      declarations: [AboutComponent],
-    });
-
-    fixture = TestBed
-      .overrideComponent(AboutComponent, {
-        set: {
-          providers: [
-            { provide: AngularFireAuth, useClass: AngularFireAuthMock },
-            { provide: DataIoService, useClass: MockDataIoService },
-            { provide: Router, useClass: MockRouter },
-          ],
-        },
-      })
-      .createComponent(AboutComponent);
-
+    fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;
-
+    fixture.detectChanges();
   });
 
+  it('should be created', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should warn', async(() => {
+    // const fixture = TestBed.createComponent(AppComponent);
+    // fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
+  }));
+
   it('shoud get json', async(() => {
-    fixture.detectChanges();
+    // fixture.detectChanges();
     fixture.whenStable().then(() => {
       // const element = fixture.nativeElement;
       expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
