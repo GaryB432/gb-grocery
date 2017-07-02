@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
@@ -82,7 +83,7 @@ describe('About Component', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        RouterModule
+        RouterTestingModule
       ],
       declarations: [AboutComponent],
       providers: [
