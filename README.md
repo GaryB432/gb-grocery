@@ -1,7 +1,5 @@
 # gb-grocery
 
-[![Build Status](https://travis-ci.org/GaryB432/gb-grocery.svg?branch=master)](https://travis-ci.org/GaryB432/gb-grocery)
-
 It's a [grocery list web app](https://bortosky.com/mobile/grocery) for your cellphone.
 
 # Getting Started

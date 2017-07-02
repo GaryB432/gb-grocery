@@ -48,13 +48,20 @@ export class Utilities {
   }
 
   public static dtoToCheckout(dto: Dto.Checkout, context: AppInfo): Checkout {
-    const newCheckout: Checkout = new Checkout(
-      context.stores.find((s) => s.id === dto.storeId),
-      new Date(dto.isoDate),
-    );
+    const store = context.stores.find((s) => s.id === dto.storeId);
+    if (!store) {
+      throw new Error('no store');
+    }
+    const newCheckout: Checkout = new Checkout(store, new Date(dto.isoDate));
 
     newCheckout.pickups = dto.pickups
-      .map((pu) => new Pickup(context.items.find((item) => item.id === pu.itemId), pu.aisle));
+      .map((pu) => {
+        const item = context.items.find((i) => i.id === pu.itemId);
+        if (!item) {
+          throw new Error('no item');
+        }
+        return new Pickup(item, pu.aisle);
+      });
     return newCheckout;
   }
 
