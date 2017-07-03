@@ -4,8 +4,6 @@ export abstract class AbstractGeoService {
 
   public abstract computeDistanceBetween(from: Coordinates, to: Coordinates, radius?: number): number;
 
-  public abstract async getAddress(coords: Coordinates): Promise<string>;
-
   public abstract async nearbyStoreSearch(coords: Coordinates): Promise<Place[]>;
 
   public abstract async getCurrentPosition(options?: PositionOptions): Promise<Position>;

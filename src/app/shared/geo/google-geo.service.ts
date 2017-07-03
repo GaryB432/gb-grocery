@@ -16,10 +16,6 @@ export class GoogleGeoService extends AbstractGeoService {
       radius);
   }
 
-  public async getAddress(coords: Coordinates): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
     return new Promise<Place[]>(
       (resolve, reject) => {

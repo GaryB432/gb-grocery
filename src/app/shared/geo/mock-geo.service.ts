@@ -21,9 +21,7 @@ export class MockGeoService extends AbstractGeoService {
     const dy: number = (y1 - y2) ** 2;
     return Math.sqrt(dx + dy);
   }
-  public async getAddress(coords: Coordinates): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
+
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
 
     function makePlace(ks: Dto.Store, n: number): Place {
@@ -85,6 +83,7 @@ export class MockGeoService extends AbstractGeoService {
           200);
       });
   }
+  
   public async getCurrentPosition(options?: PositionOptions): Promise<Position> {
     const hhCoords: Coordinates = {
       accuracy: 0,
