@@ -4,8 +4,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppInfo } from '../models/appinfo';
 import { DataService } from '../shared/data.service';
+import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
+import { MockGeoService } from '../shared/geo/mock-geo.service';
 import { LogicService } from '../shared/logic.service';
-import { AbstractGeoCoder, LocalGeoCoder } from './geocoding.service';
 import { StoreComponent } from './store.component';
 
 class MockDataService {
@@ -38,7 +39,7 @@ describe('StoreComponent', () => {
       ],
       providers: [
         { provide: LogicService, useClass: LogicService },
-        { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
+        { provide: AbstractGeoService, useClass: MockGeoService },
         { provide: DataService, useClass: MockDataService },
         { provide: Router, useClass: MockRouter },
       ],

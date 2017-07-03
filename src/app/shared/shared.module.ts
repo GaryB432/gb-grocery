@@ -25,14 +25,12 @@ import { CustomToastOptions } from './toast-options';
     LogicService
   ],
   exports: [
-    // CommonModule,
-    // ToastModule,
     MomentPipe,
     HammerGesturesDirective
   ],
   declarations: [
     HammerGesturesDirective,
-    MomentPipe]
-  // declarations: [HammerGesturesDirective]
+    MomentPipe
+  ]
 })
 export class SharedModule { }

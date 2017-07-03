@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 import { Checkout } from '../models/checkout';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
+import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
 import { LogicService } from '../shared/logic.service';
-import { AbstractGeoCoder } from './geocoding.service';
 
 type Aisle = string;
 
@@ -65,7 +65,7 @@ export class StoreComponent implements OnInit {
 
   public selectedStorePlaceId: string | null = null;
 
-  constructor(private logic: LogicService, private geo: AbstractGeoCoder, private router: Router) {
+  constructor(private logic: LogicService, private geo: AbstractGeoService, private router: Router) {
   }
 
   public checkoutReady(): boolean {
@@ -78,10 +78,9 @@ export class StoreComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.geo.getCurrentPosition(
-      (pc) => this.loadWithCurrentCoordinates(pc.coords),
-      (pec) => alert(pec.message),
-    );
+    this.geo.getCurrentPosition()
+      .then((pc) => this.loadWithCurrentCoordinates(pc.coords))
+      .catch((pec) => alert(pec.message));
   }
 
   public togglePicked(pickup: Pickup): void {

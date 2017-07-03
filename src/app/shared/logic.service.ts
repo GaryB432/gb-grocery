@@ -6,6 +6,7 @@ import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
 import { DataService } from '../shared/data.service';
+import { Place } from '../shared/geo/place';
 import { Utilities } from './utilities';
 
 type Aisle = string;
@@ -57,38 +58,24 @@ export class LogicService {
       }));
   }
 
-  public getStoresFromNearbyPlaces(places: google.maps.places.PlaceResult[]): Store[] {
+  public getStoresFromNearbyPlaces(places: Place[]): Store[] {
     const stores: Store[] = places.map((place) => {
-      let store: Store = this.cache.stores.find((s) => s.placeId === place.place_id);
+      let store: Store = this.cache.stores.find((s) => s.placeId === place.placeId);
 
       if (!store) {
         store = new Store(undefined, place.name);
         store.checkouts = [];
       }
 
-      store.formattedAddress = place.formatted_address;
-      store.formattedPhoneNumber = place.formatted_phone_number;
-      store.icon = place.icon;
-      store.location = {
-        accuracy: 0,
-        altitude: 0,
-        altitudeAccuracy: 0,
-        heading: 0,
-        latitude: place.geometry.location.lat(),
-        longitude: place.geometry.location.lng(),
-        speed: 0,
-      };
-      store.name = place.name;
-
-      if (place.photos) {
-        store.photo = place.photos[0].getUrl({ maxHeight: 300, maxWidth: 320 });
-      }
-
-      store.placeId = place.place_id;
-      store.types = place.types;
-      store.url = place.url;
-      store.website = place.website;
-      store.vicinity = place.vicinity;
+      Object.assign(store, place, {
+        location: Object.assign({
+          accuracy: 0,
+          altitude: 0,
+          altitudeAccuracy: 0,
+          heading: 0,
+          speed: 0,
+        }, place.location)
+      });
 
       return store;
     });

@@ -1,7 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';
-import { Place } from './place';
 
 namespace FakeGoogle {
 
@@ -58,7 +57,7 @@ describe('GoogleGeoService', () => {
 
   it('should translate', () => {
 
-    const fakePlace = {
+    const fakePlace: google.maps.places.PlaceResult = {
       address_components: [] as google.maps.GeocoderAddressComponent[],
       aspects: [] as google.maps.places.PlaceAspectRating[],
       formatted_address: 'formatted_address',
@@ -95,7 +94,7 @@ describe('GoogleGeoService', () => {
       website: 'website',
     };
 
-    const expected = Object.assign(new Place(), {
+    const expected = {
       formattedAddress: 'formatted_address',
       formattedPhoneNumber: 'formatted_phone_number',
       icon: 'icon',
@@ -107,7 +106,7 @@ describe('GoogleGeoService', () => {
       url: 'url',
       website: 'website',
       vicinity: 'vicinity'
-    });
+    };
 
     expect(GoogleGeoService.toPlace(fakePlace)).toEqual(expected);
   });

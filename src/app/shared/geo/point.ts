@@ -1,3 +1,4 @@
-export class Point {
-  constructor(public latitude: number, public longitude: number) { }
+export interface Point {
+  latitude: number;
+  longitude: number;
 }
