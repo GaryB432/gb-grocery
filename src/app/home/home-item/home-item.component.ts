@@ -14,9 +14,12 @@ export class HomeItemComponent implements OnInit {
   public recentCheckout: Checkout;
 
   public ngOnInit(): void {
-    this.recentCheckout = this.item
-      .checkouts
-      .reduce((pv, cv) => (!pv || !pv.date || !cv.date || cv.date > pv.date) ? cv : pv);
+
+    this.recentCheckout = this.item.checkouts.length > 0
+      ? this.item
+        .checkouts
+        .reduce((pv, cv) => (!pv || !pv.date || !cv.date || cv.date > pv.date) ? cv : pv)
+      : null;
   }
 
 }
