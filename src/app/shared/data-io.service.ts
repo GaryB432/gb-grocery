@@ -2,32 +2,35 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
+import { environment } from '../../environments/environment';
 import { DataLocalstorageService } from './data-localstorage.service';
+
 import * as Dto from './dto';
 
-const ITEMS_KEY = 'gbg-items';
-const STORES_KEY = 'gbg-stores';
-const CHECKOUTS_KEY = 'gbg-checkouts';
+const ITEMS_KEY = `gbg:items:${environment.firebase.projectId}`;
+const STORES_KEY = `gbg:stores:${environment.firebase.projectId}`;
+const CHECKOUTS_KEY = `gbg:checkouts:${environment.firebase.projectId}`;
 
 @Injectable()
 export class DataIoService {
-  private uid: string;
+  // private uid: string;
+  private user: firebase.UserInfo | null;
 
   private infoRef: firebase.database.Reference;
 
   public get isAuthenticated(): boolean {
-    return !!this.uid;
+    return !!this.user;
   }
 
   constructor(
     afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
+    db: AngularFireDatabase,
     private storage: DataLocalstorageService) {
 
     afAuth.authState.subscribe((user: firebase.User) => {
-      if (user) {
-        this.uid = user.uid;
-        this.infoRef = this.db.database.ref(`/users/${this.uid}/appInfo`);
+      this.user = user;
+      if (!!user) {
+        this.infoRef = db.database.ref(`/users/${user.uid}/appInfo`);
       }
     });
   }
@@ -52,16 +55,19 @@ export class DataIoService {
           .once('value')
           .then((snapshot: { val: () => Dto.AppInfo }) => {
             const dbInfo = snapshot.val();
+            const lsinfo: Dto.AppInfo = {
+              checkouts: this.readCheckouts(),
+              items: this.readItems(),
+              stores: this.readStores(),
+            }
             if (dbInfo) {
               Object.assign(info, dbInfo);
             } else {
-              console.warn('no data');
-              info = {
-                checkouts: this.readCheckouts(),
-                items: this.readItems(),
-                stores: this.readStores(),
-              };
-              this.infoRef.set(info);
+              console.warn(' no cloud data. initializing from local-storage.');
+              Object.assign(info, lsinfo);
+              if (info.items.length > 0) {
+                this.infoRef.set(info);
+              }
             }
             resolve(info);
           });

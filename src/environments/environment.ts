@@ -6,11 +6,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyB0cy6S5x2DJq6ZeQR5t6ELmw8zvFyMaXA',
-    authDomain: 'grocery17-9ca26.firebaseapp.com',
-    databaseURL: 'https://grocery17-9ca26.firebaseio.com',
-    messagingSenderId: '455928817247',
-    projectId: 'grocery17-9ca26',
-    storageBucket: 'grocery17-9ca26.appspot.com',
+    apiKey: 'AIzaSyC15lGGff4ztkFBx2F4fGKyKo7TVUHDpnE',
+    authDomain: 'grocery-dev-3b673.firebaseapp.com',
+    databaseURL: 'https://grocery-dev-3b673.firebaseio.com',
+    messagingSenderId: '812997008154',
+    projectId: 'grocery-dev-3b673',
+    storageBucket: 'grocery-dev-3b673.appspot.com',
   }
 };
+
