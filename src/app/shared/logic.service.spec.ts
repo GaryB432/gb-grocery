@@ -90,7 +90,7 @@ describe('Logic Service', () => {
   it('should load',
     inject([LogicService, DataService], fakeAsync((sut: LogicService, _ds: DataService) => {
       // console.log(ds, 'is not used');
-      let info: AppInfo;
+      let info: AppInfo = { items: [], stores: [], checkouts: [] };
       sut.load().then((response: AppInfo) => {
         info = response;
       });
@@ -378,47 +378,47 @@ describe('More Logic Service', () => {
 
     info.checkouts = [
       {
-        date: undefined,
+        date: new Date(2001, 0, 2, 3, 4, 5, 6),
         pickups: [
-          { item: info.items[0], aisle: '11c', picked: undefined },
-          { item: info.items[2], aisle: '11a', picked: undefined },
+          { item: info.items[0], aisle: '11c', picked: false },
+          { item: info.items[2], aisle: '11a', picked: false },
         ],
         store: ralphs,
       },
       {
-        date: undefined,
+        date: new Date(2001, 0, 2, 4, 4, 5, 6),
         pickups: [
-          { item: info.items[0], aisle: '765n', picked: undefined },
-          { item: info.items[2], aisle: '926m', picked: undefined },
+          { item: info.items[0], aisle: '765n', picked: false },
+          { item: info.items[2], aisle: '926m', picked: false },
         ],
         store: bobs,
       },
       {
-        date: undefined,
+        date: new Date(2001, 0, 3, 3, 4, 5, 6),
         pickups: [
-          { item: info.items[0], aisle: '11b', picked: undefined },
-          { item: info.items[1], aisle: '11b', picked: undefined },
-          { item: info.items[2], aisle: undefined, picked: undefined },
-          { item: info.items[3], aisle: '11b', picked: undefined },
-          { item: info.items[4], aisle: '11a', picked: undefined },
+          { item: info.items[0], aisle: '11b', picked: false },
+          { item: info.items[1], aisle: '11b', picked: false },
+          { item: info.items[2], aisle: '11a', picked: false },
+          { item: info.items[3], aisle: '11b', picked: false },
+          { item: info.items[4], aisle: '11a', picked: false },
         ],
         store: ralphs,
       },
       {
-        date: undefined,
+        date: new Date(2001, 0, 2, 6, 4, 5, 6),
         pickups: [
-          { item: info.items[0], aisle: '65n', picked: undefined },
-          { item: info.items[1], aisle: '26m', picked: undefined },
-          { item: info.items[2], aisle: '26m', picked: undefined },
+          { item: info.items[0], aisle: '65n', picked: false },
+          { item: info.items[1], aisle: '26m', picked: false },
+          { item: info.items[2], aisle: '26m', picked: false },
         ],
         store: bobs,
       },
       {
-        date: undefined,
+        date: new Date(2001, 0, 2, 5, 4, 5, 6),
         pickups: [
-          { item: info.items[0], aisle: '11c', picked: undefined },
-          { item: info.items[0], aisle: '11b', picked: undefined },
-          { item: info.items[2], aisle: '11a', picked: undefined },
+          { item: info.items[0], aisle: '11c', picked: false },
+          { item: info.items[0], aisle: '11b', picked: false },
+          { item: info.items[2], aisle: '11a', picked: false },
         ],
         store: ralphs,
       },
@@ -453,12 +453,12 @@ describe('More Logic Service', () => {
 
     const setup: PickupStarter[] = [
       { name: 'A', aisle: 'B' },
-      { name: 'C', aisle: undefined },
+      { name: 'C', aisle: 'Z' },
       { name: 'G', aisle: 'A' },
       { name: 'B', aisle: 'C' },
-      { name: 'E', aisle: undefined },
+      { name: 'E', aisle: 'Z' },
       { name: 'F', aisle: 'A' },
-      { name: 'D', aisle: undefined },
+      { name: 'D', aisle: 'Z' },
     ];
 
     const pickups: Pickup[] = setup.map((p) => {
@@ -476,7 +476,7 @@ describe('More Logic Service', () => {
 
   it('should predict aisle properly', () => {
 
-    const store: Store = new Store('S', undefined);
+    const store: Store = new Store('S', 'STORE S');
 
     const item: Item = new Item();
     item.id = 'I0';
@@ -492,7 +492,7 @@ describe('More Logic Service', () => {
 
   it('should predict undefined aisle properly', () => {
 
-    const store: Store = new Store('S', undefined);
+    const store: Store = new Store('S', 'STORE S');
 
     const item: Item = new Item();
 

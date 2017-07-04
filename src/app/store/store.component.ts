@@ -141,7 +141,7 @@ export class StoreComponent implements OnInit {
             this.changeStore();
           }
         })
-        .catch(() => {
+        .catch((e) => {
           alert('There was a mapping problem or you seem to not be near a grocery store. '
             + 'The Check Out tab is meant for when you are at the store.');
           this.router.navigateByUrl('/');

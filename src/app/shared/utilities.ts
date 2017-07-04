@@ -55,12 +55,12 @@ export class Utilities {
     const newCheckout: Checkout = new Checkout(store, new Date(dto.isoDate));
 
     newCheckout.pickups = dto.pickups
-      .map((pu) => {
-        const item = context.items.find((i) => i.id === pu.itemId);
+      .map((dpu) => {
+        const item = context.items.find((i) => i.id === dpu.itemId);
         if (!item) {
           throw new Error('no item');
         }
-        return new Pickup(item, pu.aisle);
+        return new Pickup(item, dpu.aisle || 'N/A');
       });
     return newCheckout;
   }

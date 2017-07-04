@@ -33,7 +33,7 @@ export class DataService {
           isoDate: c.date.toISOString(),
           pickups: c.pickups.map((p) => {
             return {
-              aisle: p.aisle || 'N/A',
+              aisle: p.aisle,
               itemId: p.item.id,
             };
           }),

@@ -49,7 +49,7 @@ export class LogicService {
   public getItem(id: string): Promise<Item> {
     return this.loaded.then((info) =>
       new Promise<Item>((resolve, reject): void => {
-        const item: Item = info.items.find((i) => i.id === id);
+        const item = info.items.find((i) => i.id === id);
         if (!!item) {
           resolve(item);
         } else {
@@ -60,13 +60,18 @@ export class LogicService {
 
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
     const stores: Store[] = places.map((place) => {
-      let store: Store = this.cache.stores.find((s) => s.placeId === place.placeId);
+      let store = this.cache.stores.find((s) => s.placeId === place.placeId);
 
       if (!store) {
+        /*
+        this place does not already have an associated store
+        set one up for the dropdown and its id will be applied later
+        */
         store = new Store(undefined, place.name);
         store.checkouts = [];
       }
 
+      // update the store with the fresh place information
       Object.assign(store, place, {
         location: Object.assign({
           accuracy: 0,
@@ -86,8 +91,8 @@ export class LogicService {
   }
 
   public insertCheckout(placeId: string, newStore: Store, pickups: Pickup[]): Promise<Checkout> {
-    let store: Store = this.cache.stores.find((s) => s.placeId === placeId);
-    if (store === void 0) {
+    let store = this.cache.stores.find((s) => s.placeId === placeId);
+    if (!store) {
       // the selected store is not already on file
       // this will have an undefined id
       store = newStore;
@@ -99,7 +104,7 @@ export class LogicService {
     co.pickups = pickups.slice();
     co.pickups.forEach((i) => {
       i.item.needed = false;
-      i.aisle = i.aisle ? i.aisle.toLocaleUpperCase() : undefined;
+      i.aisle = i.aisle.toLocaleUpperCase();
     });
 
     this.cache.checkouts.push(co);
@@ -141,14 +146,18 @@ export class LogicService {
     return this.data.saveAll(this.cache).then((info) => this.cache = info);
   }
 
-  public static predictAisle(item: Item, store: Store): string {
+  public static predictAisle(item: Item, store: Store): string | undefined {
     if (item.checkouts) {
-      const coHere: Checkout = item.checkouts
+      const coHere = item.checkouts
         .slice()
         .sort((a, b) => b.date.getTime() - a.date.getTime())
         .find((co) => co.store.id === store.id);
       if (coHere) {
-        return coHere.pickups.find((pu) => pu.item.id === item.id).aisle;
+        const chp = coHere.pickups.find((pu) => pu.item.id === item.id);
+        if (!chp) {
+          throw new Error('no pickup');
+        }
+        return chp.aisle;
       }
     }
     return undefined;
@@ -205,7 +214,7 @@ export class LogicService {
     // return a.localeCompare(b);
 
     function getParts(aisle: Aisle): AisleParts {
-      const groups: RegExpExecArray = LogicService.aisleRegex.exec(aisle);
+      const groups: RegExpExecArray | null = LogicService.aisleRegex.exec(aisle);
       return groups
         ? { num: parseInt(groups[1], 10), alpha: groups[2] }
         : { num: NaN, alpha: aisle };

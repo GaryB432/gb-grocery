@@ -110,7 +110,7 @@ describe('Data Service', () => {
         Utilities.flatten(info.checkouts
           .map((c) => c.pickups
             .map((p) => p.aisle))))
-        .toEqual([null, 'D10', 'S0-D10']);
+        .toEqual(['N/A', 'D10', 'S0-D10']);
 
       expect(info.checkouts[0].store).toBe(info.stores[1]);
       expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([info.items[1], info.items[0]]);

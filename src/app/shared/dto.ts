@@ -13,7 +13,7 @@ export interface AppInfo {
 
 export interface Pickup {
   itemId: string;
-  aisle: string | undefined;
+  aisle: string;
 }
 
 export interface Checkout {
