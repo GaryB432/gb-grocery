@@ -37,7 +37,7 @@ export class DataService {
               itemId: p.item.id,
             };
           }),
-          storeId: c.store.id,
+          storeId: c.store.id as string,
         };
       }),
       items: info.items.map((i) => {
@@ -49,13 +49,21 @@ export class DataService {
       }),
       stores: info.stores.map((s) => {
         return {
-          id: s.id,
+          id: s.id as string,
           name: s.name,
           place_id: s.placeId,
           vicinity: s.vicinity,
         };
       }),
     };
+
+    for (const c of dto.checkouts) {
+      for (const p of c.pickups) {
+        if (!p.aisle) {
+          delete (p.aisle);
+        }
+      }
+    }
 
     return this.io.saveAll(dto).then(() => info);
   }

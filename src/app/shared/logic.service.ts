@@ -104,7 +104,7 @@ export class LogicService {
     co.pickups = pickups.slice();
     co.pickups.forEach((i) => {
       i.item.needed = false;
-      i.aisle = i.aisle.toLocaleUpperCase();
+      i.aisle = i.aisle ? i.aisle.toLocaleUpperCase() : undefined;
     });
 
     this.cache.checkouts.push(co);

@@ -40,7 +40,11 @@ describe('Pickup Component', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({ imports: [FormsModule], declarations: [StorePickupComponent] });
     TestBed.overrideComponent(StorePickupComponent, { set: { template: '<div>hi</div>' } });
-    info = null;
+    info = {
+      checkouts: [],
+      items: [],
+      stores: [],
+    };
   });
 
   xit('should load generated stuff', () => {
@@ -99,7 +103,7 @@ describe('Pickup Component', () => {
           c.pickups.push({
             item: i,
             aisle: a,
-            picked: undefined,
+            picked: false,
           });
         }
       }

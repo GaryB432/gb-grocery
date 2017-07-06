@@ -40,6 +40,13 @@ describe('HomeItemComponent', () => {
   });
 
   it('should get recent checkout', () => {
-    expect(component.recentCheckout.store.id).toBe('S0');
+    expect(component.recentCheckout).not.toBeNull();
+    const rco = component.recentCheckout;
+    if (rco) {
+      expect(rco.store.id).toBe('S0');
+    }
+    else {
+      fail('recent checkout is null');
+    }
   });
 });

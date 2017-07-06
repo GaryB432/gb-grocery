@@ -60,7 +60,7 @@ export class Utilities {
         if (!item) {
           throw new Error('no item');
         }
-        return new Pickup(item, dpu.aisle || 'N/A');
+        return new Pickup(item, dpu.aisle);
       });
     return newCheckout;
   }

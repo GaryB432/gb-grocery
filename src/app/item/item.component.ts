@@ -47,7 +47,11 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   public getItemPickup(checkout: Checkout): Pickup {
-    return checkout.pickups.find((c) => c.item.id === this.item.id);
+    const pu = checkout.pickups.find((c) => c.item.id === this.item.id);
+    if (!pu) {
+      throw new Error('no pickup');
+    }
+    return pu;
   }
 
   public deleteItem(item: Item): void {

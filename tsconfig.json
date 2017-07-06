@@ -13,7 +13,7 @@
     // "noStrictGenericChecks": false,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "strict": false,
+    "strict": true,
     "target": "es5",
     "typeRoots": [
       "node_modules/@types"

@@ -11,7 +11,7 @@ import { Item } from '../../models/item';
 export class HomeItemComponent implements OnInit {
 
   @Input() public item: Item;
-  public recentCheckout: Checkout;
+  public recentCheckout: Checkout | null;
 
   public ngOnInit(): void {
 

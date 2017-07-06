@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.toastr.info('Swipe right on needed items.', null, { toastLife: 5000 });
+    this.toastr.info('Swipe right on needed items.', undefined, { toastLife: 5000 });
   }
 
   public getState(item: Item): string {
