@@ -1,9 +1,9 @@
-<h1>{{pickup.item.name | uppercase}}</h1>
+<h1>{{ pickup.item.name | uppercase }}</h1>
 <div class="addl">
   <input type="text" placeholder="Aisle" [(ngModel)]="pickup.aisle" [disabled]="!pickup.picked" />
   <section>
     <button *ngFor="let a of aisles" (click)="setAisle(a)" [disabled]="!pickup.picked">
-        {{a}}
+        {{ a }}
         </button>
   </section>
 </div>

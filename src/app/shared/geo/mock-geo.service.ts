@@ -83,7 +83,7 @@ export class MockGeoService extends AbstractGeoService {
           200);
       });
   }
-  
+
   public async getCurrentPosition(options?: PositionOptions): Promise<Position> {
     const hhCoords: Coordinates = {
       accuracy: 0,

@@ -79,7 +79,8 @@ export class LogicService {
           altitudeAccuracy: 0,
           heading: 0,
           speed: 0,
-        }, place.location)
+        },
+          place.location),
       });
 
       return store;

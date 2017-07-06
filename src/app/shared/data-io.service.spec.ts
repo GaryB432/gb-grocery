@@ -7,55 +7,21 @@ import { DataIoService } from './data-io.service';
 import { DataLocalstorageService } from './data-localstorage.service';
 import * as Dto from './dto';
 
-// interface Reference extends firebase.database.Query {
-//   child(path: string): firebase.database.Reference;
-//   key: string | null;
-//   onDisconnect(): firebase.database.OnDisconnect;
-//   parent: firebase.database.Reference | null;
-//   push(value?: any, onComplete?: (a: Error | null) => any): firebase.database.ThenableReference;
-//   remove(onComplete?: (a: Error | null) => any): firebase.Promise<any>;
-//   root: firebase.database.Reference;
-//   set(value: any, onComplete?: (a: Error | null) => any): firebase.Promise<any>;
-//   setPriority(priority: string | number | null, onComplete: (a: Error | null) => any): firebase.Promise<any>;
-//   setWithPriority(newVal: any, newPriority: string | number | null, onComplete?: (a: Error | null) => any): firebase.Promise<any>;
-//   transaction(transactionUpdate: (a: any) => any, onComplete?: (a: Error | null, b: boolean, c: firebase.database.DataSnapshot | null) => any, applyLocally?: boolean): firebase.Promise<any>;
-//   update(values: Object, onComplete?: (a: Error | null) => any): firebase.Promise<any>;
-// }
-
-// interface Query {
-//   endAt (value : number | string | boolean | null , key ? : string ) : firebase.database.Query ;
-//   equalTo (value : number | string | boolean | null , key ? : string ) : firebase.database.Query ;
-//   isEqual (other : firebase.database.Query | null ) : boolean ;
-//   limitToFirst (limit : number ) : firebase.database.Query ;
-//   limitToLast (limit : number ) : firebase.database.Query ;
-//   off (eventType ? : string , callback ? : (a : firebase.database.DataSnapshot , b ? : string | null ) => any , context ? : Object | null ) : any ;
-//   on (eventType : string , callback : (a : firebase.database.DataSnapshot | null , b ? : string ) => any , cancelCallbackOrContext ? : Object | null , context ? : Object | null ) : (a : firebase.database.DataSnapshot | null , b ? : string ) => any ;
-//   once (eventType : string , successCallback ? : (a : firebase.database.DataSnapshot , b ? : string ) => any , failureCallbackOrContext ? : Object | null , context ? : Object | null ) : firebase.Promise < any > ;
-//   orderByChild (path : string ) : firebase.database.Query ;
-//   orderByKey ( ) : firebase.database.Query ;
-//   orderByPriority ( ) : firebase.database.Query ;
-//   orderByValue ( ) : firebase.database.Query ;
-//   ref : firebase.database.Reference ;
-//   startAt (value : number | string | boolean | null , key ? : string ) : firebase.database.Query ;
-//   toJSON ( ) : Object ;
-//   toString ( ) : string ;
-// }
-
 class MockReference {
   constructor(public db: MockDb) { }
 
-  set(value: any, onComplete?: (a: Error | null) => any): Promise<any> {
+  public set(value: any, onComplete?: (a: Error | null) => any): Promise<any> {
     if (!value) {
-      throw new Error("Do not save undefined. KThx");
+      throw new Error('Do not save undefined. KThx');
     }
     this.db.data = value;
     this.db.callCount++;
     return Promise.resolve(value);
   }
 
-  once(eventType: string) {
+  public once(eventType: string) {
     return Promise.resolve({
-      val: () => this.db.data
+      val: () => this.db.data,
     });
   }
 }
@@ -70,7 +36,7 @@ class MockDb implements MockDatabase {
   public path?: string;
   public data: any;
   public callCount: number;
-  ref(path?: string): MockReference {
+  public ref(path?: string): MockReference {
     this.path = path;
     this.callCount = 0;
     this.data = undefined;
@@ -83,6 +49,18 @@ class MockAngularFireDatabase {
 }
 
 const someAppInfo: Dto.AppInfo = {
+  checkouts: [
+    {
+      isoDate: '2016-04-03T04:45:38.582Z',
+      pickups: [{ itemId: 'I1', aisle: 'K9' }, { itemId: 'I0', aisle: 'D10' }],
+      storeId: 'S1',
+    },
+    {
+      isoDate: '2016-04-03T05:35:18.334Z',
+      pickups: [{ itemId: 'I0', aisle: 'D10' }],
+      storeId: 'S0',
+    },
+  ],
   items: [
     {
       id: 'I0',
@@ -100,18 +78,6 @@ const someAppInfo: Dto.AppInfo = {
       needed: false,
     },
   ],
-  checkouts: [
-    {
-      isoDate: '2016-04-03T04:45:38.582Z',
-      pickups: [{ itemId: 'I1', aisle: 'K9' }, { itemId: 'I0', aisle: 'D10' }],
-      storeId: 'S1',
-    },
-    {
-      isoDate: '2016-04-03T05:35:18.334Z',
-      pickups: [{ itemId: 'I0', aisle: 'D10' }],
-      storeId: 'S0',
-    },
-  ],
   stores: [
     {
       id: 'S0',
@@ -127,12 +93,11 @@ const someAppInfo: Dto.AppInfo = {
       vicinity: '14345 Manchester Road, Ballwin',
     },
   ],
-}
+};
 
 class MockLocalStorage {
   private data: { [key: string]: string | undefined; } = {};
-  constructor() {
-  }
+
   public setup(info: Dto.AppInfo): void {
     this.data['gbg:items:grocery-dev-3b673'] = JSON.stringify(info.items);
     this.data['gbg:stores:grocery-dev-3b673'] = JSON.stringify(info.stores);
@@ -168,8 +133,8 @@ describe('Data IO Service', () => {
                 ? util.buildFailureMessage('to be set with', false, actual, expected)
                 : `${actual.path} was not set`;
               return { pass, message };
-            }
-          }
+            },
+          };
         },
         toHaveBeenCalled(util, customEqualityTesters): jasmine.CustomMatcher {
           return {
@@ -177,8 +142,8 @@ describe('Data IO Service', () => {
               const pass = actual.callCount > 0;
               const message = util.buildFailureMessage('to have been called', false, actual.path);
               return { pass, message };
-            }
-          }
+            },
+          };
         },
       });
 
@@ -190,8 +155,8 @@ describe('Data IO Service', () => {
               authState: new Observable<Partial<firebase.User>>((sub) => {
                 sub.next({ displayName: 'FUN TESTER', uid: 'uid-fun' });
                 sub.complete();
-              })
-            }
+              }),
+            },
           },
           { provide: AngularFireDatabase, useClass: MockAngularFireDatabase },
           DataIoService,
@@ -203,7 +168,7 @@ describe('Data IO Service', () => {
       inject([
         DataIoService,
         DataLocalstorageService,
-        AngularFireDatabase
+        AngularFireDatabase,
       ], (sut: DataIoService, ls: MockLocalStorage, db: MockAngularFireDatabase) => {
         const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
 
@@ -225,19 +190,18 @@ describe('Data IO Service', () => {
         });
       })));
 
-
     it('should load some cloud data', async(
       inject([
         DataIoService,
         DataLocalstorageService,
-        AngularFireDatabase
+        AngularFireDatabase,
       ], (sut: DataIoService, ls: MockLocalStorage, db: MockAngularFireDatabase) => {
         const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
 
         ls.setup({
+          checkouts: [],
           items: [],
           stores: [],
-          checkouts: []
         });
 
         db.database.data = Object.assign({}, someAppInfo);
@@ -257,26 +221,31 @@ describe('Data IO Service', () => {
         });
       })));
 
-    it('should save all', async(inject([DataIoService, DataLocalstorageService], (sut: DataIoService, ls: MockLocalStorage) => {
-      const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
-      const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
-      /* tslint:disable:max-line-length quotemark */
+    it('should save all',
+      async(inject([
+        DataIoService,
+        DataLocalstorageService,
+      ],
+        (sut: DataIoService, ls: MockLocalStorage) => {
+          const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
+          const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
+          /* tslint:disable:max-line-length quotemark */
 
-      return sut.saveAll(someAppInfo).then((info: Dto.AppInfo) => {
-        expect(info).toBeDefined();
-        expect(setItem.calls.allArgs()).toEqual([
-          ['gbg:stores:grocery-dev-3b673', '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]'],
-          ['gbg:items:grocery-dev-3b673', '[{"id":"I0","name":"asdf","needed":false},{"id":"I1","name":"zebra","needed":true},{"id":"I2","name":"another","needed":false}]'],
-          ['gbg:checkouts:grocery-dev-3b673', '[{"isoDate":"2016-04-03T04:45:38.582Z","pickups":[{"itemId":"I1","aisle":"K9"},{"itemId":"I0","aisle":"D10"}],"storeId":"S1"},{"isoDate":"2016-04-03T05:35:18.334Z","pickups":[{"itemId":"I0","aisle":"D10"}],"storeId":"S0"}]'],
-        ]);
-        expect(getItem).not.toHaveBeenCalled();
+          return sut.saveAll(someAppInfo).then((info: Dto.AppInfo) => {
+            expect(info).toBeDefined();
+            expect(setItem.calls.allArgs()).toEqual([
+              ['gbg:stores:grocery-dev-3b673', '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]'],
+              ['gbg:items:grocery-dev-3b673', '[{"id":"I0","name":"asdf","needed":false},{"id":"I1","name":"zebra","needed":true},{"id":"I2","name":"another","needed":false}]'],
+              ['gbg:checkouts:grocery-dev-3b673', '[{"isoDate":"2016-04-03T04:45:38.582Z","pickups":[{"itemId":"I1","aisle":"K9"},{"itemId":"I0","aisle":"D10"}],"storeId":"S1"},{"isoDate":"2016-04-03T05:35:18.334Z","pickups":[{"itemId":"I0","aisle":"D10"}],"storeId":"S0"}]'],
+            ]);
+            expect(getItem).not.toHaveBeenCalled();
 
-        expect(info.checkouts.length).toBe(2);
-        expect(info.items.length).toBe(3);
-        expect(info.stores.length).toBe(2);
-      });
-      /* tslint:enable:max-line-length quotemark */
-    })));
+            expect(info.checkouts.length).toBe(2);
+            expect(info.items.length).toBe(3);
+            expect(info.stores.length).toBe(2);
+          });
+          /* tslint:enable:max-line-length quotemark */
+        })));
 
   });
 
@@ -290,19 +259,23 @@ describe('Data IO Service', () => {
               authState: new Observable<Partial<firebase.User> | null>((sub) => {
                 sub.next(null);
                 sub.complete();
-              })
-            }
+              }),
+            },
           },
           { provide: AngularFireDatabase, useClass: MockAngularFireDatabase },
           DataIoService,
         ],
       });
     });
-    it('should not load', async(inject([DataIoService, DataLocalstorageService], (sut: DataIoService, ls: MockLocalStorage) => {
-      return sut.load()
-        .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
-        .catch((msg) => expect(msg).toBe('unauthenticated'));
-    })));
+    it('should not load',
+      async(inject([
+        DataIoService,
+        DataLocalstorageService,
+      ], (sut: DataIoService, ls: MockLocalStorage) => {
+        return sut.load()
+          .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
+          .catch((msg) => expect(msg).toBe('unauthenticated'));
+      })));
 
   });
 

@@ -12,8 +12,8 @@ describe('HomeItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [HomeItemComponent],
       imports: [SharedModule],
-      declarations: [HomeItemComponent]
     });
     TestBed.overrideComponent(HomeItemComponent, { set: { template: '<div>hi</div>' } });
     TestBed.compileComponents();
@@ -44,8 +44,7 @@ describe('HomeItemComponent', () => {
     const rco = component.recentCheckout;
     if (rco) {
       expect(rco.store.id).toBe('S0');
-    }
-    else {
+    } else {
       fail('recent checkout is null');
     }
   });

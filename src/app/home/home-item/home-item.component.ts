@@ -5,8 +5,8 @@ import { Item } from '../../models/item';
 
 @Component({
   selector: 'gbg-home-item',
+  styleUrls: ['./home-item.component.scss'],
   templateUrl: './home-item.component.html',
-  styleUrls: ['./home-item.component.scss']
 })
 export class HomeItemComponent implements OnInit {
 

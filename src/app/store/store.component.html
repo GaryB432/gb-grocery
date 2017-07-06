@@ -1,12 +1,12 @@
 <section [ngSwitch]="!!selectedStore">
   <section *ngSwitchCase="true">
     <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
-      <option *ngFor="let store of nbStores" [value]="store.placeId">{{store.name}}</option>
+      <option *ngFor="let store of nbStores" [value]="store.placeId">{{ store.name }}</option>
     </select>
     <section class="store-info">
       <section>
         <img [src]="selectedStore.icon" />
-        <div class="vicinity">{{selectedStore.vicinity}}</div>
+        <div class="vicinity">{{ selectedStore.vicinity }}</div>
       </section>
       <img *ngIf="selectedStore.photo" [src]="selectedStore.photo" />
     </section>

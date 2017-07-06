@@ -64,8 +64,8 @@ export class GoogleGeoService extends AbstractGeoService {
       placeId: pr.place_id,
       types: pr.types,
       url: pr.url,
-      website: pr.website,
       vicinity: pr.vicinity,
+      website: pr.website,
     };
 
     if (pr.photos && pr.photos.length > 0 && typeof pr.photos[0].getUrl === 'function') {

@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { AboutComponent } from './about.component';
 
 @NgModule({
+  declarations: [AboutComponent],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
-  declarations: [AboutComponent]
 })
 export class AboutModule { }

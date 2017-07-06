@@ -5,7 +5,7 @@ import { MockGeoService } from './mock-geo.service';
 describe('MockGeoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MockGeoService]
+      providers: [MockGeoService],
     });
   });
 

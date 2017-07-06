@@ -1,5 +1,4 @@
 export const environment = {
-  production: true,
   firebase: {
     apiKey: 'AIzaSyB0cy6S5x2DJq6ZeQR5t6ELmw8zvFyMaXA',
     authDomain: 'grocery17-9ca26.firebaseapp.com',
@@ -7,5 +6,6 @@ export const environment = {
     messagingSenderId: '455928817247',
     projectId: 'grocery17-9ca26',
     storageBucket: 'grocery17-9ca26.appspot.com',
-  }
+  },
+  production: true,
 };

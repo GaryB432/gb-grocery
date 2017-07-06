@@ -93,9 +93,9 @@ describe('Data Service', () => {
   it('should load',
     inject([DataService, DataIoService], fakeAsync((sut: DataService) => {
       const info: AppInfo = {
-        items: [],
         checkouts: [],
-        stores: []
+        items: [],
+        stores: [],
       };
       sut.load().then((response: AppInfo) => {
         Object.assign(info, response);

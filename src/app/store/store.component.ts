@@ -30,7 +30,7 @@ type Aisle = string;
         transform: 'scale(0)',
       })),
       transition('notpicked => picked, picked => notpicked',
-        animate(300)
+        animate(300),
       ),
     ]),
     trigger('cbhState', [
@@ -45,7 +45,7 @@ type Aisle = string;
           style({ transform: 'scale(1)', offset: 0 }),
           style({ transform: 'scale(0.8)', offset: 0.3 }),
           style({ transform: 'scale(1)', offset: 1 }),
-        ]))
+        ])),
       ]),
     ])],
   selector: 'gbg-store',

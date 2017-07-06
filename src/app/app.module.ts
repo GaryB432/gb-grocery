@@ -17,8 +17,9 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from './store/store.module';
 
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -32,11 +33,10 @@ import { StoreModule } from './store/store.module';
     SharedModule,
     StoreModule,
     ItemModule,
-    LoginModule
+    LoginModule,
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule { }

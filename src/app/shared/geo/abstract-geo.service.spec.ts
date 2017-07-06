@@ -5,7 +5,7 @@ import { AbstractGeoService } from './abstract-geo.service';
 describe('AbstractGeoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AbstractGeoService]
+      providers: [AbstractGeoService],
     });
   });
 

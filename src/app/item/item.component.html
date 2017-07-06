@@ -1,5 +1,5 @@
 <div *ngIf="item">
-  <h1 [ngClass]="{ needed: item.needed, item: true }">{{item.name | uppercase}}
+  <h1 [ngClass]="{ needed: item.needed, item: true }">{{ item.name | uppercase }}
     <!--
     <gbg-trashcan-icon (click)="deleteItem(item)"></gbg-trashcan-icon>
     -->
@@ -16,10 +16,10 @@
       <img [src]="co.store.icon" alt="store icon" />
     </div>
     <div class="detail">
-      <p class="store">{{co.store.name}}</p>
-      <p class="vicinity">{{co.store.vicinity}}</p>
-      <p class="aisle">{{getItemPickup(co).aisle}}</p>
-      <p class="date">{{co.date | gbgMoment}}</p>
+      <p class="store">{{ co.store.name }}</p>
+      <p class="vicinity">{{ co.store.vicinity }}</p>
+      <p class="aisle">{{ getItemPickup(co).aisle }}</p>
+      <p class="date">{{ co.date | gbgMoment }}</p>
     </div>
   </div>
 </div>

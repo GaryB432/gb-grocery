@@ -21,7 +21,11 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   private sub: Subscription;
 
-  constructor(afAuth: AngularFireAuth, private logic: LogicService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    afAuth: AngularFireAuth,
+    private logic: LogicService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   public ngOnInit(): void {

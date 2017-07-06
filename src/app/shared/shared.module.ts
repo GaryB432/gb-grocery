@@ -12,9 +12,17 @@ import { MomentPipe } from './moment.pipe';
 import { CustomToastOptions } from './toast-options';
 
 @NgModule({
+  declarations: [
+    HammerGesturesDirective,
+    MomentPipe,
+  ],
+  exports: [
+    MomentPipe,
+    HammerGesturesDirective,
+  ],
   imports: [
     CommonModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
   ],
   providers: [
     { provide: ToastOptions, useClass: CustomToastOptions },
@@ -22,15 +30,7 @@ import { CustomToastOptions } from './toast-options';
     DataService,
     DataIoService,
     DataLocalstorageService,
-    LogicService
+    LogicService,
   ],
-  exports: [
-    MomentPipe,
-    HammerGesturesDirective
-  ],
-  declarations: [
-    HammerGesturesDirective,
-    MomentPipe
-  ]
 })
 export class SharedModule { }

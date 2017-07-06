@@ -12,9 +12,9 @@ import { StoreComponent } from './store.component';
 class MockDataService {
   public load(): Promise<AppInfo> {
     const info: AppInfo = {
+      checkouts: [],
       items: [],
       stores: [],
-      checkouts: []
     };
     return Promise.resolve(info);
   }
@@ -31,11 +31,11 @@ describe('StoreComponent', () => {
         template: '<h1>Overridden template something here</h1>',
       },
     }).configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
       declarations: [
-        StoreComponent
+        StoreComponent,
+      ],
+      imports: [
+        RouterTestingModule,
       ],
       providers: [
         { provide: LogicService, useClass: LogicService },

@@ -1,8 +1,8 @@
-<h1>{{item.name | uppercase}}</h1>
+<h1>{{ item.name | uppercase }}</h1>
 <div class="recent">
   <p class="store" *ngIf="!recentCheckout">No checkouts yet</p>
-  <p class="store">{{recentCheckout?.store?.name}}</p>
+  <p class="store">{{ recentCheckout?.store?.name }}</p>
   <!-- https://github.com/angular/angular/issues/3333
         <p class="date">{{recentCheckout?.date | date:'yMMMdjm'}}</p>-->
-  <p class="date">{{recentCheckout?.date | gbgMoment}}</p>
+  <p class="date">{{ recentCheckout?.date | gbgMoment }}</p>
 </div>

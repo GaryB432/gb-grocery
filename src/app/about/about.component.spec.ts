@@ -81,16 +81,16 @@ describe('About Component', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      declarations: [AboutComponent],
       imports: [
         FormsModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
-      declarations: [AboutComponent],
       providers: [
         { provide: AngularFireAuth, useClass: AngularFireAuthMock },
         { provide: DataIoService, useClass: MockDataIoService },
         { provide: Router, useClass: MockRouter },
-      ]
+      ],
     })
       .compileComponents();
   }));

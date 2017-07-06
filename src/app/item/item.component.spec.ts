@@ -15,9 +15,9 @@ import { ItemComponent } from './item.component';
 
 class MockLogicService {
   private appInfo: AppInfo = {
+    checkouts: [],
     items: [],
     stores: [],
-    checkouts: []
   };
 
   public load(): Promise<AppInfo> {
@@ -44,7 +44,7 @@ class AngularFireAuthMock {
 }
 
 @Component({
-  template: ''
+  template: '',
 })
 class DummyComponent {
 }
@@ -59,17 +59,17 @@ describe('ItemComponent', () => {
       },
     });
     TestBed.configureTestingModule({
-      imports: [CommonModule, FormsModule, RouterTestingModule.withRoutes([
-        { path: 'home', component: DummyComponent }
-      ])],
       declarations: [ItemComponent, DummyComponent],
+      imports: [CommonModule, FormsModule, RouterTestingModule.withRoutes([
+        { path: 'home', component: DummyComponent },
+      ])],
       providers: [
         { provide: LogicService, useClass: MockLogicService },
         { provide: AngularFireAuth, useClass: AngularFireAuthMock },
         // { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
         // { provide: DataService, useClass: MockDataService },
         // { provide: Router, useClass: MockRouter },
-      ]
+      ],
     })
       .compileComponents();
   }));

@@ -46,10 +46,10 @@ export class DataIoService {
     return new Promise<Dto.AppInfo>((resolve, reject) => {
 
       if (this.isAuthenticated) {
-        let info: Dto.AppInfo = {
-          items: [],
+        const info: Dto.AppInfo = {
           checkouts: [],
-          stores: []
+          items: [],
+          stores: [],
         };
         this.infoRef
           .once('value')
@@ -59,7 +59,7 @@ export class DataIoService {
               checkouts: this.readCheckouts(),
               items: this.readItems(),
               stores: this.readStores(),
-            }
+            };
             if (dbInfo) {
               Object.assign(info, dbInfo);
             } else {
