@@ -98,7 +98,12 @@ export class LogicService {
 
   }
 
-  public insertCheckout(placeId: string, newStore: Store, pickups: Pickup[]): Promise<Checkout> {
+  public insertCheckout(
+    placeId: string,
+    newStore: Store,
+    distance: number,
+    pickups: Pickup[]): Promise<Checkout> {
+
     let store = this.cache.stores.find((s) => s.placeId === placeId);
     if (!store) {
       // the selected store is not already on file
@@ -109,6 +114,7 @@ export class LogicService {
     }
 
     const co: Checkout = new Checkout(store, new Date());
+    co.distance = distance;
     co.pickups = pickups.slice();
     co.pickups.forEach((i) => {
       i.item.needed = false;

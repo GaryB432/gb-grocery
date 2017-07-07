@@ -30,6 +30,7 @@ export class DataService {
     const dto: Dto.AppInfo = {
       checkouts: info.checkouts.map((c) => {
         return {
+          distance: c.distance || -1,
           isoDate: c.date.toISOString(),
           pickups: c.pickups.map((p) => {
             return {

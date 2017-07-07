@@ -1,14 +1,14 @@
 <section [ngSwitch]="!!selectedStore">
   <section *ngSwitchCase="true">
     <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
-      <option *ngFor="let store of nbStores" [value]="store.placeId">{{ store.name }}</option>
+      <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">{{ nbs.store.name }}</option>
     </select>
     <section class="store-info">
       <section>
-        <img [src]="selectedStore.icon" />
-        <div class="vicinity">{{ selectedStore.vicinity }}</div>
+        <img [src]="selectedStore.store.icon" />
+        <div class="vicinity">{{ selectedStore.store.vicinity }}</div>
       </section>
-      <img *ngIf="selectedStore.photo" [src]="selectedStore.photo" />
+      <img *ngIf="selectedStore.store.photo" [src]="selectedStore.store.photo" />
     </section>
     <img src="assets/img/powered_by_google_on_white.png" alt="powered by Google" />
   </section>
@@ -29,4 +29,5 @@
 <section class="check-out">
   <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
 </section>
+<div class="distance">{{ selectedStore?.distance | number : '1.2-3' }}</div>
 <div id="map"></div>

@@ -219,6 +219,7 @@ describe('More Logic Service', () => {
     info.checkouts = [
       {
         date: new Date(2001, 0, 2, 3, 4, 5, 6),
+        distance: 0,
         pickups: [
           { item: info.items[0], aisle: '11c', picked: false },
           { item: info.items[2], aisle: '11a', picked: false },
@@ -227,6 +228,7 @@ describe('More Logic Service', () => {
       },
       {
         date: new Date(2001, 0, 2, 4, 4, 5, 6),
+        distance: 0,
         pickups: [
           { item: info.items[0], aisle: '765n', picked: false },
           { item: info.items[2], aisle: '926m', picked: false },
@@ -235,6 +237,7 @@ describe('More Logic Service', () => {
       },
       {
         date: new Date(2001, 0, 3, 3, 4, 5, 6),
+        distance: 0,
         pickups: [
           { item: info.items[0], aisle: '11b', picked: false },
           { item: info.items[1], aisle: '11b', picked: false },
@@ -246,6 +249,7 @@ describe('More Logic Service', () => {
       },
       {
         date: new Date(2001, 0, 2, 6, 4, 5, 6),
+        distance: 0,
         pickups: [
           { item: info.items[0], aisle: '65n', picked: false },
           { item: info.items[1], aisle: '26m', picked: false },
@@ -255,6 +259,7 @@ describe('More Logic Service', () => {
       },
       {
         date: new Date(2001, 0, 2, 5, 4, 5, 6),
+        distance: 0,
         pickups: [
           { item: info.items[0], aisle: '11c', picked: false },
           { item: info.items[0], aisle: '11b', picked: false },

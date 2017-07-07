@@ -19,6 +19,10 @@ import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
 import { LogicService } from '../shared/logic.service';
 
 type Aisle = string;
+interface StoreDistance {
+  store: Store;
+  distance: number;
+}
 
 @Component({
   animations: [
@@ -59,7 +63,7 @@ export class StoreComponent implements OnInit {
 
   public stores: Store[] = [];
 
-  public nbStores: Store[] = [];
+  public nbStores: StoreDistance[] = [];
 
   public newName = '';
 
@@ -73,8 +77,8 @@ export class StoreComponent implements OnInit {
       && this.neededThings.filter((i) => i.picked).length > 0;
   }
 
-  public get selectedStore(): Store | undefined {
-    return this.nbStores.find((s) => s.placeId === this.selectedStorePlaceId);
+  public get selectedStore(): StoreDistance | undefined {
+    return this.nbStores.find((s) => s.store.placeId === this.selectedStorePlaceId);
   }
 
   public ngOnInit(): void {
@@ -88,21 +92,22 @@ export class StoreComponent implements OnInit {
   }
 
   public changeStore(): void {
-    const newStore = this.selectedStore;
-    if (!newStore) { throw new Error('changing to null store'); }
+    const nbs = this.selectedStore;
+    if (!nbs) { throw new Error('changing to null store'); }
     this.neededThings.forEach((t) => {
       t.picked = false;
-      t.aisle = LogicService.predictAisle(t.item, newStore);
+      t.aisle = LogicService.predictAisle(t.item, nbs.store);
     });
     this.neededThings = LogicService.sortPickups(this.neededThings.slice());
-    this.aisles = LogicService.getStoreAisles(newStore);
+    this.aisles = LogicService.getStoreAisles(nbs.store);
   }
 
   public addCheckout(): void {
     if (this.selectedStorePlaceId && this.selectedStore) {
       this.logic.insertCheckout(
         this.selectedStorePlaceId,
-        this.selectedStore,
+        this.selectedStore.store,
+        this.selectedStore.distance,
         this.neededThings
           .filter((i) => i.picked))
         .then((co: Checkout) => {
@@ -127,17 +132,16 @@ export class StoreComponent implements OnInit {
       this.geo.nearbyStoreSearch(coords)
         .then((nearbyPlaces) => {
           this.nbStores = this.logic.getStoresFromNearbyPlaces(nearbyPlaces)
-            .map((store) => {
+            .map<StoreDistance>((store) => {
               return {
                 distance: this.geo.computeDistanceBetween(coords, store.location),
                 store,
               };
             })
-            .sort((a, b) => a.distance - b.distance)
-            .map((ds) => ds.store);
+            .sort((a, b) => a.distance - b.distance);
 
           if (this.nbStores.length > 0) {
-            this.selectedStorePlaceId = this.nbStores[0].placeId;
+            this.selectedStorePlaceId = this.nbStores[0].store.placeId;
             this.changeStore();
           }
         })

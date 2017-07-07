@@ -18,6 +18,7 @@ export interface Pickup {
 
 export interface Checkout {
   isoDate: string;
+  distance?: number;
   storeId: string;
   pickups: Pickup[];
 }
