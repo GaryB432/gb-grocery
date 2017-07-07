@@ -60,6 +60,11 @@ export class LogicService {
 
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
     const stores: Store[] = places.map((place) => {
+
+      if (!place.placeId) {
+        throw new Error('no placeId');
+      }
+
       let store = this.cache.stores.find((s) => s.placeId === place.placeId);
 
       if (!store) {
@@ -72,7 +77,9 @@ export class LogicService {
       }
 
       // update the store with the fresh place information
+      /* tslint:disable-next-line:prefer-object-spread */
       Object.assign(store, place, {
+        /* tslint:disable-next-line:prefer-object-spread */
         location: Object.assign({
           accuracy: 0,
           altitude: 0,

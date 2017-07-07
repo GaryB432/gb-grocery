@@ -2,6 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';
 
+/* tslint:disable-next-line:no-namespace */
 namespace FakeGoogle {
 
   interface LatLngLiteral {
@@ -27,7 +28,7 @@ namespace FakeGoogle {
 
   export class LatLngBounds {
     private templl = new LatLng(0, 0);
-    constructor(sw?: LatLng | LatLngLiteral, ne?: LatLng | LatLngLiteral) { }
+    constructor(public sw?: LatLng | LatLngLiteral, public ne?: LatLng | LatLngLiteral) { }
     public contains(latLng: LatLng | LatLngLiteral): boolean { return false; }
     public equals(other: LatLngBounds | LatLngBoundsLiteral): boolean { return false; }
     public extend(point: LatLng | LatLngLiteral): LatLngBounds { return new LatLngBounds(); }

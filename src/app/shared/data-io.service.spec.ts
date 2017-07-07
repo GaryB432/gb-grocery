@@ -172,7 +172,7 @@ describe('Data IO Service', () => {
       ], (sut: DataIoService, ls: MockLocalStorage, db: MockAngularFireDatabase) => {
         const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
 
-        ls.setup(Object.assign({}, someAppInfo, { items: [] }));
+        ls.setup({ ...someAppInfo, items: [] });
         db.database.data = undefined;
 
         expect(db.database.data).toBeUndefined();
@@ -204,7 +204,7 @@ describe('Data IO Service', () => {
           stores: [],
         });
 
-        db.database.data = Object.assign({}, someAppInfo);
+        db.database.data = { ...someAppInfo };
 
         expect(db.database.data).toBeDefined();
 

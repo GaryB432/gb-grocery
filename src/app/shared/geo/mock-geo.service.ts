@@ -33,7 +33,7 @@ export class MockGeoService extends AbstractGeoService {
         formattedAddress: `formatted_address ${n}`,
         formattedPhoneNumber: `formatted_phone_number ${n}`,
         icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
-        location: Object.assign({}, spot),
+        location: { ...spot },
         name: `${ks.name} S${n}`,
         photo: 'assets/img/personal.png',
         placeId: ks.place_id,

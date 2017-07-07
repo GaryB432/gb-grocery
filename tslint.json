@@ -23,6 +23,11 @@
         "order": "instance-sandwich"
       }
     ],
+    "no-console": [
+      true,
+      "log",
+      "error"
+    ],
     "variable-name": [
       true,
       "ban-keywords",

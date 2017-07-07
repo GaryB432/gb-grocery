@@ -86,10 +86,10 @@ export class HomeComponent implements OnInit {
   }
 
   private getUserItems(): void {
-    console.log(this.uid);
-    this.logic.load().then((updatedData) => {
+    // console.log(this.uid);
+    this.logic.load().then((info) => {
       this.newName = '';
-      return this.items = updatedData.items
+      return this.items = info.items
         .slice()
         .sort((a, b) => a.name.localeCompare(b.name));
     });
