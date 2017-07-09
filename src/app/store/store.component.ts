@@ -108,8 +108,7 @@ export class StoreComponent implements OnInit {
         this.selectedStorePlaceId,
         this.selectedStore.store,
         this.selectedStore.distance,
-        this.neededThings
-          .filter((i) => i.picked))
+        this.neededThings.filter((i) => i.picked))
         .then((co: Checkout) => {
           alert(`Thank you for shopping at ${co.store.name}`);
           this.router.navigateByUrl('/');
