@@ -54,12 +54,9 @@ describe('Pickup Component', () => {
 
   xit('should have aisles', () => {
     const fixture: ComponentFixture<StorePickupComponent> = TestBed.createComponent(StorePickupComponent);
-    const component: StorePickupComponent = fixture.componentInstance;
 
-    // const bobs: Store = info.stores[0];
     const ralphs: Store = info.stores[1];
 
-    // const beer: Item = info.items[0];
     const food: Item = info.items[1];
 
     const now: Date = new Date();
@@ -99,7 +96,6 @@ describe('Pickup Component', () => {
           const a: Aisle = rndLayout[1][0];
           const aitems: Item[] = items[1];
           const i: Item = aitems[Math.floor(Math.random() * aitems.length)];
-          // console.log(p, a, i.name);
           c.pickups.push({
             item: i,
             aisle: a,
@@ -111,8 +107,6 @@ describe('Pickup Component', () => {
     }
 
     fixture.detectChanges();
-
-    expect(component.aisles.length).toBeGreaterThan(0);
 
     expect(fixture.nativeElement.children[0].textContent).toContain('hi');
   });

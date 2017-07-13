@@ -18,7 +18,6 @@ import { Store } from '../models/store';
 import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
 import { LogicService } from '../shared/logic.service';
 
-type Aisle = string;
 interface StoreDistance {
   store: Store;
   distance: number;
@@ -57,8 +56,6 @@ interface StoreDistance {
   templateUrl: './store.component.html',
 })
 export class StoreComponent implements OnInit {
-  public aisles: Aisle[] = [];
-
   public neededThings: Pickup[] = [];
 
   public stores: Store[] = [];
@@ -99,7 +96,6 @@ export class StoreComponent implements OnInit {
       t.aisle = LogicService.predictAisle(t.item, nbs.store);
     });
     this.neededThings = LogicService.sortPickups(this.neededThings.slice());
-    this.aisles = LogicService.getStoreAisles(nbs.store);
   }
 
   public addCheckout(): void {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Pickup } from '../../models/pickup';
 
@@ -7,17 +7,6 @@ import { Pickup } from '../../models/pickup';
   styleUrls: ['./store-pickup.component.scss'],
   templateUrl: './store-pickup.component.html',
 })
-export class StorePickupComponent implements OnInit {
-
+export class StorePickupComponent {
   @Input() public pickup: Pickup;
-
-  @Input() public aisles: string[];
-
-  public ngOnInit(): void {
-    this.aisles = [];
-  }
-
-  public setAisle(selectedAisle: string): void {
-    this.pickup.aisle = selectedAisle;
-  }
 }

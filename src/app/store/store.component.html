@@ -24,7 +24,7 @@
     <i class="fa fa-check" [@checkState]="pu.picked ? 'picked' : 'notpicked'"></i>
   </div>
 
-  <gbg-store-pickup class="info" [pickup]="pu" [aisles]="aisles"></gbg-store-pickup>
+  <gbg-store-pickup class="info" [pickup]="pu"></gbg-store-pickup>
 </article>
 <section class="check-out">
   <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
