@@ -17,13 +17,15 @@ namespace FakeGoogle {
   }
 
   export class LatLng {
-    constructor(private readonly xlat: number, private readonly xlng: number, noWrap?: boolean) { }
+    private lit: LatLngLiteral;
+    constructor(lat: number, lng: number, noWrap?: boolean) {
+      this.lit = { lat, lng };
+    }
     public equals(other: LatLng): boolean { return false; }
-    public lat(): number { return this.xlat; }
-    public lng(): number { return this.xlng; }
-    public toString(): string { return ''; }
+    public lat(): number { return this.lit.lat; }
+    public lng(): number { return this.lit.lng; }
     public toUrlValue(precision?: number): string { return ''; }
-    public toJSON(): LatLngLiteral { return { lat: this.xlat, lng: this.xlng }; }
+    public toJSON(): LatLngLiteral { return this.lit; }
   }
 
   export class LatLngBounds {
@@ -39,7 +41,6 @@ namespace FakeGoogle {
     public isEmpty(): boolean { return false; }
     public toJSON(): LatLngBoundsLiteral { return { east: 0, north: 0, south: 0, west: 0 }; }
     public toSpan(): LatLng { return this.templl; }
-    public toString(): string { return ''; }
     public toUrlValue(precision?: number): string { return ''; }
     public union(other: LatLngBounds | LatLngBoundsLiteral): LatLngBounds { return new LatLngBounds(); }
   }
