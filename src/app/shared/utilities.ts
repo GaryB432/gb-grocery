@@ -54,6 +54,8 @@ export class Utilities {
     }
     const newCheckout: Checkout = new Checkout(store, new Date(dto.isoDate));
 
+    newCheckout.distance = dto.distance || -1;
+
     newCheckout.pickups = dto.pickups
       .map((dpu) => {
         const item = context.items.find((i) => i.id === dpu.itemId);
