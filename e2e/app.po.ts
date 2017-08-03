@@ -1,11 +1,11 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, promise } from 'protractor';
 
-export class GbGroceryPage {
-  public navigateTo() {
+export class AppPage {
+  public navigateTo(): promise.Promise<any> {
     return browser.get('/');
   }
 
-  public getParagraphText() {
-    return element(by.css('gbg-root h1')).getText();
+  public getParagraphText(): promise.Promise<string> {
+    return element(by.css('gbg-root header h1')).getText();
   }
 }

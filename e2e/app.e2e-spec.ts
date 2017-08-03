@@ -1,16 +1,14 @@
-import { GbGroceryPage } from './app.po';
+import { AppPage } from './app.po';
 
 describe('gb-grocery App', () => {
-  let page: GbGroceryPage;
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new GbGroceryPage();
+    page = new AppPage();
   });
 
-  it('should display welcome message', (done) => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    page.getParagraphText()
-      .then((msg) => expect(msg).toEqual('Welcome to gbg!!'))
-      .then(done, done.fail);
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });
