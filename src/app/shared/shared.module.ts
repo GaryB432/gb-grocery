@@ -12,18 +12,9 @@ import { MomentPipe } from './moment.pipe';
 import { CustomToastOptions } from './toast-options';
 
 @NgModule({
-  declarations: [
-    HammerGesturesDirective,
-    MomentPipe,
-  ],
-  exports: [
-    MomentPipe,
-    HammerGesturesDirective,
-  ],
-  imports: [
-    CommonModule,
-    ToastModule.forRoot(),
-  ],
+  declarations: [HammerGesturesDirective, MomentPipe],
+  exports: [MomentPipe, HammerGesturesDirective],
+  imports: [CommonModule, ToastModule.forRoot()],
   providers: [
     { provide: ToastOptions, useClass: CustomToastOptions },
     AuthGuard,
@@ -33,4 +24,4 @@ import { CustomToastOptions } from './toast-options';
     LogicService,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

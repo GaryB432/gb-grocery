@@ -38,8 +38,13 @@ import { StorePickupComponent } from './store-pickup.component';
 describe('Pickup Component', () => {
   let info: AppInfo;
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [FormsModule], declarations: [StorePickupComponent] });
-    TestBed.overrideComponent(StorePickupComponent, { set: { template: '<div>hi</div>' } });
+    TestBed.configureTestingModule({
+      imports: [FormsModule],
+      declarations: [StorePickupComponent],
+    });
+    TestBed.overrideComponent(StorePickupComponent, {
+      set: { template: '<div>hi</div>' },
+    });
     info = {
       checkouts: [],
       items: [],
@@ -53,7 +58,9 @@ describe('Pickup Component', () => {
   });
 
   xit('should have aisles', () => {
-    const fixture: ComponentFixture<StorePickupComponent> = TestBed.createComponent(StorePickupComponent);
+    const fixture: ComponentFixture<
+      StorePickupComponent
+    > = TestBed.createComponent(StorePickupComponent);
 
     const ralphs: Store = info.stores[1];
 
@@ -68,25 +75,26 @@ describe('Pickup Component', () => {
     type StoreLayout = [Store, StoreAisle];
 
     const layouts: StoreLayout[] = [
-      [info.stores[0],
-      ['s0-a1', [info.items[0], food]],
-      ['a0-a2', [info.items[3]]],
+      [
+        info.stores[0],
+        ['s0-a1', [info.items[0], food]],
+        ['a0-a2', [info.items[3]]],
       ],
-      [ralphs,
+      [
+        ralphs,
         ['11a', [info.items[2], info.items[6], info.items[9]]],
         ['12a', [info.items[4], food]],
         ['11b', [info.items[3], info.items[5], info.items[7], info.items[8]]],
       ],
-      [info.stores[3],
-      ['s3-a1', [info.items[3], info.items[6]]],
-      ],
+      [info.stores[3], ['s3-a1', [info.items[3], info.items[6]]]],
     ];
 
     for (let visit = 0; visit < 20; visit++) {
-      const rndLayout: StoreLayout = layouts[Math.floor(Math.random() * layouts.length)];
+      const rndLayout: StoreLayout =
+        layouts[Math.floor(Math.random() * layouts.length)];
       const c: Checkout = new Checkout(
         rndLayout[0],
-        new Date(now.valueOf() - (Math.random() * (365 * (24 * 60 * 60 * 1000)))),
+        new Date(now.valueOf() - Math.random() * (365 * (24 * 60 * 60 * 1000)))
       );
 
       c.pickups = [];
@@ -110,5 +118,4 @@ describe('Pickup Component', () => {
 
     expect(fixture.nativeElement.children[0].textContent).toContain('hi');
   });
-
 });

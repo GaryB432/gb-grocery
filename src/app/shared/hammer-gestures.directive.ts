@@ -16,10 +16,12 @@ export interface GestureEvent {
   selector: '[gbgHammerGestures]',
 })
 export class HammerGesturesDirective implements OnInit {
+  @Output()
+  public onGesture: EventEmitter<GestureEvent> = new EventEmitter<
+    GestureEvent
+  >();
 
-  @Output() public onGesture: EventEmitter<GestureEvent> = new EventEmitter<GestureEvent>();
-
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   public ngOnInit(): void {
     const events: GestureType[] = ['swipeleft', 'swiperight', 'tap'];
@@ -31,7 +33,8 @@ export class HammerGesturesDirective implements OnInit {
       ],
     });
 
-    events.forEach((type) => hammertime.on(type, (_ev) => this.onGesture.emit({ type })));
+    events.forEach(type =>
+      hammertime.on(type, _ev => this.onGesture.emit({ type }))
+    );
   }
-
 }

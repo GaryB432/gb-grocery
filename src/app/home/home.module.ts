@@ -9,10 +9,7 @@ import { HomeItemComponent } from './home-item/home-item.component';
 import { HomeComponent } from './home.component';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    HomeItemComponent,
-  ],
+  declarations: [HomeComponent, HomeItemComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,4 +18,4 @@ import { HomeComponent } from './home.component';
     BrowserAnimationsModule,
   ],
 })
-export class HomeModule { }
+export class HomeModule {}

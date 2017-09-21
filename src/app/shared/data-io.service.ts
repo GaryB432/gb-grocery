@@ -25,8 +25,8 @@ export class DataIoService {
   constructor(
     afAuth: AngularFireAuth,
     db: AngularFireDatabase,
-    private storage: DataLocalstorageService) {
-
+    private storage: DataLocalstorageService
+  ) {
     afAuth.authState.subscribe((user: firebase.User) => {
       this.user = user;
       if (!!user) {
@@ -44,7 +44,6 @@ export class DataIoService {
 
   public load(): Promise<Dto.AppInfo> {
     return new Promise<Dto.AppInfo>((resolve, reject) => {
-
       if (this.isAuthenticated) {
         const info: Dto.AppInfo = {
           checkouts: [],
@@ -72,11 +71,9 @@ export class DataIoService {
             }
             resolve(info);
           });
-
       } else {
         reject('unauthenticated');
       }
-
     });
   }
 
@@ -86,15 +83,14 @@ export class DataIoService {
     this.writeCheckouts(newInfo.checkouts);
 
     return new Promise<Dto.AppInfo>((resolve, reject) => {
-
       if (this.isAuthenticated) {
-        this.infoRef.set(newInfo)
+        this.infoRef
+          .set(newInfo)
           .then(() => resolve(newInfo))
-          .catch((reason) => reject(reason));
+          .catch(reason => reject(reason));
       } else {
         reject('unauthenticated');
       }
-
     });
   }
 
@@ -145,5 +141,4 @@ export class DataIoService {
   private writeStores(stores: Dto.Store[]): void {
     this.storage.setItem(STORES_KEY, JSON.stringify(stores));
   }
-
 }

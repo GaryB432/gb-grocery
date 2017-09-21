@@ -17,23 +17,33 @@ import { GestureEvent } from '../shared/hammer-gestures.directive';
 import { LogicService } from '../shared/logic.service';
 
 @Component({
-  animations: [trigger('itemState', [
-    state('needed', style({
-      backgroundColor: '#00bcd4',
-      transform: 'scale(1)',
-    })),
-    state('notneeded', style({
-      backgroundColor: 'transparent',
-      transform: 'scale(.9)',
-    })),
-    transition('notneeded => needed, needed => notneeded', animate('.4s ease-in-out')),
-  ])],
+  animations: [
+    trigger('itemState', [
+      state(
+        'needed',
+        style({
+          backgroundColor: '#00bcd4',
+          transform: 'scale(1)',
+        })
+      ),
+      state(
+        'notneeded',
+        style({
+          backgroundColor: 'transparent',
+          transform: 'scale(.9)',
+        })
+      ),
+      transition(
+        'notneeded => needed, needed => notneeded',
+        animate('.4s ease-in-out')
+      ),
+    ]),
+  ],
   selector: 'gbg-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-
   public items: Item[] = [];
 
   public newName = '';
@@ -44,7 +54,8 @@ export class HomeComponent implements OnInit {
     public afAuth: AngularFireAuth,
     private logic: LogicService,
     private toastr: ToastsManager,
-    vcr: ViewContainerRef) {
+    vcr: ViewContainerRef
+  ) {
     this.toastr.setRootViewContainerRef(vcr);
     afAuth.authState.subscribe((user: firebase.User) => {
       if (user) {
@@ -52,11 +63,12 @@ export class HomeComponent implements OnInit {
         this.getUserItems();
       }
     });
-
   }
 
   public ngOnInit(): void {
-    this.toastr.info('Swipe right on needed items.', undefined, { toastLife: 5000 });
+    this.toastr.info('Swipe right on needed items.', undefined, {
+      toastLife: 5000,
+    });
   }
 
   public getState(item: Item): string {
@@ -65,7 +77,7 @@ export class HomeComponent implements OnInit {
 
   public addItem(): void {
     if (!!this.newName) {
-      this.logic.insertItem(this.newName).then((_i) => {
+      this.logic.insertItem(this.newName).then(_i => {
         this.getUserItems();
       });
     }
@@ -87,12 +99,11 @@ export class HomeComponent implements OnInit {
 
   private getUserItems(): void {
     // console.log(this.uid);
-    this.logic.load().then((info) => {
+    this.logic.load().then(info => {
       this.newName = '';
-      return this.items = info.items
+      return (this.items = info.items
         .slice()
-        .sort((a, b) => a.name.localeCompare(b.name));
+        .sort((a, b) => a.name.localeCompare(b.name)));
     });
   }
-
 }

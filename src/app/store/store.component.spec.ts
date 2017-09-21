@@ -26,37 +26,43 @@ class MockRouter {
 }
 
 describe('StoreComponent', () => {
-  beforeEach(async(() => {
-    TestBed.overrideComponent(StoreComponent, {
-      set: {
-        template: '<h1>Overridden template something here</h1>',
-      },
-    }).configureTestingModule({
-      declarations: [
-        StoreComponent,
-      ],
-      imports: [
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: LogicService, useClass: LogicService },
-        { provide: AbstractGeoService, useClass: MockGeoService },
-        { provide: DataService, useClass: MockDataService },
-        { provide: Router, useClass: MockRouter },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.overrideComponent(StoreComponent, {
+        set: {
+          template: '<h1>Overridden template something here</h1>',
+        },
+      })
+        .configureTestingModule({
+          declarations: [StoreComponent],
+          imports: [RouterTestingModule],
+          providers: [
+            { provide: LogicService, useClass: LogicService },
+            { provide: AbstractGeoService, useClass: MockGeoService },
+            { provide: DataService, useClass: MockDataService },
+            { provide: Router, useClass: MockRouter },
+          ],
+        })
+        .compileComponents();
+    })
+  );
 
-  it('should create the app', async(() => {
-    const fixture = TestBed.createComponent(StoreComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
-  }));
+  it(
+    'should create the app',
+    async(() => {
+      const fixture = TestBed.createComponent(StoreComponent);
+      const app = fixture.debugElement.componentInstance;
+      expect(app).toBeTruthy();
+    })
+  );
 
-  xit('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(StoreComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('something');
-  }));
+  xit(
+    'should render title in a h1 tag',
+    async(() => {
+      const fixture = TestBed.createComponent(StoreComponent);
+      fixture.detectChanges();
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('h1').textContent).toContain('something');
+    })
+  );
 });

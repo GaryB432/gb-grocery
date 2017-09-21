@@ -9,7 +9,10 @@ describe('MockGeoService', () => {
     });
   });
 
-  it('should be created', inject([MockGeoService], (service: MockGeoService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([MockGeoService], (service: MockGeoService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

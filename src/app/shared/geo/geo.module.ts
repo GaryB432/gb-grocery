@@ -9,12 +9,12 @@ const isLocal: boolean = window.location.hostname === 'localhost-not';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   providers: [
-    { provide: AbstractGeoService, useClass: isLocal ? MockGeoService : GoogleGeoService },
+    {
+      provide: AbstractGeoService,
+      useClass: isLocal ? MockGeoService : GoogleGeoService,
+    },
   ],
-
 })
-export class GeoModule { }
+export class GeoModule {}

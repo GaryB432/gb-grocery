@@ -12,5 +12,5 @@ export class Store {
   public vicinity: string;
   public website: string;
   public checkouts: Checkout[];
-  constructor(public id: string | undefined, public name: string) { }
+  constructor(public id: string | undefined, public name: string) {}
 }

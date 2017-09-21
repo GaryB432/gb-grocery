@@ -18,9 +18,7 @@ import { StoreModule } from './store/store.module';
 
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -35,8 +33,6 @@ import { StoreModule } from './store/store.module';
     ItemModule,
     LoginModule,
   ],
-  providers: [
-    AuthGuard,
-  ],
+  providers: [AuthGuard],
 })
-export class AppModule { }
+export class AppModule {}

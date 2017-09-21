@@ -5,7 +5,6 @@ import { GoogleGeoService } from './google-geo.service';
 
 /* tslint:disable-next-line:no-namespace */
 namespace FakeGoogle {
-
   interface LatLngLiteral {
     lat: number;
     lng: number;
@@ -22,28 +21,65 @@ namespace FakeGoogle {
     constructor(lat: number, lng: number, noWrap?: boolean) {
       this.lit = { lat, lng };
     }
-    public equals(other: LatLng): boolean { return false; }
-    public lat(): number { return this.lit.lat; }
-    public lng(): number { return this.lit.lng; }
-    public toUrlValue(precision?: number): string { return ''; }
-    public toJSON(): LatLngLiteral { return this.lit; }
+    public equals(other: LatLng): boolean {
+      return false;
+    }
+    public lat(): number {
+      return this.lit.lat;
+    }
+    public lng(): number {
+      return this.lit.lng;
+    }
+    public toUrlValue(precision?: number): string {
+      return '';
+    }
+    public toJSON(): LatLngLiteral {
+      return this.lit;
+    }
   }
 
   export class LatLngBounds {
     private templl = new LatLng(0, 0);
-    constructor(public sw?: LatLng | LatLngLiteral, public ne?: LatLng | LatLngLiteral) { }
-    public contains(latLng: LatLng | LatLngLiteral): boolean { return false; }
-    public equals(other: LatLngBounds | LatLngBoundsLiteral): boolean { return false; }
-    public extend(point: LatLng | LatLngLiteral): LatLngBounds { return new LatLngBounds(); }
-    public getCenter(): LatLng { return this.templl; }
-    public getNorthEast(): LatLng { return this.templl; }
-    public getSouthWest(): LatLng { return this.templl; }
-    public intersects(other: LatLngBounds | LatLngBoundsLiteral): boolean { return false; }
-    public isEmpty(): boolean { return false; }
-    public toJSON(): LatLngBoundsLiteral { return { east: 0, north: 0, south: 0, west: 0 }; }
-    public toSpan(): LatLng { return this.templl; }
-    public toUrlValue(precision?: number): string { return ''; }
-    public union(other: LatLngBounds | LatLngBoundsLiteral): LatLngBounds { return new LatLngBounds(); }
+    constructor(
+      public sw?: LatLng | LatLngLiteral,
+      public ne?: LatLng | LatLngLiteral
+    ) {}
+    public contains(latLng: LatLng | LatLngLiteral): boolean {
+      return false;
+    }
+    public equals(other: LatLngBounds | LatLngBoundsLiteral): boolean {
+      return false;
+    }
+    public extend(point: LatLng | LatLngLiteral): LatLngBounds {
+      return new LatLngBounds();
+    }
+    public getCenter(): LatLng {
+      return this.templl;
+    }
+    public getNorthEast(): LatLng {
+      return this.templl;
+    }
+    public getSouthWest(): LatLng {
+      return this.templl;
+    }
+    public intersects(other: LatLngBounds | LatLngBoundsLiteral): boolean {
+      return false;
+    }
+    public isEmpty(): boolean {
+      return false;
+    }
+    public toJSON(): LatLngBoundsLiteral {
+      return { east: 0, north: 0, south: 0, west: 0 };
+    }
+    public toSpan(): LatLng {
+      return this.templl;
+    }
+    public toUrlValue(precision?: number): string {
+      return '';
+    }
+    public union(other: LatLngBounds | LatLngBoundsLiteral): LatLngBounds {
+      return new LatLngBounds();
+    }
   }
 }
 
@@ -54,12 +90,14 @@ describe('GoogleGeoService', () => {
     });
   });
 
-  it('should be created', inject([GoogleGeoService], (service: GoogleGeoService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    'should be created',
+    inject([GoogleGeoService], (service: GoogleGeoService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 
   it('should translate', () => {
-
     const fakePlace: google.maps.places.PlaceResult = {
       address_components: [] as google.maps.GeocoderAddressComponent[],
       aspects: [] as google.maps.places.PlaceAspectRating[],
@@ -113,5 +151,4 @@ describe('GoogleGeoService', () => {
 
     expect(GoogleGeoService.toPlace(fakePlace)).toEqual(expected);
   });
-
 });

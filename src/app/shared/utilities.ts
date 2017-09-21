@@ -14,7 +14,8 @@ function randomString(length: number, chars: string): string {
   if (chars.indexOf('#') > -1) mask += '0123456789';
   if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:\';"<>?,./|\\';
   let result = '';
-  for (let i: number = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+  for (let i: number = length; i > 0; --i)
+    result += mask[Math.floor(Math.random() * mask.length)];
   /* tslint:enable:curly */
   return result;
 }
@@ -41,14 +42,15 @@ export class Utilities {
   public static dtoToStore(dto: Dto.Store): Store {
     const newStore: Store = new Store(dto.id, dto.name);
     newStore.placeId = dto.place_id;
-    newStore.icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png';
+    newStore.icon =
+      'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png';
     newStore.vicinity = dto.vicinity;
     newStore.checkouts = [];
     return newStore;
   }
 
   public static dtoToCheckout(dto: Dto.Checkout, context: AppInfo): Checkout {
-    const store = context.stores.find((s) => s.id === dto.storeId);
+    const store = context.stores.find(s => s.id === dto.storeId);
     if (!store) {
       throw new Error('no store');
     }
@@ -56,20 +58,21 @@ export class Utilities {
 
     newCheckout.distance = dto.distance || -1;
 
-    newCheckout.pickups = dto.pickups
-      .map((dpu) => {
-        const item = context.items.find((i) => i.id === dpu.itemId);
-        if (!item) {
-          throw new Error('no item');
-        }
-        return new Pickup(item, dpu.aisle);
-      });
+    newCheckout.pickups = dto.pickups.map(dpu => {
+      const item = context.items.find(i => i.id === dpu.itemId);
+      if (!item) {
+        throw new Error('no item');
+      }
+      return new Pickup(item, dpu.aisle);
+    });
     return newCheckout;
   }
 
   public static flatten(list: any[]): any[] {
     return list.reduce(
-      (a, b) => a.concat(Array.isArray(b) ? Utilities.flatten(b) : b), []);
+      (a, b) => a.concat(Array.isArray(b) ? Utilities.flatten(b) : b),
+      []
+    );
   }
 
   public static distinct(arr: any[]): any[] {
@@ -79,5 +82,4 @@ export class Utilities {
   private static makeRandomId(prefix: string): string {
     return prefix + randomString(5, 'a#');
   }
-
 }

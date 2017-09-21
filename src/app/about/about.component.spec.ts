@@ -70,7 +70,7 @@ class MockDataIoService {
 class AngularFireAuthMock {
   // public login() { }
   // public logout() { }
-  public authState = new Observable<Partial<firebase.User>>((sub) => {
+  public authState = new Observable<Partial<firebase.User>>(sub => {
     sub.next({ displayName: 'FUN TESTER' });
     sub.complete();
   });
@@ -80,21 +80,19 @@ describe('About Component', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AboutComponent],
-      imports: [
-        FormsModule,
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: AngularFireAuth, useClass: AngularFireAuthMock },
-        { provide: DataIoService, useClass: MockDataIoService },
-        { provide: Router, useClass: MockRouter },
-      ],
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [AboutComponent],
+        imports: [FormsModule, RouterTestingModule],
+        providers: [
+          { provide: AngularFireAuth, useClass: AngularFireAuthMock },
+          { provide: DataIoService, useClass: MockDataIoService },
+          { provide: Router, useClass: MockRouter },
+        ],
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AboutComponent);
@@ -106,19 +104,24 @@ describe('About Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should warn', async(() => {
-    // const fixture = TestBed.createComponent(AppComponent);
-    // fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
-  }));
+  it(
+    'should warn',
+    async(() => {
+      // const fixture = TestBed.createComponent(AppComponent);
+      // fixture.detectChanges();
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
+    })
+  );
 
-  it('shoud get json', async(() => {
-    // fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      // const element = fixture.nativeElement;
-      expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
-    });
-  }));
-
+  it(
+    'shoud get json',
+    async(() => {
+      // fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        // const element = fixture.nativeElement;
+        expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
+      });
+    })
+  );
 });

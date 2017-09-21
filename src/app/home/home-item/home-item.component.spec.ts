@@ -10,21 +10,27 @@ describe('HomeItemComponent', () => {
   let component: HomeItemComponent;
   let fixture: ComponentFixture<HomeItemComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeItemComponent],
-      imports: [SharedModule],
-    });
-    TestBed.overrideComponent(HomeItemComponent, { set: { template: '<div>hi</div>' } });
-    TestBed.compileComponents();
-  }));
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [HomeItemComponent],
+        imports: [SharedModule],
+      });
+      TestBed.overrideComponent(HomeItemComponent, {
+        set: { template: '<div>hi</div>' },
+      });
+      TestBed.compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeItemComponent);
     component = fixture.componentInstance;
     component.item = new Item();
 
-    const stores: Store[] = [0, 1, 2, 3, 4].map((n) => new Store(`S${n}`, `Store ${n}`));
+    const stores: Store[] = [0, 1, 2, 3, 4].map(
+      n => new Store(`S${n}`, `Store ${n}`)
+    );
 
     component.item.checkouts = [
       new Checkout(stores[1], new Date('2016-04-16T07:55:26.754Z')),

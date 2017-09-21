@@ -23,16 +23,16 @@ export class MockGeoService extends AbstractGeoService {
   }
 
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
-
     function makePlace(ks: Dto.Store, n: number): Place {
       const spot: Point = {
-        latitude: coords.latitude + (n * 2),
-        longitude: coords.longitude + (n * 2),
+        latitude: coords.latitude + n * 2,
+        longitude: coords.longitude + n * 2,
       };
       return {
         formattedAddress: `formatted_address ${n}`,
         formattedPhoneNumber: `formatted_phone_number ${n}`,
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        icon:
+          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         location: { ...spot },
         name: `${ks.name} S${n}`,
         photo: 'assets/img/personal.png',
@@ -65,26 +65,30 @@ export class MockGeoService extends AbstractGeoService {
       },
     ];
 
-    const otherPlaces: Place[] = [3, 4, 5].map((ndx) => makePlace({
-      id: `s${ndx}`,
-      name: `STORE ${ndx}`,
-      place_id: `GP${ndx}`,
-      vicinity: `Vicinity ${ndx}`,
-    }, ndx));
+    const otherPlaces: Place[] = [3, 4, 5].map(ndx =>
+      makePlace(
+        {
+          id: `s${ndx}`,
+          name: `STORE ${ndx}`,
+          place_id: `GP${ndx}`,
+          vicinity: `Vicinity ${ndx}`,
+        },
+        ndx
+      )
+    );
 
     const fakePlaces: Place[] = knownStores.map(makePlace);
 
-    return new Promise<Place[]>(
-      (resolve) => {
-        window.setTimeout(
-          () => {
-            resolve(Utilities.flatten([fakePlaces, otherPlaces]));
-          },
-          200);
-      });
+    return new Promise<Place[]>(resolve => {
+      window.setTimeout(() => {
+        resolve(Utilities.flatten([fakePlaces, otherPlaces]));
+      }, 200);
+    });
   }
 
-  public async getCurrentPosition(options?: PositionOptions): Promise<Position> {
+  public async getCurrentPosition(
+    options?: PositionOptions
+  ): Promise<Position> {
     const hhCoords: Coordinates = {
       accuracy: 0,
       altitude: 0,
@@ -96,5 +100,4 @@ export class MockGeoService extends AbstractGeoService {
     };
     return Promise.resolve({ coords: hhCoords, timestamp: 0 });
   }
-
 }

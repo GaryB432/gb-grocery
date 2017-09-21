@@ -7,9 +7,7 @@ import { Utilities } from './utilities';
 
 @Injectable()
 export class DataService {
-
-  constructor(private io: DataIoService) {
-  }
+  constructor(private io: DataIoService) {}
 
   public clearAll(): void {
     this.io.clearAll();
@@ -18,21 +16,23 @@ export class DataService {
   public load(): Promise<AppInfo> {
     const info: Partial<AppInfo> = {};
 
-    return this.io.load().then((a) => {
-      info.stores = a.stores.map((s) => Utilities.dtoToStore(s));
-      info.items = a.items.map((i) => Utilities.dtoToItem(i));
-      info.checkouts = a.checkouts.map((c) => Utilities.dtoToCheckout(c, info as AppInfo));
+    return this.io.load().then(a => {
+      info.stores = a.stores.map(s => Utilities.dtoToStore(s));
+      info.items = a.items.map(i => Utilities.dtoToItem(i));
+      info.checkouts = a.checkouts.map(c =>
+        Utilities.dtoToCheckout(c, info as AppInfo)
+      );
       return info as AppInfo;
     });
   }
 
   public saveAll(info: AppInfo): Promise<AppInfo> {
     const dto: Dto.AppInfo = {
-      checkouts: info.checkouts.map((c) => {
+      checkouts: info.checkouts.map(c => {
         return {
           distance: c.distance || -1,
           isoDate: c.date.toISOString(),
-          pickups: c.pickups.map((p) => {
+          pickups: c.pickups.map(p => {
             return {
               aisle: p.aisle,
               itemId: p.item.id,
@@ -41,14 +41,14 @@ export class DataService {
           storeId: c.store.id as string,
         };
       }),
-      items: info.items.map((i) => {
+      items: info.items.map(i => {
         return {
           id: i.id,
           name: i.name,
           needed: i.needed,
         };
       }),
-      stores: info.stores.map((s) => {
+      stores: info.stores.map(s => {
         return {
           id: s.id as string,
           name: s.name,
@@ -61,7 +61,7 @@ export class DataService {
     for (const c of dto.checkouts) {
       for (const p of c.pickups) {
         if (!p.aisle) {
-          delete (p.aisle);
+          delete p.aisle;
         }
       }
     }

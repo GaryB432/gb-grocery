@@ -19,16 +19,23 @@ export class AboutComponent implements OnInit {
   public email: string;
   public photoURL: string;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router, private io: DataIoService) {
-  }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private io: DataIoService
+  ) {}
 
   public ngOnInit(): void {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       this.isAuthenticated = !!user;
-      this.displayName = user ? user.displayName || 'FALSY NAME' : 'NOT LOGGED IN';
-      this.photoURL = user ? user.photoURL || 'assets/img/personal.png' : 'assets/img/personal.png';
+      this.displayName = user
+        ? user.displayName || 'FALSY NAME'
+        : 'NOT LOGGED IN';
+      this.photoURL = user
+        ? user.photoURL || 'assets/img/personal.png'
+        : 'assets/img/personal.png';
       if (this.isAuthenticated) {
-        this.io.load().then((info) => {
+        this.io.load().then(info => {
           this.jsonInfo = JSON.stringify(info, null, 2);
         });
       }
@@ -45,7 +52,9 @@ export class AboutComponent implements OnInit {
   public replaceAppInfoForever(): void {
     try {
       const dto: Dto.AppInfo = JSON.parse(this.jsonInfo);
-      this.doReplace(dto).then((done: boolean) => done && this.router.navigateByUrl('home'));
+      this.doReplace(dto).then(
+        (done: boolean) => done && this.router.navigateByUrl('home')
+      );
     } catch (e) {
       alert(e);
     }
@@ -57,7 +66,7 @@ export class AboutComponent implements OnInit {
 
   private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
     if (confirm('WARNING this is not validated. About to replace your data')) {
-      return this.io.saveAll(newInfo).then((_replaced) => true);
+      return this.io.saveAll(newInfo).then(_replaced => true);
     }
     return Promise.resolve(false);
   }
