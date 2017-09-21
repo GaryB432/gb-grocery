@@ -1,75 +1,75 @@
-@import "variables";
+@import 'variables';
 
 article.card {
-    div.info {
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+  div.info {
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-    .cbholder {
-        min-width: 50px;
-        height: 50px;
-        display: flex;
-        border-radius: 5px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-    }
- 
+  }
+  .cbholder {
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 .distance {
-    margin: 10px 5px;
-    font-size: .75rem;
+  margin: 10px 5px;
+  font-size: 0.75rem;
 }
 
 select {
-    font-size: 1.5rem;
-    width: 100%;
+  font-size: 1.5rem;
+  width: 100%;
 }
 
 .no-items {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 2rem 0;
-    h1, p {
-        margin: 1.2rem;
-        line-height: 1.3rem;
-    }
-    h1 {
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+  h1,
+  p {
+    margin: 1.2rem;
+    line-height: 1.3rem;
+  }
+  h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
 
 .store-info {
-    background-color: $light-heading;
-    section {
-        display: flex;
-        flex-direction: row;
-        margin: 4px;
-        padding: 10px;
-        img {
-            width: 71px;
-            height: 71px;
-        }
-        .vicinity {
-            margin: 4px 10px;
-        }
+  background-color: $light-heading;
+  section {
+    display: flex;
+    flex-direction: row;
+    margin: 4px;
+    padding: 10px;
+    img {
+      width: 71px;
+      height: 71px;
     }
+    .vicinity {
+      margin: 4px 10px;
+    }
+  }
 }
 
 .check-out {
-    display: flex;
-    justify-content: center;
-    button {
-        font-size: 2rem;
-        flex: 1 0 auto;
-    }
+  display: flex;
+  justify-content: center;
+  button {
+    font-size: 2rem;
+    flex: 1 0 auto;
+  }
 }
 
 .loader:before,

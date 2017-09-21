@@ -1,20 +1,21 @@
 :host {
-    display: block;
+  display: block;
 }
 
 section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-h1, div {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 2rem;
-    text-align: center;
+h1,
+div {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 2rem;
+  text-align: center;
 }
 
 h1 {
-    padding: 1rem;
+  padding: 1rem;
 }

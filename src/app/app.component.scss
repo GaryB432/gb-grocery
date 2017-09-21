@@ -1,38 +1,38 @@
-@import "variables";
+@import 'variables';
 
 header {
-    display: flex;
-    height: 40px;
-    background-color: $brand;
-    padding: 0 10px;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    h1 {
-        font-size: 40px;
-        font-family: serif;
-        color: $white;
-    }
+  display: flex;
+  height: 40px;
+  background-color: $brand;
+  padding: 0 10px;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  h1 {
+    font-size: 40px;
+    font-family: serif;
+    color: $white;
+  }
 }
 
 nav {
-    background-color: lighten($grey, 70%);
-    height: 33px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    a {
-        flex: 1 0 auto;
-        border: 1px solid $grey;
-        text-align: center;
-        padding: 5px;
-        text-decoration: none;
-        color: $silver;
-        &.active {
-            border-bottom: none;
-            background-color: $white;
-            color: $grey;
-            font-weight: bold;
-        }
+  background-color: lighten($grey, 70%);
+  height: 33px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  a {
+    flex: 1 0 auto;
+    border: 1px solid $grey;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    color: $silver;
+    &.active {
+      border-bottom: none;
+      background-color: $white;
+      color: $grey;
+      font-weight: bold;
     }
+  }
 }
