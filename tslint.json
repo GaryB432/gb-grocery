@@ -1,38 +1,13 @@
 {
-  "extends": "tslint:latest",
+  "extends": [
+    "tslint:latest",
+    "tslint-config-gb",
+    "tslint-config-prettier"
+  ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
   "rules": {
-    "quotemark": [
-      true,
-      "single",
-      "avoid-escape"
-    ],
-    "interface-name": [
-      true,
-      "never-prefix"
-    ],
-    "max-classes-per-file": [
-      false
-    ],
-    "member-ordering": [
-      true,
-      {
-        "order": "instance-sandwich"
-      }
-    ],
-    "no-console": [
-      true,
-      "log",
-      "error"
-    ],
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-leading-underscore"
-    ],
     "angular-whitespace": [
       true,
       "check-interpolation",
