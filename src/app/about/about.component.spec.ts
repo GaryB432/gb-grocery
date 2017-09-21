@@ -1,3 +1,4 @@
+// tslint:disable:max-classes-per-file
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';

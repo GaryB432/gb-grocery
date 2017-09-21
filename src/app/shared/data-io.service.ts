@@ -63,6 +63,7 @@ export class DataIoService {
             if (dbInfo) {
               Object.assign(info, dbInfo);
             } else {
+              // tslint:disable-next-line:no-console
               console.warn(' no cloud data. initializing from local-storage.');
               Object.assign(info, lsinfo);
               if (info.items.length > 0) {

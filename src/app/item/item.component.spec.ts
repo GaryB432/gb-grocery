@@ -1,8 +1,8 @@
+// tslint:disable:max-classes-per-file
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-// import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';

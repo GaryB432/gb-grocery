@@ -1,3 +1,4 @@
+// tslint:disable:max-classes-per-file
 import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';

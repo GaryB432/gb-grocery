@@ -1,3 +1,4 @@
+// tslint:disable:max-classes-per-file
 import { async, inject, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
