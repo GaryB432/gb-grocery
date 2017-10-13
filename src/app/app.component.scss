@@ -1,12 +1,18 @@
 @import 'variables';
 
+$header-height: 73px;
+$header-padding: 0;
+
 header {
-  display: flex;
-  height: 40px;
+  display: block;
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
   background-color: $brand;
-  padding: 0 10px;
-  align-items: center;
-  justify-content: space-between;
+  padding: $header-padding;
   overflow: hidden;
   h1 {
     font-size: 40px;
@@ -35,4 +41,8 @@ nav {
       font-weight: bold;
     }
   }
+}
+
+.content {
+  margin-top: $header-height + ($header-padding * 2);
 }

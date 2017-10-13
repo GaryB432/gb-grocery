@@ -9,7 +9,7 @@ import { DataLocalstorageService } from './data-localstorage.service';
 import * as Dto from './dto';
 
 class MockReference {
-  constructor(public db: MockDb) { }
+  constructor(public db: MockDb) {}
 
   public set(value: any, onComplete?: (a: Error | null) => any): Promise<any> {
     if (!value) {
@@ -137,11 +137,11 @@ describe('Data IO Service', () => {
 
               const message = actual.data
                 ? util.buildFailureMessage(
-                  'to be set with',
-                  false,
-                  actual,
-                  expected
-                )
+                    'to be set with',
+                    false,
+                    actual,
+                    expected
+                  )
                 : `${actual.path} was not set`;
               return { pass, message };
             },

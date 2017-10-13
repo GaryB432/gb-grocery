@@ -1,11 +1,11 @@
 <header>
   <h1>GB Grocery</h1>
+  <nav>
+    <a [routerLinkActive]="['active']" [routerLink]="['home']">Items</a>
+    <a [routerLinkActive]="['active']" [routerLink]="['store']">Check Out</a>
+    <a [routerLinkActive]="['active']" [routerLink]="['about']">About</a>
+  </nav>
 </header>
-<nav>
-  <a [routerLinkActive]="['active']" [routerLink]="['home']">Items</a>
-  <a [routerLinkActive]="['active']" [routerLink]="['store']">Check Out</a>
-  <a [routerLinkActive]="['active']" [routerLink]="['about']">About</a>
-</nav>
 <section class="content">
   <router-outlet></router-outlet>
 </section>
