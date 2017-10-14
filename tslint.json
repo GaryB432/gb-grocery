@@ -34,6 +34,16 @@
     "no-input-rename": true,
     "no-output-rename": true,
     "no-forward-ref": true,
+    "no-submodule-imports": [
+      true,
+      "rxjs",
+      "@angular/platform-browser",
+      "@angular/core/testing",
+      "@angular/router/testing",
+      "angularfire2",
+      "firebase",
+      "ng2-toastr"
+    ],
     "use-view-encapsulation": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
