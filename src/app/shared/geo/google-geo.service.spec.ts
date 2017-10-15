@@ -100,7 +100,7 @@ describe('GoogleGeoService', () => {
   it('should translate', () => {
     const fakePlace: google.maps.places.PlaceResult = {
       address_components: [] as google.maps.GeocoderAddressComponent[],
-      aspects: [] as google.maps.places.PlaceAspectRating[],
+      adr_address: 'adr_address',
       formatted_address: 'formatted_address',
       formatted_phone_number: 'formatted_phone_number',
       geometry: {
@@ -108,6 +108,7 @@ describe('GoogleGeoService', () => {
         viewport: new FakeGoogle.LatLngBounds(),
       },
       html_attributions: [''],
+      id: 'id',
       icon: 'icon',
       international_phone_number: 'international_phone_number',
       name: 'name',
@@ -131,6 +132,7 @@ describe('GoogleGeoService', () => {
       reviews: [] as google.maps.places.PlaceReview[],
       types: ['a', 'b'],
       url: 'url',
+      utc_offset: 5,
       vicinity: 'vicinity',
       website: 'website',
     };

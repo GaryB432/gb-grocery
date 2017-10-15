@@ -2,6 +2,7 @@
 import { async, inject, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 import { DataIoService } from './data-io.service';

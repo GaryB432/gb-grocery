@@ -11,7 +11,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.scss\" --single-quote --trailing-comma es5",
     "start": "ng serve",
     "prebuild": "npm run format",
-    "build": "ng build -env=prod --sourcemaps false --delete-output-path true",
+    "build": "ng build -e prod -oh bundles --delete-output-path true",
     "test": "ng test",
     "lint": "ng lint --type-check --force",
     "e2e": "ng e2e"
