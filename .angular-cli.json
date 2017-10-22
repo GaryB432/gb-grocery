@@ -20,7 +20,7 @@
       "prefix": "gbg",
       "styles": [
         "styles/styles.scss",
-        "../node_modules/ng2-toastr/ng2-toastr.css"
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "stylePreprocessorOptions": {
         "includePaths": [
