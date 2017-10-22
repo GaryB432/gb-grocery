@@ -108,8 +108,8 @@ describe('GoogleGeoService', () => {
         viewport: new FakeGoogle.LatLngBounds(),
       },
       html_attributions: [''],
-      id: 'id',
       icon: 'icon',
+      id: 'id',
       international_phone_number: 'international_phone_number',
       name: 'name',
       opening_hours: {
