@@ -11,10 +11,12 @@ import { Item } from '../../models/item';
 export class HomeItemComponent implements OnInit {
   @Input() public item: Item;
   public recentCheckout: Checkout | null;
+  public pickupCount: number;
 
   public ngOnInit(): void {
+    this.pickupCount = this.item.checkouts.length;
     this.recentCheckout =
-      this.item.checkouts.length > 0
+      this.pickupCount > 0
         ? this.item.checkouts.reduce(
             (pv, cv) =>
               !pv || !pv.date || !cv.date || cv.date > pv.date ? cv : pv
