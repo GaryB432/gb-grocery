@@ -17,9 +17,7 @@ export interface GestureEvent {
 })
 export class HammerGesturesDirective implements OnInit {
   @Output()
-  public onGesture: EventEmitter<GestureEvent> = new EventEmitter<
-    GestureEvent
-  >();
+  public swipe: EventEmitter<GestureEvent> = new EventEmitter<GestureEvent>();
 
   constructor(private el: ElementRef) {}
 
@@ -34,7 +32,7 @@ export class HammerGesturesDirective implements OnInit {
     });
 
     events.forEach(type =>
-      hammertime.on(type, _ev => this.onGesture.emit({ type }))
+      hammertime.on(type, _ev => this.swipe.emit({ type }))
     );
   }
 }

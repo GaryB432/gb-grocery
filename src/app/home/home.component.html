@@ -1,5 +1,5 @@
 <ul>
-	<li *ngFor="let item of items" (onGesture)="doSwipe($event, item)" gbgHammerGestures [@itemState]="getState(item)">
+	<li *ngFor="let item of items" (swipe)="doSwipe($event, item)" gbgHammerGestures [@itemState]="getState(item)">
 		<a [routerLink]="['/item', item.id]">
 			<gbg-home-item [item]="item"></gbg-home-item>
 		</a>

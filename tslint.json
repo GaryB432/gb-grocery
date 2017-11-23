@@ -13,27 +13,61 @@
       "check-interpolation",
       "check-pipe"
     ],
-    "banana-in-box": true,
-    "templates-no-negated-async": true,
-    "directive-selector": [
-      true,
-      "attribute",
-      "gbg",
-      "camelCase"
-    ],
+    "arrow-return-shorthand": true,
+    "callable-types": true,
+    "class-name": true,
     "component-selector": [
       true,
       "element",
       "gbg",
       "kebab-case"
     ],
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
-    "no-attribute-parameter-decorator": true,
+    "component-class-suffix": true,
+    "directive-class-suffix": true,
+    "directive-selector": [
+      true,
+      "attribute",
+      "gbg",
+      "camelCase"
+    ],
+    "eofline": true,
+    "forin": true,
+    "import-blacklist": [
+      true,
+      "rxjs",
+      "rxjs/Rx"
+    ],
+    "interface-over-type-literal": true,
+    "label-position": true,
+    "member-access": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-super": true,
+    "no-empty": false,
+    "no-empty-interface": true,
+    "no-eval": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params"
+    ],
     "no-input-rename": true,
+    "no-misused-new": true,
+    "no-non-null-assertion": true,
+    "no-output-on-prefix": true,
     "no-output-rename": true,
-    "no-forward-ref": true,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
     "no-submodule-imports": [
       true,
       "rxjs",
@@ -44,19 +78,23 @@
       "firebase",
       "ng2-toastr"
     ],
-    "use-view-encapsulation": true,
-    "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "pipe-naming": [
+    "no-switch-case-fall-through": true,
+    "no-unnecessary-initializer": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "prefer-const": true,
+    "radix": true,
+    "triple-equals": [
       true,
-      "camelCase",
-      "gbg"
+      "allow-null-check"
     ],
-    "component-class-suffix": true,
-    "directive-class-suffix": true,
-    "templates-use-public": true,
-    "no-access-missing-member": true,
-    "invoke-injectable": true,
-    "template-to-ng-template": true
+    "typeof-compare": true,
+    "unified-signatures": true,
+    "use-input-property-decorator": true,
+    "use-output-property-decorator": true,
+    "use-host-property-decorator": true,
+    "use-life-cycle-interface": true,
+    "use-pipe-transform-interface": true
   }
 }
