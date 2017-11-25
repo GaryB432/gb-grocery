@@ -1,9 +1,61 @@
+import {
+  animate,
+  animateChild,
+  query,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
 
+type Color = string;
+
+const brand: Color = '#00bcd4';
+
 @Component({
+  animations: [
+    trigger('itemState', [
+      state(
+        'needed',
+        style({
+          backgroundColor: brand,
+          transform: 'scale(1.07)',
+        })
+      ),
+      state(
+        'notneeded',
+        style({
+          backgroundColor: 'transparent',
+          transform: 'scale(0.95)',
+        })
+      ),
+      transition('notneeded <=> needed', [
+        query('@badgeAnimation', [animateChild()]),
+        animate('0.2s'),
+      ]),
+    ]),
+    trigger('badgeAnimation', [
+      state(
+        'needed',
+        style({
+          backgroundColor: 'white',
+          color: 'inherit',
+        })
+      ),
+      state(
+        'notneeded',
+        style({
+          backgroundColor: brand,
+          color: 'white',
+        })
+      ),
+      transition('notneeded <=> needed', [animate('0.2s')]),
+    ]),
+  ],
   selector: 'gbg-home-item',
   styleUrls: ['./home-item.component.scss'],
   templateUrl: './home-item.component.html',
@@ -22,5 +74,13 @@ export class HomeItemComponent implements OnInit {
               !pv || !pv.date || !cv.date || cv.date > pv.date ? cv : pv
           )
         : null;
+  }
+
+  public getState(): string {
+    return this.item.needed ? 'needed' : 'notneeded';
+  }
+
+  public toggleNeeded(): void {
+    this.item.needed = !this.item.needed;
   }
 }

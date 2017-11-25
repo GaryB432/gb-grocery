@@ -1,9 +1,11 @@
-<div class="container">
+<div class="container" [@itemState]="getState()">
   <div>
-    <h1>{{ item.name | uppercase }}</h1>
+    <a [routerLink]="['/item', item.id]">
+      <h1>{{ item.name | uppercase }}</h1>
+    </a>
     <p class="store" *ngIf="!recentCheckout">No checkouts yet</p>
     <p class="store">{{ recentCheckout?.store?.name }}</p>
     <p class="date">{{ recentCheckout?.date | gbgMoment }}</p>
   </div>
-  <div class="badge">{{ pickupCount }}</div>
+  <div (click)="toggleNeeded()" class="badge" [@badgeAnimation]="getState()">{{ pickupCount }}</div>
 </div>

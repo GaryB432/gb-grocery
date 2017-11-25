@@ -1,13 +1,4 @@
-import {
-  animate,
-  Component,
-  OnInit,
-  state,
-  style,
-  transition,
-  trigger,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -17,28 +8,6 @@ import { GestureEvent } from '../shared/hammer-gestures.directive';
 import { LogicService } from '../shared/logic.service';
 
 @Component({
-  animations: [
-    trigger('itemState', [
-      state(
-        'needed',
-        style({
-          backgroundColor: '#00bcd4',
-          transform: 'scale(1)',
-        })
-      ),
-      state(
-        'notneeded',
-        style({
-          backgroundColor: 'transparent',
-          transform: 'scale(.9)',
-        })
-      ),
-      transition(
-        'notneeded => needed, needed => notneeded',
-        animate('.4s ease-in-out')
-      ),
-    ]),
-  ],
   selector: 'gbg-home',
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
@@ -69,10 +38,6 @@ export class HomeComponent implements OnInit {
     this.toastr.info('Swipe right on needed items.', undefined, {
       toastLife: 5000,
     });
-  }
-
-  public getState(item: Item): string {
-    return item.needed ? 'needed' : 'notneeded';
   }
 
   public addItem(): void {
