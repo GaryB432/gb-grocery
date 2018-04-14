@@ -1,17 +1,17 @@
 import { inject, TestBed } from '@angular/core/testing';
 
-import { DataLocalstorageService } from './data-localstorage.service';
+import { DataLocalStorageService } from './data-local-storage.service';
 
 describe('DataLocalstorageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DataLocalstorageService],
+      providers: [DataLocalStorageService],
     });
   });
 
   it(
     'should be created',
-    inject([DataLocalstorageService], (service: DataLocalstorageService) => {
+    inject([DataLocalStorageService], (service: DataLocalStorageService) => {
       expect(service).toBeTruthy();
     })
   );

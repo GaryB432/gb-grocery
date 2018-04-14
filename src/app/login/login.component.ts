@@ -10,12 +10,10 @@ import * as firebase from 'firebase/app';
 })
 export class LoginComponent implements OnInit {
   public error: any;
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
-    // if (!afAuth) throw new Error('WTF');
-  }
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   public ngOnInit() {
-    this.afAuth.authState.subscribe((user: firebase.User) => {
+    this.afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
         this.router.navigateByUrl('home');
       }

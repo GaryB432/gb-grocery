@@ -1,3 +1,18 @@
+// import { TestBed, inject } from '@angular/core/testing';
+
+// import { LogicService } from './logic.service';
+
+// describe('LogicService', () => {
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       providers: [LogicService]
+//     });
+//   });
+
+//   it('should be created', inject([LogicService], (service: LogicService) => {
+//     expect(service).toBeTruthy();
+//   }));
+// });
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
 import { AppInfo } from '../models/appinfo';
@@ -5,7 +20,7 @@ import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
-import { DataService } from './data.service';
+import { DataService } from '../shared/data/data.service';
 import { Place } from './geo/place';
 import { LogicService } from './logic.service';
 

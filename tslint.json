@@ -60,11 +60,9 @@
       true,
       "ignore-params"
     ],
-    "no-input-rename": true,
     "no-misused-new": true,
-    "no-non-null-assertion": true,
+    "no-non-null-assertion": false,
     "no-output-on-prefix": true,
-    "no-output-rename": true,
     "no-shadowed-variable": true,
     "no-string-literal": false,
     "no-string-throw": true,
@@ -89,11 +87,12 @@
       true,
       "allow-null-check"
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,
+    "no-input-rename": true,
+    "no-output-rename": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true
   }

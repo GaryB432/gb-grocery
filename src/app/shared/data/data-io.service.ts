@@ -3,8 +3,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
-import { environment } from '../../environments/environment';
-import { DataLocalstorageService } from './data-localstorage.service';
+import { environment } from '../../../environments/environment';
+import { DataLocalStorageService } from './data-local-storage.service';
 
 import * as Dto from './dto';
 
@@ -12,12 +12,14 @@ const ITEMS_KEY = `gbg:items:${environment.firebase.projectId}`;
 const STORES_KEY = `gbg:stores:${environment.firebase.projectId}`;
 const CHECKOUTS_KEY = `gbg:checkouts:${environment.firebase.projectId}`;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DataIoService {
   // private uid: string;
-  private user: firebase.UserInfo | null;
+  private user: firebase.UserInfo | null = null;
 
-  private infoRef: firebase.database.Reference;
+  private infoRef?: firebase.database.Reference;
 
   public get isAuthenticated(): boolean {
     return !!this.user;
@@ -26,9 +28,9 @@ export class DataIoService {
   constructor(
     afAuth: AngularFireAuth,
     db: AngularFireDatabase,
-    private storage: DataLocalstorageService
+    private storage: DataLocalStorageService
   ) {
-    afAuth.authState.subscribe((user: firebase.User) => {
+    afAuth.authState.subscribe((user: firebase.User | null) => {
       this.user = user;
       if (!!user) {
         this.infoRef = db.database.ref(`/users/${user.uid}/appInfo`);
@@ -40,6 +42,9 @@ export class DataIoService {
     this.storage.removeItem(CHECKOUTS_KEY);
     this.storage.removeItem(STORES_KEY);
     this.storage.removeItem(ITEMS_KEY);
+    if (!this.infoRef) {
+      throw new Error('no inforef');
+    }
     this.infoRef.set(null);
   }
 
@@ -51,9 +56,8 @@ export class DataIoService {
           items: [],
           stores: [],
         };
-        this.infoRef
-          .once('value')
-          .then((snapshot: { val: () => Dto.AppInfo }) => {
+        this.infoRef!.once('value').then(
+          (snapshot: { val: () => Dto.AppInfo }) => {
             const dbInfo = snapshot.val();
             const lsinfo: Dto.AppInfo = {
               checkouts: this.readCheckouts(),
@@ -67,11 +71,12 @@ export class DataIoService {
               console.warn(' no cloud data. initializing from local-storage.');
               Object.assign(info, lsinfo);
               if (info.items.length > 0) {
-                this.infoRef.set(info);
+                this.infoRef!.set(info);
               }
             }
             resolve(info);
-          });
+          }
+        );
       } else {
         reject('unauthenticated');
       }
@@ -85,8 +90,7 @@ export class DataIoService {
 
     return new Promise<Dto.AppInfo>((resolve, reject) => {
       if (this.isAuthenticated) {
-        this.infoRef
-          .set(newInfo)
+        this.infoRef!.set(newInfo)
           .then(() => resolve(newInfo))
           .catch(reason => reject(reason));
       } else {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
-export class DataLocalstorageService {
+@Injectable({ providedIn: 'root' })
+export class DataLocalStorageService {
   public getItem(key: string): any {
     return localStorage.getItem(key);
   }

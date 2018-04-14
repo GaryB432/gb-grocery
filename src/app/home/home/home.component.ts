@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
-import { Item } from '../models/item';
-import { GestureEvent } from '../shared/hammer-gestures.directive';
-import { LogicService } from '../shared/logic.service';
+import { Item } from '../../models/item';
+import { GestureEvent } from '../../shared/hammer-gestures.directive';
+import { LogicService } from '../../shared/logic.service';
 
 @Component({
   selector: 'gbg-home',
@@ -17,27 +16,22 @@ export class HomeComponent implements OnInit {
 
   public newName = '';
 
-  private uid = '';
-
   constructor(
     public afAuth: AngularFireAuth,
     private logic: LogicService,
-    private toastr: ToastsManager,
     vcr: ViewContainerRef
   ) {
-    this.toastr.setRootViewContainerRef(vcr);
-    afAuth.authState.subscribe((user: firebase.User) => {
+    afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
-        this.uid = user.uid;
+        console.log(user.uid, user);
+        // this.uid = user.uid;
         this.getUserItems();
       }
     });
   }
 
   public ngOnInit(): void {
-    this.toastr.info('Swipe right on needed items.', undefined, {
-      toastLife: 5000,
-    });
+    console.log('toast me', 'Swipe right on needed items.');
   }
 
   public addItem(): void {

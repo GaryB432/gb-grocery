@@ -61,9 +61,9 @@ const brand: Color = '#00bcd4';
   templateUrl: './home-item.component.html',
 })
 export class HomeItemComponent implements OnInit {
-  @Input() public item: Item;
-  public recentCheckout: Checkout | null;
-  public pickupCount: number;
+  @Input() public item!: Item;
+  public recentCheckout?: Checkout;
+  public pickupCount = 0;
 
   public ngOnInit(): void {
     this.pickupCount = this.item.checkouts.length;
@@ -73,7 +73,7 @@ export class HomeItemComponent implements OnInit {
             (pv, cv) =>
               !pv || !pv.date || !cv.date || cv.date > pv.date ? cv : pv
           )
-        : null;
+        : undefined;
   }
 
   public getState(): string {

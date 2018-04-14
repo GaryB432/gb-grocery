@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import * as Dto from '../dto';
+import * as Dto from '../../shared/data/dto';
 import { Utilities } from '../utilities';
 import { AbstractGeoService } from './abstract-geo.service';
 import { Place } from './place';

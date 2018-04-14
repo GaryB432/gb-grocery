@@ -156,7 +156,7 @@ export class StoreComponent implements OnInit {
               return {
                 distance: this.geo.computeDistanceBetween(
                   coords,
-                  store.location
+                  store.location!
                 ),
                 store,
               };
@@ -164,7 +164,7 @@ export class StoreComponent implements OnInit {
             .sort((a, b) => a.distance - b.distance);
 
           if (this.nbStores.length > 0) {
-            this.selectedStorePlaceId = this.nbStores[0].store.placeId;
+            this.selectedStorePlaceId = this.nbStores[0].store.placeId || null;
             this.changeStore();
           }
         })

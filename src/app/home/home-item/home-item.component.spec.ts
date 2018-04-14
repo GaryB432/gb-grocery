@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
 import { Store } from '../../models/store';
-import { SharedModule } from '../../shared/shared.module';
 import { HomeItemComponent } from './home-item.component';
 
 describe('HomeItemComponent', () => {
@@ -14,7 +13,6 @@ describe('HomeItemComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         declarations: [HomeItemComponent],
-        imports: [SharedModule],
       });
       TestBed.overrideComponent(HomeItemComponent, {
         set: { template: '<div>hi</div>' },

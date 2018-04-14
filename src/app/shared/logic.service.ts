@@ -5,7 +5,7 @@ import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
-import { DataService } from '../shared/data.service';
+import { DataService } from '../shared/data/data.service';
 import { Place } from '../shared/geo/place';
 import { Utilities } from './utilities';
 
@@ -20,9 +20,9 @@ interface AisleParts {
 export class LogicService {
   private static aisleRegex: RegExp = /^(\d+)(\w*)$/;
 
-  private cache: AppInfo;
+  private cache!: AppInfo;
 
-  private loaded: Promise<AppInfo>;
+  private loaded!: Promise<AppInfo>;
 
   constructor(private data: DataService) {}
 

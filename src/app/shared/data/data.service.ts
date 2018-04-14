@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { AppInfo } from '../models/appinfo';
+import { AppInfo } from '../../models/appinfo';
+import { Utilities } from '../utilities';
 import { DataIoService } from './data-io.service';
 import * as Dto from './dto';
-import { Utilities } from './utilities';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DataService {
   constructor(private io: DataIoService) {}
 
@@ -52,8 +52,8 @@ export class DataService {
         return {
           id: s.id as string,
           name: s.name,
-          place_id: s.placeId,
-          vicinity: s.vicinity,
+          place_id: s.placeId!,
+          vicinity: s.vicinity!,
         };
       }),
     };

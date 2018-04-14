@@ -14,11 +14,11 @@ import { LogicService } from '../shared/logic.service';
   templateUrl: './item.component.html',
 })
 export class ItemComponent implements OnInit, OnDestroy {
-  public item: Item;
+  public item!: Item;
 
-  public checkouts: Checkout[];
+  public checkouts: Checkout[] = [];
 
-  private sub: Subscription;
+  private sub!: Subscription;
 
   constructor(
     afAuth: AngularFireAuth,

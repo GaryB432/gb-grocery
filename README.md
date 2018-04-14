@@ -1,46 +1,54 @@
-# gb-grocery
+# GbGrocery
 
-It's a [grocery list web app](https://bortosky.com/mobile/grocery) for your cellphone.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0-rc.2.
 
-# Getting Started
+## Development server
 
-## Dependencies
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-[Angular CLI](https://cli.angular.io/)
+## Code scaffolding
 
-## Installing
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-* `fork` this repo
-* `clone` your fork
-* `npm install` to install all dependencies
+## Build
 
-## Running the app
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-After you have installed all dependencies you can now run the app with:
+### Docker noob notes
 
-```bash
-npm start
+```cmd
+docker ps -a
+rem docker rm -f $(docker ps -a -q)
+rem rm -rf node_modules
+rem npm i && npm run build
+docker build -t gb-grocery:6.next .
+docker images
+docker run -d -p 8086:80 gb-grocery:6.next
+docker ps -a
+docker stop fb
+rem docker pull garyb432/gb-grocery:4.4
+docker tag garyb432/gb-grocery:6.next garyb432/gb-grocery:latest
 ```
-go to [http://localhost:8080](http://localhost:4200) in your browser.
 
-### Build files
+Visit http://localhost:8086 for the nginx experience
 
-* build files and watch: `ng serve`
+See also deploy-azure.cmd
 
-## Testing
+## Running unit tests
 
-#### 1. Unit Tests
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-* single run: `ng test --single-run`
-* live mode (TDD style): `ng test`
+## Running end-to-end tests
 
-#### 2. End-to-End Tests (aka. e2e, integration)
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-TBD
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Data
 
-| FB | LS | Start up action |
+| FB (Firebase) | LS (LocalStorage) | Start up action |
 |:--:|:--:|---------------------------------------------|
 | Y | Y | LS is a backup. |
 | Y | N | LS is a backup. Save FB on LS. |

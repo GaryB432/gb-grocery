@@ -1,7 +1,7 @@
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
-import { AppInfo } from '../models/appinfo';
-import { Utilities } from '../shared/utilities';
+import { AppInfo } from '../../models/appinfo';
+import { Utilities } from '../../shared/utilities';
 import { DataIoService } from './data-io.service';
 import { DataService } from './data.service';
 import * as Dto from './dto';
@@ -129,16 +129,14 @@ describe('Data Service', () => {
     inject(
       [DataService, DataIoService],
       fakeAsync((sut: DataService) => {
-        let info: AppInfo;
         checkouts[0].storeId = 'WTF';
         expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined(
           'you have a weird store id'
         );
         sut
           .load()
-          .then((response: AppInfo) => {
+          .then((_response: AppInfo) => {
             fail('keep out');
-            info = response;
           })
           .catch((e: Error) => {
             expect(e.message).toEqual('no store');

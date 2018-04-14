@@ -32,6 +32,7 @@ export class GoogleGeoService extends AbstractGeoService {
         keyword: undefined,
         location: GoogleGeoService.getLatLng(coords),
         name: undefined,
+        openNow: true,
         radius: 2 * 1609.34,
         rankBy: undefined,
         types: [grocery],

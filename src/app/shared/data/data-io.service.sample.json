@@ -1,0 +1,1297 @@
+{
+  "checkouts": [
+    {
+      "distance": -1,
+      "isoDate": "2016-04-22T16:15:10.224Z",
+      "pickups": [
+        {
+          "aisle": "N/A",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "N/A",
+          "itemId": "ijyeob"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-04-23T14:17:30.931Z",
+      "pickups": [
+        {
+          "aisle": "N/A",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-05-01T17:02:26.186Z",
+      "pickups": [
+        {
+          "aisle": "N/A",
+          "itemId": "ivsvha"
+        }
+      ],
+      "storeId": "sw7qnp"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-05-11T01:12:40.332Z",
+      "pickups": [
+        {
+          "aisle": "N/A",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "N/A",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-05-24T00:52:53.072Z",
+      "pickups": [
+        {
+          "aisle": "N/A",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "N/A",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "N/A",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-05-30T15:55:00.700Z",
+      "pickups": [
+        {
+          "aisle": "13C",
+          "itemId": "ijyjvb"
+        },
+        {
+          "aisle": "14C",
+          "itemId": "ivx9ac"
+        }
+      ],
+      "storeId": "sqbmjc"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-06-05T17:40:33.394Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-06-16T00:33:01.510Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "10B",
+          "itemId": "i4pk4f"
+        },
+        {
+          "aisle": "11A",
+          "itemId": "i8mq6g"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-07-03T01:40:20.301Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "5B",
+          "itemId": "igs35b"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-07-06T01:05:33.553Z",
+      "pickups": [
+        {
+          "aisle": "11D",
+          "itemId": "i5hj16"
+        }
+      ],
+      "storeId": "sqbmjc"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-07-18T02:12:40.807Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-07-28T00:50:50.067Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-08-12T01:06:45.084Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-08-30T01:24:25.867Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "5A",
+          "itemId": "i5eizu"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-09-20T01:19:09.815Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-09-27T00:21:12.728Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-10-04T01:00:47.593Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-10-16T22:55:05.441Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "12A",
+          "itemId": "ijyjvb"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-10-18T00:47:31.984Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-10-31T23:52:03.944Z",
+      "pickups": [
+        {
+          "aisle": "5B",
+          "itemId": "igs35b"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-11-14T20:40:13.141Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-11-23T19:02:36.091Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-12-09T16:54:21.443Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "5C",
+          "itemId": "ido9vb"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-12-17T16:46:09.422Z",
+      "pickups": [
+        {
+          "aisle": "B40",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "s85hhk"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2016-12-24T02:09:46.130Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-01-09T18:22:13.161Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-02-02T02:05:30.555Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-02-23T03:08:48.321Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "16D",
+          "itemId": "i3kqxd"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-03-11T17:34:02.089Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "11B",
+          "itemId": "ivsvha"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-03-25T16:50:05.140Z",
+      "pickups": [
+        {
+          "aisle": "5B",
+          "itemId": "igs35b"
+        },
+        {
+          "aisle": "5C",
+          "itemId": "ido9vb"
+        },
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-04-18T00:40:57.323Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "12A",
+          "itemId": "ijyjvb"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-05-03T22:02:10.809Z",
+      "pickups": [
+        {
+          "aisle": "11D",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "11D",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "5E",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "9E",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "6D",
+          "itemId": "i5eizu"
+        }
+      ],
+      "storeId": "s69lcj"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-05-24T01:38:20.777Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-06-13T01:26:40.579Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-06-30T16:33:04.813Z",
+      "pickups": [
+        {
+          "aisle": "?",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "?",
+          "itemId": "ia9kv3"
+        }
+      ],
+      "storeId": "sxor3t"
+    },
+    {
+      "distance": -1,
+      "isoDate": "2017-07-07T17:52:46.142Z",
+      "pickups": [
+        {
+          "aisle": "9E",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "s69lcj"
+    },
+    {
+      "distance": 57.94274588182088,
+      "isoDate": "2017-07-23T01:34:35.245Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 25.20450374218187,
+      "isoDate": "2017-08-14T00:58:00.996Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 44.382325374032035,
+      "isoDate": "2017-08-19T15:57:55.682Z",
+      "pickups": [
+        {
+          "aisle": "10B",
+          "itemId": "igs35b"
+        },
+        {
+          "itemId": "iud17t"
+        },
+        {
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "slm6u1"
+    },
+    {
+      "distance": 159.3645635556522,
+      "isoDate": "2017-09-10T15:42:02.727Z",
+      "pickups": [
+        {
+          "itemId": "ivsvha"
+        },
+        {
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "st2p9l"
+    },
+    {
+      "distance": 302.03636296917193,
+      "isoDate": "2017-09-22T01:11:35.954Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 44.01097705982109,
+      "isoDate": "2017-10-01T17:42:36.227Z",
+      "pickups": [
+        {
+          "aisle": "9E",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "s69lcj"
+    },
+    {
+      "distance": 28.47024669602549,
+      "isoDate": "2017-10-17T00:34:07.513Z",
+      "pickups": [
+        {
+          "aisle": "5A",
+          "itemId": "i5eizu"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 36.698181986031955,
+      "isoDate": "2017-11-03T01:14:48.186Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 39.30935338967936,
+      "isoDate": "2017-11-05T18:03:27.431Z",
+      "pickups": [
+        {
+          "aisle": "10B",
+          "itemId": "i4pk4f"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 2246.698607698265,
+      "isoDate": "2017-11-13T04:24:42.958Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 2250.626002108492,
+      "isoDate": "2017-11-23T07:54:06.062Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 9.430167596099283,
+      "isoDate": "2017-11-26T19:10:46.785Z",
+      "pickups": [
+        {
+          "aisle": "6",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "3",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "10",
+          "itemId": "ia9kv3"
+        }
+      ],
+      "storeId": "s3w3is"
+    },
+    {
+      "distance": 18.972216099048282,
+      "isoDate": "2017-12-04T00:00:58.929Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 31.697222748811708,
+      "isoDate": "2017-12-10T16:08:49.423Z",
+      "pickups": [
+        {
+          "aisle": "11D",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "6D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "8C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "s69lcj"
+    },
+    {
+      "distance": 44.06316718372516,
+      "isoDate": "2017-12-15T01:49:25.583Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 89.4024731895638,
+      "isoDate": "2017-12-21T01:35:10.478Z",
+      "pickups": [
+        {
+          "aisle": "5E",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "6D",
+          "itemId": "i5eizu"
+        },
+        {
+          "aisle": "8C",
+          "itemId": "iig774"
+        },
+        {
+          "aisle": "6D",
+          "itemId": "ido9vb"
+        }
+      ],
+      "storeId": "s69lcj"
+    },
+    {
+      "distance": 6.604531739811843,
+      "isoDate": "2018-01-06T01:53:24.181Z",
+      "pickups": [
+        {
+          "aisle": "5B",
+          "itemId": "igs35b"
+        },
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 19.443434797527452,
+      "isoDate": "2018-01-21T02:02:16.543Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 6.494108797415787,
+      "isoDate": "2018-01-21T02:03:33.470Z",
+      "pickups": [
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 19.530805614743798,
+      "isoDate": "2018-02-02T02:05:49.864Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 20.99419298112802,
+      "isoDate": "2018-02-27T01:32:13.685Z",
+      "pickups": [
+        {
+          "aisle": "10B",
+          "itemId": "i4pk4f"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "5A",
+          "itemId": "iwms3a"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 25.91886306445623,
+      "isoDate": "2018-03-04T17:50:24.932Z",
+      "pickups": [
+        {
+          "aisle": "G32",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "G19",
+          "itemId": "icizp5"
+        }
+      ],
+      "storeId": "st2p9l"
+    },
+    {
+      "distance": 13.774990489560096,
+      "isoDate": "2018-03-19T00:47:51.551Z",
+      "pickups": [
+        {
+          "aisle": "10D",
+          "itemId": "icizp5"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        },
+        {
+          "aisle": "10C",
+          "itemId": "ifc36s"
+        }
+      ],
+      "storeId": "sw8lgo"
+    },
+    {
+      "distance": 24.481025778563954,
+      "isoDate": "2018-04-02T16:21:32.249Z",
+      "pickups": [
+        {
+          "aisle": "5D",
+          "itemId": "ijyeob"
+        },
+        {
+          "aisle": "12C",
+          "itemId": "iok1p3"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "i5hj16"
+        },
+        {
+          "aisle": "14B",
+          "itemId": "inba1v"
+        },
+        {
+          "aisle": "15C",
+          "itemId": "iig774"
+        },
+        {
+          "aisle": "15D",
+          "itemId": "iud17t"
+        }
+      ],
+      "storeId": "sw8lgo"
+    }
+  ],
+  "items": [
+    {
+      "id": "i5hj16",
+      "name": "Cat food",
+      "needed": false
+    },
+    {
+      "id": "ijyeob",
+      "name": "Cereal",
+      "needed": false
+    },
+    {
+      "id": "iud17t",
+      "name": "Milk",
+      "needed": false
+    },
+    {
+      "id": "ivsvha",
+      "name": "Garbage bags",
+      "needed": false
+    },
+    {
+      "id": "icizp5",
+      "name": "Orange juice",
+      "needed": false
+    },
+    {
+      "id": "inba1v",
+      "name": "Litter",
+      "needed": false
+    },
+    {
+      "id": "ijyjvb",
+      "name": "Paper towels",
+      "needed": false
+    },
+    {
+      "id": "ivx9ac",
+      "name": "Spaghetti sauce",
+      "needed": false
+    },
+    {
+      "id": "i8mq6g",
+      "name": "Windex",
+      "needed": false
+    },
+    {
+      "id": "i4pk4f",
+      "name": "Paper plates",
+      "needed": false
+    },
+    {
+      "id": "igs35b",
+      "name": "Coffee",
+      "needed": false
+    },
+    {
+      "id": "ia9kv3",
+      "name": "Toilet paper",
+      "needed": false
+    },
+    {
+      "id": "iok1p3",
+      "name": "Peanuts",
+      "needed": false
+    },
+    {
+      "id": "i3kqxd",
+      "name": "Yogurt",
+      "needed": false
+    },
+    {
+      "id": "i5eizu",
+      "name": "Pop-tarts",
+      "needed": false
+    },
+    {
+      "id": "ido9vb",
+      "name": "Oatmeal ",
+      "needed": false
+    },
+    {
+      "id": "iig774",
+      "name": "Soda",
+      "needed": false
+    },
+    {
+      "id": "iwms3a",
+      "name": "Tea",
+      "needed": false
+    },
+    {
+      "id": "ifc36s",
+      "name": "Waffles",
+      "needed": false
+    }
+  ],
+  "stores": [
+    {
+      "id": "sw8lgo",
+      "name": "Schnucks Ballwin",
+      "place_id": "ChIJ43DkSEvU2IcRgU4nzYWcNU0",
+      "vicinity": "15425 Manchester Road, Ballwin"
+    },
+    {
+      "id": "sw7qnp",
+      "name": "Big Lots",
+      "place_id": "ChIJQ9yAC2zU2IcR4fcxoawalqI",
+      "vicinity": "14850 Manchester Road, Ballwin"
+    },
+    {
+      "id": "sqbmjc",
+      "name": "Schnucks",
+      "place_id": "ChIJ0-z4P9jT2IcRbt566e0iJIY",
+      "vicinity": "1393 Big Bend Road #1, Ballwin"
+    },
+    {
+      "id": "s85hhk",
+      "name": "The Fruit Stand",
+      "place_id": "ChIJNWN_Ak_S2IcR_A_0dGyQ-C4",
+      "vicinity": "14433 Manchester Road, Manchester"
+    },
+    {
+      "id": "s69lcj",
+      "name": "Schnucks Twin Oaks",
+      "place_id": "ChIJ0-z4P9jT2IcRJ7PO2K7a2EM",
+      "vicinity": "1393 Big Bend Road, Ballwin"
+    },
+    {
+      "id": "sxor3t",
+      "name": "Zahiba Halal Meat Market",
+      "place_id": "ChIJ7Vd1wUjU2IcRtRnZP7TvdyM",
+      "vicinity": "Historic U.S. 66, Ballwin"
+    },
+    {
+      "id": "slm6u1",
+      "name": "Schnucks Wildwood",
+      "place_id": "ChIJtyWrfz0q2YcRqmiemTga8l8",
+      "vicinity": "16580 Manchester Road, Grover"
+    },
+    {
+      "id": "st2p9l",
+      "name": "Target",
+      "place_id": "ChIJo8-4MkLU2IcRMSmWEtNBc9o",
+      "vicinity": "15025 Manchester Road, Ballwin"
+    },
+    {
+      "id": "s3w3is",
+      "name": "Schnucks Kehrs Mill",
+      "place_id": "ChIJX3IxoRLV2IcRb--KcuoUAvE",
+      "vicinity": "2511 Kehrs Mill Road, Chesterfield"
+    }
+  ]
+}

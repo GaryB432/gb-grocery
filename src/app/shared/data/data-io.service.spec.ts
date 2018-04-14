@@ -6,7 +6,7 @@ import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 import { DataIoService } from './data-io.service';
-import { DataLocalstorageService } from './data-localstorage.service';
+import { DataLocalStorageService } from './data-local-storage.service';
 import * as Dto from './dto';
 
 class MockReference {
@@ -37,7 +37,7 @@ interface MockDatabase {
 class MockDb implements MockDatabase {
   public path?: string;
   public data: any;
-  public callCount: number;
+  public callCount = -Infinity;
   public ref(path?: string): MockReference {
     this.path = path;
     this.callCount = 0;
@@ -168,7 +168,7 @@ describe('Data IO Service', () => {
 
       TestBed.configureTestingModule({
         providers: [
-          { provide: DataLocalstorageService, useClass: MockLocalStorage },
+          { provide: DataLocalStorageService, useClass: MockLocalStorage },
           {
             provide: AngularFireAuth,
             useValue: {
@@ -188,7 +188,7 @@ describe('Data IO Service', () => {
       'should load from localstorage with no cloud data',
       async(
         inject(
-          [DataIoService, DataLocalstorageService, AngularFireDatabase],
+          [DataIoService, DataLocalStorageService, AngularFireDatabase],
           (
             sut: DataIoService,
             ls: MockLocalStorage,
@@ -223,7 +223,7 @@ describe('Data IO Service', () => {
       'should load some cloud data',
       async(
         inject(
-          [DataIoService, DataLocalstorageService, AngularFireDatabase],
+          [DataIoService, DataLocalStorageService, AngularFireDatabase],
           (
             sut: DataIoService,
             ls: MockLocalStorage,
@@ -264,7 +264,7 @@ describe('Data IO Service', () => {
       'should save all',
       async(
         inject(
-          [DataIoService, DataLocalstorageService],
+          [DataIoService, DataLocalStorageService],
           (sut: DataIoService, ls: MockLocalStorage) => {
             const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
             const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
@@ -303,7 +303,7 @@ describe('Data IO Service', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         providers: [
-          { provide: DataLocalstorageService, useClass: MockLocalStorage },
+          { provide: DataLocalStorageService, useClass: MockLocalStorage },
           {
             provide: AngularFireAuth,
             useValue: {
@@ -322,7 +322,7 @@ describe('Data IO Service', () => {
       'should not load',
       async(
         inject(
-          [DataIoService, DataLocalstorageService],
+          [DataIoService, DataLocalStorageService],
           (sut: DataIoService, ls: MockLocalStorage) => {
             return sut
               .load()

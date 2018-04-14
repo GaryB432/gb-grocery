@@ -2,9 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+// import { FirebaseApp } from '@firebase/app-types';
+// import { FirebaseAuth } from '@firebase/auth-types';
+// import { FirebaseDatabase } from '@firebase/database-types';
+// import { FirebaseMessaging } from '@firebase/messaging-types';
+// import { FirebaseStorage } from '@firebase/storage-types';
+// import { FirebaseFirestore } from '@firebase/firestore-types';
+
 import * as firebase from 'firebase/app';
-import { DataIoService } from '../shared/data-io.service';
-import * as Dto from '../shared/dto';
+import { DataIoService } from '../shared/data/data-io.service';
+import * as Dto from '../shared/data/dto';
 
 @Component({
   selector: 'gbg-about',
@@ -12,12 +19,12 @@ import * as Dto from '../shared/dto';
   templateUrl: './about.component.html',
 })
 export class AboutComponent implements OnInit {
-  public jsonInfo: string;
-  public isAuthenticated: boolean;
-  public uid: string;
-  public displayName: string;
-  public email: string;
-  public photoURL: string;
+  public jsonInfo = '{}';
+  public isAuthenticated?: boolean;
+  public uid?: string;
+  public displayName?: string;
+  public email?: string;
+  public photoURL?: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -26,7 +33,7 @@ export class AboutComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.afAuth.authState.subscribe((user: firebase.User) => {
+    this.afAuth.authState.subscribe((user: firebase.User | null) => {
       this.isAuthenticated = !!user;
       this.displayName = user
         ? user.displayName || 'FALSY NAME'
