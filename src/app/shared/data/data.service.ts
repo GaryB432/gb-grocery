@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { AppInfo } from '../../models/appinfo';
 import { Utilities } from '../utilities';
-import { DataIoService } from './data-io.service';
+import { DataIOService } from './data-io.service';
 import * as Dto from './dto';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  constructor(private io: DataIoService) {}
+  constructor(private io: DataIOService) {}
 
   public clearAll(): void {
     this.io.clearAll();

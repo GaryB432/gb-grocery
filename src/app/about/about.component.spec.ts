@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { DataIoService } from '../shared/data/data-io.service';
+import { DataIOService } from '../shared/data/data-io.service';
 import * as Dto from '../shared/data/dto';
 import { AboutComponent } from './about.component';
 
@@ -87,7 +87,7 @@ xdescribe('About Component', () => {
         imports: [FormsModule, RouterTestingModule],
         providers: [
           { provide: AngularFireAuth, useClass: AngularFireAuthMock },
-          { provide: DataIoService, useClass: MockDataIoService },
+          { provide: DataIOService, useClass: MockDataIoService },
           { provide: Router, useClass: MockRouter },
         ],
       }).compileComponents();

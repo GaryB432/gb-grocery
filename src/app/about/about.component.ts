@@ -10,7 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 // import { FirebaseFirestore } from '@firebase/firestore-types';
 
 import * as firebase from 'firebase/app';
-import { DataIoService } from '../shared/data/data-io.service';
+import { DataIOService } from '../shared/data/data-io.service';
 import * as Dto from '../shared/data/dto';
 
 @Component({
@@ -29,7 +29,7 @@ export class AboutComponent implements OnInit {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private io: DataIoService
+    private io: DataIOService
   ) {}
 
   public ngOnInit(): void {

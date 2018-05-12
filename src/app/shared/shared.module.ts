@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { DataIoService } from './data/data-io.service';
+import { DataIOService } from './data/data-io.service';
 import { DataLocalStorageService } from './data/data-local-storage.service';
 import { DataService } from './data/data.service';
 import { GeoModule } from './geo/geo.module';
@@ -14,7 +14,7 @@ import { MomentPipe } from './moment.pipe';
   imports: [CommonModule, GeoModule],
   providers: [
     DataService,
-    DataIoService,
+    DataIOService,
     DataLocalStorageService,
     LogicService,
   ],

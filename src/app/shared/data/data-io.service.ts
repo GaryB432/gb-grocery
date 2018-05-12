@@ -15,7 +15,7 @@ const CHECKOUTS_KEY = `gbg:checkouts:${environment.firebase.projectId}`;
 @Injectable({
   providedIn: 'root',
 })
-export class DataIoService {
+export class DataIOService {
   // private uid: string;
   private user: firebase.UserInfo | null = null;
 

@@ -2,7 +2,7 @@ import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 
 import { AppInfo } from '../../models/appinfo';
 import { Utilities } from '../../shared/utilities';
-import { DataIoService } from './data-io.service';
+import { DataIOService } from './data-io.service';
 import { DataService } from './data.service';
 import * as Dto from './dto';
 
@@ -80,8 +80,8 @@ describe('Data Service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: DataService, useClass: DataService, deps: [DataIoService] },
-        { provide: DataIoService, useClass: MockDataIoService },
+        { provide: DataService, useClass: DataService, deps: [DataIOService] },
+        { provide: DataIOService, useClass: MockDataIoService },
       ],
     });
   });
@@ -89,7 +89,7 @@ describe('Data Service', () => {
   it(
     'should load',
     inject(
-      [DataService, DataIoService],
+      [DataService, DataIOService],
       fakeAsync((sut: DataService) => {
         const info: AppInfo = {
           checkouts: [],
@@ -127,7 +127,7 @@ describe('Data Service', () => {
   it(
     'should throw on bad store',
     inject(
-      [DataService, DataIoService],
+      [DataService, DataIOService],
       fakeAsync((sut: DataService) => {
         checkouts[0].storeId = 'WTF';
         expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined(
