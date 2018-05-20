@@ -14,7 +14,7 @@ import { Item } from '../../models/item';
 
 type Color = string;
 
-const brand: Color = '#00bcd4';
+const brand: Color = '#B2D235';
 
 @Component({
   animations: [
@@ -23,7 +23,7 @@ const brand: Color = '#00bcd4';
         'needed',
         style({
           backgroundColor: brand,
-          transform: 'scale(1.07)',
+          transform: 'scale(1)',
         })
       ),
       state(
