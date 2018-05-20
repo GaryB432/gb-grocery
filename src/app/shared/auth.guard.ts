@@ -7,10 +7,7 @@ import {
 } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
-
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
+import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -19,15 +16,16 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    return this.afAuth.authState
-      .take(1)
-      .map(authState => !!authState)
-      .do(authenticated => {
+    return this.afAuth.authState.pipe(
+      map(authState => !!authState),
+      tap(authenticated => {
         if (!authenticated) {
           this.router.navigate(['/login']);
           return false;
         }
         return true;
-      });
+      }),
+      take(1)
+    );
   }
 }
