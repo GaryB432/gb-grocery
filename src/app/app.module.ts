@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -23,9 +23,9 @@ import { StoreModule } from './store/store.module';
   declarations: [AppComponent, AboutComponent, ItemComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
-    // ServiceWorkerModule.register('/ngsw-worker.js', {
-    //   enabled: environment.production,
-    // }),
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production,
+    }),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,

@@ -21,6 +21,7 @@ docker ps -a
 rem docker rm -f $(docker ps -a -q)
 rem rm -rf node_modules
 rem npm i && npm run build
+rem ng build --prod
 docker build -t gb-grocery:6.next .
 docker images
 docker run -d -p 8086:80 gb-grocery:6.next
