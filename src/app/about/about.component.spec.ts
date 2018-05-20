@@ -80,19 +80,17 @@ xdescribe('About Component', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [AboutComponent],
-        imports: [FormsModule, RouterTestingModule],
-        providers: [
-          { provide: AngularFireAuth, useClass: AngularFireAuthMock },
-          { provide: DataIOService, useClass: MockDataIoService },
-          { provide: Router, useClass: MockRouter },
-        ],
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [AboutComponent],
+      imports: [FormsModule, RouterTestingModule],
+      providers: [
+        { provide: AngularFireAuth, useClass: AngularFireAuthMock },
+        { provide: DataIOService, useClass: MockDataIoService },
+        { provide: Router, useClass: MockRouter },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AboutComponent);
@@ -104,24 +102,18 @@ xdescribe('About Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it(
-    'should warn',
-    async(() => {
-      // const fixture = TestBed.createComponent(AppComponent);
-      // fixture.detectChanges();
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
-    })
-  );
+  it('should warn', async(() => {
+    // const fixture = TestBed.createComponent(AppComponent);
+    // fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
+  }));
 
-  it(
-    'shoud get json',
-    async(() => {
-      // fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        // const element = fixture.nativeElement;
-        expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
-      });
-    })
-  );
+  it('shoud get json', async(() => {
+    // fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      // const element = fixture.nativeElement;
+      expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
+    });
+  }));
 });

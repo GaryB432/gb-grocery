@@ -51,32 +51,30 @@ describe('ItemComponent', () => {
   let component: ItemComponent;
   let fixture: ComponentFixture<ItemComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.overrideComponent(ItemComponent, {
-        set: {
-          template: '<div>Overridden template here</div>',
-        },
-      });
-      TestBed.configureTestingModule({
-        declarations: [ItemComponent, DummyComponent],
-        imports: [
-          CommonModule,
-          FormsModule,
-          RouterTestingModule.withRoutes([
-            { path: 'home', component: DummyComponent },
-          ]),
-        ],
-        providers: [
-          { provide: LogicService, useClass: MockLogicService },
-          { provide: AngularFireAuth, useClass: AngularFireAuthMock },
-          // { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
-          // { provide: DataService, useClass: MockDataService },
-          // { provide: Router, useClass: MockRouter },
-        ],
-      }).compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.overrideComponent(ItemComponent, {
+      set: {
+        template: '<div>Overridden template here</div>',
+      },
+    });
+    TestBed.configureTestingModule({
+      declarations: [ItemComponent, DummyComponent],
+      imports: [
+        CommonModule,
+        FormsModule,
+        RouterTestingModule.withRoutes([
+          { path: 'home', component: DummyComponent },
+        ]),
+      ],
+      providers: [
+        { provide: LogicService, useClass: MockLogicService },
+        { provide: AngularFireAuth, useClass: AngularFireAuthMock },
+        // { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
+        // { provide: DataService, useClass: MockDataService },
+        // { provide: Router, useClass: MockRouter },
+      ],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemComponent);

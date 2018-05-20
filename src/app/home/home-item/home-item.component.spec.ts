@@ -9,17 +9,15 @@ describe('HomeItemComponent', () => {
   let component: HomeItemComponent;
   let fixture: ComponentFixture<HomeItemComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [HomeItemComponent],
-      });
-      TestBed.overrideComponent(HomeItemComponent, {
-        set: { template: '<div>hi</div>' },
-      });
-      TestBed.compileComponents();
-    })
-  );
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [HomeItemComponent],
+    });
+    TestBed.overrideComponent(HomeItemComponent, {
+      set: { template: '<div>hi</div>' },
+    });
+    TestBed.compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeItemComponent);

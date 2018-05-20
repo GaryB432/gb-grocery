@@ -184,119 +184,110 @@ describe('Data IO Service', () => {
       });
     });
 
-    it(
-      'should load from localstorage with no cloud data',
-      async(
-        inject(
-          [DataIOService, DataLocalStorageService, AngularFireDatabase],
-          (
-            sut: DataIOService,
-            ls: MockLocalStorage,
-            db: MockAngularFireDatabase
-          ) => {
-            const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
+    it('should load from localstorage with no cloud data', async(
+      inject(
+        [DataIOService, DataLocalStorageService, AngularFireDatabase],
+        (
+          sut: DataIOService,
+          ls: MockLocalStorage,
+          db: MockAngularFireDatabase
+        ) => {
+          const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
 
-            ls.setup({ ...someAppInfo, items: [] });
-            db.database.data = undefined;
+          ls.setup({ ...someAppInfo, items: [] });
+          db.database.data = undefined;
 
-            expect(db.database.data).toBeUndefined();
+          expect(db.database.data).toBeUndefined();
 
-            return sut.load().then((info: Dto.AppInfo) => {
-              expect(info).toBeDefined();
+          return sut.load().then((info: Dto.AppInfo) => {
+            expect(info).toBeDefined();
 
-              expect(setItem).not.toHaveBeenCalled();
+            expect(setItem).not.toHaveBeenCalled();
 
-              (expect(db.database) as any).not.toHaveBeenCalled({
-                path: '/users/uid-fun/appInfo',
-              });
-
-              expect(info.checkouts.length).toBe(2);
-              expect(info.items.length).toBe(0);
-              expect(info.stores.length).toBe(2);
+            (expect(db.database) as any).not.toHaveBeenCalled({
+              path: '/users/uid-fun/appInfo',
             });
-          }
-        )
+
+            expect(info.checkouts.length).toBe(2);
+            expect(info.items.length).toBe(0);
+            expect(info.stores.length).toBe(2);
+          });
+        }
       )
-    );
+    ));
 
-    it(
-      'should load some cloud data',
-      async(
-        inject(
-          [DataIOService, DataLocalStorageService, AngularFireDatabase],
-          (
-            sut: DataIOService,
-            ls: MockLocalStorage,
-            db: MockAngularFireDatabase
-          ) => {
-            const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
+    it('should load some cloud data', async(
+      inject(
+        [DataIOService, DataLocalStorageService, AngularFireDatabase],
+        (
+          sut: DataIOService,
+          ls: MockLocalStorage,
+          db: MockAngularFireDatabase
+        ) => {
+          const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
 
-            ls.setup({
-              checkouts: [],
-              items: [],
-              stores: [],
+          ls.setup({
+            checkouts: [],
+            items: [],
+            stores: [],
+          });
+
+          db.database.data = { ...someAppInfo };
+
+          expect(db.database.data).toBeDefined();
+
+          return sut.load().then((info: Dto.AppInfo) => {
+            expect(info).toBeDefined();
+
+            expect(setItem).not.toHaveBeenCalled();
+
+            (expect(db.database) as any).toBeProperlySet({
+              data: someAppInfo,
+              path: '/users/uid-fun/appInfo',
             });
 
-            db.database.data = { ...someAppInfo };
-
-            expect(db.database.data).toBeDefined();
-
-            return sut.load().then((info: Dto.AppInfo) => {
-              expect(info).toBeDefined();
-
-              expect(setItem).not.toHaveBeenCalled();
-
-              (expect(db.database) as any).toBeProperlySet({
-                data: someAppInfo,
-                path: '/users/uid-fun/appInfo',
-              });
-
-              expect(info.checkouts.length).toBe(2);
-              expect(info.items.length).toBe(3);
-              expect(info.stores.length).toBe(2);
-            });
-          }
-        )
+            expect(info.checkouts.length).toBe(2);
+            expect(info.items.length).toBe(3);
+            expect(info.stores.length).toBe(2);
+          });
+        }
       )
-    );
+    ));
 
-    it(
-      'should save all',
-      async(
-        inject(
-          [DataIOService, DataLocalStorageService],
-          (sut: DataIOService, ls: MockLocalStorage) => {
-            const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
-            const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
-            /* tslint:disable:max-line-length quotemark */
+    it('should save all', async(
+      inject(
+        [DataIOService, DataLocalStorageService],
+        (sut: DataIOService, ls: MockLocalStorage) => {
+          const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
+          const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
+          /* tslint:disable:max-line-length quotemark */
 
-            return sut.saveAll(someAppInfo).then((info: Dto.AppInfo) => {
-              expect(info).toBeDefined();
-              expect(setItem.calls.allArgs()).toEqual([
-                [
-                  'gbg:stores:grocery-dev-3b673',
-                  '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]',
-                ],
-                [
-                  'gbg:items:grocery-dev-3b673',
-                  '[{"id":"I0","name":"asdf","needed":false},{"id":"I1","name":"zebra","needed":true},{"id":"I2","name":"another","needed":false}]',
-                ],
-                [
-                  'gbg:checkouts:grocery-dev-3b673',
-                  '[{"isoDate":"2016-04-03T04:45:38.582Z","pickups":[{"itemId":"I1","aisle":"K9"},{"itemId":"I0","aisle":"D10"}],"storeId":"S1"},{"isoDate":"2016-04-03T05:35:18.334Z","pickups":[{"itemId":"I0","aisle":"D10"}],"storeId":"S0"}]',
-                ],
-              ]);
-              expect(getItem).not.toHaveBeenCalled();
+          return sut.saveAll(someAppInfo).then((info: Dto.AppInfo) => {
+            expect(info).toBeDefined();
+            expect(setItem.calls.allArgs()).toEqual([
+              [
+                'gbg:stores:grocery-dev-3b673',
+                '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]',
+              ],
+              [
+                'gbg:items:grocery-dev-3b673',
+                '[{"id":"I0","name":"asdf","needed":false},{"id":"I1","name":"zebra","needed":true},{"id":"I2","name":"another","needed":false}]',
+              ],
+              [
+                'gbg:checkouts:grocery-dev-3b673',
+                '[{"isoDate":"2016-04-03T04:45:38.582Z","pickups":[{"itemId":"I1","aisle":"K9"},{"itemId":"I0","aisle":"D10"}],"storeId":"S1"},{"isoDate":"2016-04-03T05:35:18.334Z","pickups":[{"itemId":"I0","aisle":"D10"}],"storeId":"S0"}]',
+              ],
+            ]);
+            expect(getItem).not.toHaveBeenCalled();
 
-              expect(info.checkouts.length).toBe(2);
-              expect(info.items.length).toBe(3);
-              expect(info.stores.length).toBe(2);
-            });
-            /* tslint:enable:max-line-length quotemark */
-          }
-        )
+            expect(info.checkouts.length).toBe(2);
+            expect(info.items.length).toBe(3);
+            expect(info.stores.length).toBe(2);
+          });
+          /* tslint:enable:max-line-length quotemark */
+        }
       )
-    );
+    ));
   });
 
   describe('unauth', () => {
@@ -318,19 +309,16 @@ describe('Data IO Service', () => {
         ],
       });
     });
-    it(
-      'should not load',
-      async(
-        inject(
-          [DataIOService, DataLocalStorageService],
-          (sut: DataIOService, ls: MockLocalStorage) => {
-            return sut
-              .load()
-              .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
-              .catch<any>(msg => expect(msg).toBe('unauthenticated'));
-          }
-        )
+    it('should not load', async(
+      inject(
+        [DataIOService, DataLocalStorageService],
+        (sut: DataIOService, ls: MockLocalStorage) => {
+          return sut
+            .load()
+            .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
+            .catch<any>(msg => expect(msg).toBe('unauthenticated'));
+        }
       )
-    );
+    ));
   });
 });
