@@ -1,5 +1,5 @@
 REM docker run -it azuresdk/azure-cli-python:latest bash
-call ng buid --prod
+call ng build --prod
 docker build -t gb-grocery:latest .
 docker tag gb-grocery:latest garyb432/gb-grocery:latest
 docker push garyb432/gb-grocery:latest
