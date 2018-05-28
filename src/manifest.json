@@ -1,8 +1,8 @@
 {
-  "name": "gb-grocery",
-  "short_name": "gb-grocery",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "GB Grocery",
+  "short_name": "GB Grocery",
+  "theme_color": "#99bc08",
+  "background_color": "#b2d235",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
