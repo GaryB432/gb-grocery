@@ -48,14 +48,16 @@ export class LogicService {
   public getItem(id: string): Promise<Item> {
     return this.loaded.then(
       info =>
-        new Promise<Item>((resolve, reject): void => {
-          const item = info.items.find(i => i.id === id);
-          if (!!item) {
-            resolve(item);
-          } else {
-            reject(`No item ${id}`);
+        new Promise<Item>(
+          (resolve, reject): void => {
+            const item = info.items.find(i => i.id === id);
+            if (!!item) {
+              resolve(item);
+            } else {
+              reject(`No item ${id}`);
+            }
           }
-        })
+        )
     );
   }
 

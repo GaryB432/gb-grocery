@@ -9,10 +9,10 @@ describe('DataLocalstorageService', () => {
     });
   });
 
-  it(
-    'should be created',
-    inject([DataLocalStorageService], (service: DataLocalStorageService) => {
+  it('should be created', inject(
+    [DataLocalStorageService],
+    (service: DataLocalStorageService) => {
       expect(service).toBeTruthy();
-    })
-  );
+    }
+  ));
 });

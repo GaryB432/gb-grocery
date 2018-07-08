@@ -87,55 +87,49 @@ describe('Logic Service', () => {
     });
   });
 
-  it(
-    'should load',
-    inject(
-      [LogicService, DataService],
-      fakeAsync((sut: LogicService, _ds: DataService) => {
-        // console.log(ds, 'is not used');
-        let info: AppInfo = { items: [], stores: [], checkouts: [] };
-        sut.load().then((response: AppInfo) => {
-          info = response;
-        });
-        tick();
-        expect(info).toBeDefined();
-        expect(info.stores.length).toBe(2);
+  it('should load', inject(
+    [LogicService, DataService],
+    fakeAsync((sut: LogicService, _ds: DataService) => {
+      // console.log(ds, 'is not used');
+      let info: AppInfo = { items: [], stores: [], checkouts: [] };
+      sut.load().then((response: AppInfo) => {
+        info = response;
+      });
+      tick();
+      expect(info).toBeDefined();
+      expect(info.stores.length).toBe(2);
+      expect(info.items.length).toBe(3);
+      expect(info.checkouts.length).toBe(2);
+      expect(info.checkouts[0].store).toBe(info.stores[1]);
+
+      expect(info.checkouts[0].pickups.length).toBe(1);
+      expect(info.checkouts[0].pickups[0].item).toBe(info.items[1]);
+      expect(info.checkouts[0].pickups[0].aisle).toBe('S1-A1');
+
+      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
+        info.items[1],
+      ]);
+    })
+  ));
+
+  it('should create item', inject(
+    [LogicService, DataService],
+    fakeAsync((sut: LogicService, _ds: DataService) => {
+      let info: AppInfo;
+      sut.load().then((response: AppInfo) => {
+        info = response;
         expect(info.items.length).toBe(3);
-        expect(info.checkouts.length).toBe(2);
-        expect(info.checkouts[0].store).toBe(info.stores[1]);
-
-        expect(info.checkouts[0].pickups.length).toBe(1);
-        expect(info.checkouts[0].pickups[0].item).toBe(info.items[1]);
-        expect(info.checkouts[0].pickups[0].aisle).toBe('S1-A1');
-
-        expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
-          info.items[1],
-        ]);
-      })
-    )
-  );
-
-  it(
-    'should create item',
-    inject(
-      [LogicService, DataService],
-      fakeAsync((sut: LogicService, _ds: DataService) => {
-        let info: AppInfo;
-        sut.load().then((response: AppInfo) => {
-          info = response;
-          expect(info.items.length).toBe(3);
-        });
-        tick();
-        sut.insertItem('tester').then(item => {
-          expect(item.id).not.toBeUndefined();
-          expect(info.items.find(i => i.id === item.id)).toBeDefined();
-          expect(item.name).toBe('tester');
-          expect(item.needed).toBe(true);
-          expect(info.items.length).toBe(4);
-        });
-      })
-    )
-  );
+      });
+      tick();
+      sut.insertItem('tester').then(item => {
+        expect(item.id).not.toBeUndefined();
+        expect(info.items.find(i => i.id === item.id)).toBeDefined();
+        expect(item.name).toBe('tester');
+        expect(item.needed).toBe(true);
+        expect(info.items.length).toBe(4);
+      });
+    })
+  ));
 
   describe('Places and Stores', () => {
     const expected: Partial<Store> = new Store(undefined, 'name');
@@ -174,62 +168,53 @@ describe('Logic Service', () => {
       website: 'website',
     };
 
-    it(
-      'should get stores from nearby places',
-      inject(
-        [LogicService, DataService],
-        fakeAsync((sut: LogicService, _ds: DataService) => {
-          let info: AppInfo = {
-            checkouts: [],
-            items: [],
-            stores: [],
-          };
-          sut.load().then((response: AppInfo) => {
-            info = response;
-            expect(info.items.length).toBe(3);
-          });
-          tick();
-          somePlace.placeId = 'NEW PLACE';
-          const ss = sut.getStoresFromNearbyPlaces([somePlace as Place]);
-          expect(ss[0].placeId).toEqual('NEW PLACE');
-        })
-      )
-    );
-    it(
-      'should get stores from nearby places w/place',
-      inject(
-        [LogicService, DataService],
-        fakeAsync((sut: LogicService, _ds: DataService) => {
-          let info: AppInfo = {
-            checkouts: [],
-            items: [],
-            stores: [],
-          };
-          sut.load().then((response: AppInfo) => {
-            info = response;
-            expect(info.items.length).toBe(3);
-          });
-          tick();
-          somePlace.placeId = info.stores[0].placeId;
-          const ss = sut.getStoresFromNearbyPlaces([somePlace as Place]);
+    it('should get stores from nearby places', inject(
+      [LogicService, DataService],
+      fakeAsync((sut: LogicService, _ds: DataService) => {
+        let info: AppInfo = {
+          checkouts: [],
+          items: [],
+          stores: [],
+        };
+        sut.load().then((response: AppInfo) => {
+          info = response;
+          expect(info.items.length).toBe(3);
+        });
+        tick();
+        somePlace.placeId = 'NEW PLACE';
+        const ss = sut.getStoresFromNearbyPlaces([somePlace as Place]);
+        expect(ss[0].placeId).toEqual('NEW PLACE');
+      })
+    ));
+    it('should get stores from nearby places w/place', inject(
+      [LogicService, DataService],
+      fakeAsync((sut: LogicService, _ds: DataService) => {
+        let info: AppInfo = {
+          checkouts: [],
+          items: [],
+          stores: [],
+        };
+        sut.load().then((response: AppInfo) => {
+          info = response;
+          expect(info.items.length).toBe(3);
+        });
+        tick();
+        somePlace.placeId = info.stores[0].placeId;
+        const ss = sut.getStoresFromNearbyPlaces([somePlace as Place]);
 
-          expect(ss).toEqual([info.stores[0]]);
-        })
-      )
-    );
+        expect(ss).toEqual([info.stores[0]]);
+      })
+    ));
   });
 
-  it(
-    'should clear all',
-    inject(
-      [LogicService, DataService],
-      fakeAsync((sut: LogicService, ds: DataService) => {
-        spyOn(ds, 'clearAll');
-        sut.clearAll();
-        expect(ds.clearAll).toHaveBeenCalled();
-      })
-    )
-  );
+  it('should clear all', inject(
+    [LogicService, DataService],
+    fakeAsync((sut: LogicService, ds: DataService) => {
+      spyOn(ds, 'clearAll');
+      sut.clearAll();
+      expect(ds.clearAll).toHaveBeenCalled();
+    })
+  ));
 });
 
 describe('More Logic Service', () => {

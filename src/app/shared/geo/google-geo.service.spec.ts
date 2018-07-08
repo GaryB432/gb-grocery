@@ -90,12 +90,12 @@ describe('GoogleGeoService', () => {
     });
   });
 
-  it(
-    'should be created',
-    inject([GoogleGeoService], (service: GoogleGeoService) => {
+  it('should be created', inject(
+    [GoogleGeoService],
+    (service: GoogleGeoService) => {
       expect(service).toBeTruthy();
-    })
-  );
+    }
+  ));
 
   it('should translate', () => {
     const fakePlace: google.maps.places.PlaceResult = {

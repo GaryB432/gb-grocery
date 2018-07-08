@@ -86,63 +86,55 @@ describe('Data Service', () => {
     });
   });
 
-  it(
-    'should load',
-    inject(
-      [DataService, DataIOService],
-      fakeAsync((sut: DataService) => {
-        const info: AppInfo = {
-          checkouts: [],
-          items: [],
-          stores: [],
-        };
-        sut.load().then((response: AppInfo) => {
-          Object.assign(info, response);
+  it('should load', inject(
+    [DataService, DataIOService],
+    fakeAsync((sut: DataService) => {
+      const info: AppInfo = {
+        checkouts: [],
+        items: [],
+        stores: [],
+      };
+      sut.load().then((response: AppInfo) => {
+        Object.assign(info, response);
+      });
+      tick();
+      expect(info).toBeDefined();
+      expect(info.stores.length).toBe(2);
+      expect(info.items.length).toBe(3);
+      expect(info.checkouts.length).toBe(2);
+
+      expect(
+        Utilities.flatten(info.checkouts.map(c => c.pickups.map(p => p.aisle)))
+      ).toEqual([undefined, 'D10', 'S0-D10']);
+
+      expect(info.checkouts[0].store).toBe(info.stores[1]);
+      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
+        info.items[1],
+        info.items[0],
+      ]);
+      expect(info.checkouts[0].pickups.length).toEqual(2);
+
+      expect(info.items[0].checkouts).toBeDefined();
+      expect(info.items[0].checkouts.length).toBe(0);
+    })
+  ));
+
+  it('should throw on bad store', inject(
+    [DataService, DataIOService],
+    fakeAsync((sut: DataService) => {
+      checkouts[0].storeId = 'WTF';
+      expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined(
+        'you have a weird store id'
+      );
+      sut
+        .load()
+        .then((_response: AppInfo) => {
+          fail('keep out');
+        })
+        .catch((e: Error) => {
+          expect(e.message).toEqual('no store');
         });
-        tick();
-        expect(info).toBeDefined();
-        expect(info.stores.length).toBe(2);
-        expect(info.items.length).toBe(3);
-        expect(info.checkouts.length).toBe(2);
-
-        expect(
-          Utilities.flatten(
-            info.checkouts.map(c => c.pickups.map(p => p.aisle))
-          )
-        ).toEqual([undefined, 'D10', 'S0-D10']);
-
-        expect(info.checkouts[0].store).toBe(info.stores[1]);
-        expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
-          info.items[1],
-          info.items[0],
-        ]);
-        expect(info.checkouts[0].pickups.length).toEqual(2);
-
-        expect(info.items[0].checkouts).toBeDefined();
-        expect(info.items[0].checkouts.length).toBe(0);
-      })
-    )
-  );
-
-  it(
-    'should throw on bad store',
-    inject(
-      [DataService, DataIOService],
-      fakeAsync((sut: DataService) => {
-        checkouts[0].storeId = 'WTF';
-        expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined(
-          'you have a weird store id'
-        );
-        sut
-          .load()
-          .then((_response: AppInfo) => {
-            fail('keep out');
-          })
-          .catch((e: Error) => {
-            expect(e.message).toEqual('no store');
-          });
-        tick();
-      })
-    )
-  );
+      tick();
+    })
+  ));
 });
