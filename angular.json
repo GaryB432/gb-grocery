@@ -32,11 +32,6 @@
                 "input": "src/styles/styles.scss"
               }
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "path/to/styles"
-              ]
-            },
             "scripts": []
           },
           "configurations": {
@@ -120,6 +115,11 @@
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "gb-grocery:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "gb-grocery:serve:production"
+            }
           }
         },
         "lint": {
