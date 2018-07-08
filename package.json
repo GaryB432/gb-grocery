@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.scss\" --single-quote --trailing-comma es5",
+    "format": "prettier --write \"src/**/{*.ts,*.scss}\" --single-quote --trailing-comma es5",
     "start": "ng serve",
     "prebuild": "npm run format",
     "build": "ng build",

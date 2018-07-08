@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { DataIOService } from './data/data-io.service';
 import { DataLocalStorageService } from './data/data-local-storage.service';
@@ -11,7 +10,7 @@ import { MomentPipe } from './moment.pipe';
 @NgModule({
   declarations: [HammerGesturesDirective, MomentPipe],
   exports: [MomentPipe, HammerGesturesDirective],
-  imports: [CommonModule, GeoModule],
+  imports: [GeoModule],
   providers: [
     DataService,
     DataIOService,
