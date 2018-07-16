@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { AboutComponent } from './about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { HomeModule } from './home/home.module';
 import { ItemComponent } from './item/item.component';
 import { LoginModule } from './login/login.module';
@@ -20,7 +21,12 @@ import { StoreModule } from './store/store.module';
 
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [AppComponent, AboutComponent, ItemComponent],
+  declarations: [
+    AppComponent,
+    AboutComponent,
+    ItemComponent,
+    CheckoutComponent,
+  ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('/ngsw-worker.js', {

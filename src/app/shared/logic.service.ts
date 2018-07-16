@@ -61,6 +61,24 @@ export class LogicService {
     );
   }
 
+  public getCheckout(store: string, isoDate: string): Promise<Checkout> {
+    const date = new Date(Date.parse(isoDate)).getTime();
+    return this.loaded.then(
+      info =>
+        new Promise<Checkout>(
+          (resolve, reject): void => {
+            const checkout = info.checkouts.find(
+              co => co.date.getTime() === date && co.store.id === store
+            );
+            if (!!checkout) {
+              resolve(checkout);
+            } else {
+              reject(`No checkout on ${isoDate} at ${store}`);
+            }
+          }
+        )
+    );
+  }
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
     const stores: Store[] = places.map(place => {
       if (!place.placeId) {
