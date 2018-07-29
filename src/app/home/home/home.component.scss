@@ -1,14 +1,16 @@
+$good-margin: 5px;
+
 :host {
   display: block;
 }
 
 h1 {
-  margin: 5px;
+  margin: $good-margin;
 }
 
 li {
   display: block;
-  margin: 5px;
+  margin: $good-margin;
   padding: 10px;
   box-shadow: 0 2px 10px 0 silver;
   min-height: 95px;
@@ -22,11 +24,17 @@ a {
 
 .add-item {
   display: flex;
-  justify-content: space-around;
+  margin: $good-margin;
+  flex-direction: row;
+  align-items: stretch;
   input {
-    width: 60%;
+    width: 1px;
+    flex-grow: 1;
+    font-size: 1.4rem;
   }
-  margin-bottom: 20px;
+  button {
+    flex-shrink: 0;
+  }
 }
 
 .no-items {
