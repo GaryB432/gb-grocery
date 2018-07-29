@@ -50,10 +50,11 @@ export class DataService {
       }),
       stores: info.stores.map(s => {
         return {
-          id: s.id as string,
+          icon: s.icon,
+          id: s.id!,
           name: s.name,
-          place_id: s.placeId!,
-          vicinity: s.vicinity!,
+          place_id: s.placeId,
+          vicinity: s.vicinity,
         };
       }),
     };

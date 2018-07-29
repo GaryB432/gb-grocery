@@ -46,18 +46,24 @@ export class MockGeoService extends AbstractGeoService {
 
     const knownStores: Dto.Store[] = [
       {
+        icon:
+          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-KOBIM',
         name: 'Schnucks',
         place_id: 'ChIJ43DkSEvU2IcRgU4nzYWcNU0',
         vicinity: '15425 Manchester Road, Ballwin',
       },
       {
+        icon:
+          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-f2jIj',
         name: 'Big Lots',
         place_id: 'ChIJQ9yAC2zU2IcR4fcxoawalqI',
         vicinity: '14850 Manchester Road, Ballwin',
       },
       {
+        icon:
+          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-F5TXz',
         name: 'Schnucks',
         place_id: 'ChIJ0-z4P9jT2IcRbt566e0iJIY',
@@ -68,6 +74,8 @@ export class MockGeoService extends AbstractGeoService {
     const otherPlaces: Place[] = [3, 4, 5].map(ndx =>
       makePlace(
         {
+          icon:
+            'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
           id: `s${ndx}`,
           name: `STORE ${ndx}`,
           place_id: `GP${ndx}`,

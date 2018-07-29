@@ -42,8 +42,7 @@ export class Utilities {
   public static dtoToStore(dto: Dto.Store): Store {
     const newStore: Store = new Store(dto.id, dto.name);
     newStore.placeId = dto.place_id;
-    newStore.icon =
-      'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png';
+    newStore.icon = dto.icon;
     newStore.vicinity = dto.vicinity;
     newStore.checkouts = [];
     return newStore;

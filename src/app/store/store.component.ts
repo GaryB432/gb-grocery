@@ -156,7 +156,7 @@ export class StoreComponent implements OnInit {
               return {
                 distance: this.geo.computeDistanceBetween(
                   coords,
-                  store.location!
+                  store.location
                 ),
                 store,
               };

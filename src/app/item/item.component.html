@@ -18,12 +18,12 @@
       <img [src]="co.store.icon" alt="store icon" />
     </div>
     <div class="detail">
-      <p class="store">{{ co.store.name }}</p>
-      <p class="vicinity">{{ co.store.vicinity }}</p>
+        <a [routerLink]="['/checkout', co.store.id, co.date.toISOString()]">
+          <p class="store">{{ co.store.name }}</p>
+          <p class="date">{{ co.date | gbgMoment }}</p>
+        </a>
+        <p class="vicinity">{{ co.store.vicinity }}</p>
       <p class="aisle">{{ getItemPickup(co).aisle }}</p>
-      <a [routerLink]="['/checkout', co.store.id, co.date.toISOString()]">
-        <p class="date">{{ co.date | gbgMoment }}</p>
-      </a>
     </div>
   </div>
 </div>

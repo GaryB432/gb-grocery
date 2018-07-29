@@ -96,21 +96,17 @@ export class LogicService {
         store.checkouts = [];
       }
 
-      // update the store with the fresh place information
-      /* tslint:disable-next-line:prefer-object-spread */
-      Object.assign(store, place, {
-        /* tslint:disable-next-line:prefer-object-spread */
-        location: Object.assign(
-          {
-            accuracy: 0,
-            altitude: 0,
-            altitudeAccuracy: 0,
-            heading: 0,
-            speed: 0,
-          },
-          place.location
-        ),
-      });
+      store.icon = place.icon;
+      store.location = {
+        accuracy: 0,
+        altitude: 0,
+        altitudeAccuracy: 0,
+        heading: 0,
+        speed: 0,
+        ...place.location,
+      };
+      store.placeId = place.placeId;
+      store.vicinity = place.vicinity;
 
       return store;
     });

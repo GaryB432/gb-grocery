@@ -1,16 +1,19 @@
 import { Checkout } from './checkout';
 
 export class Store {
-  public formattedAddress?: string;
-  public formattedPhoneNumber?: string;
-  public icon?: string;
-  public location?: Coordinates;
-  public photo?: string;
-  public placeId?: string;
-  public types?: string[];
-  public url?: string;
-  public vicinity?: string;
-  public website?: string;
+  public icon = '';
+  public location: Coordinates = {
+    accuracy: 0,
+    altitude: null,
+    altitudeAccuracy: null,
+    heading: null,
+    latitude: 0,
+    longitude: 0,
+    speed: null,
+  };
+  public placeId = '';
+  public vicinity = '';
+
   public checkouts!: Checkout[];
   constructor(public id: string | undefined, public name: string) {}
 }

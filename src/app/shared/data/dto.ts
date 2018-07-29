@@ -1,4 +1,5 @@
 export interface Store {
+  icon: string;
   id: string;
   name: string;
   place_id: string;

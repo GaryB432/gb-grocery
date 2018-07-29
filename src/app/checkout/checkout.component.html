@@ -1,5 +1,8 @@
 <div *ngIf="checkout">
   <h1 [ngClass]="{ wtf: true, sure: true }">{{ checkout.store.name }}</h1>
-  <p class="aisle">{{ checkout.pickups.length }}</p>
-  <p class="date">{{ checkout.date | gbgMoment }}</p>
+  <p>{{ checkout.pickups.length }}</p>
+  <p>{{ checkout.store.placeId }}!</p>
+  <p>{{ checkout.store.photo }}!</p>
+  <p>{{ checkout.store.website }}f</p>
+  <p>{{ checkout.date }}</p>
 </div>

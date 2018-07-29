@@ -25,10 +25,11 @@ img {
   max-width: 200px;
 }
 .swatch-field {
+  margin: 1em;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   .swatch {
-    margin: 1em;
-    padding: 1em;
+    margin: .1em;
+    padding: .1em;
   }
 }

@@ -82,12 +82,14 @@ const someAppInfo: Dto.AppInfo = {
   ],
   stores: [
     {
+      icon: '71.png',
       id: 'S0',
       name: 'FAKE SCHNUCKS',
       place_id: 'xxxxxxxxxxxxx',
       vicinity: 'vicinity',
     },
     {
+      icon: '71.png',
       id: 'S1',
       name: 'Zabihah',
       place_id: 'ChIJsUfNv0jU2IcRk9KkjfWbBC0',
@@ -267,7 +269,7 @@ describe('Data IO Service', () => {
             expect(setItem.calls.allArgs()).toEqual([
               [
                 'gbg:stores:grocery-dev-3b673',
-                '[{"id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]',
+                '[{"icon":"71.png","id":"S0","name":"FAKE SCHNUCKS","place_id":"xxxxxxxxxxxxx","vicinity":"vicinity"},{"icon":"71.png","id":"S1","name":"Zabihah","place_id":"ChIJsUfNv0jU2IcRk9KkjfWbBC0","vicinity":"14345 Manchester Road, Ballwin"}]',
               ],
               [
                 'gbg:items:grocery-dev-3b673',

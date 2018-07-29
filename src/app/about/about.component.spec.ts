@@ -43,12 +43,14 @@ const mockDtoAppInfo: Dto.AppInfo = {
   ],
   stores: [
     {
+      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
       id: 'S0',
       name: 'FAKE SCHNUCKS',
       place_id: 'xxxxxxxxxxxxx',
       vicinity: 'vicinity',
     },
     {
+      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
       id: 'S1',
       name: 'Atlantic Mills',
       place_id: 'ChIJsUfNv0jU2IcRk9KkjfWbBC0',
