@@ -1,8 +1,13 @@
-<div *ngIf="checkout">
-  <h1 [ngClass]="{ wtf: true, sure: true }">{{ checkout.store.name }}</h1>
-  <p>{{ checkout.pickups.length }}</p>
-  <p>{{ checkout.store.placeId }}!</p>
-  <p>{{ checkout.store.photo }}!</p>
-  <p>{{ checkout.store.website }}f</p>
+<div class="container" *ngIf="place">
+  <h1>
+    <a [href]="place.url">{{ place.name }}</a>
+  </h1>
   <p>{{ checkout.date }}</p>
+  <section class="pics">
+    <div *ngFor="let pic of place.photos" class="pic">
+      <img [src]="pic.url" alt="pic" />
+    </div>
+  </section>
+  <div class="id">{{ checkout.store.placeId }}</div>
 </div>
+<div id="map"></div>

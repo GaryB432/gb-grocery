@@ -1,3 +1,4 @@
+import { Photo } from './photo';
 import { Point } from './point';
 
 export interface Place {
@@ -6,6 +7,7 @@ export interface Place {
   icon: string;
   location: Point;
   name: string;
+  photos: Photo[];
   placeId: string;
   types: string[];
   url: string;

@@ -161,7 +161,7 @@ describe('Logic Service', () => {
       icon: 'icon',
       location: { latitude: 3, longitude: 5 },
       name: 'name',
-      photo: 'photo',
+      photos: [],
       types: ['fake'],
       url: 'url',
       vicinity: 'vicinity',

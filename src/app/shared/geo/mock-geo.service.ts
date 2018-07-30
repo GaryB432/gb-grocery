@@ -35,6 +35,7 @@ export class MockGeoService extends AbstractGeoService {
           'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         location: { ...spot },
         name: `${ks.name} S${n}`,
+        photos: [],
         placeId: ks.place_id,
         types: ['grocery_or_supermarket', 'fake', 'store'],
         url: `url ${n}`,
@@ -91,6 +92,10 @@ export class MockGeoService extends AbstractGeoService {
         resolve(Utilities.flatten([fakePlaces, otherPlaces]));
       }, 200);
     });
+  }
+
+  public getPlaceDetails(placeId: string): Promise<Partial<Place>> {
+    throw new Error('Method not implemented.');
   }
 
   public async getCurrentPosition(

@@ -2,6 +2,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';
+import { Place } from './place';
 
 /* tslint:disable-next-line:no-namespace */
 namespace FakeGoogle {
@@ -137,13 +138,13 @@ describe('GoogleGeoService', () => {
       website: 'website',
     };
 
-    const expected = {
+    const expected: Place = {
       formattedAddress: 'formatted_address',
       formattedPhoneNumber: 'formatted_phone_number',
       icon: 'icon',
       location: { latitude: 2, longitude: 3 },
       name: 'name',
-      photo: 'photo',
+      photos: [],
       placeId: 'place_id',
       types: ['a', 'b'],
       url: 'url',

@@ -11,6 +11,10 @@ export abstract class AbstractGeoService {
     coords: Coordinates
   ): Promise<Place[]>;
 
+  public abstract async getPlaceDetails(
+    placeId: string
+  ): Promise<Partial<Place>>;
+
   public abstract async getCurrentPosition(
     options?: PositionOptions
   ): Promise<Position>;
