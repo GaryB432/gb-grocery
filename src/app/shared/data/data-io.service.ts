@@ -65,6 +65,9 @@ export class DataIOService {
               stores: this.readStores(),
             };
             if (dbInfo) {
+              dbInfo.stores
+                .filter(s => !s.icon)
+                .forEach(s => (s.icon = 'https://via.placeholder.com/71x71'));
               Object.assign(info, dbInfo);
             } else {
               // tslint:disable-next-line:no-console
