@@ -65,13 +65,14 @@ export class DataIOService {
               stores: this.readStores(),
             };
             if (dbInfo) {
-              dbInfo.stores
-                .filter(s => !s.icon)
-                .forEach(s => (s.icon = 'https://via.placeholder.com/71x71'));
+              if (dbInfo.stores) {
+                dbInfo.stores
+                  .filter(s => !s.icon)
+                  .forEach(s => (s.icon = 'https://via.placeholder.com/71x71'));
+              }
               Object.assign(info, dbInfo);
             } else {
-              // tslint:disable-next-line:no-console
-              console.warn(' no cloud data. initializing from local-storage.');
+              // no cloud data. initializing from local-storage
               Object.assign(info, lsinfo);
               if (info.items.length > 0) {
                 this.infoRef!.set(info);
@@ -90,6 +91,8 @@ export class DataIOService {
     this.writeStores(newInfo.stores);
     this.writeItems(newInfo.items);
     this.writeCheckouts(newInfo.checkouts);
+
+    console.log('fb', newInfo);
 
     return new Promise<Dto.AppInfo>((resolve, reject) => {
       if (this.isAuthenticated) {

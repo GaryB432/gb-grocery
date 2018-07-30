@@ -35,7 +35,6 @@ export class MockGeoService extends AbstractGeoService {
           'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         location: { ...spot },
         name: `${ks.name} S${n}`,
-        photo: 'assets/img/personal.png',
         placeId: ks.place_id,
         types: ['grocery_or_supermarket', 'fake', 'store'],
         url: `url ${n}`,

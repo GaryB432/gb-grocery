@@ -96,6 +96,7 @@ export class LogicService {
         store.checkouts = [];
       }
 
+      // update the store with the fresh place information
       store.icon = place.icon;
       store.location = {
         accuracy: 0,

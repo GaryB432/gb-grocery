@@ -69,8 +69,6 @@ interface StoreDistance {
 export class StoreComponent implements OnInit {
   public neededThings: Pickup[] = [];
 
-  public stores: Store[] = [];
-
   public nbStores: StoreDistance[] = [];
 
   public newName = '';
@@ -144,8 +142,6 @@ export class StoreComponent implements OnInit {
         .filter(i => i.needed)
         .sort((a, b) => a.name.localeCompare(b.name))
         .map(i => new Pickup(i, undefined));
-
-      this.stores = updatedData.stores;
 
       this.geo
         .nearbyStoreSearch(coords)

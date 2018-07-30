@@ -75,21 +75,12 @@ export class GoogleGeoService extends AbstractGeoService {
         longitude: pr.geometry.location.lng(),
       },
       name: pr.name,
-      photo: '',
       placeId: pr.place_id,
       types: pr.types,
       url: pr.url,
       vicinity: pr.vicinity,
       website: pr.website,
     };
-
-    if (
-      pr.photos &&
-      pr.photos.length > 0 &&
-      typeof pr.photos[0].getUrl === 'function'
-    ) {
-      place.photo = pr.photos[0].getUrl({ maxHeight: 300, maxWidth: 320 });
-    }
 
     return place;
   }

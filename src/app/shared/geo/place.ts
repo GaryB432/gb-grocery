@@ -6,7 +6,6 @@ export interface Place {
   icon: string;
   location: Point;
   name: string;
-  photo: string;
   placeId: string;
   types: string[];
   url: string;
