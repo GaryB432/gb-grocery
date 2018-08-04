@@ -125,7 +125,7 @@ export class GoogleGeoService extends AbstractGeoService {
     };
 
     if (photoOptions) {
-      place.photos = pr.photos.map(p => ({
+      place.photos = pr.photos.slice(0, 8).map(p => ({
         height: p.height,
         html_attributions: p.html_attributions,
         width: p.width,
