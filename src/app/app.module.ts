@@ -6,6 +6,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '../environments/environment';
 import { AboutComponent } from './about/about.component';
@@ -42,6 +43,7 @@ import { StoreModule } from './store/store.module';
     SharedModule,
     StoreModule,
     LoginModule,
+    ToastrModule.forRoot(),
   ],
   providers: [AuthGuard],
 })

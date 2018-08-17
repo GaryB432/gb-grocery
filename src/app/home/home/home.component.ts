@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { ToastrService } from 'ngx-toastr';
 
 import { Item } from '../../models/item';
 import { GestureEvent } from '../../shared/hammer-gestures.directive';
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     private logic: LogicService,
+    private toastr: ToastrService,
     vcr: ViewContainerRef
   ) {
     afAuth.authState.subscribe((user: firebase.User | null) => {
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log('toast me', 'Swipe right on needed items.');
+    setTimeout(() => this.toastr.show('Swipe right on needed items.'), 0);
   }
 
   public addItem(): void {
