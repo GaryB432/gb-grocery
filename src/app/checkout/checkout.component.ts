@@ -31,6 +31,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         .load()
         .then(() => this.logic.getCheckout(store, date))
         .then(co => {
+          co.pickups = co.pickups.sort((a, b) =>
+            a.item.name.localeCompare(b.item.name)
+          );
           this.checkout = co;
           return this.geo.getPlaceDetails(this.checkout.store.placeId);
         })
