@@ -2,6 +2,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrService } from 'ngx-toastr';
 
 import { AppInfo } from '../models/appinfo';
 import { DataService } from '../shared/data/data.service';
@@ -21,6 +22,8 @@ class MockDataService {
   }
 }
 
+class MockToastrService {}
+
 class MockRouter {
   public navigate: jasmine.Spy = jasmine.createSpy('navigate');
 }
@@ -39,6 +42,7 @@ describe('StoreComponent', () => {
           { provide: LogicService, useClass: LogicService },
           { provide: AbstractGeoService, useClass: MockGeoService },
           { provide: DataService, useClass: MockDataService },
+          { provide: ToastrService, useClass: MockToastrService },
           { provide: Router, useClass: MockRouter },
         ],
       })

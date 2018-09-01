@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { ToastrService } from 'ngx-toastr';
 
 import { Item } from '../../models/item';
 import { GestureEvent } from '../../shared/hammer-gestures.directive';
@@ -12,7 +11,7 @@ import { LogicService } from '../../shared/logic.service';
   styleUrls: ['./home.component.scss'],
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   public items: Item[] = [];
 
   public newName = '';
@@ -20,7 +19,6 @@ export class HomeComponent implements OnInit {
   constructor(
     public afAuth: AngularFireAuth,
     private logic: LogicService,
-    private toastr: ToastrService,
     vcr: ViewContainerRef
   ) {
     afAuth.authState.subscribe((user: firebase.User | null) => {
@@ -30,10 +28,6 @@ export class HomeComponent implements OnInit {
         this.getUserItems();
       }
     });
-  }
-
-  public ngOnInit(): void {
-    setTimeout(() => this.toastr.show('Swipe right on needed items.'), 0);
   }
 
   public addItem(): void {

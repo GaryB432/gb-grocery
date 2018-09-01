@@ -28,10 +28,8 @@
               "src/manifest.json"
             ],
             "styles": [
-              "node_modules/ngx-toastr/toastr.css",
-              {
-                "input": "src/styles/styles.scss"
-              }
+              "src/styles/toastr.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -81,10 +79,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "node_modules/ngx-toastr/toastr.css",
-              {
-                "input": "src/styles/styles.scss"
-              }
+              "src/styles/toastr.css",
+              "src/styles/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -103,7 +99,8 @@
             ],
             "exclude": [
               "**/node_modules/**"
-            ]
+            ],
+            "format": "stylish"
           }
         }
       }

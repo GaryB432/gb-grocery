@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { Checkout } from '../models/checkout';
 import { Pickup } from '../models/pickup';
@@ -78,6 +79,7 @@ export class StoreComponent implements OnInit {
   constructor(
     private logic: LogicService,
     private geo: AbstractGeoService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -127,7 +129,7 @@ export class StoreComponent implements OnInit {
           this.neededThings.filter(i => i.picked)
         )
         .then((co: Checkout) => {
-          alert(`Thank you for shopping at ${co.store.name}`);
+          this.toastr.success(`Thank you for shopping at ${co.store.name}`);
           this.router.navigateByUrl('/');
         });
     } else {
