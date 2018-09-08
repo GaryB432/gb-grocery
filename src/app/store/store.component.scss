@@ -63,15 +63,6 @@ select {
   }
 }
 
-.check-out {
-  display: flex;
-  justify-content: center;
-  button {
-    font-size: 2rem;
-    flex: 1 0 auto;
-  }
-}
-
 .loader:before,
 .loader:after,
 .loader {
