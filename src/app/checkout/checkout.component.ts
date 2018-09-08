@@ -38,7 +38,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
           return this.geo.getPlaceDetails(this.checkout.store.placeId);
         })
         .then(p => {
-          console.log(p);
           this.place = p;
         })
         .catch(err => {

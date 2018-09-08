@@ -23,7 +23,6 @@ export class HomeComponent {
   ) {
     afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
-        console.log(user.uid, user);
         // this.uid = user.uid;
         this.getUserItems();
       }

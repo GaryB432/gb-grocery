@@ -92,8 +92,8 @@ export class DataIOService {
     this.writeItems(newInfo.items);
     this.writeCheckouts(newInfo.checkouts);
 
-    console.log('fb', newInfo);
-
+    console.log('saveAll', newInfo);
+    
     return new Promise<Dto.AppInfo>((resolve, reject) => {
       if (this.isAuthenticated) {
         this.infoRef!.set(newInfo)
