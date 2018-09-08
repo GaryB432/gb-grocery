@@ -1,18 +1,18 @@
-<section [ngSwitch]="!!selectedStore">
-  <section *ngSwitchCase="true">
-    <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
-      <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">{{ nbs.store.name }}</option>
-    </select>
-    <section class="store-info">
-      <section>
-        <img [src]="selectedStore.store.icon" />
-        <div class="vicinity">{{ selectedStore.store.vicinity }}</div>
-      </section>
+<section *ngIf="!!selectedStore; else loading">
+  <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
+    <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">{{ nbs.store.name }}</option>
+  </select>
+  <section class="store-info">
+    <section>
+      <img [src]="selectedStore.store.icon" />
+      <div class="vicinity">{{ selectedStore.store.vicinity }}</div>
     </section>
-    <img src="assets/img/powered_by_google_on_white.png" alt="powered by Google" />
   </section>
-  <div *ngSwitchDefault class="loader"></div>
+  <img src="assets/img/powered_by_google_on_white.png" alt="powered by Google" />
 </section>
+<ng-template #loading>
+  <div class="loader"></div>
+</ng-template>
 <div *ngIf="neededThings.length === 0" class="no-items">
   <h1>You don't need anything</h1>
   <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here for
