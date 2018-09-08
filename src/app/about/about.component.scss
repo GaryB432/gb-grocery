@@ -24,12 +24,3 @@ img {
   display: block;
   max-width: 200px;
 }
-.swatch-field {
-  margin: 1em;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  .swatch {
-    margin: 0.1em;
-    padding: 0.1em;
-  }
-}
