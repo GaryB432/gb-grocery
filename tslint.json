@@ -36,7 +36,7 @@
       true,
       140
     ],
-    "member-access": false,
+    "member-access": true,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -68,8 +68,7 @@
       "@angular/platform-browser",
       "@angular/core/testing",
       "@angular/router/testing",
-      "angularfire2",
-      "firebase"
+      "@angular/fire"
     ],
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
