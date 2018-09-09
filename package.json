@@ -8,7 +8,9 @@
   },
   "scripts": {
     "ng": "ng",
+    "format": "prettier --write \"src/**/{*.ts,*.scss}\"",
     "start": "ng serve",
+    "prebuild": "npm run format",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -45,9 +47,12 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "prettier": "^1.14.2",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
+    "tslint-config-gb": "^1.1.0",
+    "tslint-config-prettier": "^1.15.0",
     "typescript": "~2.9.2"
   },
   "prettier": {
