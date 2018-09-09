@@ -6,9 +6,50 @@
     "type": "git",
     "url": "git+https://github.com/GaryB432/gb-grocery.git"
   },
-  "scripts": {},
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@angular/animations": "next",
+    "@angular/common": "next",
+    "@angular/compiler": "next",
+    "@angular/core": "next",
+    "@angular/forms": "next",
+    "@angular/http": "next",
+    "@angular/platform-browser": "next",
+    "@angular/platform-browser-dynamic": "next",
+    "@angular/router": "next",
+    "core-js": "^2.5.4",
+    "rxjs": "~6.2.0",
+    "zone.js": "~0.8.26"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.8.0",
+    "@angular/cli": "next",
+    "@angular/compiler-cli": "next",
+    "@angular/language-service": "next",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~4.3.0",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~3.0.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.4.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.11.0",
+    "typescript": "^2.9.2"
+  },
   "prettier": {
     "printWidth": 80,
     "singleQuote": true,
@@ -18,7 +59,6 @@
     "bracketSpacing": true,
     "trailingComma": "es5"
   },
-  "devDependencies": {},
   "bugs": {
     "url": "https://github.com/GaryB432/gb-grocery/issues"
   }
