@@ -1,0 +1,9 @@
+<h1>
+  Welcome to {{ title }}!
+</h1>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.name}}
+  </li>
+</ul>
+<button (click)="addFakeStuff()">Add Fake Stuff</button>
