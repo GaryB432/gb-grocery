@@ -33,7 +33,7 @@ export class AboutComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.afAuth.authState.subscribe((user: firebase.User | null) => {
+    this.afAuth.authState.subscribe(async (user: firebase.User | null) => {
       this.isAuthenticated = !!user;
       this.displayName = user
         ? user.displayName || 'FALSY NAME'
@@ -42,9 +42,8 @@ export class AboutComponent implements OnInit {
         ? user.photoURL || 'assets/img/personal.png'
         : 'assets/img/personal.png';
       if (this.isAuthenticated) {
-        this.io.load().then(info => {
-          this.jsonInfo = JSON.stringify(info, null, 2);
-        });
+        const info = await this.io.load();
+        this.jsonInfo = JSON.stringify(info, null, 2);
       }
     });
   }
