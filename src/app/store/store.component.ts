@@ -107,8 +107,7 @@ export class StoreComponent implements OnInit {
     pickup.picked = !pickup.picked;
   }
 
-  public changeStore(_event?: any): void {
-    console.log(_event);
+  public changeStore(_placeID?: string): void {
     const nbs = this.selectedStore;
     if (!nbs) {
       throw new Error('changing to null store');
