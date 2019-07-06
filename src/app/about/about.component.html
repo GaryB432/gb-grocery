@@ -1,6 +1,6 @@
 <section>
   <div>{{ displayName }}</div>
-  <img [src]="photoURL" alt="you">
+  <img [src]="photoURL" alt="you" />
   <div *ngIf="isAuthenticated; else unAuth">
     <button (click)="logout()">Logout</button>
   </div>

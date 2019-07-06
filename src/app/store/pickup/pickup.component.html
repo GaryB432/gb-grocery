@@ -1,4 +1,9 @@
 <h1>{{ pickup.item.name | uppercase }}</h1>
 <div class="addl">
-  <input type="text" placeholder="Aisle" [(ngModel)]="pickup.aisle" [disabled]="!pickup.picked" />
+  <input
+    type="text"
+    placeholder="Aisle"
+    [(ngModel)]="pickup.aisle"
+    [disabled]="!pickup.picked"
+  />
 </div>
