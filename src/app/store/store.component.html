@@ -43,8 +43,9 @@
   <gbg-store-pickup class="info" [pickup]="pu"></gbg-store-pickup>
 </article>
 <section class="brow">
-
-  <button class="b2" [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
+  <button class="b2" [disabled]="!checkoutReady()" (click)="addCheckout()">
+    Check Out
+  </button>
 </section>
 <div class="distance">{{ selectedStore?.distance | number: '1.2-3' }}</div>
 
