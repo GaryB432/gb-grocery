@@ -10,6 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
+    "strict": true,
     "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
@@ -19,6 +20,10 @@
       "dom"
     ]
   },
+  "types": [
+    "googlemaps",
+    "hammerjs"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
