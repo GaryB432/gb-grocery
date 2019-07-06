@@ -51,7 +51,7 @@ export class DataService {
       stores: info.stores.map(s => {
         return {
           icon: s.icon || '',
-          id: s.id!,
+          id: s.id || '',
           name: s.name,
           place_id: s.placeId,
           vicinity: s.vicinity || '',

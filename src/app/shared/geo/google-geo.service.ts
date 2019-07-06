@@ -80,8 +80,8 @@ export class GoogleGeoService extends AbstractGeoService {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             resolve(
               GoogleGeoService.toPlace(result, {
-                maxWidth: 320,
                 maxHeight: 500,
+                maxWidth: 320,
               })
             );
           } else {
@@ -132,8 +132,8 @@ export class GoogleGeoService extends AbstractGeoService {
       place.photos = (pr.photos || []).slice(0, 8).map(p => ({
         height: p.height,
         html_attributions: p.html_attributions,
-        width: p.width,
         url: p.getUrl(photoOptions),
+        width: p.width,
       }));
     }
 

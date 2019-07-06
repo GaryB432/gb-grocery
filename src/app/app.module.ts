@@ -44,9 +44,9 @@ import { StoreModule } from './store/store.module';
     StoreModule,
     LoginModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
+      timeOut: 5000,
     }),
   ],
   providers: [AuthGuard],
