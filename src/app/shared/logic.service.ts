@@ -48,16 +48,14 @@ export class LogicService {
   public getItem(id: string): Promise<Item> {
     return this.loaded.then(
       info =>
-        new Promise<Item>(
-          (resolve, reject): void => {
-            const item = info.items.find(i => i.id === id);
-            if (!!item) {
-              resolve(item);
-            } else {
-              reject(`No item ${id}`);
-            }
+        new Promise<Item>((resolve, reject): void => {
+          const item = info.items.find(i => i.id === id);
+          if (!!item) {
+            resolve(item);
+          } else {
+            reject(`No item ${id}`);
           }
-        )
+        })
     );
   }
 
@@ -65,18 +63,16 @@ export class LogicService {
     const date = new Date(Date.parse(isoDate)).getTime();
     return this.loaded.then(
       info =>
-        new Promise<Checkout>(
-          (resolve, reject): void => {
-            const checkout = info.checkouts.find(
-              co => co.date.getTime() === date && co.store.id === store
-            );
-            if (!!checkout) {
-              resolve(checkout);
-            } else {
-              reject(`No checkout on ${isoDate} at ${store}`);
-            }
+        new Promise<Checkout>((resolve, reject): void => {
+          const checkout = info.checkouts.find(
+            co => co.date.getTime() === date && co.store.id === store
+          );
+          if (!!checkout) {
+            resolve(checkout);
+          } else {
+            reject(`No checkout on ${isoDate} at ${store}`);
           }
-        )
+        })
     );
   }
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
