@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AbstractGeoService } from './abstract-geo.service';
 import { Place } from './place';
+import { Point } from './point';
 
 @Injectable()
 export class GoogleGeoService extends AbstractGeoService {
@@ -79,8 +80,8 @@ export class GoogleGeoService extends AbstractGeoService {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             resolve(
               GoogleGeoService.toPlace(result, {
-                maxWidth: 320,
                 maxHeight: 500,
+                maxWidth: 320,
               })
             );
           } else {
@@ -107,14 +108,17 @@ export class GoogleGeoService extends AbstractGeoService {
     pr: google.maps.places.PlaceResult,
     photoOptions?: google.maps.places.PhotoOptions
   ): Place {
+    const location: Point = pr.geometry
+      ? {
+          latitude: pr.geometry.location.lat(),
+          longitude: pr.geometry.location.lng(),
+        }
+      : { latitude: 0, longitude: 0 };
     const place: Place = {
       formattedAddress: pr.formatted_address,
       formattedPhoneNumber: pr.formatted_phone_number,
       icon: pr.icon,
-      location: {
-        latitude: pr.geometry.location.lat(),
-        longitude: pr.geometry.location.lng(),
-      },
+      location,
       name: pr.name,
       photos: [],
       placeId: pr.place_id,
@@ -125,11 +129,11 @@ export class GoogleGeoService extends AbstractGeoService {
     };
 
     if (photoOptions) {
-      place.photos = pr.photos.slice(0, 8).map(p => ({
+      place.photos = (pr.photos || []).slice(0, 8).map(p => ({
         height: p.height,
         html_attributions: p.html_attributions,
-        width: p.width,
         url: p.getUrl(photoOptions),
+        width: p.width,
       }));
     }
 

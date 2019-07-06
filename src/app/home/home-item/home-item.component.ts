@@ -69,9 +69,8 @@ export class HomeItemComponent implements OnInit {
     this.pickupCount = this.item.checkouts.length;
     this.recentCheckout =
       this.pickupCount > 0
-        ? this.item.checkouts.reduce(
-            (pv, cv) =>
-              !pv || !pv.date || !cv.date || cv.date > pv.date ? cv : pv
+        ? this.item.checkouts.reduce((pv, cv) =>
+            !pv || !pv.date || !cv.date || cv.date > pv.date ? cv : pv
           )
         : undefined;
   }

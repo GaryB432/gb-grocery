@@ -56,31 +56,37 @@ export class DataIOService {
           items: [],
           stores: [],
         };
-        this.infoRef!.once('value').then(
-          (snapshot: { val: () => Dto.AppInfo }) => {
-            const dbInfo = snapshot.val();
-            const lsinfo: Dto.AppInfo = {
-              checkouts: this.readCheckouts(),
-              items: this.readItems(),
-              stores: this.readStores(),
-            };
-            if (dbInfo) {
-              if (dbInfo.stores) {
-                dbInfo.stores
-                  .filter(s => !s.icon)
-                  .forEach(s => (s.icon = 'https://via.placeholder.com/71x71'));
+        if (!!this.infoRef) {
+          this.infoRef
+            .once('value')
+            .then((snapshot: { val: () => Dto.AppInfo }) => {
+              const dbInfo = snapshot.val();
+              const lsinfo: Dto.AppInfo = {
+                checkouts: this.readCheckouts(),
+                items: this.readItems(),
+                stores: this.readStores(),
+              };
+              if (dbInfo) {
+                if (dbInfo.stores) {
+                  dbInfo.stores
+                    .filter(s => !s.icon)
+                    .forEach(
+                      s => (s.icon = 'https://via.placeholder.com/71x71')
+                    );
+                }
+                Object.assign(info, dbInfo);
+              } else if (!!this.infoRef) {
+                // no cloud data. initializing from local-storage
+                Object.assign(info, lsinfo);
+                if (info.items.length > 0) {
+                  this.infoRef.set(info);
+                }
               }
-              Object.assign(info, dbInfo);
-            } else {
-              // no cloud data. initializing from local-storage
-              Object.assign(info, lsinfo);
-              if (info.items.length > 0) {
-                this.infoRef!.set(info);
-              }
-            }
-            resolve(info);
-          }
-        );
+              resolve(info);
+            });
+        } else {
+          reject('no inforef');
+        }
       } else {
         reject('unauthenticated');
       }
@@ -93,10 +99,11 @@ export class DataIOService {
     this.writeCheckouts(newInfo.checkouts);
 
     console.log('saveAll', newInfo);
-    
+
     return new Promise<Dto.AppInfo>((resolve, reject) => {
-      if (this.isAuthenticated) {
-        this.infoRef!.set(newInfo)
+      if (this.isAuthenticated && !!this.infoRef) {
+        this.infoRef
+          .set(newInfo)
           .then(() => resolve(newInfo))
           .catch(reason => reject(reason));
       } else {

@@ -13,20 +13,19 @@ export class DataService {
     this.io.clearAll();
   }
 
-  public load(): Promise<AppInfo> {
+  public async load(): Promise<AppInfo> {
     const info: Partial<AppInfo> = {};
 
-    return this.io.load().then(a => {
-      info.stores = a.stores.map(s => Utilities.dtoToStore(s));
-      info.items = a.items.map(i => Utilities.dtoToItem(i));
-      info.checkouts = a.checkouts.map(c =>
-        Utilities.dtoToCheckout(c, info as AppInfo)
-      );
-      return info as AppInfo;
-    });
+    const a = await this.io.load();
+    info.stores = a.stores.map(s => Utilities.dtoToStore(s));
+    info.items = a.items.map(i => Utilities.dtoToItem(i));
+    info.checkouts = a.checkouts.map(c =>
+      Utilities.dtoToCheckout(c, info as AppInfo)
+    );
+    return info as AppInfo;
   }
 
-  public saveAll(info: AppInfo): Promise<AppInfo> {
+  public async saveAll(info: AppInfo): Promise<AppInfo> {
     const dto: Dto.AppInfo = {
       checkouts: info.checkouts.map(c => {
         return {
@@ -50,11 +49,11 @@ export class DataService {
       }),
       stores: info.stores.map(s => {
         return {
-          icon: s.icon,
-          id: s.id!,
+          icon: s.icon || '',
+          id: s.id || '',
           name: s.name,
           place_id: s.placeId,
-          vicinity: s.vicinity,
+          vicinity: s.vicinity || '',
         };
       }),
     };
@@ -67,6 +66,7 @@ export class DataService {
       }
     }
 
-    return this.io.saveAll(dto).then(() => info);
+    await this.io.saveAll(dto);
+    return info;
   }
 }

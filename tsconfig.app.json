@@ -1,15 +1,17 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "module": "es2015",
+    "outDir": "./out-tsc/app",
     "types": [
       "googlemaps",
       "hammerjs"
     ]
   },
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
     "src/test.ts",
-    "**/*.spec.ts"
+    "src/**/*.spec.ts"
   ]
 }

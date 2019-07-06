@@ -1,14 +1,15 @@
-<div class="container" *ngIf="place">
+<div class="container" *ngIf="place && checkout">
   <h1>
     <a [href]="place.url">{{ place.name }}</a>
   </h1>
   <p>{{ checkout.date }}</p>
   <table>
     <tr *ngFor="let pu of checkout.pickups">
-      <td>{{pu.item.name}}</td>
-      <td>{{pu.aisle}}</td>
+      <td>{{ pu.item.name }}</td>
+      <td>{{ pu.aisle }}</td>
     </tr>
   </table>
+
   <section class="pics">
     <div *ngFor="let pic of place.photos" class="pic">
       <img [src]="pic.url" alt="pic" />

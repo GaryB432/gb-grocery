@@ -1,8 +1,8 @@
 <section>
   <div>{{ displayName }}</div>
-  <img [src]="photoURL" alt="you">
+  <img [src]="photoURL" alt="you" />
   <div *ngIf="isAuthenticated; else unAuth">
-    <button (click)="logout()">Logout</button>
+    <button class="b2" (click)="logout()">Logout</button>
   </div>
   <ng-template #unAuth>
     <a [routerLink]="['/login']">Login</a>
@@ -10,11 +10,11 @@
 </section>
 <section *ngIf="isAuthenticated">
   <p>This will erase all gb-grocery data. BE CAREFUL.</p>
-  <button (click)="clearData()">Erase</button>
+  <button class="b2" (click)="clearData()">Erase</button>
 </section>
 <section *ngIf="isAuthenticated">
   <textarea [(ngModel)]="jsonInfo" rows="20" cols="35"></textarea>
   <p>This will replace your data from the text above. BE CAREFUL.</p>
-  <button (click)="replaceAppInfoForever()">Replace</button>
+  <button class="b2" (click)="replaceAppInfoForever()">Replace</button>
 </section>
-<p>4.11 a</p>
+<p>5.ng8</p>
