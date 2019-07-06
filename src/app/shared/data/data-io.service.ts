@@ -93,7 +93,7 @@ export class DataIOService {
     this.writeCheckouts(newInfo.checkouts);
 
     console.log('saveAll', newInfo);
-    
+
     return new Promise<Dto.AppInfo>((resolve, reject) => {
       if (this.isAuthenticated) {
         this.infoRef!.set(newInfo)

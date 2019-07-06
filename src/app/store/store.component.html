@@ -1,7 +1,43 @@
 <section *ngIf="!!selectedStore; else loading">
-  <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
-    <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">{{ nbs.store.name }}</option>
-  </select>
+
+    <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
+        <option *ngFor="let nbs of nbStores" [ngValue]="selectedStorePlaceId">{{ nbs.store.name }}</option>
+      </select>
+
+      <section class="store-info">
+          <section>
+            <img [src]="selectedStore.store.icon" />
+            <div class="vicinity">{{ selectedStore.store.vicinity }}</div>
+          </section>
+        </section>
+        <img src="assets/img/powered_by_google_on_white.png" alt="powered by Google" />
+      
+</section>
+<ng-template #loading>
+  <div class="loader"></div>
+</ng-template>
+<div *ngIf="neededThings.length === 0" class="no-items">
+    <h1>You don't need anything</h1>
+    <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here for
+      you to pick up.</p>
+  </div>
+  <article *ngFor="let pu of neededThings" class="card" [@cbhState]="pu.picked ? 'picked' : 'notpicked'">
+    <div (click)="togglePicked(pu)" class="cbholder">
+      <i class="fa fa-check" [@checkState]="pu.picked ? 'picked' : 'notpicked'"></i>
+    </div>
+  
+    <gbg-store-pickup class="info" [pickup]="pu"></gbg-store-pickup>
+  </article>
+  <button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
+  <div class="distance">{{ selectedStore?.distance | number : '1.2-3' }}</div> 
+  
+<!-- 
+  
+  <section *ngIf="!!selectedStore; else loading">
+
+    <select [(ngModel)]="selectedStorePlaceId" (ngModelChange)="changeStore($event)">
+        <option *ngFor="let nbs of nbStores" [value]="selectedStorePlaceId">{{ nbs.store.name }}</option>
+      </select> 
   <section class="store-info">
     <section>
       <img [src]="selectedStore.store.icon" />
@@ -13,18 +49,6 @@
 <ng-template #loading>
   <div class="loader"></div>
 </ng-template>
-<div *ngIf="neededThings.length === 0" class="no-items">
-  <h1>You don't need anything</h1>
-  <p>Head back over to <a [routerLink]="['/home']">Items</a> and switch on some items that you need. They will appear here for
-    you to pick up.</p>
-</div>
-<article *ngFor="let pu of neededThings" class="card" [@cbhState]="pu.picked ? 'picked' : 'notpicked'">
-  <div (click)="togglePicked(pu)" class="cbholder">
-    <i class="fa fa-check" [@checkState]="pu.picked ? 'picked' : 'notpicked'"></i>
-  </div>
 
-  <gbg-store-pickup class="info" [pickup]="pu"></gbg-store-pickup>
-</article>
-<button [disabled]="!checkoutReady()" (click)="addCheckout()">Check Out</button>
-<div class="distance">{{ selectedStore?.distance | number : '1.2-3' }}</div>
+-->
 <div id="map"></div>

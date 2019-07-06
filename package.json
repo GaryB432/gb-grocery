@@ -8,7 +8,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "format": "prettier --write \"src/**/{*.ts,*.scss}\"",
+    "format": "prettier --write \"src/**/{*.ts,*.scss,*.html}\"",
     "start": "ng serve",
     "prebuild": "npm run format",
     "build": "ng build",
