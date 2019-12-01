@@ -54,7 +54,10 @@ const someAppInfo: Dto.AppInfo = {
   checkouts: [
     {
       isoDate: '2016-04-03T04:45:38.582Z',
-      pickups: [{ itemId: 'I1', aisle: 'K9' }, { itemId: 'I0', aisle: 'D10' }],
+      pickups: [
+        { itemId: 'I1', aisle: 'K9' },
+        { itemId: 'I0', aisle: 'D10' },
+      ],
       storeId: 'S1',
     },
     {
