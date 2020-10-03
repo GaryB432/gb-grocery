@@ -171,6 +171,7 @@ export class StoreComponent implements OnInit {
             'There was a mapping problem or you seem to not be near a grocery store. ' +
               'The Check Out tab is meant for when you are at the store.'
           );
+          alert(e);
           this.router.navigateByUrl('/');
         });
     });
