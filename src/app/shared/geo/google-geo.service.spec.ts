@@ -114,6 +114,7 @@ describe('GoogleGeoService', () => {
       international_phone_number: 'international_phone_number',
       name: 'name',
       opening_hours: {
+        isOpen: () => false,
         open_now: true,
         periods: [] as google.maps.places.OpeningPeriod[],
         weekday_text: [] as string[],

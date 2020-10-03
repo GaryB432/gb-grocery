@@ -26,7 +26,7 @@ export class GoogleGeoService extends AbstractGeoService {
 
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
     return new Promise<Place[]>((resolve, reject) => {
-      const grocery = 'grocery_or_supermarket';
+      const supermarket = 'supermarket';
       if (!!this.mapElement) {
         const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
           new google.maps.Map(this.mapElement)
@@ -39,7 +39,7 @@ export class GoogleGeoService extends AbstractGeoService {
           openNow: true,
           radius: 2 * 1609.34,
           rankBy: undefined,
-          types: [grocery],
+          type: supermarket,
         };
         placeService.nearbySearch(
           searchRequest,
