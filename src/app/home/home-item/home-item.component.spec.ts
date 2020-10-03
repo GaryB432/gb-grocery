@@ -24,8 +24,8 @@ describe('HomeItemComponent', () => {
     component = fixture.componentInstance;
     component.item = new Item();
 
-    const stores: Store[] = [0, 1, 2, 3, 43].map( 
-      n => new Store(`S${n}`, `Store ${n}`) 
+    const stores: Store[] = [0, 1, 2, 3, 43].map(
+      n => new Store(`S${n}`, `Store ${n}`)
     );
 
     component.item.checkouts = [
