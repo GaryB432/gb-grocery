@@ -6,6 +6,8 @@ import { Point } from './point';
 
 @Injectable()
 export class GoogleGeoService extends AbstractGeoService {
+  private mapElement: HTMLElement | null = document.getElementById('map');
+
   constructor() {
     super();
   }
@@ -25,70 +27,78 @@ export class GoogleGeoService extends AbstractGeoService {
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
     return new Promise<Place[]>((resolve, reject) => {
       const grocery = 'grocery_or_supermarket';
-      const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-        new google.maps.Map(document.getElementById('map'))
-      );
-      const searchRequest: google.maps.places.PlaceSearchRequest = {
-        bounds: undefined,
-        keyword: undefined,
-        location: GoogleGeoService.getLatLng(coords),
-        name: undefined,
-        openNow: true,
-        radius: 2 * 1609.34,
-        rankBy: undefined,
-        types: [grocery],
-      };
-      placeService.nearbySearch(
-        searchRequest,
-        (
-          results: google.maps.places.PlaceResult[],
-          status: google.maps.places.PlacesServiceStatus
-        ) => {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            resolve(results.map(gs => GoogleGeoService.toPlace(gs)));
-          } else {
-            reject(status.toString());
+      if (!!this.mapElement) {
+        const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
+          new google.maps.Map(this.mapElement)
+        );
+        const searchRequest: google.maps.places.PlaceSearchRequest = {
+          bounds: undefined,
+          keyword: undefined,
+          location: GoogleGeoService.getLatLng(coords),
+          name: undefined,
+          openNow: true,
+          radius: 2 * 1609.34,
+          rankBy: undefined,
+          types: [grocery],
+        };
+        placeService.nearbySearch(
+          searchRequest,
+          (
+            results: google.maps.places.PlaceResult[],
+            status: google.maps.places.PlacesServiceStatus
+          ) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              resolve(results.map(gs => GoogleGeoService.toPlace(gs)));
+            } else {
+              reject(status.toString());
+            }
           }
-        }
-      );
+        );
+      } else {
+        reject('no map element');
+      }
     });
   }
 
   public async getPlaceDetails(placeId: string): Promise<Partial<Place>> {
     return new Promise<Place>((resolve, reject) => {
-      const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-        new google.maps.Map(document.getElementById('map'))
-      );
-      const searchRequest: google.maps.places.PlaceDetailsRequest = {
-        fields: [
-          'name',
-          'place_id',
-          'formatted_phone_number',
-          'geometry',
-          'plus_code',
-          'photo',
-          'url',
-        ],
-        placeId,
-      };
-      placeService.getDetails(
-        searchRequest,
-        (
-          result: google.maps.places.PlaceResult,
-          status: google.maps.places.PlacesServiceStatus
-        ) => {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            resolve(
-              GoogleGeoService.toPlace(result, {
-                maxHeight: 500,
-                maxWidth: 320,
-              })
-            );
-          } else {
-            reject(status.toString());
+      if (!!this.mapElement) {
+        const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
+          new google.maps.Map(this.mapElement)
+        );
+        const searchRequest: google.maps.places.PlaceDetailsRequest = {
+          fields: [
+            'name',
+            'place_id',
+            'formatted_phone_number',
+            'geometry',
+            'plus_code',
+            'photo',
+            'url',
+          ],
+          placeId,
+        };
+        placeService.getDetails(
+          searchRequest,
+          (
+            result: google.maps.places.PlaceResult,
+            status: google.maps.places.PlacesServiceStatus
+          ) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              resolve(
+                GoogleGeoService.toPlace(result, {
+                  maxHeight: 500,
+                  maxWidth: 320,
+                })
+              );
+            } else {
+              reject(status.toString());
+            }
           }
-        }
-      );
+        );
+      } else {
+        reject('no map element');
+      }
     });
   }
 
