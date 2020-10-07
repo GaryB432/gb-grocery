@@ -7,13 +7,5 @@ export const environment = {
     projectId: 'grocery17-9ca26',
     storageBucket: 'grocery17-9ca26.appspot.com',
   },
-  azure: {
-    BUILD_BUILDNUMBER: 'BUILD_BUILDNUMBER',
-    BUILD_BUILDURI: 'BUILD_BUILDURI',
-    BUILD_DEFINITIONNAME: 'BUILD_DEFINITIONNAME',
-    BUILD_DEFINITIONVERSION: 'BUILD_DEFINITIONVERSION',
-    BUILD_QUEUEDBY: 'BUILD_QUEUEDBY',
-    BUILD_SOURCEBRANCH: 'BUILD_SOURCEBRANCH',
-  },
   production: true,
 };
