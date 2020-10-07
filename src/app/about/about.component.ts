@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-
-// import { FirebaseApp } from '@firebase/app-types';
-// import { FirebaseAuth } from '@firebase/auth-types';
-// import { FirebaseDatabase } from '@firebase/database-types';
-// import { FirebaseMessaging } from '@firebase/messaging-types';
-// import { FirebaseStorage } from '@firebase/storage-types';
-// import { FirebaseFirestore } from '@firebase/firestore-types';
-
 import * as firebase from 'firebase/app';
+import { environment } from '../../environments/environment';
 import { DataIOService } from '../shared/data/data-io.service';
 import * as Dto from '../shared/data/dto';
+
+interface IEnvironment {
+  azure: {
+    BUILD_BUILDNUMBER: string;
+    BUILD_BUILDURI: string;
+    BUILD_DEFINITIONNAME: string;
+    BUILD_DEFINITIONVERSION: string;
+    BUILD_QUEUEDBY: string;
+    BUILD_SOURCEBRANCH: string;
+  };
+}
 
 @Component({
   selector: 'gbg-about',
@@ -25,6 +29,7 @@ export class AboutComponent implements OnInit {
   public displayName?: string;
   public email?: string;
   public photoURL?: string;
+  public env: IEnvironment = (environment as unknown) as IEnvironment;
 
   constructor(
     private afAuth: AngularFireAuth,
