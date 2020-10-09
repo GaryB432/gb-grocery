@@ -19,8 +19,6 @@ export class AboutComponent implements OnInit {
   public email?: string;
   public photoURL?: string;
   public environmentKeys: string[] = [
-    'INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN',
-    'INPUT_REPO_TOKEN',
     'INPUT_ACTION',
     'INPUT_APP_BUILD_COMMAND',
     'INPUT_APP_LOCATION',

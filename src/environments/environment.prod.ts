@@ -8,9 +8,6 @@ export const environment = {
     storageBucket: 'grocery17-9ca26.appspot.com',
   },
   azure: {
-    INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN:
-      'INPUT_AZURE_STATIC_WEB_APPS_API_TOKEN',
-    INPUT_REPO_TOKEN: 'INPUT_REPO_TOKEN',
     INPUT_ACTION: 'INPUT_ACTION',
     INPUT_APP_BUILD_COMMAND: 'INPUT_APP_BUILD_COMMAND',
     INPUT_APP_LOCATION: 'INPUT_APP_LOCATION',
