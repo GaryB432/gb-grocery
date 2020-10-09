@@ -147,6 +147,8 @@ export class GoogleGeoService extends AbstractGeoService {
       }));
     }
 
+    console.log(place.name, place.types);
+
     return place;
   }
 
