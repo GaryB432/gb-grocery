@@ -6,8 +6,6 @@ import { Point } from './point';
 
 @Injectable()
 export class GoogleGeoService extends AbstractGeoService {
-  private mapElement: HTMLElement | null = document.getElementById('map');
-
   constructor() {
     super();
   }
@@ -26,20 +24,21 @@ export class GoogleGeoService extends AbstractGeoService {
 
   public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
     return new Promise<Place[]>((resolve, reject) => {
-      const grocery = 'grocery_or_supermarket';
-      if (!!this.mapElement) {
+      const mapElement = document.getElementById('map');
+      const supermarket = 'grocery_or_supermarket';
+      if (!!mapElement) {
         const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-          new google.maps.Map(this.mapElement)
+          new google.maps.Map(mapElement)
         );
         const searchRequest: google.maps.places.PlaceSearchRequest = {
           bounds: undefined,
           keyword: undefined,
           location: GoogleGeoService.getLatLng(coords),
           name: undefined,
-          openNow: true,
+          openNow: undefined,
           radius: 2 * 1609.34,
           rankBy: undefined,
-          types: [grocery],
+          type: supermarket,
         };
         placeService.nearbySearch(
           searchRequest,
@@ -62,9 +61,10 @@ export class GoogleGeoService extends AbstractGeoService {
 
   public async getPlaceDetails(placeId: string): Promise<Partial<Place>> {
     return new Promise<Place>((resolve, reject) => {
-      if (!!this.mapElement) {
+      const mapElement = document.getElementById('map');
+      if (!!mapElement) {
         const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-          new google.maps.Map(this.mapElement)
+          new google.maps.Map(mapElement)
         );
         const searchRequest: google.maps.places.PlaceDetailsRequest = {
           fields: [
