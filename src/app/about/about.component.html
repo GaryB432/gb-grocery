@@ -17,4 +17,12 @@
   <p>This will replace your data from the text above. BE CAREFUL.</p>
   <button class="b2" (click)="replaceAppInfoForever()">Replace</button>
 </section>
-<p>11.ng8.3 - swa 2010082026</p>
+<table>
+  <tbody>
+    <tr *ngFor="let k of environmentKeys">
+      <td>{{ k }}</td>
+      <td>{{ env.azure[k] }}</td>
+    </tr>
+  </tbody>
+</table>
+<p>11.ng8.3 - swa 2010082128</p>
