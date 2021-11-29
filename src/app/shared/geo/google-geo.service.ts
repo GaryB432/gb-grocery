@@ -11,8 +11,8 @@ export class GoogleGeoService extends AbstractGeoService {
   }
 
   public computeDistanceBetween(
-    from: Coordinates,
-    to: Coordinates,
+    from: GeolocationCoordinates,
+    to: GeolocationCoordinates,
     radius?: number
   ): number {
     return google.maps.geometry.spherical.computeDistanceBetween(
@@ -22,14 +22,15 @@ export class GoogleGeoService extends AbstractGeoService {
     );
   }
 
-  public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
+  public async nearbyStoreSearch(
+    coords: GeolocationCoordinates
+  ): Promise<Place[]> {
     return new Promise<Place[]>((resolve, reject) => {
       const mapElement = document.getElementById('map');
       const supermarket = 'grocery_or_supermarket';
       if (!!mapElement) {
-        const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-          new google.maps.Map(mapElement)
-        );
+        const placeService: google.maps.places.PlacesService =
+          new google.maps.places.PlacesService(new google.maps.Map(mapElement));
         const searchRequest: google.maps.places.PlaceSearchRequest = {
           bounds: undefined,
           keyword: undefined,
@@ -47,7 +48,7 @@ export class GoogleGeoService extends AbstractGeoService {
             status: google.maps.places.PlacesServiceStatus
           ) => {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-              resolve(results.map(gs => GoogleGeoService.toPlace(gs)));
+              resolve(results.map((gs) => GoogleGeoService.toPlace(gs)));
             } else {
               reject(status.toString());
             }
@@ -63,9 +64,8 @@ export class GoogleGeoService extends AbstractGeoService {
     return new Promise<Place>((resolve, reject) => {
       const mapElement = document.getElementById('map');
       if (!!mapElement) {
-        const placeService: google.maps.places.PlacesService = new google.maps.places.PlacesService(
-          new google.maps.Map(mapElement)
-        );
+        const placeService: google.maps.places.PlacesService =
+          new google.maps.places.PlacesService(new google.maps.Map(mapElement));
         const searchRequest: google.maps.places.PlaceDetailsRequest = {
           fields: [
             'name',
@@ -104,11 +104,11 @@ export class GoogleGeoService extends AbstractGeoService {
 
   public async getCurrentPosition(
     options?: PositionOptions
-  ): Promise<Position> {
-    return new Promise<Position>((resolve, reject) => {
+  ): Promise<GeolocationPosition> {
+    return new Promise<GeolocationPosition>((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
-        p => resolve(p),
-        e => reject(e),
+        (p) => resolve(p),
+        (e) => reject(e),
         options
       );
     });
@@ -139,7 +139,7 @@ export class GoogleGeoService extends AbstractGeoService {
     };
 
     if (photoOptions) {
-      place.photos = (pr.photos || []).slice(0, 8).map(p => ({
+      place.photos = (pr.photos || []).slice(0, 8).map((p) => ({
         height: p.height,
         html_attributions: p.html_attributions,
         url: p.getUrl(photoOptions),
@@ -152,7 +152,7 @@ export class GoogleGeoService extends AbstractGeoService {
     return place;
   }
 
-  private static getLatLng(coords: Coordinates): google.maps.LatLng {
+  private static getLatLng(coords: GeolocationCoordinates): google.maps.LatLng {
     return new google.maps.LatLng(coords.latitude, coords.longitude, true);
   }
 }

@@ -31,25 +31,26 @@ export class LogicService {
   }
 
   public deleteItem(item: Item, context: AppInfo): Promise<AppInfo> {
-    const ndx: number = context.items.findIndex(i => i.id === item.id);
+    const ndx: number = context.items.findIndex((i) => i.id === item.id);
     if (ndx < 0) {
       throw new Error(`No item ${item.id} to delete`);
     }
     const spliced: Item = context.items.splice(ndx, 1)[0];
 
     context.checkouts.forEach(
-      co => (co.pickups = co.pickups.filter(pu => pu.item.id !== spliced.id))
+      (co) =>
+        (co.pickups = co.pickups.filter((pu) => pu.item.id !== spliced.id))
     );
-    context.checkouts = context.checkouts.filter(co => co.pickups.length > 0);
+    context.checkouts = context.checkouts.filter((co) => co.pickups.length > 0);
 
     return this.saveAll();
   }
 
   public getItem(id: string): Promise<Item> {
     return this.loaded.then(
-      info =>
+      (info) =>
         new Promise<Item>((resolve, reject): void => {
-          const item = info.items.find(i => i.id === id);
+          const item = info.items.find((i) => i.id === id);
           if (!!item) {
             resolve(item);
           } else {
@@ -62,10 +63,10 @@ export class LogicService {
   public getCheckout(store: string, isoDate: string): Promise<Checkout> {
     const date = new Date(Date.parse(isoDate)).getTime();
     return this.loaded.then(
-      info =>
+      (info) =>
         new Promise<Checkout>((resolve, reject): void => {
           const checkout = info.checkouts.find(
-            co => co.date.getTime() === date && co.store.id === store
+            (co) => co.date.getTime() === date && co.store.id === store
           );
           if (!!checkout) {
             resolve(checkout);
@@ -76,12 +77,12 @@ export class LogicService {
     );
   }
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
-    const stores: Store[] = places.map(place => {
+    const stores: Store[] = places.map((place) => {
       if (!place.placeId) {
         throw new Error('no placeId');
       }
 
-      let store = this.cache.stores.find(s => s.placeId === place.placeId);
+      let store = this.cache.stores.find((s) => s.placeId === place.placeId);
 
       if (!store) {
         /*
@@ -118,7 +119,7 @@ export class LogicService {
     distance: number,
     pickups: Pickup[]
   ): Promise<Checkout> {
-    let store = this.cache.stores.find(s => s.placeId === placeId);
+    let store = this.cache.stores.find((s) => s.placeId === placeId);
     if (!store) {
       // the selected store is not already on file
       // this will have an undefined id
@@ -130,7 +131,7 @@ export class LogicService {
     const co: Checkout = new Checkout(store, new Date());
     co.distance = distance;
     co.pickups = pickups.slice();
-    co.pickups.forEach(i => {
+    co.pickups.forEach((i) => {
       i.item.needed = false;
       i.aisle = i.aisle ? i.aisle.toLocaleUpperCase() : undefined;
     });
@@ -142,7 +143,7 @@ export class LogicService {
 
   public insertItem(name: string): Promise<Item> {
     const id: string = Utilities.makeItemId();
-    if (this.cache.items.find(c => c.id === id)) {
+    if (this.cache.items.find((c) => c.id === id)) {
       throw new Error('Random id was duplicated! Make a loop to check.');
     }
 
@@ -160,8 +161,8 @@ export class LogicService {
   public load(): Promise<AppInfo> {
     this.loaded = this.data
       .load()
-      .then(info => LogicService.project(info))
-      .then(info => (this.cache = info));
+      .then((info) => LogicService.project(info))
+      .then((info) => (this.cache = info));
     return this.loaded;
   }
 
@@ -170,7 +171,7 @@ export class LogicService {
   }
 
   private saveAll(): Promise<AppInfo> {
-    return this.data.saveAll(this.cache).then(info => (this.cache = info));
+    return this.data.saveAll(this.cache).then((info) => (this.cache = info));
   }
 
   public static predictAisle(item: Item, store: Store): string | undefined {
@@ -178,9 +179,9 @@ export class LogicService {
       const coHere = item.checkouts
         .slice()
         .sort((a, b) => b.date.getTime() - a.date.getTime())
-        .find(co => co.store.id === store.id);
+        .find((co) => co.store.id === store.id);
       if (coHere) {
-        const chp = coHere.pickups.find(pu => pu.item.id === item.id);
+        const chp = coHere.pickups.find((pu) => pu.item.id === item.id);
         if (!chp) {
           throw new Error('no pickup');
         }
@@ -194,8 +195,8 @@ export class LogicService {
     return LogicService.sortAisles(
       Utilities.distinct(
         Utilities.flatten(
-          store.checkouts.map(c =>
-            c.pickups.filter(p => !!p.aisle).map(p => p.aisle)
+          store.checkouts.map((c) =>
+            c.pickups.filter((p) => !!p.aisle).map((p) => p.aisle)
           )
         )
       )
@@ -233,11 +234,11 @@ export class LogicService {
   }
 
   public static project(info: AppInfo): AppInfo {
-    info.items.forEach(item => (item.checkouts = []));
-    info.stores.forEach(store => (store.checkouts = []));
-    info.checkouts.forEach(co => {
+    info.items.forEach((item) => (item.checkouts = []));
+    info.stores.forEach((store) => (store.checkouts = []));
+    info.checkouts.forEach((co) => {
       co.store.checkouts.push(co);
-      co.pickups.forEach(p => p.item.checkouts.push(co));
+      co.pickups.forEach((p) => p.item.checkouts.push(co));
     });
     return info;
   }
@@ -246,9 +247,8 @@ export class LogicService {
     // return a.localeCompare(b);
 
     function getParts(aisle: Aisle): AisleParts {
-      const groups: RegExpExecArray | null = LogicService.aisleRegex.exec(
-        aisle
-      );
+      const groups: RegExpExecArray | null =
+        LogicService.aisleRegex.exec(aisle);
       return groups
         ? { num: parseInt(groups[1], 10), alpha: groups[2] }
         : { num: NaN, alpha: aisle };

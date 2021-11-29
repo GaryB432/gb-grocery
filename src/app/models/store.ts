@@ -2,7 +2,7 @@ import { Checkout } from './checkout';
 
 export class Store {
   public icon?: string;
-  public location!: Coordinates;
+  public location!: GeolocationCoordinates;
   public placeId!: string;
   public vicinity?: string;
 

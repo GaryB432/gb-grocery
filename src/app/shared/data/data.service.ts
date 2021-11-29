@@ -17,9 +17,9 @@ export class DataService {
     const info: Partial<AppInfo> = {};
 
     const a = await this.io.load();
-    info.stores = a.stores.map(s => Utilities.dtoToStore(s));
-    info.items = a.items.map(i => Utilities.dtoToItem(i));
-    info.checkouts = a.checkouts.map(c =>
+    info.stores = a.stores.map((s) => Utilities.dtoToStore(s));
+    info.items = a.items.map((i) => Utilities.dtoToItem(i));
+    info.checkouts = a.checkouts.map((c) =>
       Utilities.dtoToCheckout(c, info as AppInfo)
     );
     return info as AppInfo;
@@ -27,11 +27,11 @@ export class DataService {
 
   public async saveAll(info: AppInfo): Promise<AppInfo> {
     const dto: Dto.AppInfo = {
-      checkouts: info.checkouts.map(c => {
+      checkouts: info.checkouts.map((c) => {
         return {
           distance: c.distance || -1,
           isoDate: c.date.toISOString(),
-          pickups: c.pickups.map(p => {
+          pickups: c.pickups.map((p) => {
             return {
               aisle: p.aisle,
               itemId: p.item.id,
@@ -40,14 +40,14 @@ export class DataService {
           storeId: c.store.id as string,
         };
       }),
-      items: info.items.map(i => {
+      items: info.items.map((i) => {
         return {
           id: i.id,
           name: i.name,
           needed: i.needed,
         };
       }),
-      stores: info.stores.map(s => {
+      stores: info.stores.map((s) => {
         return {
           icon: s.icon || '',
           id: s.id || '',

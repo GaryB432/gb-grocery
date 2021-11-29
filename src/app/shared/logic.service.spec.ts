@@ -32,13 +32,13 @@ class MockDataService {
   };
   public load(): Promise<AppInfo> {
     const today: Date = new Date(2001, 2, 3, 4, 5, 6, 7);
-    this.info.stores = [0, 1].map(n => {
+    this.info.stores = [0, 1].map((n) => {
       const s: Store = new Store(`S${n}`, `STORE ${n}`);
       s.placeId = `PLACE${n}`;
       s.checkouts = [];
       return s;
     });
-    this.info.items = [0, 1, 2].map(n => {
+    this.info.items = [0, 1, 2].map((n) => {
       const item: Item = new Item();
       item.id = `I-${n}`;
       item.name = `ITEM ${n}`;
@@ -106,7 +106,7 @@ describe('Logic Service', () => {
       expect(info.checkouts[0].pickups[0].item).toBe(info.items[1]);
       expect(info.checkouts[0].pickups[0].aisle).toBe('S1-A1');
 
-      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
+      expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([
         info.items[1],
       ]);
     })
@@ -121,9 +121,9 @@ describe('Logic Service', () => {
         expect(info.items.length).toBe(3);
       });
       tick();
-      sut.insertItem('tester').then(item => {
+      sut.insertItem('tester').then((item) => {
         expect(item.id).not.toBeUndefined();
-        expect(info.items.find(i => i.id === item.id)).toBeDefined();
+        expect(info.items.find((i) => i.id === item.id)).toBeDefined();
         expect(item.name).toBe('tester');
         expect(item.needed).toBe(true);
         expect(info.items.length).toBe(4);
@@ -220,11 +220,11 @@ describe('Logic Service', () => {
 describe('More Logic Service', () => {
   const info: AppInfo = new AppInfo();
 
-  info.stores = [0, 1, 2, 3].map(n => {
+  info.stores = [0, 1, 2, 3].map((n) => {
     return new Store(`S${n}`, `STORE ${n}`);
   });
 
-  info.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => {
+  info.items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => {
     const item: Item = {
       checkouts: [],
       id: `I${n}`,
@@ -348,14 +348,14 @@ describe('More Logic Service', () => {
       { name: 'D', aisle: 'Z' },
     ];
 
-    const pickups: Pickup[] = setup.map(p => {
+    const pickups: Pickup[] = setup.map((p) => {
       const item: Item = new Item();
       item.id = `ID${p.name}`;
       item.name = p.name;
       return new Pickup(item, p.aisle);
     });
 
-    expect(LogicService.sortPickups(pickups).map(p => p.item.name)).toEqual([
+    expect(LogicService.sortPickups(pickups).map((p) => p.item.name)).toEqual([
       'F',
       'G',
       'A',

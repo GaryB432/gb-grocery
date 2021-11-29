@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { environment } from '../../environments/environment';
 import { DataIOService } from '../shared/data/data-io.service';
 import * as Dto from '../shared/data/dto';
@@ -70,17 +69,15 @@ export class AboutComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.afAuth.authState.subscribe(async (user: firebase.User | null) => {
-      this.isAuthenticated = !!user;
-      this.displayName = user
-        ? user.displayName || 'FALSY NAME'
-        : 'NOT LOGGED IN';
-      this.photoURL = user
-        ? user.photoURL || 'assets/img/personal.png'
-        : 'assets/img/personal.png';
-      if (this.isAuthenticated) {
+    this.afAuth.authState.subscribe(async (user) => {
+      if (user && user.uid) {
+        this.isAuthenticated = true;
+        this.displayName = user.displayName || 'FALSY NAME';
+        this.photoURL = user.photoURL || 'assets/img/personal.png';
         const info = await this.io.load();
         this.jsonInfo = JSON.stringify(info, null, 2);
+      } else {
+        this.displayName = 'NOT LOGGED IN';
       }
     });
   }
@@ -104,12 +101,12 @@ export class AboutComponent implements OnInit {
   }
 
   public logout() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
   }
 
   private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
     if (confirm('WARNING this is not validated. About to replace your data')) {
-      return this.io.saveAll(newInfo).then(_replaced => true);
+      return this.io.saveAll(newInfo).then((_replaced) => true);
     }
     return Promise.resolve(false);
   }

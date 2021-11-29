@@ -1,7 +1,6 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 import { Item } from '../../models/item';
 import { GestureEvent } from '../../shared/hammer-gestures.directive';
 import { LogicService } from '../../shared/logic.service';
@@ -31,7 +30,7 @@ export class HomeComponent {
 
   public addItem(): void {
     if (!!this.newName) {
-      this.logic.insertItem(this.newName).then(_i => {
+      this.logic.insertItem(this.newName).then((_i) => {
         this.getUserItems();
       });
     }
@@ -53,7 +52,7 @@ export class HomeComponent {
 
   private getUserItems(): void {
     // console.log(this.uid);
-    this.logic.load().then(info => {
+    this.logic.load().then((info) => {
       this.newName = '';
       return (this.items = info.items
         .slice()

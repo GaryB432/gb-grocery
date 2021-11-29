@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import * as Hammer from 'hammerjs';
 
 export type GestureType = 'swipeleft' | 'swiperight' | 'tap';
 
@@ -31,8 +32,8 @@ export class HammerGesturesDirective implements OnInit {
       ],
     });
 
-    events.forEach(type =>
-      hammertime.on(type, _ev => this.swipe.emit({ type }))
+    events.forEach((type) =>
+      hammertime.on(type, (_ev) => this.swipe.emit({ type }))
     );
   }
 }

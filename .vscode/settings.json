@@ -1,5 +1,5 @@
 {
   "staticWebApps.appSubpath": "/",
   "staticWebApps.apiSubpath": "",
-  "staticWebApps.appArtifactSubpath": "dist/gb-grocery"
+  "staticWebApps.outputSubpath": "dist/gb-grocery"
 }

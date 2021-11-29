@@ -2,7 +2,8 @@
 @import 'reset';
 @import 'variables';
 
-@import '../../node_modules/font-awesome/scss/font-awesome';
+@import 'fa/fontawesome.scss';
+@import 'fa/solid.scss';
 
 $base-font-size: 20px;
 

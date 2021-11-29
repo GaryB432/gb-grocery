@@ -1,0 +1,8 @@
+**/package*.json
+.angular
+assets
+coverage
+dist
+junit
+src/styles/fa
+

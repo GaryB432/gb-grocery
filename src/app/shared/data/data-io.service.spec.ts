@@ -1,10 +1,9 @@
 // tslint:disable:max-classes-per-file
 import { async, inject, TestBed } from '@angular/core/testing';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
-
 import { DataIOService } from './data-io.service';
 import { DataLocalStorageService } from './data-local-storage.service';
 import * as Dto from './dto';
@@ -177,7 +176,7 @@ describe('Data IO Service', () => {
           {
             provide: AngularFireAuth,
             useValue: {
-              authState: new Observable<Partial<firebase.User>>(sub => {
+              authState: new Observable<Partial<firebase.User>>((sub) => {
                 sub.next({ displayName: 'FUN TESTER', uid: 'uid-fun' });
                 sub.complete();
               }),
@@ -303,10 +302,12 @@ describe('Data IO Service', () => {
           {
             provide: AngularFireAuth,
             useValue: {
-              authState: new Observable<Partial<firebase.User> | null>(sub => {
-                sub.next(null);
-                sub.complete();
-              }),
+              authState: new Observable<Partial<firebase.User> | null>(
+                (sub) => {
+                  sub.next(null);
+                  sub.complete();
+                }
+              ),
             },
           },
           { provide: AngularFireDatabase, useClass: MockAngularFireDatabase },
@@ -321,7 +322,7 @@ describe('Data IO Service', () => {
           return sut
             .load()
             .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
-            .catch<any>(msg => expect(msg).toBe('unauthenticated'));
+            .catch<any>((msg) => expect(msg).toBe('unauthenticated'));
         }
       )
     ));

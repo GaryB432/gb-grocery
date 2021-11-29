@@ -8,7 +8,6 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
 

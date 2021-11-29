@@ -86,21 +86,21 @@ export class StoreComponent implements OnInit {
   public checkoutReady(): boolean {
     return (
       this.selectedStorePlaceId != null &&
-      this.neededThings.filter(i => i.picked).length > 0
+      this.neededThings.filter((i) => i.picked).length > 0
     );
   }
 
   public get selectedStore(): StoreDistance | undefined {
     return this.nbStores.find(
-      s => s.store.placeId === this.selectedStorePlaceId
+      (s) => s.store.placeId === this.selectedStorePlaceId
     );
   }
 
   public ngOnInit(): void {
     this.geo
       .getCurrentPosition()
-      .then(pc => this.loadWithCurrentCoordinates(pc.coords))
-      .catch(pec => alert(pec.message));
+      .then((pc) => this.loadWithCurrentCoordinates(pc.coords))
+      .catch((pec) => alert(pec.message));
   }
 
   public togglePicked(pickup: Pickup): void {
@@ -112,7 +112,7 @@ export class StoreComponent implements OnInit {
     if (!nbs) {
       throw new Error('changing to null store');
     }
-    this.neededThings.forEach(t => {
+    this.neededThings.forEach((t) => {
       t.picked = false;
       t.aisle = LogicService.predictAisle(t.item, nbs.store);
     });
@@ -126,7 +126,7 @@ export class StoreComponent implements OnInit {
           this.selectedStorePlaceId,
           this.selectedStore.store,
           this.selectedStore.distance,
-          this.neededThings.filter(i => i.picked)
+          this.neededThings.filter((i) => i.picked)
         )
         .then((co: Checkout) => {
           this.toastr.success(`Thank you for shopping at ${co.store.name}`);
@@ -137,20 +137,20 @@ export class StoreComponent implements OnInit {
     }
   }
 
-  private loadWithCurrentCoordinates(coords: Coordinates): void {
-    this.logic.load().then(updatedData => {
+  private loadWithCurrentCoordinates(coords: GeolocationCoordinates): void {
+    this.logic.load().then((updatedData) => {
       this.neededThings = updatedData.items
         .slice()
-        .filter(i => i.needed)
+        .filter((i) => i.needed)
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map(i => new Pickup(i, undefined));
+        .map((i) => new Pickup(i, undefined));
 
       this.geo
         .nearbyStoreSearch(coords)
-        .then(nearbyPlaces => {
+        .then((nearbyPlaces) => {
           this.nbStores = this.logic
             .getStoresFromNearbyPlaces(nearbyPlaces)
-            .map<StoreDistance>(store => {
+            .map<StoreDistance>((store) => {
               return {
                 distance: this.geo.computeDistanceBetween(
                   coords,
@@ -166,7 +166,7 @@ export class StoreComponent implements OnInit {
             this.changeStore();
           }
         })
-        .catch(e => {
+        .catch((e) => {
           alert(
             'There was a mapping problem or you seem to not be near a grocery store. ' +
               'The Check Out tab is meant for when you are at the store.'

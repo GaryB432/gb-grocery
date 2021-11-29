@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
 import { environment } from '../../../environments/environment';
 import { DataLocalStorageService } from './data-local-storage.service';
-
 import * as Dto from './dto';
 
 const ITEMS_KEY = `gbg:items:${environment.firebase.projectId}`;
@@ -17,9 +15,9 @@ const CHECKOUTS_KEY = `gbg:checkouts:${environment.firebase.projectId}`;
 })
 export class DataIOService {
   // private uid: string;
-  private user: firebase.UserInfo | null = null;
+  private user: firebase.User | null = null;
 
-  private infoRef?: firebase.database.Reference;
+  private infoRef?: any;
 
   public get isAuthenticated(): boolean {
     return !!this.user;
@@ -69,9 +67,9 @@ export class DataIOService {
               if (dbInfo) {
                 if (dbInfo.stores) {
                   dbInfo.stores
-                    .filter(s => !s.icon)
+                    .filter((s) => !s.icon)
                     .forEach(
-                      s => (s.icon = 'https://via.placeholder.com/71x71')
+                      (s) => (s.icon = 'https://via.placeholder.com/71x71')
                     );
                 }
                 Object.assign(info, dbInfo);
@@ -105,7 +103,7 @@ export class DataIOService {
         this.infoRef
           .set(newInfo)
           .then(() => resolve(newInfo))
-          .catch(reason => reject(reason));
+          .catch((reason: unknown) => reject(reason));
       } else {
         reject('unauthenticated');
       }

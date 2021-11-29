@@ -106,11 +106,13 @@ describe('Data Service', () => {
       expect(info.checkouts.length).toBe(2);
 
       expect(
-        Utilities.flatten(info.checkouts.map(c => c.pickups.map(p => p.aisle)))
+        Utilities.flatten(
+          info.checkouts.map((c) => c.pickups.map((p) => p.aisle))
+        )
       ).toEqual([undefined, 'D10', 'S0-D10']);
 
       expect(info.checkouts[0].store).toBe(info.stores[1]);
-      expect(info.checkouts[0].pickups.map(p => p.item)).toEqual([
+      expect(info.checkouts[0].pickups.map((p) => p.item)).toEqual([
         info.items[1],
         info.items[0],
       ]);
@@ -125,7 +127,7 @@ describe('Data Service', () => {
     [DataService, DataIOService],
     fakeAsync((sut: DataService) => {
       checkouts[0].storeId = 'WTF';
-      expect(stores.find(s => s.id === checkouts[0].storeId)).toBeUndefined(
+      expect(stores.find((s) => s.id === checkouts[0].storeId)).toBeUndefined(
         'you have a weird store id'
       );
       sut

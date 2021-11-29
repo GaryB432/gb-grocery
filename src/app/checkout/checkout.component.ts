@@ -25,22 +25,22 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     // https://medium.com/@AAlakkad/angular-2-display-html-without-sanitizing-filtering-17499024b079
 
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe((params) => {
       const { date, store } = params;
       this.logic
         .load()
         .then(() => this.logic.getCheckout(store, date))
-        .then(co => {
+        .then((co) => {
           co.pickups = co.pickups.sort((a, b) =>
             a.item.name.localeCompare(b.item.name)
           );
           this.checkout = co;
           return this.geo.getPlaceDetails(this.checkout.store.placeId);
         })
-        .then(p => {
+        .then((p) => {
           this.place = p;
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err);
         });
     });

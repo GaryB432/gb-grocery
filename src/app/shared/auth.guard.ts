@@ -5,7 +5,7 @@ import {
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
@@ -17,8 +17,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.afAuth.authState.pipe(
-      map(authState => !!authState),
-      tap(authenticated => {
+      map((authState) => !!authState),
+      tap((authenticated) => {
         if (!authenticated) {
           this.router.navigate(['/login']);
           return false;

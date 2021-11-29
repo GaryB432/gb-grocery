@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Subscription } from 'rxjs';
 
 import { Checkout } from '../models/checkout';
@@ -28,18 +28,18 @@ export class ItemComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe((params) => {
       const key = 'id';
       this.logic
         .load()
         .then(() => this.logic.getItem(params[key]))
-        .then(item => {
+        .then((item) => {
           this.item = item;
           this.checkouts = this.item.checkouts
             .slice()
             .sort((a, b) => b.date.getTime() - a.date.getTime());
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err);
           this.router.navigateByUrl('/');
         });
@@ -51,7 +51,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   }
 
   public getItemPickup(checkout: Checkout): Pickup {
-    const pu = checkout.pickups.find(c => c.item.id === this.item.id);
+    const pu = checkout.pickups.find((c) => c.item.id === this.item.id);
     if (!pu) {
       throw new Error('no pickup');
     }
@@ -66,7 +66,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     ) {
       this.logic
         .load()
-        .then(info => this.logic.deleteItem(item, info))
+        .then((info) => this.logic.deleteItem(item, info))
         .then(() => this.router.navigateByUrl('/'));
     }
   }

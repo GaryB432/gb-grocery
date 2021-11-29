@@ -12,7 +12,10 @@ export class MockGeoService extends AbstractGeoService {
     super();
   }
 
-  public computeDistanceBetween(from: Coordinates, to: Coordinates): number {
+  public computeDistanceBetween(
+    from: GeolocationCoordinates,
+    to: GeolocationCoordinates
+  ): number {
     const x1: number = from.longitude;
     const x2: number = to.longitude;
     const y1: number = from.latitude;
@@ -22,7 +25,9 @@ export class MockGeoService extends AbstractGeoService {
     return Math.sqrt(dx + dy);
   }
 
-  public async nearbyStoreSearch(coords: Coordinates): Promise<Place[]> {
+  public async nearbyStoreSearch(
+    coords: GeolocationCoordinates
+  ): Promise<Place[]> {
     function makePlace(ks: Dto.Store, n: number): Place {
       const spot: Point = {
         latitude: coords.latitude + n * 2,
@@ -31,8 +36,7 @@ export class MockGeoService extends AbstractGeoService {
       return {
         formattedAddress: `formatted_address ${n}`,
         formattedPhoneNumber: `formatted_phone_number ${n}`,
-        icon:
-          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         location: { ...spot },
         name: `${ks.name} S${n}`,
         photos: [],
@@ -46,24 +50,21 @@ export class MockGeoService extends AbstractGeoService {
 
     const knownStores: Dto.Store[] = [
       {
-        icon:
-          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-KOBIM',
         name: 'Schnucks',
         place_id: 'ChIJ43DkSEvU2IcRgU4nzYWcNU0',
         vicinity: '15425 Manchester Road, Ballwin',
       },
       {
-        icon:
-          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-f2jIj',
         name: 'Big Lots',
         place_id: 'ChIJQ9yAC2zU2IcR4fcxoawalqI',
         vicinity: '14850 Manchester Road, Ballwin',
       },
       {
-        icon:
-          'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
         id: 'S-F5TXz',
         name: 'Schnucks',
         place_id: 'ChIJ0-z4P9jT2IcRbt566e0iJIY',
@@ -71,11 +72,10 @@ export class MockGeoService extends AbstractGeoService {
       },
     ];
 
-    const otherPlaces: Place[] = [3, 4, 5].map(ndx =>
+    const otherPlaces: Place[] = [3, 4, 5].map((ndx) =>
       makePlace(
         {
-          icon:
-            'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
+          icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/shopping-71.png',
           id: `s${ndx}`,
           name: `STORE ${ndx}`,
           place_id: `GP${ndx}`,
@@ -87,7 +87,7 @@ export class MockGeoService extends AbstractGeoService {
 
     const fakePlaces: Place[] = knownStores.map(makePlace);
 
-    return new Promise<Place[]>(resolve => {
+    return new Promise<Place[]>((resolve) => {
       window.setTimeout(() => {
         resolve(Utilities.flatten([fakePlaces, otherPlaces]));
       }, 200);
@@ -100,8 +100,8 @@ export class MockGeoService extends AbstractGeoService {
 
   public async getCurrentPosition(
     options?: PositionOptions
-  ): Promise<Position> {
-    const hhCoords: Coordinates = {
+  ): Promise<GeolocationPosition> {
+    const hhCoords: GeolocationCoordinates = {
       accuracy: 0,
       altitude: 0,
       altitudeAccuracy: 0,

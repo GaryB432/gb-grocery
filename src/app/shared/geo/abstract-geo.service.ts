@@ -2,20 +2,18 @@ import { Place } from './place';
 
 export abstract class AbstractGeoService {
   public abstract computeDistanceBetween(
-    from: Coordinates,
-    to: Coordinates,
+    from: GeolocationCoordinates,
+    to: GeolocationCoordinates,
     radius?: number
   ): number;
 
-  public abstract async nearbyStoreSearch(
-    coords: Coordinates
+  public abstract nearbyStoreSearch(
+    coords: GeolocationCoordinates
   ): Promise<Place[]>;
 
-  public abstract async getPlaceDetails(
-    placeId: string
-  ): Promise<Partial<Place>>;
+  public abstract getPlaceDetails(placeId: string): Promise<Partial<Place>>;
 
-  public abstract async getCurrentPosition(
+  public abstract getCurrentPosition(
     options?: PositionOptions
-  ): Promise<Position>;
+  ): Promise<GeolocationPosition>;
 }

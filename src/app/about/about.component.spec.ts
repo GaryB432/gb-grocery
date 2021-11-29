@@ -1,12 +1,11 @@
 // tslint:disable:max-classes-per-file
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
-
 import { DataIOService } from '../shared/data/data-io.service';
 import * as Dto from '../shared/data/dto';
 import { AboutComponent } from './about.component';
@@ -75,7 +74,7 @@ class MockDataIoService {
 class AngularFireAuthMock {
   // public login() { }
   // public logout() { }
-  public authState = new Observable<Partial<firebase.User>>(sub => {
+  public authState = new Observable<Partial<firebase.User>>((sub) => {
     sub.next({ displayName: 'FUN TESTER' });
     sub.complete();
   });

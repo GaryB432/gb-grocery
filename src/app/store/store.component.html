@@ -3,9 +3,9 @@
     [(ngModel)]="selectedStorePlaceId"
     (ngModelChange)="changeStore($event)"
   >
-    <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">{{
-      nbs.store.name
-    }}</option>
+    <option *ngFor="let nbs of nbStores" [value]="nbs.store.placeId">
+      {{ nbs.store.name }}
+    </option>
   </select>
   <section class="store-info">
     <section>

@@ -49,7 +49,7 @@ export class Utilities {
   }
 
   public static dtoToCheckout(dto: Dto.Checkout, context: AppInfo): Checkout {
-    const store = context.stores.find(s => s.id === dto.storeId);
+    const store = context.stores.find((s) => s.id === dto.storeId);
     if (!store) {
       throw new Error('no store');
     }
@@ -57,8 +57,8 @@ export class Utilities {
 
     newCheckout.distance = dto.distance || -1;
 
-    newCheckout.pickups = dto.pickups.map(dpu => {
-      const item = context.items.find(i => i.id === dpu.itemId);
+    newCheckout.pickups = dto.pickups.map((dpu) => {
+      const item = context.items.find((i) => i.id === dpu.itemId);
       if (!item) {
         throw new Error('no item');
       }
