@@ -28,9 +28,18 @@ table,
 th,
 td {
   border: 1px solid black;
+  font-size: 8px;
 }
 
 th,
 td {
   padding: 0.5em;
+}
+
+.stamp {
+  padding: .5em 1em;
+  margin: 1em;
+  background-color: rgb(255, 87, 87);
+  font: bold;
+  color: white;
 }

@@ -55,7 +55,7 @@ export class AboutComponent implements OnInit {
     'ACTIONS_RUNTIME_TOKEN',
     'ACTIONS_CACHE_URL',
   ];
-
+  public showEnviornment = false;
   public env: {
     firebase: any;
     azure: { [key: string]: string };
@@ -102,6 +102,10 @@ export class AboutComponent implements OnInit {
 
   public logout() {
     this.afAuth.signOut();
+  }
+
+  public toggleEnvironmentTable():void{
+    this.showEnviornment = !this.showEnviornment;
   }
 
   private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
