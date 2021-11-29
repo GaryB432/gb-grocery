@@ -1,4 +1,11 @@
 {
+  "search.exclude": {
+    "**/coverage": true,
+    "**/dist": true,
+    "**/node_modules": true,
+    "**/*-lock.json": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib/",
   "staticWebApps.appSubpath": "/",
   "staticWebApps.apiSubpath": "",
   "staticWebApps.outputSubpath": "dist/gb-grocery"
