@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
 import { Pickup } from '../../models/pickup';
 
 @Component({

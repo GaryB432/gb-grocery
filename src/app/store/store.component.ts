@@ -9,7 +9,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
+import { AppInfo } from '../models/appinfo';
 import { Checkout } from '../models/checkout';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
@@ -76,7 +76,9 @@ export class StoreComponent implements OnInit {
 
   public selectedStorePlaceId: string | null = null;
 
-  constructor(
+  private cachedAppInfo?: AppInfo;
+
+  public constructor(
     private logic: LogicService,
     private geo: AbstractGeoService,
     private toastr: ToastrService,
@@ -105,6 +107,11 @@ export class StoreComponent implements OnInit {
 
   public togglePicked(pickup: Pickup): void {
     pickup.picked = !pickup.picked;
+    this.logic.changePickup(pickup);
+  }
+
+  public pickupChanged(pickup: Pickup): void {
+    this.logic.changePickup(pickup);
   }
 
   public changeStore(_placeID?: string): void {
@@ -112,11 +119,12 @@ export class StoreComponent implements OnInit {
     if (!nbs) {
       throw new Error('changing to null store');
     }
-    this.neededThings.forEach((t) => {
-      t.picked = false;
-      t.aisle = LogicService.predictAisle(t.item, nbs.store);
-    });
-    this.neededThings = LogicService.sortPickups(this.neededThings.slice());
+    if (this.cachedAppInfo) {
+      this.neededThings = this.logic.getPickups(
+        this.cachedAppInfo,
+        this.selectedStore ? this.selectedStore.store : undefined
+      );
+    }
   }
 
   public addCheckout(): void {
@@ -139,12 +147,7 @@ export class StoreComponent implements OnInit {
 
   private loadWithCurrentCoordinates(coords: GeolocationCoordinates): void {
     void this.logic.load().then((updatedData) => {
-      this.neededThings = updatedData.items
-        .slice()
-        .filter((i) => i.needed)
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .map((i) => new Pickup(i, undefined));
-
+      this.cachedAppInfo = updatedData;
       this.geo
         .nearbyStoreSearch(coords)
         .then((nearbyPlaces) => {
@@ -162,9 +165,13 @@ export class StoreComponent implements OnInit {
             .sort((a, b) => a.distance - b.distance);
 
           if (this.nbStores.length > 0) {
-            this.selectedStorePlaceId = this.nbStores[0].store.placeId || null;
-            this.changeStore();
+            const nbs = this.nbStores[0].store;
+            this.selectedStorePlaceId = nbs.placeId || null;
           }
+          this.neededThings = this.logic.getPickups(
+            updatedData,
+            this.selectedStore?.store
+          );
         })
         .catch((e) => {
           alert(

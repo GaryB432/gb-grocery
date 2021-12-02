@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { AppInfo } from '../models/appinfo';
 import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
@@ -24,7 +23,11 @@ export class LogicService {
 
   private loaded!: Promise<AppInfo>;
 
-  public constructor(private data: DataService) {}
+  private pickups = new Map<string, Pickup>();
+
+  private puMappedStore?: Store;
+
+  constructor(private data: DataService) {}
 
   public clearAll(): void {
     this.data.clearAll();
@@ -277,5 +280,23 @@ export class LogicService {
           : numcomp;
       }
     }
+  }
+  public changePickup(pu: Pickup): void {
+    this.pickups.set(pu.item.id, pu);
+  }
+  public getPickups(data: AppInfo, store: Store | undefined): Pickup[] {
+    if (this.puMappedStore && store !== this.puMappedStore) {
+      this.pickups.clear();
+    }
+    const getAisle = (item: Item): string | undefined =>
+      store ? LogicService.predictAisle(item, store) : undefined;
+    return LogicService.sortPickups(
+      data.items
+        .filter((item) => item.needed)
+        .map((item) => {
+          const pu = this.pickups.get(item.id);
+          return pu ?? new Pickup(item, getAisle(item), false);
+        })
+    );
   }
 }

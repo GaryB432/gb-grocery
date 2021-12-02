@@ -40,7 +40,11 @@
     ></i>
   </div>
 
-  <gbg-store-pickup class="info" [pickup]="pu"></gbg-store-pickup>
+  <gbg-store-pickup
+    class="info"
+    [pickup]="pu"
+    (aisleChanged)="pickupChanged($event)"
+  ></gbg-store-pickup>
 </article>
 <section class="brow">
   <button class="b2" [disabled]="!checkoutReady()" (click)="addCheckout()">
