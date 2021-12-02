@@ -11,7 +11,7 @@ import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  public constructor(private afAuth: AngularFireAuth, private router: Router) {}
   public canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
       map((authState) => !!authState),
       tap((authenticated) => {
         if (!authenticated) {
-          this.router.navigate(['/login']);
+          void this.router.navigate(['/login']);
           return false;
         }
         return true;

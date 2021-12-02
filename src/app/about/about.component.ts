@@ -62,7 +62,7 @@ export class AboutComponent implements OnInit {
     production: boolean;
   } = environment;
 
-  constructor(
+  public constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private io: DataIOService
@@ -85,26 +85,26 @@ export class AboutComponent implements OnInit {
   public clearData(): void {
     if (confirm('About to Reset')) {
       this.io.clearAll();
-      this.router.navigateByUrl('home');
+      void this.router.navigateByUrl('home');
     }
   }
 
   public replaceAppInfoForever(): void {
     try {
       const dto: Dto.AppInfo = JSON.parse(this.jsonInfo);
-      this.doReplace(dto).then(
-        (done: boolean) => done && this.router.navigateByUrl('home')
-      );
+      this.doReplace(dto)
+        .then((done: boolean) => done && this.router.navigateByUrl('home'))
+        .catch((e) => console.error(e));
     } catch (e) {
       alert(e);
     }
   }
 
-  public logout() {
-    this.afAuth.signOut();
+  public logout(): void {
+    void this.afAuth.signOut();
   }
 
-  public toggleEnvironmentTable():void{
+  public toggleEnvironmentTable(): void {
     this.showEnviornment = !this.showEnviornment;
   }
 

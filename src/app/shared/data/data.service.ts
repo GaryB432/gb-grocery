@@ -7,7 +7,7 @@ import * as Dto from './dto';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  constructor(private io: DataIOService) {}
+  public constructor(private io: DataIOService) {}
 
   public clearAll(): void {
     this.io.clearAll();

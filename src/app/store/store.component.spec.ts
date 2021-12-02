@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -30,7 +29,7 @@ class MockRouter {
 
 describe('StoreComponent', () => {
   beforeEach(async(() => {
-    TestBed.overrideComponent(StoreComponent, {
+    void void TestBed.overrideComponent(StoreComponent, {
       set: {
         template: '<h1>Overridden template something here</h1>',
       },

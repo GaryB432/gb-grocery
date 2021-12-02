@@ -7,7 +7,7 @@
 //   let fixture: ComponentFixture<AppComponent>;
 
 //   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
+//     void TestBed.configureTestingModule({
 //       declarations: [ AppComponent ]
 //     })
 //     .compileComponents();
@@ -30,7 +30,7 @@ import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [RouterTestingModule],
     }).compileComponents();

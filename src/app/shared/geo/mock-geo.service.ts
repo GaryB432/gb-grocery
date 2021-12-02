@@ -8,7 +8,7 @@ import { Point } from './point';
 
 @Injectable()
 export class MockGeoService extends AbstractGeoService {
-  constructor() {
+  public constructor() {
     super();
   }
 

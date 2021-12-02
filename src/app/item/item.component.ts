@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit, OnDestroy {
 
   private sub!: Subscription;
 
-  constructor(
+  public constructor(
     afAuth: AngularFireAuth,
     private logic: LogicService,
     private route: ActivatedRoute,
@@ -41,7 +41,7 @@ export class ItemComponent implements OnInit, OnDestroy {
         })
         .catch((err) => {
           alert(err);
-          this.router.navigateByUrl('/');
+          void this.router.navigateByUrl('/');
         });
     });
   }
@@ -67,7 +67,8 @@ export class ItemComponent implements OnInit, OnDestroy {
       this.logic
         .load()
         .then((info) => this.logic.deleteItem(item, info))
-        .then(() => this.router.navigateByUrl('/'));
+        .then(() => this.router.navigateByUrl('/'))
+        .catch((e) => console.error(e));
     }
   }
 }

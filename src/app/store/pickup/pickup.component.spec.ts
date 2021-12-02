@@ -23,7 +23,6 @@
 //     expect(component).toBeTruthy();
 //   });
 // });
-/* tslint:disable:object-literal-sort-keys */
 
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -38,11 +37,11 @@ import { PickupComponent } from './pickup.component';
 describe('Pickup Component', () => {
   let info: AppInfo;
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       imports: [FormsModule],
       declarations: [PickupComponent],
     });
-    TestBed.overrideComponent(PickupComponent, {
+    void TestBed.overrideComponent(PickupComponent, {
       set: { template: '<div>hi</div>' },
     });
     info = {

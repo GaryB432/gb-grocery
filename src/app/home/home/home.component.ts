@@ -15,7 +15,7 @@ export class HomeComponent {
 
   public newName = '';
 
-  constructor(
+  public constructor(
     public afAuth: AngularFireAuth,
     private logic: LogicService,
     vcr: ViewContainerRef
@@ -29,10 +29,13 @@ export class HomeComponent {
   }
 
   public addItem(): void {
-    if (!!this.newName) {
-      this.logic.insertItem(this.newName).then((_i) => {
-        this.getUserItems();
-      });
+    if (this.newName) {
+      this.logic
+        .insertItem(this.newName)
+        .then((_i) => {
+          this.getUserItems();
+        })
+        .catch((e) => console.error(e));
     }
   }
 
@@ -47,16 +50,19 @@ export class HomeComponent {
       default:
         break;
     }
-    this.logic.updateItem(item);
+    void this.logic.updateItem(item);
   }
 
   private getUserItems(): void {
     // console.log(this.uid);
-    this.logic.load().then((info) => {
-      this.newName = '';
-      return (this.items = info.items
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name)));
-    });
+    this.logic
+      .load()
+      .then((info) => {
+        this.newName = '';
+        return (this.items = info.items
+          .slice()
+          .sort((a, b) => a.name.localeCompare(b.name)));
+      })
+      .catch((e) => console.error(e));
   }
 }

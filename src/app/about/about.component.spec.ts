@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
@@ -85,7 +84,7 @@ xdescribe('About Component', () => {
   let fixture: ComponentFixture<AboutComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [AboutComponent],
       imports: [FormsModule, RouterTestingModule],
       providers: [
@@ -115,7 +114,7 @@ xdescribe('About Component', () => {
 
   it('shoud get json', async(() => {
     // fixture.detectChanges();
-    fixture.whenStable().then(() => {
+    void fixture.whenStable().then(() => {
       // const element = fixture.nativeElement;
       expect(component.jsonInfo.length).toBe(1007); // pretty fragile but effective
     });

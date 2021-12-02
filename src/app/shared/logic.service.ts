@@ -18,13 +18,13 @@ interface AisleParts {
 
 @Injectable()
 export class LogicService {
-  private static aisleRegex: RegExp = /^(\d+)(\w*)$/;
+  private static aisleRegex = /^(\d+)(\w*)$/;
 
   private cache!: AppInfo;
 
   private loaded!: Promise<AppInfo>;
 
-  constructor(private data: DataService) {}
+  public constructor(private data: DataService) {}
 
   public clearAll(): void {
     this.data.clearAll();
@@ -51,7 +51,7 @@ export class LogicService {
       (info) =>
         new Promise<Item>((resolve, reject): void => {
           const item = info.items.find((i) => i.id === id);
-          if (!!item) {
+          if (item) {
             resolve(item);
           } else {
             reject(`No item ${id}`);
@@ -68,7 +68,7 @@ export class LogicService {
           const checkout = info.checkouts.find(
             (co) => co.date.getTime() === date && co.store.id === store
           );
-          if (!!checkout) {
+          if (checkout) {
             resolve(checkout);
           } else {
             reject(`No checkout on ${isoDate} at ${store}`);
@@ -108,7 +108,7 @@ export class LogicService {
 
       return store;
     });
-    this.saveAll();
+    void this.saveAll();
 
     return stores;
   }

@@ -96,7 +96,7 @@ describe('Data Service', () => {
         items: [],
         stores: [],
       };
-      sut.load().then((response: AppInfo) => {
+      void sut.load().then((response: AppInfo) => {
         Object.assign(info, response);
       });
       tick();

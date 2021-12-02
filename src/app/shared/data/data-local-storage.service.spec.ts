@@ -4,7 +4,7 @@ import { DataLocalStorageService } from './data-local-storage.service';
 
 describe('DataLocalstorageService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       providers: [DataLocalStorageService],
     });
   });

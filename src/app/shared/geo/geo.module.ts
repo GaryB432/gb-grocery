@@ -5,7 +5,7 @@ import { AbstractGeoService } from './abstract-geo.service';
 import { GoogleGeoService } from './google-geo.service';
 import { MockGeoService } from './mock-geo.service';
 
-const isLocal: boolean = window.location.hostname === 'localhost-not';
+const isLocal: boolean = window.location.hostname === 'localhost';
 
 @NgModule({
   declarations: [],

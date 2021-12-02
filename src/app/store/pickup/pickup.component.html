@@ -3,7 +3,8 @@
   <input
     type="text"
     placeholder="Aisle"
-    [(ngModel)]="pickup.aisle"
+    [ngModel]="pickup.aisle"
+    (ngModelChange)="changeAisle($event)"
     [disabled]="!pickup.picked"
   />
 </div>

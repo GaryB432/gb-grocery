@@ -8,7 +8,6 @@ import * as Dto from './data/dto';
 // http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript#10727155
 function randomString(length: number, chars: string): string {
   let mask = '';
-  /* tslint:disable:curly */
   if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
   if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   if (chars.indexOf('#') > -1) mask += '0123456789';
@@ -16,7 +15,6 @@ function randomString(length: number, chars: string): string {
   let result = '';
   for (let i: number = length; i > 0; --i)
     result += mask[Math.floor(Math.random() * mask.length)];
-  /* tslint:enable:curly */
   return result;
 }
 
@@ -74,8 +72,8 @@ export class Utilities {
     );
   }
 
-  public static distinct(arr: any[]): any[] {
-    return Array.from(new Set(arr));
+  public static distinct<T>(arr: T[]): T[] {
+    return Array.from(new Set<T>(arr));
   }
 
   private static makeRandomId(prefix: string): string {

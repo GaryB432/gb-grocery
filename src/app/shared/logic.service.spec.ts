@@ -79,7 +79,7 @@ class MockDataService {
 
 describe('Logic Service', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       providers: [
         { provide: LogicService, useClass: LogicService },
         { provide: DataService, useClass: MockDataService },
@@ -92,7 +92,7 @@ describe('Logic Service', () => {
     fakeAsync((sut: LogicService, _ds: DataService) => {
       // console.log(ds, 'is not used');
       let info: AppInfo = { items: [], stores: [], checkouts: [] };
-      sut.load().then((response: AppInfo) => {
+      void sut.load().then((response: AppInfo) => {
         info = response;
       });
       tick();
@@ -116,12 +116,12 @@ describe('Logic Service', () => {
     [LogicService, DataService],
     fakeAsync((sut: LogicService, _ds: DataService) => {
       let info: AppInfo;
-      sut.load().then((response: AppInfo) => {
+      void sut.load().then((response: AppInfo) => {
         info = response;
         expect(info.items.length).toBe(3);
       });
       tick();
-      sut.insertItem('tester').then((item) => {
+      void sut.insertItem('tester').then((item) => {
         expect(item.id).not.toBeUndefined();
         expect(info.items.find((i) => i.id === item.id)).toBeDefined();
         expect(item.name).toBe('tester');
@@ -176,7 +176,7 @@ describe('Logic Service', () => {
           items: [],
           stores: [],
         };
-        sut.load().then((response: AppInfo) => {
+        void sut.load().then((response: AppInfo) => {
           info = response;
           expect(info.items.length).toBe(3);
         });
@@ -194,7 +194,7 @@ describe('Logic Service', () => {
           items: [],
           stores: [],
         };
-        sut.load().then((response: AppInfo) => {
+        void sut.load().then((response: AppInfo) => {
           info = response;
           expect(info.items.length).toBe(3);
         });

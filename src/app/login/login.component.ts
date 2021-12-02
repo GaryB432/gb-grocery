@@ -10,17 +10,21 @@ import firebase from 'firebase/compat/app';
 })
 export class LoginComponent implements OnInit {
   public error: any;
-  constructor(private afAuth: AngularFireAuth, private router: Router) {}
+  public constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   public ngOnInit() {
     this.afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
-        this.router.navigateByUrl('home');
+        void this.router.navigateByUrl('home');
       }
     });
   }
 
   public loginGoogle() {
-    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    void this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    // this.afAuth
+    //   .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    //   .then((a) => console.log(a.user))
+    //   .catch((e) => console.error(e));
   }
 }

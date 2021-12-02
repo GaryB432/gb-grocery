@@ -121,7 +121,7 @@ export class StoreComponent implements OnInit {
 
   public addCheckout(): void {
     if (this.selectedStorePlaceId && this.selectedStore) {
-      this.logic
+      void this.logic
         .insertCheckout(
           this.selectedStorePlaceId,
           this.selectedStore.store,
@@ -130,7 +130,7 @@ export class StoreComponent implements OnInit {
         )
         .then((co: Checkout) => {
           this.toastr.success(`Thank you for shopping at ${co.store.name}`);
-          this.router.navigateByUrl('/');
+          void this.router.navigateByUrl('/');
         });
     } else {
       alert('Sorry something is wrong.');
@@ -138,7 +138,7 @@ export class StoreComponent implements OnInit {
   }
 
   private loadWithCurrentCoordinates(coords: GeolocationCoordinates): void {
-    this.logic.load().then((updatedData) => {
+    void this.logic.load().then((updatedData) => {
       this.neededThings = updatedData.items
         .slice()
         .filter((i) => i.needed)
@@ -172,7 +172,7 @@ export class StoreComponent implements OnInit {
               'The Check Out tab is meant for when you are at the store.'
           );
           alert(e);
-          this.router.navigateByUrl('/');
+          void this.router.navigateByUrl('/');
         });
     });
   }

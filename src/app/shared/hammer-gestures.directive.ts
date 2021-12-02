@@ -20,7 +20,7 @@ export class HammerGesturesDirective implements OnInit {
   @Output()
   public swipe: EventEmitter<GestureEvent> = new EventEmitter<GestureEvent>();
 
-  constructor(private el: ElementRef) {}
+  public constructor(private el: ElementRef) {}
 
   public ngOnInit(): void {
     const events: GestureType[] = ['swipeleft', 'swiperight', 'tap'];

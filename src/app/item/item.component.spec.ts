@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -51,12 +50,12 @@ describe('ItemComponent', () => {
   let fixture: ComponentFixture<ItemComponent>;
 
   beforeEach(async(() => {
-    TestBed.overrideComponent(ItemComponent, {
+    void TestBed.overrideComponent(ItemComponent, {
       set: {
         template: '<div>Overridden template here</div>',
       },
     });
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       declarations: [ItemComponent, DummyComponent],
       imports: [
         CommonModule,

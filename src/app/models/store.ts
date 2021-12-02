@@ -7,5 +7,5 @@ export class Store {
   public vicinity?: string;
 
   public checkouts!: Checkout[];
-  constructor(public id: string | undefined, public name: string) {}
+  public constructor(public id: string | undefined, public name: string) {}
 }

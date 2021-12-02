@@ -23,14 +23,14 @@ export class DataIOService {
     return !!this.user;
   }
 
-  constructor(
+  public constructor(
     afAuth: AngularFireAuth,
     db: AngularFireDatabase,
     private storage: DataLocalStorageService
   ) {
     afAuth.authState.subscribe((user: firebase.User | null) => {
       this.user = user;
-      if (!!user) {
+      if (user) {
         this.infoRef = db.database.ref(`/users/${user.uid}/appInfo`);
       }
     });
@@ -54,7 +54,7 @@ export class DataIOService {
           items: [],
           stores: [],
         };
-        if (!!this.infoRef) {
+        if (this.infoRef) {
           this.infoRef
             .once('value')
             .then((snapshot: { val: () => Dto.AppInfo }) => {
@@ -73,7 +73,7 @@ export class DataIOService {
                     );
                 }
                 Object.assign(info, dbInfo);
-              } else if (!!this.infoRef) {
+              } else if (this.infoRef) {
                 // no cloud data. initializing from local-storage
                 Object.assign(info, lsinfo);
                 if (info.items.length > 0) {
@@ -95,8 +95,6 @@ export class DataIOService {
     this.writeStores(newInfo.stores);
     this.writeItems(newInfo.items);
     this.writeCheckouts(newInfo.checkouts);
-
-    console.log('saveAll', newInfo);
 
     return new Promise<Dto.AppInfo>((resolve, reject) => {
       if (this.isAuthenticated && !!this.infoRef) {

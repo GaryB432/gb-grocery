@@ -1,4 +1,3 @@
-// tslint:disable:max-classes-per-file
 import { async, inject, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -9,7 +8,7 @@ import { DataLocalStorageService } from './data-local-storage.service';
 import * as Dto from './dto';
 
 class MockReference {
-  constructor(public db: MockDb) {}
+  public constructor(public db: MockDb) {}
 
   public set(value: any, onComplete?: (a: Error | null) => any): Promise<any> {
     if (!value) {
@@ -170,7 +169,7 @@ describe('Data IO Service', () => {
         },
       });
 
-      TestBed.configureTestingModule({
+      void TestBed.configureTestingModule({
         providers: [
           { provide: DataLocalStorageService, useClass: MockLocalStorage },
           {
@@ -264,7 +263,6 @@ describe('Data IO Service', () => {
         (sut: DataIOService, ls: MockLocalStorage) => {
           const getItem: jasmine.Spy = spyOn(ls, 'getItem').and.callThrough();
           const setItem: jasmine.Spy = spyOn(ls, 'setItem').and.callThrough();
-          /* tslint:disable:max-line-length quotemark */
 
           return sut.saveAll(someAppInfo).then((info: Dto.AppInfo) => {
             expect(info).toBeDefined();
@@ -288,7 +286,6 @@ describe('Data IO Service', () => {
             expect(info.items.length).toBe(3);
             expect(info.stores.length).toBe(2);
           });
-          /* tslint:enable:max-line-length quotemark */
         }
       )
     ));

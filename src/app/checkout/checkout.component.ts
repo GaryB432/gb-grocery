@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   public checkout?: Checkout;
   public place?: Partial<Place>;
   private sub?: Subscription;
-  constructor(
+  public constructor(
     private logic: LogicService,
     private geo: AbstractGeoService,
     private route: ActivatedRoute

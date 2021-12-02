@@ -6,7 +6,7 @@ import { Point } from './point';
 
 @Injectable()
 export class GoogleGeoService extends AbstractGeoService {
-  constructor() {
+  public constructor() {
     super();
   }
 
@@ -28,7 +28,7 @@ export class GoogleGeoService extends AbstractGeoService {
     return new Promise<Place[]>((resolve, reject) => {
       const mapElement = document.getElementById('map');
       const supermarket = 'grocery_or_supermarket';
-      if (!!mapElement) {
+      if (mapElement) {
         const placeService: google.maps.places.PlacesService =
           new google.maps.places.PlacesService(new google.maps.Map(mapElement));
         const searchRequest: google.maps.places.PlaceSearchRequest = {
@@ -63,7 +63,7 @@ export class GoogleGeoService extends AbstractGeoService {
   public async getPlaceDetails(placeId: string): Promise<Partial<Place>> {
     return new Promise<Place>((resolve, reject) => {
       const mapElement = document.getElementById('map');
-      if (!!mapElement) {
+      if (mapElement) {
         const placeService: google.maps.places.PlacesService =
           new google.maps.places.PlacesService(new google.maps.Map(mapElement));
         const searchRequest: google.maps.places.PlaceDetailsRequest = {
@@ -146,8 +146,6 @@ export class GoogleGeoService extends AbstractGeoService {
         width: p.width,
       }));
     }
-
-    console.log(place.name, place.types);
 
     return place;
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Pickup } from '../../models/pickup';
 
@@ -8,5 +8,10 @@ import { Pickup } from '../../models/pickup';
   templateUrl: './pickup.component.html',
 })
 export class PickupComponent {
+  @Output() public aisleChanged = new EventEmitter<Pickup>();
   @Input() public pickup!: Pickup;
+  public changeAisle(s: string): void {
+    this.pickup.aisle = s;
+    this.aisleChanged.emit(this.pickup);
+  }
 }

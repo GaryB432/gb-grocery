@@ -1,10 +1,9 @@
-// tslint:disable:max-classes-per-file
 import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';
 import { Place } from './place';
 
-/* tslint:disable-next-line:no-namespace */
+/* eslint-disable-next-line @typescript-eslint/no-namespace */
 namespace FakeGoogle {
   interface LatLngLiteral {
     lat: number;
@@ -19,7 +18,7 @@ namespace FakeGoogle {
 
   export class LatLng {
     private lit: LatLngLiteral;
-    constructor(lat: number, lng: number, noWrap?: boolean) {
+    public constructor(lat: number, lng: number, noWrap?: boolean) {
       this.lit = { lat, lng };
     }
     public equals(other: LatLng): boolean {
@@ -41,7 +40,7 @@ namespace FakeGoogle {
 
   export class LatLngBounds {
     private templl = new LatLng(0, 0);
-    constructor(
+    public constructor(
       public sw?: LatLng | LatLngLiteral,
       public ne?: LatLng | LatLngLiteral
     ) {}
@@ -86,7 +85,7 @@ namespace FakeGoogle {
 
 describe('GoogleGeoService', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+    void TestBed.configureTestingModule({
       providers: [GoogleGeoService],
     });
   });
