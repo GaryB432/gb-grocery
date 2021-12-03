@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import * as Dto from '../../shared/data/dto';
 import { Utilities } from '../utilities';
 import { AbstractGeoService } from './abstract-geo.service';
@@ -23,6 +22,25 @@ export class MockGeoService extends AbstractGeoService {
     const dx: number = (x1 - x2) ** 2;
     const dy: number = (y1 - y2) ** 2;
     return Math.sqrt(dx + dy);
+  }
+
+  public async getCurrentPosition(
+    _options?: PositionOptions
+  ): Promise<GeolocationPosition> {
+    const hhCoords: GeolocationCoordinates = {
+      accuracy: 0,
+      altitude: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      latitude: 38.575547947584255,
+      longitude: -90.55149092347412,
+      speed: 0,
+    };
+    return Promise.resolve({ coords: hhCoords, timestamp: 0 });
+  }
+
+  public async getPlaceDetails(placeId: string): Promise<Partial<Place>> {
+    throw new Error('Method not implemented.');
   }
 
   public async nearbyStoreSearch(
@@ -92,24 +110,5 @@ export class MockGeoService extends AbstractGeoService {
         resolve(Utilities.flatten([fakePlaces, otherPlaces]));
       }, 200);
     });
-  }
-
-  public getPlaceDetails(placeId: string): Promise<Partial<Place>> {
-    throw new Error('Method not implemented.');
-  }
-
-  public async getCurrentPosition(
-    options?: PositionOptions
-  ): Promise<GeolocationPosition> {
-    const hhCoords: GeolocationCoordinates = {
-      accuracy: 0,
-      altitude: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      latitude: 38.575547947584255,
-      longitude: -90.55149092347412,
-      speed: 0,
-    };
-    return Promise.resolve({ coords: hhCoords, timestamp: 0 });
   }
 }

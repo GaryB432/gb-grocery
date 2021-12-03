@@ -64,16 +64,16 @@ class MockDataService {
     return Promise.resolve(this.info);
   }
 
-  public saveAll(_info: AppInfo): Promise<AppInfo> {
-    return Promise.resolve(this.info);
-  }
-
   public clearAll(): void {
     this.info = {
       checkouts: [],
       items: [],
       stores: [],
     };
+  }
+
+  public saveAll(_info: AppInfo): Promise<AppInfo> {
+    return Promise.resolve(this.info);
   }
 }
 
@@ -334,8 +334,8 @@ describe('More Logic Service', () => {
 
   it('should sort pickups', () => {
     interface PickupStarter {
-      name: string;
       aisle: string;
+      name: string;
     }
 
     const setup: PickupStarter[] = [

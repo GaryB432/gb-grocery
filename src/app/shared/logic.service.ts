@@ -11,8 +11,8 @@ import { Utilities } from './utilities';
 type Aisle = string;
 
 interface AisleParts {
-  num: number;
   alpha: string;
+  num: number;
 }
 
 @Injectable()
@@ -26,6 +26,112 @@ export class LogicService {
   private pickups = new Map<string, Pickup>();
 
   public constructor(private data: DataService) {}
+
+  public static getStoreAisles(store: Store): Aisle[] {
+    return LogicService.sortAisles(
+      Utilities.distinct(
+        Utilities.flatten(
+          store.checkouts.map((c) =>
+            c.pickups.filter((p) => !!p.aisle).map((p) => p.aisle)
+          )
+        )
+      )
+    );
+  }
+
+  public static predictAisle(item: Item, store: Store): string | undefined {
+    if (item.checkouts) {
+      const coHere = item.checkouts
+        .slice()
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
+        .find((co) => co.store.id === store.id);
+      if (coHere) {
+        const chp = coHere.pickups.find((pu) => pu.item.id === item.id);
+        if (!chp) {
+          throw new Error('no pickup');
+        }
+        return chp.aisle;
+      }
+    }
+    return undefined;
+  }
+
+  public static project(info: AppInfo): AppInfo {
+    info.items.forEach((item) => (item.checkouts = []));
+    info.stores.forEach((store) => (store.checkouts = []));
+    info.checkouts.forEach((co) => {
+      co.store.checkouts.push(co);
+      co.pickups.forEach((p) => p.item.checkouts.push(co));
+    });
+    return info;
+  }
+
+  public static sortAisles(aisles: Aisle[]): Aisle[] {
+    return aisles.slice(0).sort(LogicService.compareAisles);
+  }
+
+  public static sortPickups(pickups: Pickup[]): Pickup[] {
+    return pickups.sort((a, b) => {
+      const itemCompare: number = a.item.name.localeCompare(b.item.name);
+      if (a.aisle) {
+        if (b.aisle) {
+          // both a and b have defined aisles
+          const aisleCompare: number = LogicService.compareAisles(
+            a.aisle,
+            b.aisle
+          );
+          return aisleCompare < 0 ? -1 : aisleCompare > 0 ? 1 : itemCompare;
+        } else {
+          // a but no b
+          return -1;
+        }
+      } else if (b.aisle) {
+        // no a but b
+        return 1;
+      } else {
+        // neither a nor b have defined aisles
+        return itemCompare;
+      }
+    });
+  }
+
+  private static compareAisles(a: Aisle, b: Aisle): number {
+    function getParts(aisle: Aisle): AisleParts {
+      const groups: RegExpExecArray | null =
+        LogicService.aisleRegex.exec(aisle);
+      return groups
+        ? { num: parseInt(groups[1], 10), alpha: groups[2] }
+        : { num: NaN, alpha: aisle };
+    }
+
+    const aparts: AisleParts = getParts(a);
+    const bparts: AisleParts = getParts(b);
+
+    if (isNaN(aparts.num)) {
+      if (isNaN(bparts.num)) {
+        // neither a nor b has a num part
+        return aparts.alpha.localeCompare(bparts.alpha);
+      } else {
+        // b has a num part, a does not
+        return 1;
+      }
+    } else {
+      if (isNaN(bparts.num)) {
+        // a has a num part, b does not
+        return -1;
+      } else {
+        // both a and b have num part
+        const numcomp: number = aparts.num - bparts.num;
+        return numcomp === 0
+          ? aparts.alpha.localeCompare(bparts.alpha)
+          : numcomp;
+      }
+    }
+  }
+
+  public changePickup(pu: Pickup): void {
+    this.pickups.set(pu.item.id, pu);
+  }
 
   public clearAll(): void {
     this.data.clearAll();
@@ -47,20 +153,6 @@ export class LogicService {
     return this.saveAll();
   }
 
-  public getItem(id: string): Promise<Item> {
-    return this.loaded.then(
-      (info) =>
-        new Promise<Item>((resolve, reject): void => {
-          const item = info.items.find((i) => i.id === id);
-          if (item) {
-            resolve(item);
-          } else {
-            reject(`No item ${id}`);
-          }
-        })
-    );
-  }
-
   public getCheckout(store: string, isoDate: string): Promise<Checkout> {
     const date = new Date(Date.parse(isoDate)).getTime();
     return this.loaded.then(
@@ -77,6 +169,34 @@ export class LogicService {
         })
     );
   }
+
+  public getItem(id: string): Promise<Item> {
+    return this.loaded.then(
+      (info) =>
+        new Promise<Item>((resolve, reject): void => {
+          const item = info.items.find((i) => i.id === id);
+          if (item) {
+            resolve(item);
+          } else {
+            reject(`No item ${id}`);
+          }
+        })
+    );
+  }
+
+  public getPickups(data: AppInfo, store: Store | undefined): Pickup[] {
+    const getAisle = (item: Item): string | undefined =>
+      store ? LogicService.predictAisle(item, store) : undefined;
+    return LogicService.sortPickups(
+      data.items
+        .filter((item) => item.needed)
+        .map((item) => {
+          const pu = this.pickups.get(item.id);
+          return pu ?? new Pickup(item, getAisle(item), false);
+        })
+    );
+  }
+
   public getStoresFromNearbyPlaces(places: Place[]): Store[] {
     const stores: Store[] = places.map((place) => {
       if (!place.placeId) {
@@ -174,125 +294,5 @@ export class LogicService {
 
   private saveAll(): Promise<AppInfo> {
     return this.data.saveAll(this.cache).then((info) => (this.cache = info));
-  }
-
-  public static predictAisle(item: Item, store: Store): string | undefined {
-    if (item.checkouts) {
-      const coHere = item.checkouts
-        .slice()
-        .sort((a, b) => b.date.getTime() - a.date.getTime())
-        .find((co) => co.store.id === store.id);
-      if (coHere) {
-        const chp = coHere.pickups.find((pu) => pu.item.id === item.id);
-        if (!chp) {
-          throw new Error('no pickup');
-        }
-        return chp.aisle;
-      }
-    }
-    return undefined;
-  }
-
-  public static getStoreAisles(store: Store): Aisle[] {
-    return LogicService.sortAisles(
-      Utilities.distinct(
-        Utilities.flatten(
-          store.checkouts.map((c) =>
-            c.pickups.filter((p) => !!p.aisle).map((p) => p.aisle)
-          )
-        )
-      )
-    );
-  }
-
-  public static sortPickups(pickups: Pickup[]): Pickup[] {
-    return pickups.sort((a, b) => {
-      const itemCompare: number = a.item.name.localeCompare(b.item.name);
-      if (a.aisle) {
-        if (b.aisle) {
-          // both a and b have defined aisles
-          const aisleCompare: number = LogicService.compareAisles(
-            a.aisle,
-            b.aisle
-          );
-          return aisleCompare < 0 ? -1 : aisleCompare > 0 ? 1 : itemCompare;
-        } else {
-          // a but no b
-          return -1;
-        }
-      } else if (b.aisle) {
-        // no a but b
-        return 1;
-      } else {
-        // neither a nor b have defined aisles
-        return itemCompare;
-      }
-    });
-  }
-
-  public static sortAisles(aisles: Aisle[]): Aisle[] {
-    // return aisles.slice(0);
-    return aisles.slice(0).sort(LogicService.compareAisles);
-  }
-
-  public static project(info: AppInfo): AppInfo {
-    info.items.forEach((item) => (item.checkouts = []));
-    info.stores.forEach((store) => (store.checkouts = []));
-    info.checkouts.forEach((co) => {
-      co.store.checkouts.push(co);
-      co.pickups.forEach((p) => p.item.checkouts.push(co));
-    });
-    return info;
-  }
-
-  private static compareAisles(a: Aisle, b: Aisle): number {
-    // return a.localeCompare(b);
-
-    function getParts(aisle: Aisle): AisleParts {
-      const groups: RegExpExecArray | null =
-        LogicService.aisleRegex.exec(aisle);
-      return groups
-        ? { num: parseInt(groups[1], 10), alpha: groups[2] }
-        : { num: NaN, alpha: aisle };
-    }
-
-    const aparts: AisleParts = getParts(a);
-    const bparts: AisleParts = getParts(b);
-
-    if (isNaN(aparts.num)) {
-      if (isNaN(bparts.num)) {
-        // neither a nor b has a num part
-        return aparts.alpha.localeCompare(bparts.alpha);
-      } else {
-        // b has a num part, a does not
-        return 1;
-      }
-    } else {
-      if (isNaN(bparts.num)) {
-        // a has a num part, b does not
-        return -1;
-      } else {
-        // both a and b have num part
-        const numcomp: number = aparts.num - bparts.num;
-        return numcomp === 0
-          ? aparts.alpha.localeCompare(bparts.alpha)
-          : numcomp;
-      }
-    }
-  }
-  public changePickup(pu: Pickup): void {
-    this.pickups.set(pu.item.id, pu);
-  }
-  public getPickups(data: AppInfo, store: Store | undefined): Pickup[] {
-    const getAisle = (item: Item): string | undefined =>
-      store ? LogicService.predictAisle(item, store) : undefined;
-    return LogicService.sortPickups(
-      data.items
-        .filter((item) => item.needed)
-        .map((item) => {
-          const pu = this.pickups.get(item.id);
-          return pu ?? new Pickup(item, getAisle(item), false);
-        })
-    );
   }
 }

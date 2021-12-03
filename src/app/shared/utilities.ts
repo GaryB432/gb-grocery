@@ -19,31 +19,8 @@ function randomString(length: number, chars: string): string {
 }
 
 export class Utilities {
-  public static makeItemId(): string {
-    return Utilities.makeRandomId('i');
-  }
-
-  public static makeStoreId(): string {
-    return Utilities.makeRandomId('s');
-  }
-
-  public static dtoToItem(dto: Dto.Item): Item {
-    const newItem: Item = new Item();
-    newItem.id = dto.id;
-    newItem.name = dto.name;
-    newItem.needed = dto.needed;
-    newItem.checkouts = [];
-    return newItem;
-  }
-
-  // TODO make this on the Store class
-  public static dtoToStore(dto: Dto.Store): Store {
-    const newStore: Store = new Store(dto.id, dto.name);
-    newStore.placeId = dto.place_id;
-    newStore.icon = dto.icon;
-    newStore.vicinity = dto.vicinity;
-    newStore.checkouts = [];
-    return newStore;
+  public static distinct<T>(arr: T[]): T[] {
+    return Array.from(new Set<T>(arr));
   }
 
   public static dtoToCheckout(dto: Dto.Checkout, context: AppInfo): Checkout {
@@ -65,6 +42,25 @@ export class Utilities {
     return newCheckout;
   }
 
+  public static dtoToItem(dto: Dto.Item): Item {
+    const newItem: Item = new Item();
+    newItem.id = dto.id;
+    newItem.name = dto.name;
+    newItem.needed = dto.needed;
+    newItem.checkouts = [];
+    return newItem;
+  }
+
+  // TODO make this on the Store class
+  public static dtoToStore(dto: Dto.Store): Store {
+    const newStore: Store = new Store(dto.id, dto.name);
+    newStore.placeId = dto.place_id;
+    newStore.icon = dto.icon;
+    newStore.vicinity = dto.vicinity;
+    newStore.checkouts = [];
+    return newStore;
+  }
+
   public static flatten(list: any[]): any[] {
     return list.reduce(
       (a, b) => a.concat(Array.isArray(b) ? Utilities.flatten(b) : b),
@@ -72,8 +68,12 @@ export class Utilities {
     );
   }
 
-  public static distinct<T>(arr: T[]): T[] {
-    return Array.from(new Set<T>(arr));
+  public static makeItemId(): string {
+    return Utilities.makeRandomId('i');
+  }
+
+  public static makeStoreId(): string {
+    return Utilities.makeRandomId('s');
   }
 
   private static makeRandomId(prefix: string): string {

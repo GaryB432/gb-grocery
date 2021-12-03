@@ -17,8 +17,8 @@ import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
 import { LogicService } from '../shared/logic.service';
 
 interface StoreDistance {
-  store: Store;
   distance: number;
+  store: Store;
 }
 
 @Component({
@@ -68,14 +68,10 @@ interface StoreDistance {
   templateUrl: './store.component.html',
 })
 export class StoreComponent implements OnInit {
-  public neededThings: Pickup[] = [];
-
   public nbStores: StoreDistance[] = [];
-
+  public neededThings: Pickup[] = [];
   public newName = '';
-
   public selectedStorePlaceId: string | null = null;
-
   private cachedAppInfo?: AppInfo;
 
   public constructor(
@@ -85,46 +81,10 @@ export class StoreComponent implements OnInit {
     private router: Router
   ) {}
 
-  public checkoutReady(): boolean {
-    return (
-      this.selectedStorePlaceId != null &&
-      this.neededThings.filter((i) => i.picked).length > 0
-    );
-  }
-
   public get selectedStore(): StoreDistance | undefined {
     return this.nbStores.find(
       (s) => s.store.placeId === this.selectedStorePlaceId
     );
-  }
-
-  public ngOnInit(): void {
-    this.geo
-      .getCurrentPosition()
-      .then((pc) => this.loadWithCurrentCoordinates(pc.coords))
-      .catch((pec) => alert(pec.message));
-  }
-
-  public togglePicked(pickup: Pickup): void {
-    pickup.picked = !pickup.picked;
-    this.logic.changePickup(pickup);
-  }
-
-  public pickupChanged(pickup: Pickup): void {
-    this.logic.changePickup(pickup);
-  }
-
-  public changeStore(_placeID?: string): void {
-    const nbs = this.selectedStore;
-    if (!nbs) {
-      throw new Error('changing to null store');
-    }
-    if (this.cachedAppInfo) {
-      this.neededThings = this.logic.getPickups(
-        this.cachedAppInfo,
-        this.selectedStore ? this.selectedStore.store : undefined
-      );
-    }
   }
 
   public addCheckout(): void {
@@ -143,6 +103,42 @@ export class StoreComponent implements OnInit {
     } else {
       alert('Sorry something is wrong.');
     }
+  }
+
+  public changeStore(_placeID?: string): void {
+    const nbs = this.selectedStore;
+    if (!nbs) {
+      throw new Error('changing to null store');
+    }
+    if (this.cachedAppInfo) {
+      this.neededThings = this.logic.getPickups(
+        this.cachedAppInfo,
+        this.selectedStore ? this.selectedStore.store : undefined
+      );
+    }
+  }
+
+  public checkoutReady(): boolean {
+    return (
+      this.selectedStorePlaceId != null &&
+      this.neededThings.filter((i) => i.picked).length > 0
+    );
+  }
+
+  public ngOnInit(): void {
+    this.geo
+      .getCurrentPosition()
+      .then((pc) => this.loadWithCurrentCoordinates(pc.coords))
+      .catch((pec) => alert(pec.message));
+  }
+
+  public pickupChanged(pickup: Pickup): void {
+    this.logic.changePickup(pickup);
+  }
+
+  public togglePicked(pickup: Pickup): void {
+    pickup.picked = !pickup.picked;
+    this.logic.changePickup(pickup);
   }
 
   private loadWithCurrentCoordinates(coords: GeolocationCoordinates): void {
