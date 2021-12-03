@@ -25,8 +25,6 @@ export class LogicService {
 
   private pickups = new Map<string, Pickup>();
 
-  private puMappedStore?: Store;
-
   constructor(private data: DataService) {}
 
   public clearAll(): void {
@@ -140,6 +138,7 @@ export class LogicService {
     });
 
     this.cache.checkouts.push(co);
+    this.pickups.clear();
 
     return this.saveAll().then(() => co);
   }
@@ -285,9 +284,6 @@ export class LogicService {
     this.pickups.set(pu.item.id, pu);
   }
   public getPickups(data: AppInfo, store: Store | undefined): Pickup[] {
-    if (this.puMappedStore && store !== this.puMappedStore) {
-      this.pickups.clear();
-    }
     const getAisle = (item: Item): string | undefined =>
       store ? LogicService.predictAisle(item, store) : undefined;
     return LogicService.sortPickups(
