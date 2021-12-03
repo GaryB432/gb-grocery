@@ -61,7 +61,10 @@ export class Utilities {
     return newStore;
   }
 
-  public static flatten(list: any[]): any[] {
+  public static flatten<T>(list: unknown | unknown[]): T[] {
+    if (!Array.isArray(list)) {
+      throw new Error('flatten needs an array');
+    }
     return list.reduce(
       (a, b) => a.concat(Array.isArray(b) ? Utilities.flatten(b) : b),
       []
