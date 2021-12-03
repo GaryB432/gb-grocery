@@ -1,48 +1,57 @@
 @import '../styles/variables';
 
-$header-height: 73px;
-$header-padding: 0;
-
 header {
   display: block;
-  height: $header-height;
+  box-sizing: border-box;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9999;
-  width: 100%;
-  background-color: $brand;
-  padding: $header-padding;
-  overflow: hidden;
-  h1 {
-    font-size: 40px;
-    font-family: serif;
-    color: $white;
+  width: 100vw;
+  .top {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $brand;
+    color: white;
+    h1 {
+      font-size: 1.5em;
+      padding: 0.2em;
+    }
+    a {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      margin: 0.2em;
+      padding: 0.3em;
+      &.active {
+        background-color: darken($brand, 10);
+      }
+    }
   }
-}
-
-nav {
-  background-color: lighten($grey, 70%);
-  height: 33px;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  a {
-    flex: 1 0 auto;
-    border: 1px solid $grey;
-    text-align: center;
-    padding: 5px;
-    text-decoration: none;
-    color: $silver;
-    &.active {
-      border-bottom: none;
-      background-color: $white;
-      color: $grey;
-      font-weight: bold;
+  nav {
+    display: flex;
+    justify-content: space-between;
+    a {
+      border: 2px solid darken($brand, 10);
+      text-align: center;
+      padding: .3em;
+      color: $silver;
+      background-color: lighten($brand, 30);
+      text-decoration: none;
+      flex-grow: 1;
+      &.active {
+        border-bottom: none;
+        background-color: $white;
+        color: $grey;
+        font-weight: bold;
+      }
     }
   }
 }
 
 .content {
-  margin-top: $header-height + ($header-padding * 2);
+  margin-top: 14vh;
+  padding: 0 0.2em;
 }
