@@ -11,17 +11,18 @@ import * as Dto from '../shared/data/dto';
   templateUrl: './about.component.html',
 })
 export class AboutComponent implements OnInit {
-  public jsonInfo = '{}';
-  public isAuthenticated?: boolean;
-  public uid?: string;
+  public buildStamp?: string;
   public displayName?: string;
   public email?: string;
-  public photoURL?: string;
   public env: {
+    buildStamp: string;
     firebase: unknown;
     production: boolean;
-    buildStamp: string;
   } = environment;
+  public isAuthenticated?: boolean;
+  public jsonInfo = '{}';
+  public photoURL?: string;
+  public uid?: string;
 
   public constructor(
     private afAuth: AngularFireAuth,
@@ -29,7 +30,27 @@ export class AboutComponent implements OnInit {
     private io: DataIOService
   ) {}
 
+  public clearData(): void {
+    if (confirm('About to Reset')) {
+      this.io.clearAll();
+      void this.router.navigateByUrl('home');
+    }
+  }
+
+  public logout(): void {
+    void this.afAuth.signOut();
+  }
+
   public ngOnInit(): void {
+    this.buildStamp = new Intl.DateTimeFormat('en-US', {
+      year: '2-digit',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    }).format(new Date(this.env.buildStamp));
+
     this.afAuth.authState.subscribe(async (user) => {
       if (user && user.uid) {
         this.isAuthenticated = true;
@@ -43,13 +64,6 @@ export class AboutComponent implements OnInit {
     });
   }
 
-  public clearData(): void {
-    if (confirm('About to Reset')) {
-      this.io.clearAll();
-      void this.router.navigateByUrl('home');
-    }
-  }
-
   public replaceAppInfoForever(): void {
     try {
       const dto: Dto.AppInfo = JSON.parse(this.jsonInfo);
@@ -61,19 +75,9 @@ export class AboutComponent implements OnInit {
     }
   }
 
-  public logout(): void {
-    void this.afAuth.signOut();
-  }
-
-  public buildStamp(): string {
-    const e = new Date(this.env.buildStamp).toLocaleDateString();
-    return e;
-    // return this.env.buildStamp.substr(0, 3);
-  }
-
   private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
     if (confirm('WARNING this is not validated. About to replace your data')) {
-      return this.io.saveAll(newInfo).then((_replaced) => true);
+      return this.io.saveAll(newInfo).then(() => true);
     }
     return Promise.resolve(false);
   }

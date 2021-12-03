@@ -7,6 +7,6 @@ export const environment = {
     projectId: 'grocery17-9ca26',
     storageBucket: 'grocery17-9ca26.appspot.com',
   },
-  buildStamp: '1980-01-01T00:00:00.000Z',
+  buildStamp: '{{ buildStamp }}',
   production: true,
 };

@@ -37,9 +37,8 @@ td {
 }
 
 .stamp {
-  padding: 0.5em 1em;
+  border: thin solid #ccc;
+  text-align: center;
+  padding: 0.2em 1em;
   margin: 1em;
-  background-color: rgb(255, 87, 87);
-  font: bold;
-  color: white;
 }
