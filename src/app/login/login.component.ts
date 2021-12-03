@@ -9,10 +9,10 @@ import firebase from 'firebase/compat/app';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  public error: any;
+  public error: unknown;
   public constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.afAuth.authState.subscribe((user: firebase.User | null) => {
       if (user) {
         void this.router.navigateByUrl('home');
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public loginGoogle() {
+  public loginGoogle(): void {
     void this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     // this.afAuth
     //   .signInWithPopup(new firebase.auth.GoogleAuthProvider())

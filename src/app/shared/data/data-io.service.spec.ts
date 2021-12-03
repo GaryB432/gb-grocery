@@ -10,7 +10,10 @@ import * as Dto from './dto';
 class MockReference {
   public constructor(public db: MockDb) {}
 
-  public set(value: any, onComplete?: (a: Error | null) => any): Promise<any> {
+  public set(
+    value: Dto.AppInfo,
+    onComplete?: (a: Error | null) => any
+  ): Promise<Dto.AppInfo> {
     if (!value) {
       throw new Error('Do not save undefined. KThx');
     }
@@ -28,13 +31,13 @@ class MockReference {
 
 interface MockDatabase {
   path?: string;
-  data: Dto.AppInfo;
+  data: Dto.AppInfo | undefined;
   callCount: number;
 }
 
 class MockDb implements MockDatabase {
   public path?: string;
-  public data: any;
+  public data: Dto.AppInfo | undefined;
   public callCount = -Infinity;
   public ref(path?: string): MockReference {
     this.path = path;
@@ -131,13 +134,14 @@ describe('Data IO Service', () => {
               expected: MockDatabase
             ): jasmine.CustomMatcherResult {
               const pass =
-                util.equals(actual.path, expected.path) &&
-                actual.data &&
-                expected.data &&
-                util.equals(actual.data, expected.data) &&
-                util.equals(actual.data.stores, expected.data.stores) &&
-                util.equals(actual.data.checkouts, expected.data.checkouts) &&
-                util.equals(actual.data.items, expected.data.items);
+                (util.equals(actual.path, expected.path) &&
+                  actual.data &&
+                  expected.data &&
+                  util.equals(actual.data, expected.data) &&
+                  util.equals(actual.data.stores, expected.data.stores) &&
+                  util.equals(actual.data.checkouts, expected.data.checkouts) &&
+                  util.equals(actual.data.items, expected.data.items)) ||
+                false;
 
               const message = actual.data
                 ? util.buildFailureMessage(

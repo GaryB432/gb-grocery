@@ -25,7 +25,7 @@ export class LogicService {
 
   private pickups = new Map<string, Pickup>();
 
-  constructor(private data: DataService) {}
+  public constructor(private data: DataService) {}
 
   public clearAll(): void {
     this.data.clearAll();

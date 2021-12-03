@@ -18,7 +18,7 @@ export class AboutComponent implements OnInit {
   public email?: string;
   public photoURL?: string;
   public env: {
-    firebase: any;
+    firebase: unknown;
     production: boolean;
     buildStamp: string;
   } = environment;
