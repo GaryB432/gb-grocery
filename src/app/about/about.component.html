@@ -17,12 +17,4 @@
   <p>This will replace your data from the text above. BE CAREFUL.</p>
   <button class="b2" (click)="replaceAppInfoForever()">Replace</button>
 </section>
-<table *ngIf="showEnviornment">
-  <tbody>
-    <tr *ngFor="let k of environmentKeys">
-      <td>{{ k }}</td>
-      <td>{{ env.azure[k] }}</td>
-    </tr>
-  </tbody>
-</table>
-<p class="stamp" (click)="toggleEnvironmentTable()">v6 ng13.0 2021-12-02b</p>
+<p class="stamp">{{ buildStamp() }}</p>

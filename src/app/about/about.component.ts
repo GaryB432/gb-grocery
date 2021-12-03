@@ -17,49 +17,10 @@ export class AboutComponent implements OnInit {
   public displayName?: string;
   public email?: string;
   public photoURL?: string;
-  public environmentKeys: string[] = [
-    'INPUT_ACTION',
-    'INPUT_APP_BUILD_COMMAND',
-    'INPUT_APP_LOCATION',
-    'INPUT_API_LOCATION',
-    'INPUT_APP_ARTIFACT_LOCATION',
-    'INPUT_API_BUILD_COMMAND',
-    'INPUT_ROUTES_LOCATION',
-    'HOME',
-    'GITHUB_JOB',
-    'GITHUB_REF',
-    'GITHUB_SHA',
-    'GITHUB_REPOSITORY',
-    'GITHUB_REPOSITORY_OWNER',
-    'GITHUB_RUN_ID',
-    'GITHUB_RUN_NUMBER',
-    'GITHUB_RETENTION_DAYS',
-    'GITHUB_ACTOR',
-    'GITHUB_WORKFLOW',
-    'GITHUB_HEAD_REF',
-    'GITHUB_BASE_REF',
-    'GITHUB_EVENT_NAME',
-    'GITHUB_SERVER_URL',
-    'GITHUB_API_URL',
-    'GITHUB_GRAPHQL_URL',
-    'GITHUB_WORKSPACE',
-    'GITHUB_ACTION',
-    'GITHUB_EVENT_PATH',
-    'GITHUB_PATH',
-    'GITHUB_ENV',
-    'RUNNER_OS',
-    'RUNNER_TOOL_CACHE',
-    'RUNNER_TEMP',
-    'RUNNER_WORKSPACE',
-    'ACTIONS_RUNTIME_URL',
-    'ACTIONS_RUNTIME_TOKEN',
-    'ACTIONS_CACHE_URL',
-  ];
-  public showEnviornment = false;
   public env: {
     firebase: any;
-    azure: { [key: string]: string };
     production: boolean;
+    buildStamp: string;
   } = environment;
 
   public constructor(
@@ -104,8 +65,10 @@ export class AboutComponent implements OnInit {
     void this.afAuth.signOut();
   }
 
-  public toggleEnvironmentTable(): void {
-    this.showEnviornment = !this.showEnviornment;
+  public buildStamp(): string {
+    const e = new Date(this.env.buildStamp).toLocaleDateString();
+    return e;
+    // return this.env.buildStamp.substr(0, 3);
   }
 
   private doReplace(newInfo: Dto.AppInfo): Promise<boolean> {
