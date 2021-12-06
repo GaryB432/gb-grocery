@@ -27,5 +27,6 @@ export interface Checkout {
 export interface Item {
   id: string;
   name: string;
+  favorite: boolean;
   needed: boolean;
 }

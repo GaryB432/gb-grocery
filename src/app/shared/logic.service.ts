@@ -272,6 +272,7 @@ export class LogicService {
     const item: Item = Utilities.dtoToItem({
       id,
       name,
+      favorite: false,
       needed: true,
     });
 

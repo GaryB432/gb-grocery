@@ -111,10 +111,7 @@ export class StoreComponent implements OnInit {
       throw new Error('changing to null store');
     }
     if (this.cachedAppInfo) {
-      this.neededThings = this.logic.getPickups(
-        this.cachedAppInfo,
-        nbs.store
-      );
+      this.neededThings = this.logic.getPickups(this.cachedAppInfo, nbs.store);
     }
   }
 

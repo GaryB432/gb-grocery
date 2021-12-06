@@ -42,6 +42,7 @@ export class DataService {
       }),
       items: info.items.map((i) => {
         return {
+          favorite: i.favorite,
           id: i.id,
           name: i.name,
           needed: i.needed,
