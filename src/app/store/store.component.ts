@@ -113,7 +113,7 @@ export class StoreComponent implements OnInit {
     if (this.cachedAppInfo) {
       this.neededThings = this.logic.getPickups(
         this.cachedAppInfo,
-        this.selectedStore ? this.selectedStore.store : undefined
+        nbs.store
       );
     }
   }
