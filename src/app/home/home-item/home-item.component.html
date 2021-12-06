@@ -7,10 +7,12 @@
     <p class="store">{{ recentCheckout?.store?.name }}</p>
     <p class="date">{{ recentCheckout?.date | gbgMoment }}</p>
   </div>
+  <gbg-liker></gbg-liker>
   <input
     type="checkbox"
     [ngModel]="item.favorite"
     (ngModelChange)="toggleFavorite()"
+    gbgLiker
   />
   <div (click)="toggleNeeded()" class="badge" [@badgeAnimation]="getState()">
     {{ pickupCount }}
