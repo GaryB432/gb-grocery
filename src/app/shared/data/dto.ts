@@ -7,26 +7,26 @@ export interface Store {
 }
 
 export interface AppInfo {
+  checkouts: Checkout[];
   items: Item[];
   stores: Store[];
-  checkouts: Checkout[];
 }
 
 export interface Pickup {
-  itemId: string;
   aisle: string | undefined;
+  itemId: string;
 }
 
 export interface Checkout {
-  isoDate: string;
   distance?: number;
-  storeId: string;
+  isoDate: string;
   pickups: Pickup[];
+  storeId: string;
 }
 
 export interface Item {
+  favorite: boolean;
   id: string;
   name: string;
-  favorite: boolean;
   needed: boolean;
 }
