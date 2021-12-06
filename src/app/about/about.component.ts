@@ -48,6 +48,7 @@ export class AboutComponent implements OnInit {
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
+      timeZone: 'America/Chicago',
       hour12: true,
     }).format(new Date(this.env.buildStamp));
 
