@@ -13,7 +13,12 @@
   <button class="b2" (click)="clearData()">Erase</button>
 </section>
 <section *ngIf="isAuthenticated">
-  <textarea [(ngModel)]="jsonInfo" rows="20" cols="35"></textarea>
+  <textarea
+    [(ngModel)]="jsonInfo"
+    rows="20"
+    cols="35"
+    spellcheck="false"
+  ></textarea>
   <p>This will replace your data from the text above. BE CAREFUL.</p>
   <button class="b2" (click)="replaceAppInfoForever()">Replace</button>
 </section>
