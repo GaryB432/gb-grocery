@@ -44,7 +44,6 @@ export class Utilities {
 
   public static dtoToItem(dto: Dto.Item): Item {
     const newItem: Item = new Item();
-    newItem.favorite = dto.favorite;
     newItem.id = dto.id;
     newItem.name = dto.name;
     newItem.needed = dto.needed;

@@ -10,7 +10,6 @@ import {
 import { Component, Input, OnInit } from '@angular/core';
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
-import { LogicService } from '../../shared/logic.service';
 
 type Color = string;
 
@@ -65,8 +64,6 @@ export class HomeItemComponent implements OnInit {
   public recentCheckout?: Checkout;
   public pickupCount = 0;
 
-  public constructor(private logic: LogicService) {}
-
   public ngOnInit(): void {
     this.pickupCount = this.item.checkouts.length;
     this.recentCheckout =
@@ -81,10 +78,6 @@ export class HomeItemComponent implements OnInit {
     return this.item.needed ? 'needed' : 'notneeded';
   }
 
-  public toggleFavorite(): void {
-    this.item.favorite = !this.item.favorite;
-    void this.logic.updateItem(this.item);
-  }
   public toggleNeeded(): void {
     this.item.needed = !this.item.needed;
   }
