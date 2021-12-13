@@ -252,9 +252,13 @@ export class LogicService {
     const co: Checkout = new Checkout(store, new Date());
     co.distance = distance;
     co.pickups = pickups.slice();
-    co.pickups.forEach((i) => {
-      i.item.needed = false;
-      i.aisle = i.aisle ? i.aisle.toLocaleUpperCase() : undefined;
+    co.pickups.forEach((pu) => {
+      const i = this.cache.items.find((ci) => ci.id === pu.item.id);
+      if (!i) {
+        throw new Error('no item');
+      }
+      i.needed = false;
+      pu.aisle = pu.aisle ? pu.aisle.toLocaleUpperCase() : undefined;
     });
 
     this.cache.checkouts.push(co);
