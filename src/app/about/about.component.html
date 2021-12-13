@@ -1,5 +1,5 @@
 <section>
-  <div>{{ displayName }}</div>
+  <h1>{{ displayName }}</h1>
   <img [src]="photoURL" alt="you" />
   <div *ngIf="isAuthenticated; else unAuth">
     <button class="b2" (click)="logout()">Logout</button>

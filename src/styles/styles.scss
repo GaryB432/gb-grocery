@@ -5,11 +5,11 @@
 @import 'fa/fontawesome.scss';
 @import 'fa/solid.scss';
 
-$base-font-size: 20px;
+// $base-font-size: 20px;
 
-html {
-  font-size: $base-font-size;
-}
+// html {
+//   font-size: $base-font-size;
+// }
 
 body {
   font-family: Helvetica Neue, Helvetica, Arial;
@@ -27,7 +27,7 @@ input[type='submit'],
 .input-checkbox {
   -webkit-appearance: none;
   border-radius: 0;
-  font-size: $base-font-size;
+  // font-size: $base-font-size;
 }
 
 button {
@@ -44,7 +44,7 @@ select {
   -webkit-appearance: menulist;
   border-radius: 0;
   // border: 1px solid #ccc;
-  font-size: $base-font-size;
+  // font-size: $base-font-size;
   width: 100%;
   // font-family: Arial, Helvetica, sans-serif
 }
