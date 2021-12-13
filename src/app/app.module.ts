@@ -44,7 +44,7 @@ import { StoreModule } from './store/store.module';
     StoreModule,
     LoginModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-bottom-center',
       preventDuplicates: true,
       timeOut: 5000,
     }),
