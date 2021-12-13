@@ -8,6 +8,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { LogicService } from 'src/app/shared/logic.service';
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
 
@@ -64,6 +65,8 @@ export class HomeItemComponent implements OnInit {
   public recentCheckout?: Checkout;
   public pickupCount = 0;
 
+  public constructor(private logic: LogicService) {}
+
   public ngOnInit(): void {
     this.pickupCount = this.item.checkouts.length;
     this.recentCheckout =
@@ -76,6 +79,11 @@ export class HomeItemComponent implements OnInit {
 
   public getState(): string {
     return this.item.needed ? 'needed' : 'notneeded';
+  }
+
+  public toggleFavorite(): void {
+    this.item.favorite = !this.item.favorite;
+    setTimeout(() => this.logic.updateItem(this.item), 0);
   }
 
   public toggleNeeded(): void {
