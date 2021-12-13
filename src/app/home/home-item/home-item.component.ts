@@ -23,14 +23,12 @@ const brand: Color = '#B2D235';
         'needed',
         style({
           backgroundColor: brand,
-          transform: 'scale(1)',
         })
       ),
       state(
         'notneeded',
         style({
           backgroundColor: 'transparent',
-          transform: 'scale(0.95)',
         })
       ),
       transition('notneeded <=> needed', [

@@ -14,7 +14,6 @@ import { Component, Input } from '@angular/core';
         'off',
         style({
           fill: 'none',
-          stroke: 'black',
           transform: 'scale(1)',
           fillOpacity: 0,
         })
@@ -23,8 +22,7 @@ import { Component, Input } from '@angular/core';
         'on',
         style({
           fill: '#ff4747',
-          stroke: 'none',
-          transform: 'scale(1.5)',
+          transform: 'scale(1.7)',
           fillOpacity: 1,
         })
       ),
@@ -43,7 +41,7 @@ import { Component, Input } from '@angular/core';
       />
     </svg>
   `,
-  styles: ['svg { display: block; height: 2em; }'],
+  styles: ['svg { display: block; height: 2em; stroke: #ff4747; }'],
 })
 export class StarComponent {
   @Input() public state = 'off';
