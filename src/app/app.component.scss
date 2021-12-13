@@ -45,14 +45,22 @@ nav {
   justify-content: space-around;
   justify-items: center;
   a {
-    border: thin solid green;
+    border: thin solid variables.$brand;
     flex: 1 0 auto;
     font-size: 1.2em;
     padding: 0.8em;
     text-align: center;
     text-decoration: none;
+    background-color: variables.$light-heading;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      color: black;
+    }
     &.active {
       border-bottom: thin solid white;
+      background-color: white;
       font-weight: bold;
     }
   }
