@@ -1,56 +1,63 @@
-@import '../styles/variables';
+@use '../styles/variables';
 
-header {
+$header-height: 100px;
+
+:host {
   display: block;
-  box-sizing: border-box;
+}
+
+.top {
+  width: 100%;
+  height: $header-height;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
-  width: 100vw;
-  .top {
-    height: 8vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: $brand;
-    color: white;
-    h1 {
-      font-size: 1.5em;
-      padding: 0.2em;
-    }
-    a {
-      display: inline-block;
-      color: white;
-      text-decoration: none;
-      margin: 0.2em;
-      padding: 0.3em;
-      &.active {
-        background-color: darken($brand, 10);
-      }
-    }
+  background-color: variables.$brand;
+  z-index: 99;
+}
+
+header {
+  align-items: center;
+  border: thin solid silver;
+  color: white;
+  display: flex;
+  height: 50%;
+  justify-content: space-between;
+  margin: 0 0.5em;
+  h1 {
+    font-size: 1.8em;
+    font-weight: bold;
   }
-  nav {
-    display: flex;
-    justify-content: space-between;
-    a {
-      border: 2px solid darken($brand, 10);
-      text-align: center;
-      padding: 0.3em;
-      color: $silver;
-      background-color: lighten($brand, 30);
-      text-decoration: none;
-      flex-grow: 1;
-      &.active {
-        border-bottom: none;
-        background-color: $white;
-        color: $grey;
-        font-weight: bold;
-      }
+  a {
+    color: white;
+    padding: 0.5em;
+    &.active {
+      background-color: darken(variables.$brand, 10);
     }
   }
 }
 
-.content {
-  margin-top: 14vh;
+nav {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 50%;
+  justify-content: space-around;
+  justify-items: center;
+  a {
+    border: thin solid green;
+    flex: 1 0 auto;
+    font-size: 1.2em;
+    padding: 0.8em;
+    text-align: center;
+    text-decoration: none;
+    &.active {
+      border-bottom: thin solid white;
+      font-weight: bold;
+    }
+  }
+}
+
+main {
+  padding-top: calc(#{$header-height} + 5px);
 }

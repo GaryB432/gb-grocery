@@ -1,17 +1,15 @@
-<header>
-  <section class="top">
+<section class="top">
+  <header>
     <h1>GB Grocery</h1>
-    <div>
-      <a [routerLinkActive]="['active']" [routerLink]="['about']"
-        ><i class="fa fa-question"></i
-      ></a>
-    </div>
-  </section>
+    <a [routerLinkActive]="['active']" [routerLink]="['about']"
+      ><i class="fa fa-question"></i
+    ></a>
+  </header>
   <nav>
     <a [routerLinkActive]="['active']" [routerLink]="['home']">Items</a>
     <a [routerLinkActive]="['active']" [routerLink]="['store']">Check Out</a>
   </nav>
-</header>
-<section class="content">
-  <router-outlet></router-outlet>
 </section>
+<main>
+  <router-outlet></router-outlet>
+</main>
