@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@use '../../styles/variables';
 
 article.card {
   div.info {
@@ -47,7 +47,7 @@ select {
 }
 
 .store-info {
-  background-color: $light-heading;
+  background-color: variables.$light-heading;
   section {
     display: flex;
     flex-direction: row;
@@ -79,7 +79,7 @@ section.brow {
   animation: load7 1.8s infinite ease-in-out;
 }
 .loader {
-  color: $brand;
+  color: variables.$brand;
   font-size: 10px;
   margin: 55px auto;
   position: relative;
