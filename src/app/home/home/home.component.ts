@@ -61,7 +61,11 @@ export class HomeComponent {
         this.newName = '';
         return (this.items = info.items
           .slice()
-          .sort((a, b) => a.name.localeCompare(b.name)));
+          .sort(
+            (a, b) =>
+              (a.favorite === b.favorite ? 0 : a.favorite ? -1 : 1) ||
+              a.name.localeCompare(b.name)
+          ));
       })
       .catch((e) => console.error(e));
   }

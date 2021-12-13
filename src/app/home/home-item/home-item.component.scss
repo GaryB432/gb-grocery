@@ -23,13 +23,19 @@ h1 {
   min-height: 5em;
 }
 
+.right {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
 .date {
   font-style: italic;
   font-size: 0.8rem;
 }
 
 .badge {
-  margin-left: 1rem;
+  // margin-left: 1rem;
   width: 2rem;
   text-align: center;
   line-height: 2rem;

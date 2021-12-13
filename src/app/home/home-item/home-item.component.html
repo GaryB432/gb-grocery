@@ -7,13 +7,19 @@
     <p class="store">{{ recentCheckout?.store?.name }}</p>
     <p class="date">{{ recentCheckout?.date | gbgMoment }}</p>
   </div>
-  <gbg-star></gbg-star>
-  <input
-    type="checkbox"
-    [ngModel]="item.favorite"
-    (ngModelChange)="toggleFavorite()"
-  />
-  <div (click)="toggleNeeded()" class="badge" [@badgeAnimation]="getState()">
-    {{ pickupCount }}
+  <div class="right">
+    <input
+      hidden
+      [id]="item.id"
+      type="checkbox"
+      [ngModel]="item.favorite"
+      (ngModelChange)="toggleFavorite()"
+    />
+    <label [for]="item.id">
+      <gbg-star [state]="item.favorite ? 'on' : 'off'"></gbg-star>
+    </label>
+    <div (click)="toggleNeeded()" class="badge" [@badgeAnimation]="getState()">
+      {{ pickupCount }}
+    </div>
   </div>
 </div>
