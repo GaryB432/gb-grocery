@@ -22,7 +22,7 @@ import { Component, Input } from '@angular/core';
         'on',
         style({
           fill: '#ff4747',
-          transform: 'scale(1.7)',
+          transform: 'scale(1.2)',
           fillOpacity: 1,
         })
       ),
