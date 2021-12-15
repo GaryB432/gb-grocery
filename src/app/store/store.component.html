@@ -47,7 +47,7 @@
   ></gbg-store-pickup>
 </article>
 <section class="brow">
-  <button class="b2" [disabled]="!checkoutReady()" (click)="addCheckout()">
+  <button [disabled]="!checkoutReady()" (click)="addCheckout()">
     Check Out
   </button>
 </section>

@@ -2,7 +2,7 @@
   <h1>{{ displayName }}</h1>
   <img [src]="photoURL" alt="you" />
   <div *ngIf="isAuthenticated; else unAuth">
-    <button class="b2" (click)="logout()">Logout</button>
+    <button (click)="logout()">Logout</button>
   </div>
   <ng-template #unAuth>
     <a [routerLink]="['/login']">Login</a>
@@ -10,7 +10,7 @@
 </section>
 <section *ngIf="isAuthenticated">
   <p>This will erase all gb-grocery data. BE CAREFUL.</p>
-  <button class="b2" (click)="clearData()">Erase</button>
+  <button (click)="clearData()">Erase</button>
 </section>
 <section *ngIf="isAuthenticated">
   <textarea
@@ -20,6 +20,6 @@
     spellcheck="false"
   ></textarea>
   <p>This will replace your data from the text above. BE CAREFUL.</p>
-  <button class="b2" (click)="replaceAppInfoForever()">Replace</button>
+  <button (click)="replaceAppInfoForever()">Replace</button>
 </section>
 <p class="stamp">{{ buildStamp }}</p>

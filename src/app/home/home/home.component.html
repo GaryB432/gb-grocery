@@ -20,7 +20,7 @@
 </section>
 <section class="add-item">
   <input type="text" placeholder="New Item" [(ngModel)]="newName" />
-  <button class="icon-button" (click)="addItem()">
+  <button class="icon-button" [disabled]="!addReady()" (click)="addItem()">
     <i class="fa fa-plus"></i>
   </button>
 </section>

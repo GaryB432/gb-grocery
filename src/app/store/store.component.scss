@@ -65,6 +65,8 @@ select {
 
 section.brow {
   padding: 0 0.4em;
+  display: flex;
+  justify-content: space-around;
 }
 
 .loader:before,

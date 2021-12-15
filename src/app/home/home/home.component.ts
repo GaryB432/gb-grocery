@@ -39,6 +39,10 @@ export class HomeComponent {
     }
   }
 
+  public addReady(): boolean {
+    return this.newName.length > 0;
+  }
+
   public doSwipe(e: GestureEvent, item: Item): void {
     switch (e.type) {
       case 'swipeleft':
@@ -54,7 +58,6 @@ export class HomeComponent {
   }
 
   private getUserItems(): void {
-    // console.log(this.uid);
     this.logic
       .load()
       .then((info) => {

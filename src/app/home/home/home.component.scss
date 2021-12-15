@@ -15,14 +15,11 @@ li {
   display: flex;
   margin: 2em 0.5em;
   flex-direction: row;
-  align-items: stretch;
+  justify-content: space-around;
+  gap: 1em;
   input {
-    width: 1px;
     flex-grow: 1;
     font-size: 1.4rem;
-  }
-  button {
-    flex-shrink: 0;
   }
 }
 
