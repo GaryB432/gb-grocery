@@ -27,16 +27,19 @@ const mockDtoAppInfo: Dto.AppInfo = {
   ],
   items: [
     {
+      favorite: false,
       id: 'I0',
       name: 'asdf',
       needed: false,
     },
     {
+      favorite: false,
       id: 'I1',
       name: 'zebra',
       needed: true,
     },
     {
+      favorite: false,
       id: 'I2',
       name: 'another',
       needed: false,

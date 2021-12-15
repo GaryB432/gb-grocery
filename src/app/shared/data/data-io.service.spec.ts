@@ -1,4 +1,4 @@
-import { async, inject, TestBed } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import firebase from 'firebase/compat/app';
@@ -70,16 +70,19 @@ const someAppInfo: Dto.AppInfo = {
   items: [
     {
       id: 'I0',
+      favorite: false,
       name: 'asdf',
       needed: false,
     },
     {
       id: 'I1',
+      favorite: false,
       name: 'zebra',
       needed: true,
     },
     {
       id: 'I2',
+      favorite: false,
       name: 'another',
       needed: false,
     },
@@ -191,7 +194,7 @@ describe('Data IO Service', () => {
       });
     });
 
-    it('should load from localstorage with no cloud data', async(
+    it('should load from localstorage with no cloud data', () =>
       inject(
         [DataIOService, DataLocalStorageService, AngularFireDatabase],
         (
@@ -220,10 +223,9 @@ describe('Data IO Service', () => {
             expect(info.stores.length).toBe(2);
           });
         }
-      )
-    ));
+      ));
 
-    it('should load some cloud data', async(
+    it('should load some cloud data', () =>
       inject(
         [DataIOService, DataLocalStorageService, AngularFireDatabase],
         (
@@ -258,10 +260,9 @@ describe('Data IO Service', () => {
             expect(info.stores.length).toBe(2);
           });
         }
-      )
-    ));
+      ));
 
-    it('should save all', async(
+    it('should save all', () =>
       inject(
         [DataIOService, DataLocalStorageService],
         (sut: DataIOService, ls: MockLocalStorage) => {
@@ -277,7 +278,7 @@ describe('Data IO Service', () => {
               ],
               [
                 'gbg:items:grocery-dev-3b673',
-                '[{"id":"I0","name":"asdf","needed":false},{"id":"I1","name":"zebra","needed":true},{"id":"I2","name":"another","needed":false}]',
+                '[{"id":"I0","favorite":false,"name":"asdf","needed":false},{"id":"I1","favorite":false,"name":"zebra","needed":true},{"id":"I2","favorite":false,"name":"another","needed":false}]',
               ],
               [
                 'gbg:checkouts:grocery-dev-3b673',
@@ -291,8 +292,7 @@ describe('Data IO Service', () => {
             expect(info.stores.length).toBe(2);
           });
         }
-      )
-    ));
+      ));
   });
 
   describe('unauth', () => {
@@ -316,7 +316,7 @@ describe('Data IO Service', () => {
         ],
       });
     });
-    it('should not load', async(
+    it('should not load', () =>
       inject(
         [DataIOService, DataLocalStorageService],
         (sut: DataIOService, ls: MockLocalStorage) => {
@@ -325,7 +325,6 @@ describe('Data IO Service', () => {
             .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
             .catch<any>((msg) => expect(msg).toBe('unauthenticated'));
         }
-      )
-    ));
+      ));
   });
 });

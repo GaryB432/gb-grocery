@@ -25,6 +25,7 @@ class MockLogicService {
   public getItem(id: string): Promise<Item> {
     return Promise.resolve({
       checkouts: [],
+      favorite: false,
       id,
       name: `YOUR ITEM ${id}`,
       needed: false,

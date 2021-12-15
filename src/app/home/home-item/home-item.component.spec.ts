@@ -1,23 +1,54 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppInfo } from 'src/app/models/appinfo';
+import { LogicService } from 'src/app/shared/logic.service';
 
 import { Checkout } from '../../models/checkout';
 import { Item } from '../../models/item';
 import { Store } from '../../models/store';
 import { HomeItemComponent } from './home-item.component';
 
+class MockLogicService {
+  private appInfo: AppInfo = {
+    checkouts: [],
+    items: [],
+    stores: [],
+  };
+
+  public load(): Promise<AppInfo> {
+    this.appInfo.stores = [];
+    return Promise.resolve(this.appInfo);
+  }
+  public getItem(id: string): Promise<Item> {
+    return Promise.resolve({
+      checkouts: [],
+      favorite: false,
+      id,
+      name: `YOUR ITEM ${id}`,
+      needed: false,
+    });
+  }
+}
+
 describe('HomeItemComponent', () => {
   let component: HomeItemComponent;
   let fixture: ComponentFixture<HomeItemComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     void TestBed.configureTestingModule({
       declarations: [HomeItemComponent],
+      providers: [
+        { provide: LogicService, useClass: MockLogicService },
+        // { provide: AngularFireAuth, useClass: AngularFireAuthMock },
+        // { provide: AbstractGeoCoder, useClass: LocalGeoCoder },
+        // { provide: DataService, useClass: MockDataService },
+        // { provide: Router, useClass: MockRouter },
+      ],
     });
     void TestBed.overrideComponent(HomeItemComponent, {
       set: { template: '<div>hi</div>' },
     });
     void TestBed.compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HomeItemComponent);
