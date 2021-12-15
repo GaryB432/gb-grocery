@@ -34,10 +34,14 @@
   [@cbhState]="pu.picked ? 'picked' : 'notpicked'"
 >
   <div (click)="togglePicked(pu)" class="cbholder">
-    <i
-      class="fa fa-check"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="1 0 10 10"
+      fill="currentColor"
       [@checkState]="pu.picked ? 'picked' : 'notpicked'"
-    ></i>
+    >
+      <path d="M5 0H7V4H11V6H7V10H5V6h-4V4H5Z"></path>
+    </svg>
   </div>
 
   <gbg-store-pickup

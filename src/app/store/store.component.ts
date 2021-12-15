@@ -27,7 +27,7 @@ interface StoreDistance {
       state(
         'picked',
         style({
-          transform: 'scale(2)',
+          transform: 'scale(1)',
         })
       ),
       state(
@@ -36,7 +36,7 @@ interface StoreDistance {
           transform: 'scale(0)',
         })
       ),
-      transition('notpicked => picked, picked => notpicked', animate(300)),
+      transition('picked <=> notpicked', animate(300)),
     ]),
     trigger('cbhState', [
       state(
