@@ -7,13 +7,13 @@ export abstract class AbstractGeoService {
     radius?: number
   ): number;
 
-  public abstract nearbyStoreSearch(
-    coords: GeolocationCoordinates
-  ): Promise<Place[]>;
-
-  public abstract getPlaceDetails(placeId: string): Promise<Partial<Place>>;
-
   public abstract getCurrentPosition(
     options?: PositionOptions
   ): Promise<GeolocationPosition>;
+
+  public abstract getPlaceDetails(placeId: string): Promise<Partial<Place>>;
+
+  public abstract nearbyStoreSearch(
+    coords: GeolocationCoordinates
+  ): Promise<Place[]>;
 }

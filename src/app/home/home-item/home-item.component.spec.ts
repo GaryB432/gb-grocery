@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppInfo } from 'src/app/models/appinfo';
 import { LogicService } from 'src/app/shared/logic.service';
 
@@ -33,7 +33,7 @@ describe('HomeItemComponent', () => {
   let component: HomeItemComponent;
   let fixture: ComponentFixture<HomeItemComponent>;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     void TestBed.configureTestingModule({
       declarations: [HomeItemComponent],
       providers: [

@@ -30,6 +30,13 @@ class MockDataService {
     items: [],
     stores: [],
   };
+  public clearAll(): void {
+    this.info = {
+      checkouts: [],
+      items: [],
+      stores: [],
+    };
+  }
   public load(): Promise<AppInfo> {
     const today: Date = new Date(2001, 2, 3, 4, 5, 6, 7);
     this.info.stores = [0, 1].map((n) => {
@@ -62,14 +69,6 @@ class MockDataService {
     ];
 
     return Promise.resolve(this.info);
-  }
-
-  public clearAll(): void {
-    this.info = {
-      checkouts: [],
-      items: [],
-      stores: [],
-    };
   }
 
   public saveAll(_info: AppInfo): Promise<AppInfo> {

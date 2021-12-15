@@ -30,11 +30,11 @@ namespace FakeGoogle {
     public lng(): number {
       return this.lit.lng;
     }
-    public toUrlValue(precision?: number): string {
-      return '';
-    }
     public toJSON(): LatLngLiteral {
       return this.lit;
+    }
+    public toUrlValue(precision?: number): string {
+      return '';
     }
   }
 
@@ -121,7 +121,7 @@ describe('GoogleGeoService', () => {
       permanently_closed: false,
       photos: [
         {
-          getUrl: (opts: any) => 'photo',
+          getUrl: (opts: unknown) => 'photo',
           height: 0,
           html_attributions: [] as string[],
           width: 0,
