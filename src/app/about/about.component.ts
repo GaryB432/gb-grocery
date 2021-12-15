@@ -21,7 +21,7 @@ export class AboutComponent implements OnInit {
   } = environment;
   public isAuthenticated?: boolean;
   public jsonInfo = '{}';
-  public photoURL?: string;
+  public photoURL = 'assets/img/personal.png';
   public uid?: string;
 
   public constructor(

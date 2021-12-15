@@ -40,7 +40,7 @@ export class ItemComponent implements OnInit, OnDestroy {
             .sort((a, b) => b.date.getTime() - a.date.getTime());
         })
         .catch((err) => {
-          alert(err);
+          console.error(err);
           void this.router.navigateByUrl('/');
         });
     });
