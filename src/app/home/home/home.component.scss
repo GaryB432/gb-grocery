@@ -16,8 +16,10 @@ li {
   margin: 2em 0.5em;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   gap: 1em;
   input {
+    height: 2em;
     flex-grow: 1;
     font-size: 1.4rem;
   }
