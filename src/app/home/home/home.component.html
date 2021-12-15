@@ -20,7 +20,13 @@
 </section>
 <section class="add-item">
   <input type="text" placeholder="New Item" [(ngModel)]="newName" />
-  <button class="icon-button" [disabled]="!addReady()" (click)="addItem()">
-    <i class="fa fa-plus"></i>
+  <button class="icon" [disabled]="!addReady()" (click)="addItem()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="1 0 10 10"
+      fill="currentColor"
+    >
+      <path d="M5 0H7V4H11V6H7V10H5V6h-4V4H5Z"></path>
+    </svg>
   </button>
 </section>
