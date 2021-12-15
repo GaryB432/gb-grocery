@@ -57,8 +57,12 @@ export class AboutComponent implements OnInit {
         this.isAuthenticated = true;
         this.displayName = user.displayName || 'FALSY NAME';
         this.photoURL = user.photoURL || 'assets/img/personal.png';
-        const info = await this.io.load();
-        this.jsonInfo = JSON.stringify(info, null, 2);
+        try {
+          const info = await this.io.load();
+          this.jsonInfo = JSON.stringify(info, null, 2);
+        } catch {
+          this.jsonInfo = '{error: "unauthenticated"}';
+        }
       } else {
         this.displayName = 'NOT LOGGED IN';
       }

@@ -323,7 +323,7 @@ describe('Data IO Service', () => {
           return sut
             .load()
             .then((info: Dto.AppInfo) => fail('KEEP OUT!'))
-            .catch<any>((msg) => expect(msg).toBe('unauthenticated'));
+            .catch<any>((msg) => expect(msg).toBe('unauthenticated af'));
         }
       ));
   });

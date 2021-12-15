@@ -86,7 +86,7 @@ export class DataIOService {
           reject('no inforef');
         }
       } else {
-        reject('unauthenticated');
+        reject('unauthenticated a');
       }
     });
   }
@@ -103,7 +103,7 @@ export class DataIOService {
           .then(() => resolve(newInfo))
           .catch((reason: unknown) => reject(reason));
       } else {
-        reject('unauthenticated');
+        reject('unauthenticated b');
       }
     });
   }

@@ -34,6 +34,9 @@ header {
     &.active {
       background-color: darken(variables.$brand, 10);
     }
+    svg {
+      height: 2em;
+    }
   }
 }
 
