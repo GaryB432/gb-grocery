@@ -1,6 +1,8 @@
 import {
   animate,
+  animateChild,
   keyframes,
+  query,
   state,
   style,
   transition,
@@ -23,21 +25,6 @@ interface StoreDistance {
 
 @Component({
   animations: [
-    trigger('checkState', [
-      state(
-        'picked',
-        style({
-          transform: 'scale(1)',
-        })
-      ),
-      state(
-        'notpicked',
-        style({
-          transform: 'scale(0)',
-        })
-      ),
-      transition('picked <=> notpicked', animate(300)),
-    ]),
     trigger('cbhState', [
       state(
         'picked',
@@ -60,7 +47,23 @@ interface StoreDistance {
             style({ transform: 'scale(1)', offset: 1 }),
           ])
         ),
+        query('@checkState', [animateChild()]),
       ]),
+    ]),
+    trigger('checkState', [
+      state(
+        'picked',
+        style({
+          transform: 'scale(1)',
+        })
+      ),
+      state(
+        'notpicked',
+        style({
+          transform: 'scale(0)',
+        })
+      ),
+      transition('picked <=> notpicked', animate(200)),
     ]),
   ],
   selector: 'gbg-store',
