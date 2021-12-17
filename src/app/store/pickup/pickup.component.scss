@@ -4,14 +4,14 @@ h1 {
 .addl {
   margin: 0.2em 0;
   display: block;
-  width: 90%;
   input {
-    width: 100%;
+    width: 10ch;
+    font-size: 1.5em;
   }
   section {
-    margin-top: 5px;
+    margin-top: 0.5em;
     button {
-      margin: 5px;
+      margin: 0.5em;
     }
   }
 }
