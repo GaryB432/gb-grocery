@@ -47,20 +47,38 @@ interface StoreDistance {
             style({ transform: 'scale(1)', offset: 1 }),
           ])
         ),
-        query('@checkState', [animateChild()]),
+        query('@r1', [animateChild()]),
+        query('@r2', [animateChild()]),
       ]),
     ]),
-    trigger('checkState', [
-      state(
-        'picked',
-        style({
-          transform: 'scale(1)',
-        })
-      ),
+    trigger('r1', [
       state(
         'notpicked',
         style({
-          transform: 'scale(0)',
+          width: '0',
+        })
+      ),
+      state(
+        'picked',
+        style({
+          // style="width: 12.5371px"
+          width: '12.537px',
+        })
+      ),
+      transition('picked <=> notpicked', animate(200)),
+    ]),
+    trigger('r2', [
+      state(
+        'notpicked',
+        style({
+          width: '0',
+        })
+      ),
+      state(
+        'picked',
+        style({
+          // style="width: 21.4157px"
+          width: '21.415px',
         })
       ),
       transition('picked <=> notpicked', animate(200)),

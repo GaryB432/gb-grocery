@@ -36,9 +36,25 @@
   <div (click)="togglePicked(pu)" class="cbholder">
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      style="border: 2px solid red"
+      viewBox="0 0 24 24"
+    >
+      <rect
+        transform="translate(3.714 8.556) rotate(45)"
+        height="5.2538"
+        [@r1]="pu.picked ? 'picked' : 'notpicked'"
+      ></rect>
+      <rect
+        transform="translate(5.22 17.334) rotate(-45)"
+        height="5.2538"
+        [@r2]="pu.picked ? 'picked' : 'notpicked'"
+      ></rect>
+    </svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="currentColor"
-      [@checkState]="pu.picked ? 'picked' : 'notpicked'"
     >
       <path
         d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"
