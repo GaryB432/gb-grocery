@@ -160,41 +160,47 @@ export class StoreComponent implements OnInit {
   }
 
   private loadWithCurrentCoordinates(coords: GeolocationCoordinates): void {
-    void this.logic.load().then((updatedData) => {
-      this.cachedAppInfo = updatedData;
-      this.geo
-        .nearbyStoreSearch(coords)
-        .then((nearbyPlaces) => {
-          this.nbStores = this.logic
-            .getStoresFromNearbyPlaces(nearbyPlaces)
-            .map<StoreDistance>((store) => {
-              return {
-                distance: this.geo.computeDistanceBetween(
-                  coords,
-                  store.location
-                ),
-                store,
-              };
-            })
-            .sort((a, b) => a.distance - b.distance);
+    void this.logic
+      .load()
+      .then((updatedData) => {
+        this.cachedAppInfo = updatedData;
+        this.geo
+          .nearbyStoreSearch(coords)
+          .then((nearbyPlaces) => {
+            this.nbStores = this.logic
+              .getStoresFromNearbyPlaces(nearbyPlaces)
+              .map<StoreDistance>((store) => {
+                return {
+                  distance: this.geo.computeDistanceBetween(
+                    coords,
+                    store.location
+                  ),
+                  store,
+                };
+              })
+              .sort((a, b) => a.distance - b.distance);
 
-          if (this.nbStores.length > 0) {
-            const nbs = this.nbStores[0].store;
-            this.selectedStorePlaceId = nbs.placeId || null;
-          }
-          this.neededThings = this.logic.getPickups(
-            updatedData,
-            this.selectedStore?.store
-          );
-        })
-        .catch((e) => {
-          alert(
-            'There was a mapping problem or you seem to not be near a grocery store. ' +
-              'The Check Out tab is meant for when you are at the store.'
-          );
-          alert(e);
-          void this.router.navigateByUrl('/');
-        });
-    });
+            if (this.nbStores.length > 0) {
+              const nbs = this.nbStores[0].store;
+              this.selectedStorePlaceId = nbs.placeId || null;
+            }
+            this.neededThings = this.logic.getPickups(
+              updatedData,
+              this.selectedStore?.store
+            );
+          })
+          .catch((e) => {
+            alert(
+              'There was a mapping problem or you seem to not be near a grocery store. ' +
+                'The Check Out tab is meant for when you are at the store.'
+            );
+            alert(e);
+            void this.router.navigateByUrl('/');
+          });
+      })
+      .catch((e) => {
+        console.error(e);
+        void this.router.navigateByUrl('/');
+      });
   }
 }
