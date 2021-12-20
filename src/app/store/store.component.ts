@@ -1,8 +1,10 @@
 import {
   animate,
   animateChild,
+  group,
   keyframes,
   query,
+  sequence,
   state,
   style,
   transition,
@@ -35,16 +37,16 @@ interface StoreDistance {
       state(
         'notpicked',
         style({
-          backgroundColor: 'transparent',
+          backgroundColor: 'unset',
         })
       ),
       transition('picked <=> notpicked', [
         animate(
-          '200ms ease-out',
+          '100ms',
           keyframes([
-            style({ transform: 'scale(1)', offset: 0 }),
-            style({ transform: 'scale(0.8)', offset: 0.3 }),
-            style({ transform: 'scale(1)', offset: 1 }),
+            style({ transform: 'scale(1)' }),
+            style({ transform: 'scale(0.8)' }),
+            style({ transform: 'scale(1)' }),
           ])
         ),
         query('@r1', [animateChild()]),
@@ -61,11 +63,10 @@ interface StoreDistance {
       state(
         'picked',
         style({
-          // style="width: 12.5371px"
           width: '12.537px',
         })
       ),
-      transition('picked <=> notpicked', animate(200)),
+      transition('notpicked => picked', animate(150)),
     ]),
     trigger('r2', [
       state(
@@ -77,11 +78,10 @@ interface StoreDistance {
       state(
         'picked',
         style({
-          // style="width: 21.4157px"
           width: '21.415px',
         })
       ),
-      transition('picked <=> notpicked', animate(200)),
+      transition('notpicked => picked', animate(100)),
     ]),
   ],
   selector: 'gbg-store',
