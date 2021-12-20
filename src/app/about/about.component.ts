@@ -19,9 +19,9 @@ export class AboutComponent implements OnInit {
     firebase: unknown;
     production: boolean;
   } = environment;
-  public isAuthenticated?: boolean;
+  public isAuthenticated = false;
   public jsonInfo = '{}';
-  public photoURL = 'assets/img/personal.png';
+  public photoURL = 'assets/img/unauth.jpg';
   public uid?: string;
 
   public constructor(
@@ -38,7 +38,7 @@ export class AboutComponent implements OnInit {
   }
 
   public logout(): void {
-    void this.afAuth.signOut();
+    this.afAuth.signOut().then(() => (this.isAuthenticated = false));
   }
 
   public ngOnInit(): void {
@@ -54,9 +54,10 @@ export class AboutComponent implements OnInit {
 
     this.afAuth.authState.subscribe(async (user) => {
       if (user && user.uid) {
+        console.log(user);
         this.isAuthenticated = true;
         this.displayName = user.displayName || 'FALSY NAME';
-        this.photoURL = user.photoURL || 'assets/img/personal.png';
+        this.photoURL = user.photoURL || 'assets/img/unauth.jpg';
         try {
           const info = await this.io.load();
           this.jsonInfo = JSON.stringify(info, null, 2);
