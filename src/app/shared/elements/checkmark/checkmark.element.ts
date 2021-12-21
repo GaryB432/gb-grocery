@@ -19,6 +19,29 @@ interface Points {
   g: Vector;
   i: Vector;
 }
+/*
+
+N O T   T O   S C A L E !
+
+                  /\ d
+                 /  \
+      /\ f      /    \
+     /  \      /      \
+    /    \    /        \
+   /      \  /          \
+   \ a     \/ e         / c
+    \      /\          /
+     \    /  \        /
+      \  /    \      /
+       \/      \    /
+        \ g     \  /
+         \       \/ i
+          \      /
+           \    /
+            \  /
+             \/ b (h)
+
+*/
 
 const ps: Points = {
   a: new Vector(0, 12.272),
@@ -62,8 +85,17 @@ export class CheckmarkElement extends HTMLElement {
     this.setAttribute('checked', value ? 'true' : 'false');
   }
 
+  public get duration(): number {
+    const value = this.getAttribute('duration');
+    return value === null ? 100 : Number(value);
+  }
+
+  public set duration(value: number) {
+    this.setAttribute('duration', value.toString());
+  }
+
   public attributeChangedCallback(name: string, oldVal: string): void {
-    this.update(oldVal && name === 'checked' ? 100 : 0);
+    this.update(oldVal && name === 'checked' ? this.duration : 0);
   }
 
   public connectedCallback(): void {
@@ -82,15 +114,16 @@ export class CheckmarkElement extends HTMLElement {
   }
 
   private update(duration: number): void {
+    const px = (n = 0) => `${n}px`;
     Promise.resolve().then(
       () => {
         if (this.r1 && this.r2) {
           if (this.checked) {
-            const wpxs = [l1, l2].map((l) => `${l}px`);
+            const wpxs = [l1, l2].map(px);
             const ws = wpxs.map((width) => ({ width }));
             const a1 = this.r1.animate([{ width: 0 }, ws[0]], {
               delay: 0,
-              duration: duration,
+              duration,
             });
             const a2 = this.r2.animate([{ width: 0 }, ws[1]], {
               delay: duration,

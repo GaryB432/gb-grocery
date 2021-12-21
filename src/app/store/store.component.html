@@ -34,7 +34,7 @@
   [@cbhState]="pu.picked ? 'picked' : 'notpicked'"
 >
   <div (click)="togglePicked(pu)" class="cbholder">
-    <gb-checkmark [checked]="pu.picked"></gb-checkmark>
+    <gb-checkmark [checked]="pu.picked" duration="100"></gb-checkmark>
   </div>
 
   <gbg-store-pickup
