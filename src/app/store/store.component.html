@@ -34,22 +34,7 @@
   [@cbhState]="pu.picked ? 'picked' : 'notpicked'"
 >
   <div (click)="togglePicked(pu)" class="cbholder">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <rect
-        transform="translate(3.714 8.556) rotate(45)"
-        height="5.2538"
-        [@r1]="pu.picked ? 'picked' : 'notpicked'"
-      ></rect>
-      <rect
-        transform="translate(5.22 17.334) rotate(-45)"
-        height="5.2538"
-        [@r2]="pu.picked ? 'picked' : 'notpicked'"
-      ></rect>
-    </svg>
+    <gb-checkmark [checked]="pu.picked"></gb-checkmark>
   </div>
 
   <gbg-store-pickup

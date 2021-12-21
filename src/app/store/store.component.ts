@@ -1,10 +1,6 @@
 import {
   animate,
-  animateChild,
-  group,
   keyframes,
-  query,
-  sequence,
   state,
   style,
   transition,
@@ -17,6 +13,7 @@ import { AppInfo } from '../models/appinfo';
 import { Checkout } from '../models/checkout';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
+import { CheckmarkElement } from '../shared/elements';
 import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
 import { LogicService } from '../shared/logic.service';
 
@@ -49,39 +46,7 @@ interface StoreDistance {
             style({ transform: 'scale(1)' }),
           ])
         ),
-        query('@r1', [animateChild()]),
-        query('@r2', [animateChild()]),
       ]),
-    ]),
-    trigger('r1', [
-      state(
-        'notpicked',
-        style({
-          width: '0',
-        })
-      ),
-      state(
-        'picked',
-        style({
-          width: '12.537px',
-        })
-      ),
-      transition('notpicked => picked', animate(150)),
-    ]),
-    trigger('r2', [
-      state(
-        'notpicked',
-        style({
-          width: '0',
-        })
-      ),
-      state(
-        'picked',
-        style({
-          width: '21.415px',
-        })
-      ),
-      transition('notpicked => picked', animate(100)),
     ]),
   ],
   selector: 'gbg-store',
@@ -204,3 +169,5 @@ export class StoreComponent implements OnInit {
       });
   }
 }
+
+customElements.define('gb-checkmark', CheckmarkElement);
