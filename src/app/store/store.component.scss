@@ -29,17 +29,21 @@ select {
 .no-items {
   display: flex;
   flex-direction: column;
-  align-items: center;
   text-align: center;
-  margin: 2rem 0;
+  margin: 1rem;
+  justify-content: space-between;
+  height: 13rem;
+  gap: 1rem;
   h1,
   p {
-    margin: 1.2rem;
     line-height: 1.3rem;
   }
   h1 {
     font-size: 1.2rem;
     font-weight: bold;
+  }
+  svg {
+    color: variables.$brand;
   }
 }
 

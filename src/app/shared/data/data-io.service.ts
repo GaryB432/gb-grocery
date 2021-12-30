@@ -100,7 +100,11 @@ export class DataIOService {
       if (this.isAuthenticated && !!this.infoRef) {
         this.infoRef
           .set(newInfo)
-          .then(() => resolve(newInfo))
+          .then(() => {
+            setTimeout(() => {
+              resolve(newInfo);
+            }, 0);
+          })
           .catch((reason: unknown) => reject(reason));
       } else {
         reject('unauthenticated b');

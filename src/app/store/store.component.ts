@@ -57,7 +57,9 @@ export class StoreComponent implements OnInit {
   public nbStores: StoreDistance[] = [];
   public neededThings: Pickup[] = [];
   public newName = '';
+  public ready = false;
   public selectedStorePlaceId: string | null = null;
+  private addingCheckout = false;
   private cachedAppInfo?: AppInfo;
 
   public constructor(
@@ -75,6 +77,7 @@ export class StoreComponent implements OnInit {
 
   public addCheckout(): void {
     if (this.selectedStorePlaceId && this.selectedStore) {
+      this.addingCheckout = true;
       void this.logic
         .insertCheckout(
           this.selectedStorePlaceId,
@@ -83,6 +86,7 @@ export class StoreComponent implements OnInit {
           this.neededThings.filter((i) => i.picked)
         )
         .then((co: Checkout) => {
+          this.addingCheckout = false;
           this.toastr.success(`Thank you for shopping at ${co.store.name}`);
           void this.router.navigateByUrl('/');
         });
@@ -103,8 +107,9 @@ export class StoreComponent implements OnInit {
 
   public checkoutReady(): boolean {
     return (
+      !this.addingCheckout &&
       this.selectedStorePlaceId != null &&
-      this.neededThings.filter((i) => i.picked).length > 0
+      this.neededThings.some((i) => i.picked)
     );
   }
 
@@ -153,6 +158,7 @@ export class StoreComponent implements OnInit {
               updatedData,
               this.selectedStore?.store
             );
+            this.ready = true;
           })
           .catch((e) => {
             alert(
