@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "gb-grocery:build:production"
+              "buildTarget": "gb-grocery:build:production"
             },
             "development": {
-              "browserTarget": "gb-grocery:build:development"
+              "buildTarget": "gb-grocery:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gb-grocery:build"
+            "buildTarget": "gb-grocery:build"
           }
         },
         "test": {
