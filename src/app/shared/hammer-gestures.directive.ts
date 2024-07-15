@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import * as Hammer from 'hammerjs';
+import Hammer from 'hammerjs';
 
 export type GestureType = 'swipeleft' | 'swiperight' | 'tap';
 
