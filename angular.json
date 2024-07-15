@@ -48,7 +48,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "serviceWorker": "tbd",
+              "serviceWorker": "ngsw-config.json",
               "outputHashing": "all"
             },
             "development": {
