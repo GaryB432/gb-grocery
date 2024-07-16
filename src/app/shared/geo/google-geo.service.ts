@@ -135,19 +135,24 @@ export class GoogleGeoService extends AbstractGeoService {
           rankBy: undefined,
           type: supermarket,
         };
-        placeService.nearbySearch(
-          searchRequest,
-          (
-            results: google.maps.places.PlaceResult[],
-            status: google.maps.places.PlacesServiceStatus
-          ) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-              resolve(results.map((gs) => GoogleGeoService.toPlace(gs)));
-            } else {
-              reject(status.toString());
+        try {
+          placeService.nearbySearch(
+            searchRequest,
+            (
+              results: google.maps.places.PlaceResult[],
+              status: google.maps.places.PlacesServiceStatus
+            ) => {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                console.log(results);
+                resolve(results.map((gs) => GoogleGeoService.toPlace(gs)));
+              } else {
+                reject(status.toString());
+              }
             }
-          }
-        );
+          );
+        } catch (e) {
+          reject(JSON.stringify(e));
+        }
       } else {
         reject('no map element');
       }
