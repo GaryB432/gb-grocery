@@ -51,9 +51,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Data
 
-| FB (Firebase) | LS (LocalStorage) | Start up action |
-|:--:|:--:|---------------------------------------------|
-| Y | Y | LS is a backup. |
-| Y | N | LS is a backup. Save FB on LS. |
-| N | Y | Maybe a new phone user. Save LS to FB. The people sharing this device only have one LS bucket so it will be overwritten but it is just a backup so overwriting is OK. |
-| N | N | New user, initialize FB and LS |
+| FB (Firebase) | LS (LocalStorage) | Start up action                                                                                                                                                       |
+| :-----------: | :---------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|       Y       |         Y         | LS is a backup.                                                                                                                                                       |
+|       Y       |         N         | LS is a backup. Save FB on LS.                                                                                                                                        |
+|       N       |         Y         | Maybe a new phone user. Save LS to FB. The people sharing this device only have one LS bucket so it will be overwritten but it is just a backup so overwriting is OK. |
+|       N       |         N         | New user, initialize FB and LS                                                                                                                                        |
