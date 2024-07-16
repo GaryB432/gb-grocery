@@ -60,5 +60,8 @@
   },
   "bugs": {
     "url": "https://github.com/GaryB432/gb-grocery/issues"
+  },
+  "engines": {
+    "node": ">=18.19"
   }
 }
