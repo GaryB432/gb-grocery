@@ -7,10 +7,11 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { LogicService } from 'src/app/shared/logic.service';
-import { Checkout } from '../../models/checkout';
-import { Item } from '../../models/item';
+import type { OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import type { LogicService } from 'src/app/shared/logic.service';
+import type { Checkout } from '../../models/checkout';
+import type { Item } from '../../models/item';
 
 type Color = string;
 

@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Subscription } from 'rxjs';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { ActivatedRoute, Router } from '@angular/router';
+import type { AngularFireAuth } from '@angular/fire/compat/auth';
+import type { Subscription } from 'rxjs';
 
-import { Checkout } from '../models/checkout';
-import { Item } from '../models/item';
-import { Pickup } from '../models/pickup';
-import { LogicService } from '../shared/logic.service';
+import type { Checkout } from '../models/checkout';
+import type { Item } from '../models/item';
+import type { Pickup } from '../models/pickup';
+import type { LogicService } from '../shared/logic.service';
 
 @Component({
   selector: 'gbg-item',

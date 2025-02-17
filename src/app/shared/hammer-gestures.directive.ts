@@ -1,10 +1,5 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import type { ElementRef, OnInit } from '@angular/core';
+import { Directive, EventEmitter, Output } from '@angular/core';
 import Hammer from 'hammerjs';
 
 export type GestureType = 'swipeleft' | 'swiperight' | 'tap';

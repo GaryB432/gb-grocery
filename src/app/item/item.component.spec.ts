@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import firebase from 'firebase/compat/app';
+import type firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
-import { AppInfo } from '../models/appinfo';
-import { Item } from '../models/item';
+import type { AppInfo } from '../models/appinfo';
+import type { Item } from '../models/item';
 import { LogicService } from '../shared/logic.service';
 import { ItemComponent } from './item.component';
 

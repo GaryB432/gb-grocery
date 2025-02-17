@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { ActivatedRoute } from '@angular/router';
+import type { Subscription } from 'rxjs';
 
-import { Checkout } from '../models/checkout';
-import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
-import { Place } from '../shared/geo/place';
-import { LogicService } from '../shared/logic.service';
+import type { Checkout } from '../models/checkout';
+import type { AbstractGeoService } from '../shared/geo/abstract-geo.service';
+import type { Place } from '../shared/geo/place';
+import type { LogicService } from '../shared/logic.service';
 
 @Component({
   selector: 'gbg-checkout',

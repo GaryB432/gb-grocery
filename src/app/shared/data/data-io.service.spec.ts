@@ -1,11 +1,11 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import firebase from 'firebase/compat/app';
+import type firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { DataIOService } from './data-io.service';
 import { DataLocalStorageService } from './data-local-storage.service';
-import * as Dto from './dto';
+import type * as Dto from './dto';
 
 class MockReference {
   public constructor(public db: MockDb) {}

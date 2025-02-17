@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Pickup } from '../../models/pickup';
+import type { Pickup } from '../../models/pickup';
 
 @Component({
   selector: 'gbg-store-pickup',

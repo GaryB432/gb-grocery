@@ -1,6 +1,6 @@
-import { Checkout } from './checkout';
-import { Item } from './item';
-import { Store } from './store';
+import type { Checkout } from './checkout';
+import type { Item } from './item';
+import type { Store } from './store';
 
 export class AppInfo {
   public items!: Item[];

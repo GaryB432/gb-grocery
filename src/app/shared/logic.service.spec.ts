@@ -21,7 +21,7 @@ import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
 import { DataService } from '../shared/data/data.service';
-import { Place } from './geo/place';
+import type { Place } from './geo/place';
 import { LogicService } from './logic.service';
 
 class MockDataService {

@@ -1,12 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import firebase from 'firebase/compat/app';
+import type firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { DataIOService } from '../shared/data/data-io.service';
-import * as Dto from '../shared/data/dto';
+import type * as Dto from '../shared/data/dto';
 import { AboutComponent } from './about.component';
 
 const mockDtoAppInfo: Dto.AppInfo = {

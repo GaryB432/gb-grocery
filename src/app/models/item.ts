@@ -1,4 +1,4 @@
-import { Checkout } from './checkout';
+import type { Checkout } from './checkout';
 
 export class Item {
   public favorite = false;

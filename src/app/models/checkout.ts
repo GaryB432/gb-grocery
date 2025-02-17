@@ -1,5 +1,5 @@
-import { Pickup } from './pickup';
-import { Store } from './store';
+import type { Pickup } from './pickup';
+import type { Store } from './store';
 
 export class Checkout {
   public pickups!: Pickup[];

@@ -6,16 +6,17 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { AppInfo } from '../models/appinfo';
-import { Checkout } from '../models/checkout';
-import { Pickup } from '../models/pickup';
-import { Store } from '../models/store';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Router } from '@angular/router';
+import type { ToastrService } from 'ngx-toastr';
+import type { AppInfo } from '../models/appinfo';
+import type { Checkout } from '../models/checkout';
+import type { Pickup } from '../models/pickup';
+import type { Store } from '../models/store';
 import { CheckmarkElement } from '../shared/elements';
-import { AbstractGeoService } from '../shared/geo/abstract-geo.service';
-import { LogicService } from '../shared/logic.service';
+import type { AbstractGeoService } from '../shared/geo/abstract-geo.service';
+import type { LogicService } from '../shared/logic.service';
 
 interface StoreDistance {
   distance: number;

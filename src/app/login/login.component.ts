@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import type { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { AngularFireAuth } from '@angular/fire/compat/auth';
+import type { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 
 @Component({
