@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +28,7 @@ class MockRouter {
 }
 
 describe('StoreComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     void void TestBed.overrideComponent(StoreComponent, {
       set: {
         template: '<h1>Overridden template something here</h1>',
@@ -48,13 +48,13 @@ describe('StoreComponent', () => {
       .compileComponents();
   }));
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(StoreComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
 
-  xit('should render title in a h1 tag', async(() => {
+  xit('should render title in a h1 tag', waitForAsync(() => {
     const fixture = TestBed.createComponent(StoreComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
