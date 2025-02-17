@@ -1,4 +1,4 @@
-import type { Item } from './item';
+import { Item } from './item';
 
 export class Pickup {
   public constructor(

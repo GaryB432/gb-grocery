@@ -1,7 +1,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 
 import { GoogleGeoService } from './google-geo.service';
-import type { Place } from './place';
+import { Place } from './place';
 
 /* eslint-disable-next-line @typescript-eslint/no-namespace */
 namespace FakeGoogle {

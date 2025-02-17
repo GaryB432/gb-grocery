@@ -1,4 +1,4 @@
-import type { Checkout } from './checkout';
+import { Checkout } from './checkout';
 
 export class Store {
   public icon?: string;

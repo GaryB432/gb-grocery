@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import type { AppInfo } from '../../models/appinfo';
+import { AppInfo } from '../../models/appinfo';
 import { Utilities } from '../utilities';
-import type { DataIOService } from './data-io.service';
-import type * as Dto from './dto';
+import { DataIOService } from './data-io.service';
+import * as Dto from './dto';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {

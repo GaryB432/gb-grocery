@@ -27,7 +27,7 @@
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import type { AppInfo } from '../../models/appinfo';
+import { AppInfo } from '../../models/appinfo';
 // import { Checkout } from '../../models/checkout';
 // import { Item } from '../../models/item';
 // import { Store } from '../../models/store';

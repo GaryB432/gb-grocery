@@ -1,10 +1,9 @@
-import type { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
-import type { AngularFireAuth } from '@angular/fire/compat/auth';
-import type { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { environment } from '../../environments/environment';
-import type { DataIOService } from '../shared/data/data-io.service';
-import type * as Dto from '../shared/data/dto';
+import { DataIOService } from '../shared/data/data-io.service';
+import * as Dto from '../shared/data/dto';
 
 @Component({
   selector: 'gbg-about',

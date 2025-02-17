@@ -1,10 +1,9 @@
-import type { ViewContainerRef } from '@angular/core';
-import { Component } from '@angular/core';
-import type { AngularFireAuth } from '@angular/fire/compat/auth';
-import type firebase from 'firebase/compat/app';
-import type { Item } from '../../models/item';
-import type { GestureEvent } from '../../shared/hammer-gestures.directive';
-import type { LogicService } from '../../shared/logic.service';
+import { Component, ViewContainerRef } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
+import { Item } from '../../models/item';
+import { GestureEvent } from '../../shared/hammer-gestures.directive';
+import { LogicService } from '../../shared/logic.service';
 
 @Component({
   selector: 'gbg-home',

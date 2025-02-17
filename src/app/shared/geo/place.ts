@@ -1,5 +1,5 @@
-import type { Photo } from './photo';
-import type { Point } from './point';
+import { Photo } from './photo';
+import { Point } from './point';
 
 export interface Place {
   formattedAddress?: string;

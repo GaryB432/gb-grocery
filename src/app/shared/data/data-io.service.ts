@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import type { AngularFireAuth } from '@angular/fire/compat/auth';
-import type { AngularFireDatabase } from '@angular/fire/compat/database';
-import type firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import firebase from 'firebase/compat/app';
 import { environment } from '../../../environments/environment';
-import type { DataLocalStorageService } from './data-local-storage.service';
-import type * as Dto from './dto';
+import { DataLocalStorageService } from './data-local-storage.service';
+import * as Dto from './dto';
 
 const ITEMS_KEY = `gbg:items:${environment.firebase.projectId}`;
 const STORES_KEY = `gbg:stores:${environment.firebase.projectId}`;

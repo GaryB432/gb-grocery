@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AbstractGeoService } from './abstract-geo.service';
-import type { Place } from './place';
-import type { Point } from './point';
+import { Place } from './place';
+import { Point } from './point';
 
 @Injectable()
 export class GoogleGeoService extends AbstractGeoService {

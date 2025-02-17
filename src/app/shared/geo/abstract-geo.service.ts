@@ -1,4 +1,4 @@
-import type { Place } from './place';
+import { Place } from './place';
 
 export abstract class AbstractGeoService {
   public abstract computeDistanceBetween(

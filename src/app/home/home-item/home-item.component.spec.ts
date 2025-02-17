@@ -1,6 +1,5 @@
-import type { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
-import type { AppInfo } from 'src/app/models/appinfo';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppInfo } from 'src/app/models/appinfo';
 import { LogicService } from 'src/app/shared/logic.service';
 
 import { Checkout } from '../../models/checkout';

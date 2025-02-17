@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import type {
+import {
   ActivatedRouteSnapshot,
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import type { AngularFireAuth } from '@angular/fire/compat/auth';
-import type { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 
 @Injectable()

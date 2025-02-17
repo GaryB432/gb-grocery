@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import type * as Dto from '../../shared/data/dto';
+import * as Dto from '../../shared/data/dto';
 import { Utilities } from '../utilities';
 import { AbstractGeoService } from './abstract-geo.service';
-import type { Place } from './place';
-import type { Point } from './point';
+import { Place } from './place';
+import { Point } from './point';
 
 @Injectable()
 export class MockGeoService extends AbstractGeoService {

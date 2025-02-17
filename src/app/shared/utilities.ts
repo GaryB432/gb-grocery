@@ -1,9 +1,9 @@
-import type { AppInfo } from '../models/appinfo';
+import { AppInfo } from '../models/appinfo';
 import { Checkout } from '../models/checkout';
 import { Item } from '../models/item';
 import { Pickup } from '../models/pickup';
 import { Store } from '../models/store';
-import type * as Dto from './data/dto';
+import * as Dto from './data/dto';
 
 // http://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript#10727155
 function randomString(length: number, chars: string): string {
