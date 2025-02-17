@@ -28,27 +28,25 @@ class MockRouter {
 }
 
 describe('StoreComponent', () => {
-  beforeEach(
-    waitForwaitForAsync(() => {
-      void void TestBed.overrideComponent(StoreComponent, {
-        set: {
-          template: '<h1>Overridden template something here</h1>',
-        },
-      })
-        .configureTestingModule({
-          declarations: [StoreComponent],
-          imports: [RouterTestingModule],
-          providers: [
-            { provide: LogicService, useClass: LogicService },
-            { provide: AbstractGeoService, useClass: MockGeoService },
-            { provide: DataService, useClass: MockDataService },
-            { provide: ToastrService, useClass: MockToastrService },
-            { provide: Router, useClass: MockRouter },
-          ],
-        })
-        .compileComponents();
+  beforeEach(waitForAsync(() => {
+    void void TestBed.overrideComponent(StoreComponent, {
+      set: {
+        template: '<h1>Overridden template something here</h1>',
+      },
     })
-  );
+      .configureTestingModule({
+        declarations: [StoreComponent],
+        imports: [RouterTestingModule],
+        providers: [
+          { provide: LogicService, useClass: LogicService },
+          { provide: AbstractGeoService, useClass: MockGeoService },
+          { provide: DataService, useClass: MockDataService },
+          { provide: ToastrService, useClass: MockToastrService },
+          { provide: Router, useClass: MockRouter },
+        ],
+      })
+      .compileComponents();
+  }));
 
   it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(StoreComponent);
