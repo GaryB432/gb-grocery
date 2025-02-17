@@ -17,7 +17,7 @@ export class DataIOService {
   // private uid: string;
   private user: firebase.User | null = null;
 
-  private infoRef?: any;
+  private infoRef: firebase.database.Reference | null = null;
 
   public get isAuthenticated(): boolean {
     return !!this.user;
