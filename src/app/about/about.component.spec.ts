@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -86,7 +86,7 @@ xdescribe('About Component', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     void TestBed.configureTestingModule({
       declarations: [AboutComponent],
       imports: [FormsModule, RouterTestingModule],
@@ -108,14 +108,14 @@ xdescribe('About Component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should warn', async(() => {
+  it('should warn', waitForAsync(() => {
     // const fixture = TestBed.createComponent(AppComponent);
     // fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('p').textContent).toContain('BE CAREFUL');
   }));
 
-  it('shoud get json', async(() => {
+  it('shoud get json', waitForAsync(() => {
     // fixture.detectChanges();
     void fixture.whenStable().then(() => {
       // const element = fixture.nativeElement;
