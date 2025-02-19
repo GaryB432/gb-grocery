@@ -1,34 +1,33 @@
-import { promises } from 'fs';
-import { posix } from 'path';
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
+
+const projectKey = 'gb-grocery';
 
 interface AngularJson {
   projects: {
-    'gb-grocery': {
+    [projectKey]: {
       root: string;
       sourceRoot: string;
     };
   };
 }
 
-promises.readFile('angular.json').then((buff) => {
-  const ngProj = JSON.parse(buff.toString()) as AngularJson;
+const ngProj = JSON.parse(readFileSync('angular.json', 'utf-8')) as AngularJson;
 
-  const gbg = ngProj.projects['gb-grocery'];
-  const envFile = posix.join(
-    gbg.root,
-    gbg.sourceRoot,
-    'environments/environment.prod.ts'
-  );
+const gbg = ngProj.projects[projectKey];
+const envFile = join(
+  gbg.root,
+  gbg.sourceRoot,
+  'environments',
+  'environment.prod.ts'
+);
 
-  promises
-    .readFile(envFile + '.template')
-    .then((c) => {
-      const stampedEnv = c
-        .toString()
-        .replace('{{ buildStamp }}', new Date().toISOString());
-      promises.writeFile(envFile, stampedEnv).then(() => {
-        console.log(`${envFile} updated`);
-      });
-    })
-    .catch((c) => console.error(c));
-});
+const stamp = new Date().toISOString();
+const stampedEnv = readFileSync(envFile.concat('.template'), 'utf-8')
+  .replace('{{ buildRef }}', process.env['GITHUB_REF_NAME'] ?? 'N/A')
+  .replace('{{ buildStamp }}', stamp);
+
+writeFileSync(envFile, stampedEnv);
+
+console.log(`${envFile} updated: `);
+console.log(`${process.env['GITHUB_HEAD_REF'] ?? 'N/A'} updated`);

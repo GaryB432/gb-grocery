@@ -8,5 +8,6 @@ export const environment = {
     storageBucket: 'grocery17-9ca26.appspot.com',
   },
   buildStamp: '{{ buildStamp }}',
+  buildRef: '{{ buildRef }}',
   production: true,
 };

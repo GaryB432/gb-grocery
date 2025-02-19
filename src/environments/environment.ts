@@ -13,6 +13,7 @@ export const environment = {
     storageBucket: 'grocery-dev-3b673.appspot.com',
   },
   buildStamp: '1980-01-01T06:00:01.000Z',
+  buildRef: '0/NOT-AVAILABLE',
   production: false,
 };
 
