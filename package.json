@@ -12,7 +12,7 @@
     "start": "ng serve",
     "pretest": "eslint \"src/**/*.ts\"",
     "build": "ng build",
-    "build:azure": "npx ts-node --project tools/tsconfig.tools.json tools/scripts/stamp && ng build",
+    "build:azure": "tsx tools/scripts/stamp && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
