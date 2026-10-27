@@ -70,6 +70,16 @@ section.brow {
   justify-content: space-around;
 }
 
+div.powered {
+  gap: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  .iconify {
+    height: 1em;
+  }
+}
+
 .loader:before,
 .loader:after,
 .loader {

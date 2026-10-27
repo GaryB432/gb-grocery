@@ -33,7 +33,7 @@ ng g class shared/geo/point --skip-tests
 ng g class shared/utilities --skip-tests
 
 
-npm install @types/googlemaps -D
+npm install @types/google.maps -D
 npm install @types/hammerjs -D
 npm install eslint-plugin-gb -D
 npm install @angular/fire firebase

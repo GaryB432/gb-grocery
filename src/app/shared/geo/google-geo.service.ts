@@ -14,6 +14,9 @@ export class GoogleGeoService extends AbstractGeoService {
     pr: google.maps.places.PlaceResult,
     photoOptions?: google.maps.places.PhotoOptions
   ): Place {
+    if (!pr.geometry?.location || !pr.name) {
+      throw new Error(`The PlaceResult is missing necessary values`);
+    }
     const location: Point = pr.geometry
       ? {
           latitude: pr.geometry.location.lat(),
@@ -95,10 +98,13 @@ export class GoogleGeoService extends AbstractGeoService {
         placeService.getDetails(
           searchRequest,
           (
-            result: google.maps.places.PlaceResult,
+            result: google.maps.places.PlaceResult | null,
             status: google.maps.places.PlacesServiceStatus
           ) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
+            if (
+              status === google.maps.places.PlacesServiceStatus.OK &&
+              result
+            ) {
               resolve(
                 GoogleGeoService.toPlace(result, {
                   maxHeight: 500,
@@ -139,10 +145,13 @@ export class GoogleGeoService extends AbstractGeoService {
           placeService.nearbySearch(
             searchRequest,
             (
-              results: google.maps.places.PlaceResult[],
+              results: google.maps.places.PlaceResult[] | null,
               status: google.maps.places.PlacesServiceStatus
             ) => {
-              if (status === google.maps.places.PlacesServiceStatus.OK) {
+              if (
+                status === google.maps.places.PlacesServiceStatus.OK &&
+                results
+              ) {
                 console.log(results);
                 resolve(results.map((gs) => GoogleGeoService.toPlace(gs)));
               } else {
